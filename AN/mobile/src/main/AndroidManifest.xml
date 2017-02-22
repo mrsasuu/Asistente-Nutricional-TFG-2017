@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionBar"
         android:hardwareAccelerated="true">
-        <activity android:name=".screens.LogIn">
+        <activity android:name=".screens.Activity_LogIn">
         </activity>
         <activity
             android:name=".screens.ActivitySplashScreen"

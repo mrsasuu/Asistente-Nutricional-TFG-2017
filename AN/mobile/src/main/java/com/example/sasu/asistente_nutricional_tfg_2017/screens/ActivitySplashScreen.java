@@ -5,11 +5,8 @@ package com.example.sasu.asistente_nutricional_tfg_2017.screens;
  */
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 
@@ -57,7 +54,7 @@ public class ActivitySplashScreen extends Activity {
 
                    //Languages.setLocale(ControllerPreferences.getLanguage(),context);
 
-                    Intent intent = new Intent(ActivitySplashScreen.this, LogIn.class);
+                    Intent intent = new Intent(ActivitySplashScreen.this, Activity_LogIn.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
@@ -85,7 +82,7 @@ public class ActivitySplashScreen extends Activity {
 
                 // Start the next activity
                 Intent mainIntent = new Intent().setClass(
-                        ActivitySplashScreen.this, LogIn.class);
+                        ActivitySplashScreen.this, Activity_LogIn.class);
                 startActivity(mainIntent);
 
                 // Close the activity so the user won't able to go back this

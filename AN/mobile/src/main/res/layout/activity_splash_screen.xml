@@ -4,7 +4,7 @@
     android:id="@+id/activity_log_in"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sasu.asistente_nutricional_tfg_2017.screens.LogIn">
+    tools:context="com.example.sasu.asistente_nutricional_tfg_2017.screens.Activity_LogIn">
 
     <ImageView
         android:layout_width="match_parent"
