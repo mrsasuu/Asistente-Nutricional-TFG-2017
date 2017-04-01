@@ -73,6 +73,28 @@ public class LoginFragment extends Fragment {
         });
 
         registration = (Button) view.findViewById(R.id.btn_registration);
+        login = (Button) view.findViewById(R.id.btn_logIn);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Loging_Loading loginLoading = new Loging_Loading();
+                FragmentManager fragmentManager = getFragmentManager();
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+                transaction.addToBackStack(transaction.toString());
+                transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+                //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
+                transaction.replace(R.id.activity_Main_Login,loginLoading);
+
+
+                transaction.commit();
+            }
+        });
+
+        //Intent artWorkIntent = new Intent(MainActivity.this, ActivityContentType.class);
+        //startActivity(artWorkIntent);
 
         registration.setOnClickListener(new View.OnClickListener() {
             @Override

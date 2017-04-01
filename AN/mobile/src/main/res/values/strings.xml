@@ -6,4 +6,5 @@
     <string name="No">No</string>
     <string name="Yes">Sí</string>
     <string name="exit_Message">¿Seguro que quieres salir de la aplicación?</string>
+    <string name="loging_in">Iniciando sesión</string>
 </resources>

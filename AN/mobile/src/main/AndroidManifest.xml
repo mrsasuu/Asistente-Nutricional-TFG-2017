@@ -11,6 +11,8 @@
         android:hardwareAccelerated="true">
         <activity android:name=".screens.Activity_LogIn">
         </activity>
+        <activity android:name=".screens.Main_Menu">
+        </activity>
         <activity
             android:name=".screens.ActivitySplashScreen"
             android:screenOrientation="portrait"

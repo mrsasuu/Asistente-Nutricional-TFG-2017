@@ -2,22 +2,19 @@ package com.example.sasu.asistente_nutricional_tfg_2017.screens;
 
 import android.content.DialogInterface;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.LoginFragment;
-import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Loging_Loading;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.RegistrationFragment;
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
 
-public class Activity_LogIn extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,Loging_Loading.OnFragmentInteractionListener, RegistrationFragment.OnFragmentInteractionListener {
+public class Main_Menu extends AppCompatActivity{
 
     LinearLayout input_user_layout;
     LinearLayout input_password_layout;
@@ -56,7 +53,7 @@ public class Activity_LogIn extends AppCompatActivity implements LoginFragment.O
                 }
             }
         });*/
-
+/*
         LoginFragment loginFragment = new LoginFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -65,7 +62,7 @@ public class Activity_LogIn extends AppCompatActivity implements LoginFragment.O
         transaction.add(R.id.activity_Main_Login,loginFragment);
         //transaction.addToBackStack(transaction.toString());
         transaction.commit();
-
+*/
 
     }
 
@@ -93,8 +90,8 @@ public class Activity_LogIn extends AppCompatActivity implements LoginFragment.O
 
     }
 
-    @Override
+    /*@Override
     public void onFragmentInteraction(Uri uri) {
 
-    }
+    }*/
 }
