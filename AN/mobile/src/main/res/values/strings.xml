@@ -7,4 +7,12 @@
     <string name="Yes">Sí</string>
     <string name="exit_Message">¿Seguro que quieres salir de la aplicación?</string>
     <string name="loging_in">Iniciando sesión</string>
+    <string name="open">Abrir</string>
+    <string name="close">Cerrar</string>
+    <string name="title_activity_main_menu2">Main_menu2</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

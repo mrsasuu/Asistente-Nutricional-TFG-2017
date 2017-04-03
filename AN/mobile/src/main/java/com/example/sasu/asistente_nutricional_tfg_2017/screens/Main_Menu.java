@@ -1,30 +1,61 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.screens;
 
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
-import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.LoginFragment;
-import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.RegistrationFragment;
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
 
 public class Main_Menu extends AppCompatActivity{
 
-    LinearLayout input_user_layout;
-    LinearLayout input_password_layout;
-    EditText input_user;
-    EditText input_password;
+   private String[] mPlanetTitles = {"MEnu1","Menu2"};
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBar actionBar;
+    private ActionBarDrawerToggle mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.main_menu);
+
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close);
+
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //setSupportActionBar(myToolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        myToolbar.setTitle("Inicio");
+        //myToolbar.
+
+
+        /*//mPlanetTitles = getResources().getStringArray(R.array.planets_array);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, mPlanetTitles));*/
+        // Set the list's click listener
+       //mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+
 /*
         input_user_layout = (LinearLayout) findViewById(R.id.input_user_layout);
         input_user = (EditText) findViewById(R.id.input_user);
@@ -64,6 +95,14 @@ public class Main_Menu extends AppCompatActivity{
         transaction.commit();
 */
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

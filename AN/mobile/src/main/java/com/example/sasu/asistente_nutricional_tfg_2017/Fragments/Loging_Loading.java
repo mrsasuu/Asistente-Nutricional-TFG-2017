@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
 import com.example.sasu.asistente_nutricional_tfg_2017.screens.Main_Menu;
+import com.example.sasu.asistente_nutricional_tfg_2017.screens.Main_menu2;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +41,7 @@ public class Loging_Loading extends Fragment {
 
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
+        load();
         return inflater.inflate(R.layout.fragment_loging__loading, container, false);
     }
 
@@ -65,22 +67,21 @@ public class Loging_Loading extends Fragment {
 
 
 
-        /*new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                while(progressStatus < 100){
-                    progressStatus++;
-
-
-                }try {
-                    Thread.sleep(100);
+                try {
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
+                Intent intent = new Intent(getActivity(), Main_menu2.class);
+                startActivity(intent);
+
 
             }
-        });*/
+        }).start();
 
     }
 
