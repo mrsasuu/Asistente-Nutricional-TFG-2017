@@ -29,8 +29,8 @@ import com.hookedonplay.decoviewlib.events.DecoEvent;
 public class Main_menu2 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FloatingActionButton fb1,fb2,fb3,fb4;
-    LinearLayout fb2L,fb3L,fb4L;
+    FloatingActionButton fb1,fb2,fb3,fb4,fb5,fb6,fb7;
+    LinearLayout fb2L,fb3L,fb4L,fb5L,fb6L,fb7L;
     Animation fabOpen, fabClose, fabClockw, fabAntiClockw;
     boolean isOpen = false;
 
@@ -45,10 +45,16 @@ public class Main_menu2 extends AppCompatActivity
         fb2 = (FloatingActionButton) findViewById(R.id.action_button2);
         fb3 = (FloatingActionButton) findViewById(R.id.action_button3);
         fb4 = (FloatingActionButton) findViewById(R.id.action_button4);
+        fb5 = (FloatingActionButton) findViewById(R.id.action_button5);
+        fb6 = (FloatingActionButton) findViewById(R.id.action_button6);
+        fb7 = (FloatingActionButton) findViewById(R.id.action_button7);
 
         fb2L = (LinearLayout) findViewById(R.id.fab2Lay);
         fb3L = (LinearLayout) findViewById(R.id.fab3Lay);
         fb4L = (LinearLayout) findViewById(R.id.fab4Lay);
+        fb5L = (LinearLayout) findViewById(R.id.fab5Lay);
+        fb6L = (LinearLayout) findViewById(R.id.fab6Lay);
+        fb7L = (LinearLayout) findViewById(R.id.fab7Lay);
 
 
         fabOpen = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_open);
@@ -65,40 +71,91 @@ public class Main_menu2 extends AppCompatActivity
                     fb2L.startAnimation(fabClose);
                     fb3L.startAnimation(fabClose);
                     fb4L.startAnimation(fabClose);
+                    fb5L.startAnimation(fabClose);
+                    fb6L.startAnimation(fabClose);
+                    fb7L.startAnimation(fabClose);
+
                     fb2.startAnimation(fabClose);
                     fb3.startAnimation(fabClose);
                     fb4.startAnimation(fabClose);
+                    fb5.startAnimation(fabClose);
+                    fb6.startAnimation(fabClose);
+                    fb7.startAnimation(fabClose);
+
                     fb1.startAnimation(fabAntiClockw);
+
                     fb2L.setVisibility(View.INVISIBLE);
                     fb3L.setVisibility(View.INVISIBLE);
                     fb4L.setVisibility(View.INVISIBLE);
+                    fb5L.setVisibility(View.INVISIBLE);
+                    fb6L.setVisibility(View.INVISIBLE);
+                    fb7L.setVisibility(View.INVISIBLE);
+
                     fb2L.setClickable(false);
                     fb3L.setClickable(false);
                     fb4L.setClickable(false);
+                    fb5L.setClickable(false);
+                    fb6L.setClickable(false);
+                    fb7L.setClickable(false);
+
                     fb2.setClickable(false);
                     fb3.setClickable(false);
                     fb4.setClickable(false);
+                    fb5.setClickable(false);
+                    fb6.setClickable(false);
+                    fb7.setClickable(false);
+
                     isOpen = false;
 
                 }else{
                     fb2L.startAnimation(fabOpen);
                     fb3L.startAnimation(fabOpen);
                     fb4L.startAnimation(fabOpen);
+                    fb5L.startAnimation(fabOpen);
+                    fb6L.startAnimation(fabOpen);
+                    fb7L.startAnimation(fabOpen);
+
                     fb2.startAnimation(fabOpen);
                     fb3.startAnimation(fabOpen);
                     fb4.startAnimation(fabOpen);
+                    fb5.startAnimation(fabOpen);
+                    fb6.startAnimation(fabOpen);
+                    fb7.startAnimation(fabOpen);
+
                     fb1.startAnimation(fabClockw);
+
                     fb2L.setVisibility(View.VISIBLE);
                     fb3L.setVisibility(View.VISIBLE);
                     fb4L.setVisibility(View.VISIBLE);
+                    fb5L.setVisibility(View.VISIBLE);
+                    fb6L.setVisibility(View.VISIBLE);
+                    fb7L.setVisibility(View.VISIBLE);
+
                     fb2L.setClickable(true);
                     fb3L.setClickable(true);
                     fb4L.setClickable(true);
+                    fb5L.setClickable(true);
+                    fb6L.setClickable(true);
+                    fb7L.setClickable(true);
+
                     fb2.setClickable(true);
                     fb3.setClickable(true);
+                    fb4.setClickable(true);
+                    fb5.setClickable(true);
+                    fb6.setClickable(true);
+                    fb7.setClickable(true);
+
                     isOpen = true;
 
                 }
+            }
+        });
+
+        fb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 

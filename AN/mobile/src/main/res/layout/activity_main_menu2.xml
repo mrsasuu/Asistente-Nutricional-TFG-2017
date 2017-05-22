@@ -35,13 +35,6 @@
 
         </FrameLayout>
 
-        <!--<android.support.design.widget.BottomNavigationView
-            android:id="@+id/navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="?android:attr/windowBackground"
-            app:menu="@menu/navigation" />-->
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="220px"
@@ -196,8 +189,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="90dp"
-        android:layout_marginLeft="170dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="250dp"
         android:visibility="invisible">
 
     <TextView
@@ -226,8 +219,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="130dp"
-        android:layout_marginRight="70dp"
+        android:layout_marginBottom="140dp"
+        android:layout_marginRight="150dp"
         android:visibility="invisible">
 
         <TextView
@@ -245,8 +238,97 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             app:backgroundTint="#447CC5"
-            android:src="@mipmap/agua"
+            android:src="@mipmap/comida"
             android:tag="Añadir vaso de agua"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/fab6Lay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="200dp"
+        android:layout_marginLeft="55dp"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:text="Añadir \n Cena"
+            android:minLines="2"
+            android:gravity="center|top"
+            android:elevation="7dp"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/action_button6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            app:backgroundTint="#447CC5"
+            android:src="@mipmap/cena"
+            android:tag="Añadir otro"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fab7Lay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="200dp"
+        android:layout_marginRight="55dp"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:text="Añadir \n Merienda"
+            android:minLines="2"
+            android:gravity="center|top"
+            android:elevation="7dp"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/action_button7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            app:backgroundTint="#447CC5"
+            android:src="@mipmap/merienda"
+            android:tag="Añadir otro"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fab5Lay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="140dp"
+        android:layout_marginLeft="150dp"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:text="Añadir \n Otro"
+            android:minLines="2"
+            android:gravity="center|top"
+            android:elevation="7dp"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/action_button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            app:backgroundTint="#447CC5"
+            android:src="@mipmap/snack"
+            android:tag="Añadir otro"
             />
     </LinearLayout>
 
@@ -258,8 +340,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="90dp"
-        android:layout_marginRight="170dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="250dp"
         android:visibility="invisible">
 
         <TextView
