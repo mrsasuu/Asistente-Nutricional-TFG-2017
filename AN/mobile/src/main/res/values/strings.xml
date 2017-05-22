@@ -15,4 +15,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="desayuno">Desayuno</string>
+    <string name="almuerzo">Almuerzo</string>
+    <string name="merienda">Merienda</string>
+    <string name="cena">Cena</string>
 </resources>

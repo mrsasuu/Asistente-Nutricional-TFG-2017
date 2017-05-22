@@ -14,6 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
+
 
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
 import com.hookedonplay.decoviewlib.DecoView;
@@ -25,33 +29,91 @@ import com.hookedonplay.decoviewlib.events.DecoEvent;
 public class Main_menu2 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    FloatingActionButton fb1,fb2,fb3,fb4;
+    LinearLayout fb2L,fb3L,fb4L;
+    Animation fabOpen, fabClose, fabClockw, fabAntiClockw;
+    boolean isOpen = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fb1 = (FloatingActionButton) findViewById(R.id.action_button);
+        fb2 = (FloatingActionButton) findViewById(R.id.action_button2);
+        fb3 = (FloatingActionButton) findViewById(R.id.action_button3);
+        fb4 = (FloatingActionButton) findViewById(R.id.action_button4);
+
+        fb2L = (LinearLayout) findViewById(R.id.fab2Lay);
+        fb3L = (LinearLayout) findViewById(R.id.fab3Lay);
+        fb4L = (LinearLayout) findViewById(R.id.fab4Lay);
+
+
+        fabOpen = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_open);
+        fabClose = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
+        fabClockw = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_clocl_wise);
+        fabAntiClockw = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_anti_clocl_wise);
+
+        fb1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                if(isOpen){
+                    fb2L.startAnimation(fabClose);
+                    fb3L.startAnimation(fabClose);
+                    fb4L.startAnimation(fabClose);
+                    fb2.startAnimation(fabClose);
+                    fb3.startAnimation(fabClose);
+                    fb4.startAnimation(fabClose);
+                    fb1.startAnimation(fabAntiClockw);
+                    fb2L.setVisibility(View.INVISIBLE);
+                    fb3L.setVisibility(View.INVISIBLE);
+                    fb4L.setVisibility(View.INVISIBLE);
+                    fb2L.setClickable(false);
+                    fb3L.setClickable(false);
+                    fb4L.setClickable(false);
+                    fb2.setClickable(false);
+                    fb3.setClickable(false);
+                    fb4.setClickable(false);
+                    isOpen = false;
+
+                }else{
+                    fb2L.startAnimation(fabOpen);
+                    fb3L.startAnimation(fabOpen);
+                    fb4L.startAnimation(fabOpen);
+                    fb2.startAnimation(fabOpen);
+                    fb3.startAnimation(fabOpen);
+                    fb4.startAnimation(fabOpen);
+                    fb1.startAnimation(fabClockw);
+                    fb2L.setVisibility(View.VISIBLE);
+                    fb3L.setVisibility(View.VISIBLE);
+                    fb4L.setVisibility(View.VISIBLE);
+                    fb2L.setClickable(true);
+                    fb3L.setClickable(true);
+                    fb4L.setClickable(true);
+                    fb2.setClickable(true);
+                    fb3.setClickable(true);
+                    isOpen = true;
+
+                }
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        toggle.syncState();*/
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);*/
 
-        toolbar.setTitle("Inicio");
+        //toolbar.setTitle("Inicio");
 
+        /*
         DecoView arcView = (DecoView)findViewById(R.id.dynamicArcView);
 
 
@@ -117,6 +179,10 @@ public class Main_menu2 extends AppCompatActivity
         arcView.addEvent(new DecoEvent.Builder(25).setIndex(series2Index).setDelay(4000).build());
         arcView.addEvent(new DecoEvent.Builder(70).setIndex(series2Index).setDelay(5000).build());
         arcView.addEvent(new DecoEvent.Builder(100).setIndex(series2Index).setDelay(18000).build());
+
+        */
+
+
     }
 
     @Override
@@ -144,9 +210,9 @@ public class Main_menu2 extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
