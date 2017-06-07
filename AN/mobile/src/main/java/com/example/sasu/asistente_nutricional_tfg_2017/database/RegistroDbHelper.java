@@ -10,8 +10,10 @@ import com.example.sasu.asistente_nutricional_tfg_2017.models.Comida;
  * Created by Sasu on 06/06/2017.
  */
 
-public class RegistroDbHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
+//Por ahor ano se usará ya que utilizaremos ORM SUGAR
+
+public class RegistroDbHelper {//extends SQLiteOpenHelper {
+ /*   public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Registro.db";
 
     public RegistroDbHelper(Context context) {
@@ -58,5 +60,5 @@ public class RegistroDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
-    }
+    }*/
 }

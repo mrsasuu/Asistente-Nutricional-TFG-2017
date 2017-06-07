@@ -47,72 +47,30 @@
 
             android:gravity="bottom|center">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center|center_vertical">
 
 
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginMenuElement"
+
+                android:layout_gravity="start|center_vertical"
                 android:orientation="vertical"
-                android:textAlignment="center"
-                android:layout_marginRight="@dimen/marginMenuElement"
-                android:gravity="center">
+                android:textAlignment="center">
 
                 <ImageView
                     android:layout_width="@dimen/imageMenuElement"
                     android:layout_height="@dimen/imageMenuElement"
-                    android:src="@mipmap/desayuno"
                     android:layout_gravity="center"
-                    />
+                    android:src="@mipmap/inicio" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
                     android:gravity="center"
-                    android:text="Desayuno"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginRight="@dimen/marginMenuElement"
-                android:textAlignment="center"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="@dimen/imageMenuElement"
-                    android:layout_height="@dimen/imageMenuElement"
-                    android:src="@mipmap/comida"
-                    android:layout_gravity="center"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Comida"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:orientation="vertical"
-
-                android:textAlignment="center"
-                android:gravity="center">
-
-                <!--<ImageView
-                    android:layout_width="200px"
-                    android:layout_height="200px"
-                    android:src="@mipmap/middlebutton"
-                    android:layout_gravity="center"
-                    />-->
+                    android:text="Inicio" />
 
             </LinearLayout>
 
@@ -120,42 +78,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+
                 android:layout_marginRight="@dimen/marginMenuElement"
                 android:textAlignment="center"
-                android:gravity="center">
+                android:layout_gravity="end|center_vertical"
+                >
 
                 <ImageView
                     android:layout_width="@dimen/imageMenuElement"
                     android:layout_height="@dimen/imageMenuElement"
-                    android:src="@mipmap/merienda"
+                    android:src="@mipmap/registro"
                     android:layout_gravity="center"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
                     android:gravity="center"
-                    android:text="Merienda"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginRight="@dimen/marginMenuElement"
-                android:textAlignment="center"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="@dimen/imageMenuElement"
-                    android:layout_height="@dimen/imageMenuElement"
-                    android:src="@mipmap/cena"
-                    android:layout_gravity="center"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Cena"/>
+                    android:text="Registro"/>
 
             </LinearLayout>
 
@@ -165,7 +105,6 @@
 
 
 
-        </LinearLayout>
         </android.support.v7.widget.CardView>
 
 
@@ -348,6 +287,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textColor="#000000"
             android:text="Añadir \n Desayuno"
             android:minLines="2"

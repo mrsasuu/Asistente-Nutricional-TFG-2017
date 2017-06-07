@@ -3,14 +3,18 @@ package com.example.sasu.asistente_nutricional_tfg_2017.models;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.Grupo;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.Porcion;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.SubGrupo;
+import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
 
 /**
  * Created by Sasu on 06/06/2017.
  */
 
-public class Alimento {
+public class Alimento extends SugarRecord{
     private Grupo grupoAlimentario;
     private SubGrupo categoria;
+
+    @Unique
     private String id;
     private String nombre;
     private String urlImagen;
@@ -22,11 +26,23 @@ public class Alimento {
     private double carbohidratos;
     private double grasas;
 
+    public Alimento(String id, String nombre, String urlImagen, double porcion, double proteinas, double carbohidratos, double grasas, Grupo grupoAlimentario, SubGrupo categoria){
+        this.id = id;
+        this.nombre = nombre;
+        this.urlImagen = urlImagen;
+        this.porcion = porcion;
+        this.proteinas = proteinas;
+        this.carbohidratos = carbohidratos;
+        this.grasas = grasas;
+        this.grupoAlimentario = grupoAlimentario;
+        this.categoria = categoria;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
-    public String getId() {
+    public String getIdAl() {
         return id;
     }
 

@@ -7,6 +7,8 @@ import android.provider.BaseColumns;
  */
 
 public class Registro {
+/*
+    Por ahor ano se usará ya que utilizaremos ORM SUGAR
 
     public abstract class AlimentosEntrada implements BaseColumns{
         public static final String TABLE_NAME = "alimentos";
@@ -35,4 +37,6 @@ public class Registro {
 
 
     }
+
+    */
 }
