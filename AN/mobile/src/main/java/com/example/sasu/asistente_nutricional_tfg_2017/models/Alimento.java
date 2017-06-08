@@ -26,6 +26,10 @@ public class Alimento extends SugarRecord{
     private double carbohidratos;
     private double grasas;
 
+    PrioridadComida prioridad;
+
+
+
     public Alimento(String id, String nombre, String urlImagen, double porcion, double proteinas, double carbohidratos, double grasas, Grupo grupoAlimentario, SubGrupo categoria){
         this.id = id;
         this.nombre = nombre;
@@ -36,6 +40,14 @@ public class Alimento extends SugarRecord{
         this.grasas = grasas;
         this.grupoAlimentario = grupoAlimentario;
         this.categoria = categoria;
+    }
+
+    public PrioridadComida getPrioridad(){
+        return prioridad;
+    }
+
+    public void setPrioridad(PrioridadComida prioridad){
+        this.prioridad = prioridad;
     }
 
     public String getNombre() {

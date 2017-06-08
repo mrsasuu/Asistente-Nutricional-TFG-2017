@@ -2,9 +2,12 @@ package com.example.sasu.asistente_nutricional_tfg_2017.screens;
 
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +22,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 
+import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Inicio;
+import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.LoginFragment;
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.EdgeDetail;
@@ -27,7 +32,7 @@ import com.hookedonplay.decoviewlib.charts.SeriesLabel;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 
 public class Main_menu2 extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Inicio.OnFragmentInteractionListener {
 
     FloatingActionButton fb1,fb2,fb3,fb4,fb5,fb6,fb7;
     LinearLayout fb2L,fb3L,fb4L,fb5L,fb6L,fb7L;
@@ -38,6 +43,14 @@ public class Main_menu2 extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu2);
+
+        Inicio inicioFragment = new Inicio();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+        transaction.add(R.id.fragment_container,inicioFragment);
+
+        transaction.commit();
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -297,5 +310,10 @@ public class Main_menu2 extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
