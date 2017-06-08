@@ -7,5 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="marginMenuElement">50dp</dimen>
     <dimen name="imageMenuElement">100px</dimen>
+    <dimen name="altoListaRegistro">55dp</dimen>
+    <dimen name="anchoListaRegistro">55dp</dimen>
 
 </resources>
