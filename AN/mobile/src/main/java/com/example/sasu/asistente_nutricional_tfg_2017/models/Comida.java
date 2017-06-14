@@ -1,15 +1,10 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.models;
 
-import android.content.ContentValues;
-
-import com.example.sasu.asistente_nutricional_tfg_2017.database.Registro;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
 import com.orm.SugarRecord;
 
 import java.util.ArrayList;
 import java.util.Date;
-
-import static android.R.attr.id;
 
 /**
  * Created by Sasu on 06/06/2017.
@@ -28,16 +23,16 @@ public class Comida extends SugarRecord{
         ContentValues values = new ContentValues();
 
         for(int i = 0; i < alimentos.size() ; i++){
-            values.put(Registro.AlimentosEntrada.ID, alimentos.get(i).getId());
+            values.put(RegistroDB.AlimentosEntrada.ID, alimentos.get(i).getId());
 
-            values.put(Registro.AlimentosEntrada.NOMBRE, alimentos.get(i).getNombre());
-            values.put(Registro.AlimentosEntrada.GRUPO, alimentos.get(i).getGrupo());
-            values.put(Registro.AlimentosEntrada.SUB_GRUPO, alimentos.get(i).getSub_Grupo());
-            values.put(Registro.AlimentosEntrada.PORCION, alimentos.get(i).getPorcion());
-            values.put(Registro.AlimentosEntrada.PROTEINAS, alimentos.get(i).getProteinas());
-            values.put(Registro.AlimentosEntrada.CARBOHIDRATOS, alimentos.get(i).getCarbohidratos());
-            values.put(Registro.AlimentosEntrada.GRASAS, alimentos.get(i).getGrasas());
-            values.put(Registro.AlimentosEntrada.URL, alimentos.get(i).getUrl());
+            values.put(RegistroDB.AlimentosEntrada.NOMBRE, alimentos.get(i).getNombre());
+            values.put(RegistroDB.AlimentosEntrada.GRUPO, alimentos.get(i).getGrupo());
+            values.put(RegistroDB.AlimentosEntrada.SUB_GRUPO, alimentos.get(i).getSub_Grupo());
+            values.put(RegistroDB.AlimentosEntrada.PORCION, alimentos.get(i).getPorcion());
+            values.put(RegistroDB.AlimentosEntrada.PROTEINAS, alimentos.get(i).getProteinas());
+            values.put(RegistroDB.AlimentosEntrada.CARBOHIDRATOS, alimentos.get(i).getCarbohidratos());
+            values.put(RegistroDB.AlimentosEntrada.GRASAS, alimentos.get(i).getGrasas());
+            values.put(RegistroDB.AlimentosEntrada.URL, alimentos.get(i).getUrl());
 
         }
 
@@ -50,11 +45,11 @@ public class Comida extends SugarRecord{
         ContentValues values = new ContentValues();
 
         for(int i = 0; i < alimentos.size() ; i++){
-            values.put(Registro.RegistroEntrada.ID, alimentos.get(i).getId());
+            values.put(RegistroDB.RegistroEntrada.ID, alimentos.get(i).getId());
 
-            values.put(Registro.RegistroEntrada.FECHA,fecha.toString());
-            values.put(Registro.RegistroEntrada.HORARIOCOMIDA, hora.toString());
-            values.put(Registro.RegistroEntrada.IDCOMIDA, alimentos.get(i).getId());
+            values.put(RegistroDB.RegistroEntrada.FECHA,fecha.toString());
+            values.put(RegistroDB.RegistroEntrada.HORARIOCOMIDA, hora.toString());
+            values.put(RegistroDB.RegistroEntrada.IDCOMIDA, alimentos.get(i).getId());
 
         }
 

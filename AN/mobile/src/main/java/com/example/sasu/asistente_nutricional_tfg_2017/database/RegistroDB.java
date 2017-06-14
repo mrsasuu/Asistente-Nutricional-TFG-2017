@@ -6,7 +6,8 @@ import android.provider.BaseColumns;
  * Created by Sasu on 06/06/2017.
  */
 
-public class Registro {
+public class RegistroDB {
+
 /*
     Por ahor ano se usará ya que utilizaremos ORM SUGAR
 

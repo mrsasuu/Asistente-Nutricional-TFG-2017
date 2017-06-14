@@ -57,6 +57,7 @@
 
                 android:layout_gravity="start|center_vertical"
                 android:orientation="vertical"
+                android:onClick="inicio"
                 android:textAlignment="center">
 
                 <ImageView
@@ -82,6 +83,7 @@
                 android:layout_marginRight="@dimen/marginMenuElement"
                 android:textAlignment="center"
                 android:layout_gravity="end|center_vertical"
+                android:onClick="registro"
                 >
 
                 <ImageView

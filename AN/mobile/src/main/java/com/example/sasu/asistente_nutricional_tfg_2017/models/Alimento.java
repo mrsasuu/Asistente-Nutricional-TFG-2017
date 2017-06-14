@@ -42,6 +42,11 @@ public class Alimento extends SugarRecord{
         this.categoria = categoria;
     }
 
+    public Alimento(String nombre)
+    {
+        this.nombre = nombre;
+    }
+
     public PrioridadComida getPrioridad(){
         return prioridad;
     }

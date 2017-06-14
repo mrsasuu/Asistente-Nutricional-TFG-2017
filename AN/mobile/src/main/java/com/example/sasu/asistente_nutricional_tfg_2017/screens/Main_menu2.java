@@ -1,20 +1,15 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.screens;
 
-import android.graphics.Color;
-import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.Animation;
@@ -23,16 +18,13 @@ import android.widget.LinearLayout;
 
 
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Inicio;
-import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.LoginFragment;
+import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Loging_Loading;
+import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Registro;
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
-import com.hookedonplay.decoviewlib.DecoView;
-import com.hookedonplay.decoviewlib.charts.EdgeDetail;
-import com.hookedonplay.decoviewlib.charts.SeriesItem;
-import com.hookedonplay.decoviewlib.charts.SeriesLabel;
-import com.hookedonplay.decoviewlib.events.DecoEvent;
+import com.example.sasu.asistente_nutricional_tfg_2017.database.RegistroDB;
 
 public class Main_menu2 extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Inicio.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Inicio.OnFragmentInteractionListener, Registro.OnFragmentInteractionListener {
 
     FloatingActionButton fb1,fb2,fb3,fb4,fb5,fb6,fb7;
     LinearLayout fb2L,fb3L,fb4L,fb5L,fb6L,fb7L;
@@ -253,6 +245,34 @@ public class Main_menu2 extends AppCompatActivity
         */
 
 
+    }
+
+    public void inicio(View v){
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+        transaction.addToBackStack(transaction.toString());
+        transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+        //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
+        transaction.replace(R.id.fragment_container,Inicio.newInstance());
+
+
+        transaction.commit();
+    }
+
+    public void registro(View v){
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+        transaction.addToBackStack(transaction.toString());
+        transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+        //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
+        transaction.replace(R.id.fragment_container, Registro.newInstance());
+
+
+        transaction.commit();
     }
 
     @Override

@@ -14,7 +14,7 @@ import com.example.sasu.asistente_nutricional_tfg_2017.models.Comida;
 
 public class RegistroDbHelper {//extends SQLiteOpenHelper {
  /*   public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Registro.db";
+    public static final String DATABASE_NAME = "RegistroDB.db";
 
     public RegistroDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -23,26 +23,26 @@ public class RegistroDbHelper {//extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE " + Registro.AlimentosEntrada.TABLE_NAME + " ("
-                + Registro.AlimentosEntrada._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + Registro.AlimentosEntrada.ID + " TEXT NOT NULL,"
-                + Registro.AlimentosEntrada.NOMBRE + " TEXT NOT NULL,"
-                + Registro.AlimentosEntrada.GRUPO + " TEXT NOT NULL,"
-                + Registro.AlimentosEntrada.SUB_GRUPO + " TEXT NOT NULL,"
-                + Registro.AlimentosEntrada.PORCION + " TEXT NOT NULL,"
-                + Registro.AlimentosEntrada.PROTEINAS + " TEXT NOT NULL,"
-                + Registro.AlimentosEntrada.CARBOHIDRATOS + " TEXT NOT NULL,"
-                + Registro.AlimentosEntrada.GRASAS + " TEXT NOT NULL,"
-                + Registro.AlimentosEntrada.URL + " TEXT,"
-                + "UNIQUE (" + Registro.AlimentosEntrada.ID + "))");
+        sqLiteDatabase.execSQL("CREATE TABLE " + RegistroDB.AlimentosEntrada.TABLE_NAME + " ("
+                + RegistroDB.AlimentosEntrada._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + RegistroDB.AlimentosEntrada.ID + " TEXT NOT NULL,"
+                + RegistroDB.AlimentosEntrada.NOMBRE + " TEXT NOT NULL,"
+                + RegistroDB.AlimentosEntrada.GRUPO + " TEXT NOT NULL,"
+                + RegistroDB.AlimentosEntrada.SUB_GRUPO + " TEXT NOT NULL,"
+                + RegistroDB.AlimentosEntrada.PORCION + " TEXT NOT NULL,"
+                + RegistroDB.AlimentosEntrada.PROTEINAS + " TEXT NOT NULL,"
+                + RegistroDB.AlimentosEntrada.CARBOHIDRATOS + " TEXT NOT NULL,"
+                + RegistroDB.AlimentosEntrada.GRASAS + " TEXT NOT NULL,"
+                + RegistroDB.AlimentosEntrada.URL + " TEXT,"
+                + "UNIQUE (" + RegistroDB.AlimentosEntrada.ID + "))");
 
-        sqLiteDatabase.execSQL("CREATE TABLE " + Registro.RegistroEntrada.TABLE_NAME + " ("
-                + Registro.RegistroEntrada._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + Registro.RegistroEntrada.ID + " TEXT NOT NULL,"
-                + Registro.RegistroEntrada.FECHA + " DATE NOT NULL,"
-                + Registro.RegistroEntrada.HORARIOCOMIDA + " TEXT NOT NULL,"
-                + Registro.RegistroEntrada.IDCOMIDA + " TEXT NOT NULL,"
-                + "UNIQUE (" + Registro.RegistroEntrada.ID + "))");
+        sqLiteDatabase.execSQL("CREATE TABLE " + RegistroDB.RegistroEntrada.TABLE_NAME + " ("
+                + RegistroDB.RegistroEntrada._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + RegistroDB.RegistroEntrada.ID + " TEXT NOT NULL,"
+                + RegistroDB.RegistroEntrada.FECHA + " DATE NOT NULL,"
+                + RegistroDB.RegistroEntrada.HORARIOCOMIDA + " TEXT NOT NULL,"
+                + RegistroDB.RegistroEntrada.IDCOMIDA + " TEXT NOT NULL,"
+                + "UNIQUE (" + RegistroDB.RegistroEntrada.ID + "))");
 
 
     }
@@ -51,7 +51,7 @@ public class RegistroDbHelper {//extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         return sqLiteDatabase.insert(
-                Registro.AlimentosEntrada.TABLE_NAME,
+                RegistroDB.AlimentosEntrada.TABLE_NAME,
                 null,
                 comida.toContentValuesComida());
 
