@@ -7,4 +7,7 @@
     <color name="RegistroCalendarioColorFuente">#000000</color>
     <color name="red">#d20101</color>
     <color name="green">#35a432</color>
+    <color name="whiteTransparent">#9effffff</color>
+
+
 </resources>

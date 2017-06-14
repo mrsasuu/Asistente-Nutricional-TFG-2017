@@ -67,7 +67,7 @@ public class Registro extends Fragment {
         RecyclerView.LayoutManager llm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(llm);
 
-        List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"));
+        List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
 
         AdapterRegistro adaptador= new AdapterRegistro(alimentos);
         rv.setAdapter(adaptador);

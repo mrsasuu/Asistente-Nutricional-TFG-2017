@@ -5,9 +5,34 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Registro">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
 
+    <Button
+        android:layout_gravity="start"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@mipmap/atras"/>
 
-<LinearLayout
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:text="Hoy"/>
+
+    <Button
+        android:layout_gravity="end"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@mipmap/next"/>
+
+</FrameLayout>
+
+<!--<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -185,7 +210,7 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"

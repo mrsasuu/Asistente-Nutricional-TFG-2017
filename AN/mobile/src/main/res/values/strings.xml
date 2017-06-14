@@ -19,4 +19,7 @@
     <string name="almuerzo">Almuerzo</string>
     <string name="merienda">Merienda</string>
     <string name="cena">Cena</string>
+    <string name="title_activity_registrar_comida">registrarComida</string>
+    <string name="title_activity_registrar_comida_tab">registrarComidaTab</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

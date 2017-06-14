@@ -1,10 +1,13 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.screens;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 
@@ -22,19 +26,135 @@ import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Loging_Loading;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Registro;
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
 import com.example.sasu.asistente_nutricional_tfg_2017.database.RegistroDB;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
+import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.ControllerPreferences;
 
 public class Main_menu2 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Inicio.OnFragmentInteractionListener, Registro.OnFragmentInteractionListener {
 
+    float currentX;
+    float currentY,downXValue,downYValue;
     FloatingActionButton fb1,fb2,fb3,fb4,fb5,fb6,fb7;
     LinearLayout fb2L,fb3L,fb4L,fb5L,fb6L,fb7L;
+    FrameLayout fondo;
+    ControllerPreferences controller = ControllerPreferences.getInstance();
+    int position = 0;
     Animation fabOpen, fabClose, fabClockw, fabAntiClockw;
     boolean isOpen = false;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.EDGE_RIGHT:
+                if(position!=1){
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+                    transaction.addToBackStack(transaction.toString());
+                    transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+                    //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
+                    transaction.replace(R.id.fragment_container, Registro.newInstance());
+
+
+                    transaction.commit();
+                }
+                break;
+            case MotionEvent.EDGE_LEFT:
+                if(position!=0){
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+                    transaction.addToBackStack(transaction.toString());
+                    transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+                    //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
+                    transaction.replace(R.id.fragment_container, Inicio.newInstance());
+
+
+                    transaction.commit();
+                }
+                break;
+
+            case MotionEvent.ACTION_DOWN: {
+                // store the X value when the user's finger was pressed down
+                downXValue = event.getX();
+                downYValue = event.getY();
+                Log.v("", "= " + downYValue);
+                break;
+            }
+
+            case MotionEvent.ACTION_UP: {
+                // Get the X value when the user released his/her finger
+                float currentX = event.getX();
+                float currentY = event.getY();
+                // check if horizontal or vertical movement was bigger
+
+                if (Math.abs(downXValue - currentX) > Math.abs(downYValue
+                        - currentY)) {
+                    Log.v("", "x");
+                    // going backwards: pushing stuff to the right
+                    if (downXValue < currentX) {
+                        Log.v("", "right");
+                        if(position==1){
+                            position = 0;
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+                            transaction.addToBackStack(transaction.toString());
+                            transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+                            //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
+                            transaction.replace(R.id.fragment_container, Inicio.newInstance());
+
+
+                            transaction.commit();
+                        }
+
+
+                    }
+
+                    // going forwards: pushing stuff to the left
+                    if (downXValue > currentX) {
+                        if(position==0){
+                            position = 1;
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+                            transaction.addToBackStack(transaction.toString());
+                            transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+                            //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
+                            transaction.replace(R.id.fragment_container, Registro.newInstance());
+
+
+                            transaction.commit();
+                        }
+                        Log.v("", "left");
+
+                    }
+
+                } else {
+                    Log.v("", "y ");
+
+                    if (downYValue < currentY) {
+                        Log.v("", "down");
+
+                    }
+                    if (downYValue > currentY) {
+                        Log.v("", "up");
+
+                    }
+                }
+                break;
+            }
+
+        }
+        return super.onTouchEvent(event);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu2);
+
+        fondo = (FrameLayout) findViewById(R.id.fondo);
 
         Inicio inicioFragment = new Inicio();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -73,6 +193,7 @@ public class Main_menu2 extends AppCompatActivity
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
                 if(isOpen){
+
                     fb2L.startAnimation(fabClose);
                     fb3L.startAnimation(fabClose);
                     fb4L.startAnimation(fabClose);
@@ -87,8 +208,12 @@ public class Main_menu2 extends AppCompatActivity
                     fb6.startAnimation(fabClose);
                     fb7.startAnimation(fabClose);
 
+                    //fondo.startAnimation(fabClose);
+
                     fb1.startAnimation(fabAntiClockw);
 
+
+                    fondo.setVisibility(View.INVISIBLE);
                     fb2L.setVisibility(View.INVISIBLE);
                     fb3L.setVisibility(View.INVISIBLE);
                     fb4L.setVisibility(View.INVISIBLE);
@@ -113,12 +238,15 @@ public class Main_menu2 extends AppCompatActivity
                     isOpen = false;
 
                 }else{
+
                     fb2L.startAnimation(fabOpen);
                     fb3L.startAnimation(fabOpen);
                     fb4L.startAnimation(fabOpen);
                     fb5L.startAnimation(fabOpen);
                     fb6L.startAnimation(fabOpen);
                     fb7L.startAnimation(fabOpen);
+
+                    //fondo.startAnimation(fabOpen);
 
                     fb2.startAnimation(fabOpen);
                     fb3.startAnimation(fabOpen);
@@ -129,6 +257,7 @@ public class Main_menu2 extends AppCompatActivity
 
                     fb1.startAnimation(fabClockw);
 
+                    fondo.setVisibility(View.VISIBLE);
                     fb2L.setVisibility(View.VISIBLE);
                     fb3L.setVisibility(View.VISIBLE);
                     fb4L.setVisibility(View.VISIBLE);
@@ -249,6 +378,8 @@ public class Main_menu2 extends AppCompatActivity
 
     public void inicio(View v){
 
+        position = 0;
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 
@@ -263,6 +394,8 @@ public class Main_menu2 extends AppCompatActivity
 
     public void registro(View v){
 
+        position = 1;
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 
@@ -273,6 +406,13 @@ public class Main_menu2 extends AppCompatActivity
 
 
         transaction.commit();
+    }
+
+    public void registrarDesayuno(View v){
+
+        controller.setHorarioRegistrar(HorarioComida.DESAYUNO);
+        Intent intent = new Intent(this, registrarComidaTab.class);
+        startActivity(intent);
     }
 
     @Override
