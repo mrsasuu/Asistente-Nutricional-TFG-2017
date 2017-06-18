@@ -14,7 +14,7 @@
         tools:replace="android:icon,android:theme">
         <meta-data
             android:name="DATABASE"
-            android:value="sugar_example.db" />
+            android:value="asistente14.db" />
         <meta-data
             android:name="VERSION"
             android:value="2" />
@@ -23,7 +23,7 @@
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="com.example" />
+            android:value="com.example.sasu.asistente_nutricional_tfg_2017" />
 
         <activity
             android:name=".screens.Activity_LogIn"

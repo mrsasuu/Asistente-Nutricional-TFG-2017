@@ -1,5 +1,8 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.utilidades;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Comida;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
@@ -15,6 +18,8 @@ public class ControllerPreferences {
     private Comida comida;
     private HorarioComida horarioRegistrar;
 
+    public Date fechaActual;
+
     public HorarioComida getHorarioRegistrar() {
         return horarioRegistrar;
     }
@@ -25,11 +30,57 @@ public class ControllerPreferences {
 
     public void registrarComidaHorario(Alimento al){
         comida.registrarComidaHorario(horarioRegistrar,al);
-        comida.save();
+        //comida.save();
     }
 
     public ControllerPreferences() {
-        Date hoy = new Date();
+        /*Date hoy = new Date();
+        Log.println(Log.INFO,"HORA", String.valueOf(hoy.getTime()));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(hoy);
+        //Log.println(Log.INFO,"DIA",cal.getTime());
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        List<Comida> comidas = null;
+        String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
+
+        Log.v("","Buscamos la fecha: "+ fechaB);
+        //try{
+             //comidas = Comida.findWithQuery(Comida.class, "Select * from Comida where fecha = "+fechaB);
+            //comidas = Comida.find(Comida.class,"fecha = ?",fechaB);
+
+        /*}catch (Exception e){
+            comida = new Comida(fechaB);
+            comida.save();
+        }*/
+        
+/*
+        if(comidas.size() !=0){
+            Log.println(Log.INFO,"Encontrado"," en la base de datos");
+            comida = comidas.get(0);
+        }else{
+            Log.println(Log.INFO,"No encontrado"," en la base de datos");
+            /*comida = new Comida(fechaB);
+            comida.save();*/
+            /*comida = Comida.findById(Comida.class, 1);
+        }
+        comida = Comida.findById(Comida.class, 1);
+        comida = new Comida(fechaB);
+        comida.save();
+
+        comida = null;
+
+        comidas = Comida.findWithQuery(Comida.class, "Select * from Comida where id = 1");
+        comida = Comida.findById(Comida.class, 1);
+*/
+
+        comida = new Comida();
+        fechaActual = new Date();
+    }
+
+    public Comida getComida(){
+        /*Date hoy = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(hoy);
         int year = cal.get(Calendar.YEAR);
@@ -37,25 +88,28 @@ public class ControllerPreferences {
         int day = cal.get(Calendar.DAY_OF_MONTH);
         List<Comida> comidas = null;
         String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
-        
+
         try{
             comidas = Comida.find(Comida.class,"fecha = ?",fechaB);
         }catch (Exception e){
-            comida = new Comida();
+            comida = new Comida(fechaB);
             comida.save();
         }
-        
+
 
         if(comidas.size() !=0){
             comida = comidas.get(0);
         }else{
-            comida = new Comida();
+            comida = new Comida(fechaB);
             comida.save();
-        }
+        }*/
 
+        return comida;
     }
 
-    public Comida getComida(){
+    public Comida getComida(String fecha){
+        comida = new Comida(fecha);
+
         return comida;
     }
 

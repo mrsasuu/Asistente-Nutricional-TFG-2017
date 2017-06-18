@@ -1,10 +1,11 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.models;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
-import com.orm.SugarRecord;
-import com.orm.dsl.Unique;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,25 +13,172 @@ import java.util.Map;
  * Created by Sasu on 06/06/2017.
  */
 
-public class Comida extends SugarRecord{
-    @Unique
+public class Comida{
     String fecha;
-    Map<HorarioComida,List<Alimento>> comidas;
+    int id;
+    ArrayList<HorarioComida> horarios = new ArrayList<>();
+
+
+    Map<HorarioComida,List<Alimento>> comidas = new HashMap<>();
+
+    public Comida() {
+
+        Date hoy = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(hoy);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
+        fecha = fechaB;
+
+
+
+        horarios.add(HorarioComida.DESAYUNO);
+        horarios.add(HorarioComida.ALMUERZO);
+        horarios.add(HorarioComida.MERIENDA_TARDE);
+        horarios.add(HorarioComida.CENA);
+        horarios.add(HorarioComida.OTRO);
+
+        for(int i = 0; i < horarios.size(); i++){
+            //List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horarioComida = ?", fecha,horarios.get(i).toString());
+            comidas.put(horarios.get(i),new ArrayList<Alimento>());
+            //comidas.put(horarios.get(i),new ArrayList<Alimento>());
+
+
+        }
+
+        for(int i = 0; i < horarios.size(); i++){
+            List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
+            List<Alimento> alimentos =  new ArrayList<>();
+            for(int j = 0; (j < listaPorHorario.size())&&(listaPorHorario!=null);j++){
+                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(i).getId_alimento());
+                alimentos.add(al);
+            }
+
+            comidas.remove(horarios.get(i));
+            comidas.put(horarios.get(i),alimentos);
+
+
+        }
 
 
 
 
-    public void registrarComidaHorario(HorarioComida h,Alimento al){
+
+
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Map<HorarioComida, List<Alimento>> getComidas() {
+        return comidas;
+    }
+
+    public void setComidas(Map<HorarioComida, List<Alimento>> comidas) {
+        this.comidas = comidas;
+    }
+
+    public void registrarComidaHorario(HorarioComida h, Alimento al){
         if(comidas.containsKey(h)){
             List<Alimento> alimentos = comidas.get(h);
             alimentos.add(al);
 
             comidas.remove(h);
             comidas.put(h,alimentos);
+        }else{
+            List<Alimento> alimentos = new ArrayList<>();
+            alimentos.add(al);
+            comidas.put(h,alimentos);
+        }
+        Tabla nuevo = new Tabla(fecha,h.toString(),al.getId());
+        nuevo.save();
+    }
+
+    public Comida(String fecha) {
+        this.fecha = fecha;
+
+
+        horarios.add(HorarioComida.DESAYUNO);
+        horarios.add(HorarioComida.ALMUERZO);
+        horarios.add(HorarioComida.MERIENDA_TARDE);
+        horarios.add(HorarioComida.CENA);
+        horarios.add(HorarioComida.OTRO);
+
+        for(int i = 0; i < horarios.size(); i++){
+            //List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horarioComida = ?", fecha,horarios.get(i).toString());
+            comidas.put(horarios.get(i),new ArrayList<Alimento>());
+            //comidas.put(horarios.get(i),new ArrayList<Alimento>());
+
+
+        }
+
+        for(int i = 0; i < horarios.size(); i++){
+            List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
+            List<Alimento> alimentos =  new ArrayList<>();
+            for(int j = 0; (j < listaPorHorario.size())&&(listaPorHorario!=null);j++){
+                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(i).getId_alimento());
+                alimentos.add(al);
+            }
+
+            comidas.remove(horarios.get(i));
+            comidas.put(horarios.get(i),alimentos);
+
+
         }
     }
 
-    public Comida() {
+    public List<Alimento> getLista(HorarioComida desayuno) {
+        List<Alimento> alimentos = new ArrayList<>();
+        if(comidas.containsKey(desayuno)){
+            alimentos = comidas.get(desayuno);
+
+        }
+
+        return alimentos;
+    }
+
+    public void save(){
+        for(int i = 0; i < comidas.size(); i++){
+            List<Alimento> alim = comidas.get(horarios.get(i));
+
+            List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
+
+            for(int j = 0; j < alim.size(); j++){
+                Tabla comida = new Tabla(fecha,horarios.get(i).toString(),alim.get(j).getId());
+                if(!listaPorHorario.contains(comida)){
+                    comida.save();
+                    //alim.get(i).save();
+                }
+            }
+        }
+    }
+
+    public void eliminarRegistrosNoUsados(){
+        for(int i = 0; i < comidas.size(); i++){
+            List<Alimento> alim = comidas.get(horarios.get(i));
+
+            List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
+            //Tabla comida = new Tabla(fecha,horarios.get(i).toString(),alim.get(i).getId());
+            for(int j = 0; j < listaPorHorario.size(); j++){
+                Alimento al = Alimento.findById(Alimento.class,listaPorHorario.get(j).getId_alimento());
+                if(!alim.contains(al)){
+                    al.delete();
+                    //alim.get(i).save();
+                }
+            }
+        }
     }
 
     /*

@@ -11,5 +11,17 @@ import java.util.ArrayList;
 
 public class PrioridadComida extends SugarRecord {
     int prioridad;
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
+    }
+
+    public PrioridadComida() {
+    }
+
     ArrayList<HorarioComida> horarioComidas;
 }

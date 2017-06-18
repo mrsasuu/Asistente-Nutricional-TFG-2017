@@ -1,7 +1,6 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.models;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.Grupo;
-import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.Porcion;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.SubGrupo;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
@@ -11,13 +10,13 @@ import com.orm.dsl.Unique;
  */
 
 public class Alimento extends SugarRecord{
-    private Grupo grupoAlimentario;
+    private Grupo grupo_alimentario;
     private SubGrupo categoria;
 
-    @Unique
-    private String id;
+
+    //private Long id;
     private String nombre;
-    private String urlImagen;
+    private String url_imagen;
     //private Porcion porcion;
     private double porcion; // Debe ser 1, 0.75, 0.5 o 0.25 donde 1 significa todo el plato, 0.75 significa tres cuartos del plato etc.
 
@@ -29,16 +28,70 @@ public class Alimento extends SugarRecord{
     PrioridadComida prioridad;
 
 
+    public Alimento() {
+    }
 
-    public Alimento(String id, String nombre, String urlImagen, double porcion, double proteinas, double carbohidratos, double grasas, Grupo grupoAlimentario, SubGrupo categoria){
+    public Grupo getGrupo_alimentario() {
+        return grupo_alimentario;
+    }
+
+    public void setGrupo_alimentario(Grupo grupo_alimentario) {
+        this.grupo_alimentario = grupo_alimentario;
+    }
+
+    public SubGrupo getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(SubGrupo categoria) {
+        this.categoria = categoria;
+    }
+/*
+    public Long getIde() {
+        return id;
+    }
+
+    public void setId(Long id) {
         this.id = id;
+    }*/
+
+    public void setNombre(String nombre) {
         this.nombre = nombre;
-        this.urlImagen = urlImagen;
+    }
+
+    public String getUrl_imagen() {
+        return url_imagen;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
+    }
+
+    public void setPorcion(double porcion) {
+        this.porcion = porcion;
+    }
+
+    public void setProteinas(double proteinas) {
+        this.proteinas = proteinas;
+    }
+
+    public void setCarbohidratos(double carbohidratos) {
+        this.carbohidratos = carbohidratos;
+    }
+
+    public void setGrasas(double grasas) {
+        this.grasas = grasas;
+    }
+
+    public Alimento(Long id, String nombre, String url_imagen, double porcion, double proteinas, double carbohidratos, double grasas, Grupo grupo_alimentario, SubGrupo categoria){
+        //this.id = id;
+        this.nombre = nombre;
+        this.url_imagen = url_imagen;
         this.porcion = porcion;
         this.proteinas = proteinas;
         this.carbohidratos = carbohidratos;
         this.grasas = grasas;
-        this.grupoAlimentario = grupoAlimentario;
+        this.grupo_alimentario = grupo_alimentario;
         this.categoria = categoria;
     }
 
@@ -46,6 +99,7 @@ public class Alimento extends SugarRecord{
     {
         this.nombre = nombre;
     }
+
 
     public PrioridadComida getPrioridad(){
         return prioridad;
@@ -58,13 +112,13 @@ public class Alimento extends SugarRecord{
     public String getNombre() {
         return nombre;
     }
-
-    public String getIdAl() {
+/*
+    public Long getIdAl() {
         return id;
-    }
+    }*/
 
     public String getGrupo() {
-        return grupoAlimentario.toString();
+        return grupo_alimentario.toString();
     }
 
     public String getSub_Grupo() {
@@ -88,7 +142,7 @@ public class Alimento extends SugarRecord{
     }
 
     public String getUrl() {
-        return urlImagen;
+        return url_imagen;
     }
 
     //Micronutrientes como vitaminas, sales minerales

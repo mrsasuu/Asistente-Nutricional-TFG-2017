@@ -125,8 +125,16 @@ public class registrarComidaTab extends AppCompatActivity {
             RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.listaAlimentosRegistro);
             RecyclerView.LayoutManager llm = new LinearLayoutManager(getContext());
             rv.setLayoutManager(llm);
+            List<Alimento> alimentos = Alimento.listAll(Alimento.class);
+            if(alimentos.size() == 0 || alimentos==null)
+            {
+                alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
 
-            List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
+                for(int i = 0; i < alimentos.size(); i++){
+                    alimentos.get(i).save();
+
+                }
+            }
 
             AdapterRegistrarAlimento adaptador= new AdapterRegistrarAlimento(alimentos);
             rv.setAdapter(adaptador);
