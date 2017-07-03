@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<% include ../../partials/backend/head_backend %>
+		<link rel="stylesheet" href="/static/css/src/users_b.css">
+	</head>
+
+	<body>
+		<% include ../../partials/backend/sidemenu_backend %>
+
+		<main class="grey lighten-3">
+			<!-- Nav -->
+			<% include ../../partials/backend/header_backend %>
+
+			<div class="row content_start">
+				<div id="btn_add_container" class="col s12">
+					<!-- Button add Food -->
+					<a class="waves-effect waves-light btn modal-trigger" href="#add_food">Añadir comida</a>
+				</div>
+			</div>
+
+			<!-- Table all Food -->
+			<div id="users-table" class="row">
+				<table id="tabla_usuarios" class="striped">
+					<thead>
+						<tr>
+							<th data-field="id">#</th>
+							<th data-field="picture">Foto</th>
+							<th data-field="name">Nombre</th>
+							<th data-field="carbon_hydrates">H. Carbono</th>
+							<th data-field="proteins">Proteinas</th>
+							<th data-field="lipids">Lípidos</th>
+							<th data-field="action">Acción</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<% var count = 0;
+						for(var i=0; i<foods.length; i++) { %>
+							<% if(foods[i].ACTIVE) {
+								count++; %>
+								<tr>
+								<td><%= foods[i].ID %></td>
+								<td><img src="<%= foods[i].PHOTO %>" class="circle z-depth-1" width="50px" height="50px"/></td>
+								<td><%= foods[i].NAME %></td>
+								<td><%= foods[i].CARBON_HYDRATES%></td>
+								<td><%= foods[i].PROTEINS%></td>
+								<td><%= foods[i].LIPIDS%></td>
+								<td class="actions">
+									<a class="modal-trigger" href="#edit_food"><i class="material-icons">mode_edit</i></a>
+									<a class="modal-trigger" href="#delete_food"><i class="material-icons">delete</i></a>
+								</td>
+								</tr>
+							<% } %>
+						<% }
+						if(count == 0) { %>
+							<td colspan="5" id="no_food">NO HAY ALIMENTOS ACTUALMENTE</td>
+						<% } %>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Modal Add Food -->
+			<% include ../../partials/backend/modals/modal_add_user %>
+
+			<!-- Modal Edit Food -->
+			<% include ../../partials/backend/modals/modal_edit_user %>
+
+			<!-- Modal Delete Food -->
+			<% include ../../partials/backend/modals/modal_delete_user %>
+
+		</main>
+
+		<footer class="page-footer">
+			<% include ../../partials/backend/footer_backend %>
+		</footer>
+
+		<% include ../../partials/backend/script_backend %>
+		<% include ../../partials/backend/server_messages %>
+		<script src="/static/js/src/imagePrevisualization.js"></script>
+		<script src="/static/js/src/user_b.js"></script>
+	</body>
+</html>

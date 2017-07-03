@@ -1,0 +1,15 @@
+<nav>
+	<div class="nav-wrapper z-depth-1">
+		<div id="breadcrumb_container">
+			<a href="/backend/" class="breadcrumb hide-on-small-only">Dashboard</a>
+			
+			<% if(typeof(moreContent) !== 'undefined') { %>
+				<a href="<%= breadcrumb.LINK %>" class="breadcrumb hide-on-small-only"><%= breadcrumb.SECTION %></a>
+				<a id="content_action" href="<%= moreContent.LINK %>" class="breadcrumb"><%= moreContent.SECTION %></a>
+			<% }
+			else { %>
+				<a href="<%= breadcrumb.LINK %>" class="breadcrumb"><%= breadcrumb.SECTION %></a>
+			<% } %>
+		</div>
+	</div>
+</nav>

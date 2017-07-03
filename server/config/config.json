@@ -1,0 +1,17 @@
+{
+	"http":{
+		"host": "localhost",
+		"port": 2424
+	},
+	"db":{
+		"host": "localhost",
+		"port": 3306,
+		"driver": "mariadb",
+		"username": "root",
+		"password": "pepito11",
+		"database": "an"
+	},
+	"logs": {
+		"user_login_logout": false
+	}
+}

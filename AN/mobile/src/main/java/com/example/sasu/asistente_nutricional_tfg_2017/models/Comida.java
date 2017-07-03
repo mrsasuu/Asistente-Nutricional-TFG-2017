@@ -48,11 +48,17 @@ public class Comida{
 
         }
 
+        List<Tabla> todo = Tabla.listAll(Tabla.class);
+        List<Alimento> alimen = Alimento.listAll(Alimento.class);
+
         for(int i = 0; i < horarios.size(); i++){
+
+
             List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
+
             List<Alimento> alimentos =  new ArrayList<>();
             for(int j = 0; (j < listaPorHorario.size())&&(listaPorHorario!=null);j++){
-                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(i).getId_alimento());
+                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(j).getId_alimento());
                 alimentos.add(al);
             }
 
@@ -128,7 +134,7 @@ public class Comida{
             List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
             List<Alimento> alimentos =  new ArrayList<>();
             for(int j = 0; (j < listaPorHorario.size())&&(listaPorHorario!=null);j++){
-                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(i).getId_alimento());
+                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(j).getId_alimento());
                 alimentos.add(al);
             }
 
