@@ -28,30 +28,28 @@ var Food = DBConnector.connectAN().define('FOOD', {
             retrieveLastAdded: function() {
                 return Food.findOne( { order: 'ID DESC' });
             },
-            add: function(proteins, carbon_hydrates, name, lipids, photo) {
-                var shasum = crypto.createHash('sha1');
-                shasum.update(carbon_hydrates);
-                carbon_hydrates = shasum.digest('hex');
+            add: function(name, photo, proteins, carbon_hydrates, lipids) {
 
                 return Food.create({
+                    NAME: name,
+                    PHOTO: photo,
                     PROTEINS: proteins,
                     CARBON_HYDRATES: carbon_hydrates,
-                    NAME: name,
-                    SURNAME: lipids,
-                    PHOTO: photo
+                    LIPIDS: lipids
+
                 });
             },
-            updateById: function(user_id){
+            updateById: function(food_id){
                 return Food.update({
+                    NAME: this.name,
+                    PHOTO: this.photo,
                     PROTEINS: this.proteins,
                     CARBON_HYDRATES: this.carbon_hydrates,
-                    NAME: this.name,
                     LIPIDS: this.lipids,
-                    PHOTO: this.photo,
-                }, { where: {ID: user_id} });
+                }, { where: {ID: food_id} });
             },
-            removeById: function(user_id){
-                return Food.update({ where: {ID: user_id} });
+            removeById: function(food_id){
+                return Food.destroy({ where: {ID: food_id} });
             }
         },
         freezeTableName: true,

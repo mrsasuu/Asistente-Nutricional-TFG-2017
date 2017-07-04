@@ -21,7 +21,11 @@ function FoodController(json, activityLogC) {
     //this.uploadvideopath = path.join(__dirname, '..', 'public', 'static', 'video', 'content_videos') + '/';
     //this.uploadsubtitlepath = path.join(__dirname, '..', 'public', 'static', 'video', 'content_videos_subtitles') + '/';*/
 
+    this.uploadpath = path.join(__dirname, '..', 'public', 'static', 'upload') +'/';
+    this.uploadimgpath = path.join(__dirname, '..', 'public', 'static', 'img', 'foods')+'/';
+
     this.activityLogController = activityLogC;
+
     /*this.contentTypeController = contentTypeC;
     this.localizationController = localizationC;
     this.langController = langC;
@@ -49,6 +53,7 @@ FoodController.prototype.initBackend = function() {
 
             foods.retrieveAll().then(function(result) {
                 self.renderJson.foods = result;
+
                 res.render('pages/backend/food', self.renderJson);
                 self.clearMessages();
             }, function(error) {
@@ -60,130 +65,206 @@ FoodController.prototype.initBackend = function() {
             res.redirect('/');
     });
 
-    self.routerBackend.route('/add').get(function(req, res) {
-        self.renderJson.breadcrumb = {'LINK': '/backend/contents/', 'SECTION': 'Contenido'};
-
-        self.renderJson.action = 'add';
-
-        self.renderJson.moreContent = {'LINK': '/backend/contents/add', 'SECTION': 'Añadir Contenido'};
+    self.routerBackend.route('/add').post(upload.array('add_photo_food', 1), function(req, res) {
         self.renderJson.user = req.session.user;
 
         if(typeof self.renderJson.user !== 'undefined' && parseInt(self.renderJson.user.ADMIN)) {
-            self.contentTypeController.getAllContentTypes().then(function(success) {
-                self.renderJson.contentTypes = success;
+            var name_food = req.body.add_name_food;
+            var proteins_food = req.body.add_proteins_food;
+            var carbon_hydrates_food = req.body.add_carbon_hydrates_food;
+            var lipids_food = req.body.add_lipids_food;
+            var photo_food = '/static/img/img_not_available.png';
 
-                self.localizationController.getAllLocalizations().then(function(success) {
-                    self.renderJson.locations = success;
+            // Check if there's files to upload
+            if(req.files.length > 0) {
+                var file = Utils.normalizeStr(req.files[0].originalname);
+                var extension = '.'+file.substr(file.lastIndexOf('.')+1);
 
-                    res.render('pages/backend/content', self.renderJson);
-                    self.clearMessages();
-                }, function(err) {
-                    self.renderJson.error = 'Se ha producido un error interno recuperando información';
-                    res.redirect('/backend/contents/');
+                file = file.split('.').splice(0,1).join('.');
+
+                var dst = self.uploadimgpath + file + extension;
+
+                // Check if the file exist. If there's an error it doesn't exist
+                try {
+                    fs.accessSync(dst, fs.F_OK);
+
+                    file += Date.now();
+                    file += extension;
+                } catch(e) {		// File not found
+                    file += extension;
+                }
+
+                dst = self.uploadimgpath + file;
+
+                var tmp = self.uploadpath+req.files[0].filename;
+
+                fs.createReadStream(tmp).pipe(fs.createWriteStream(dst));
+
+                // Delete created tmp file
+                fs.unlink(tmp, function(error) {
+                    if(error)
+                        console.log(error);
+                    else
+                        console.log('successfully deleted ' + tmp);
                 });
-            }, function(err) {
-                self.renderJson.error = 'Se ha producido un error recuperando información';
-                res.redirect('/backend/contents/');
+
+                // Path to the file, to be sabed in DB
+                photo_food = '/static/img/foods/' + file;
+            }
+
+            var food = Food.build();
+
+            food.add(
+                name_food,
+                photo_food,
+                proteins_food,
+                carbon_hydrates_food,
+                lipids_food
+            ).then(function(result) {
+                self.renderJson.msg = 'Alimento añadido correctamente';
+
+                // Add the event to a new Activity Log
+                var ct = "Inserción";
+                var desc = "Se ha añadido el alimento " + name_food;
+                var date = new Date();
+                var uid = self.renderJson.user.ID;
+                self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+
+                res.redirect('/backend/foods');
+            }, function(error) {
+                console.log(error);
+                self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/foods');
             });
         }
-        else {
+        else
             res.redirect('/');
-        }
     });
 
-    self.routerBackend.route('/edit/:contentId').get(function(req, res) {
-
-        var contentId = req.params.contentId;
-
-        self.renderJson.breadcrumb = {'LINK': '/backend/contents/', 'SECTION': 'Contenido'};
-
-        self.renderJson.action = 'add';
-
-        self.renderJson.moreContent = {'LINK': '/backend/contents/edit/' + contentId, 'SECTION': 'Editar Contenido'};
+    self.routerBackend.route('/edit').post(upload.array('edit_photo_food', 1), function(req, res) {
         self.renderJson.user = req.session.user;
 
         if(typeof self.renderJson.user !== 'undefined' && parseInt(self.renderJson.user.ADMIN)) {
-            self.contentTypeController.getAllContentTypes().then(function(success) {
-                self.renderJson.contentTypes = success;
+            var food = Food.build();
 
-                self.localizationController.getAllLocalizations().then(function(success) {
-                    self.renderJson.locations = success;
+            var id_food = req.body.edit_id_food;
 
-                    var contentInformation = ContentInformation.build();
+            food.name = req.body.edit_name_food;
+            food.proteins = req.body.edit_proteins_food;
+            food.carbon_hydrates = req.body.edit_carbon_hydrates_food;
+            food.lipids = req.body.edit_lipids_food;
+            food.photo = req.body.edit_photo_anterior_food;
 
-                    contentInformation.retrieveByContentId(contentId).then(function(success) {
-                        self.renderJson.contentInformations = success;
+            // Check if there're files to upload
+            if(req.files.length > 0) {
+                var file = Utils.normalizeStr(req.files[0].originalname);
+                var extension = '.'+file.substr(file.lastIndexOf('.')+1);
 
-                        var langIds = [];
-                        for(var i=0; i<success.length; i++)
-                            langIds.push(success[i].LANG_ID);
+                file = file.split('.').splice(0,1).join('.');
+                var dst = self.uploadimgpath + file + extension;
 
-                        self.langController.getAllLangWidthIds(langIds).then(function(success) {
-                            self.renderJson.langs = success;
+                // Check if the file exist. If there's an error it doesn't exist
+                try {
+                    fs.accessSync(dst, fs.F_OK);
 
-                            var content = Content.build();
+                    file += Date.now();
+                    file += extension;
+                } catch(e) { 			// File not found
+                    file += extension;
+                }
 
-                            content.retrieveById(contentId).then(function(success) {
-                                self.renderJson.cont = success;
+                dst = self.uploadimgpath + file;
 
-                                var image = Image.build();
+                var tmp = self.uploadpath+req.files[0].filename;
 
-                                image.retrieveAllByContentId(contentId).then(function(success) {
-                                    self.renderJson.images = success;
+                fs.createReadStream(tmp).pipe(fs.createWriteStream(dst));
 
-                                    var imageIds = [];
-
-                                    for(var i=0; i<success.length; i++)
-                                        imageIds.push(success[i].ID);
-
-                                    var altImage = AltImage.build();
-
-                                    altImage.retrieveAllByImageIds(imageIds).then(function(success) {
-                                        self.renderJson.altTexts = success;
-
-                                        var video = Video.build();
-
-                                        video.retrieveAllByContentId(contentId).then(function(success) {
-                                            self.renderJson.videos = success;
-
-                                            res.render('pages/backend/content', self.renderJson);
-                                            self.clearMessages();
-                                        }, function(err) {
-                                            self.renderJson.error = 'Se ha producido un error interno recuperando los videos';
-                                            res.redirect('/backend/contents/');
-                                        });
-                                    }, function(err) {
-                                        self.renderJson.error = 'Se ha producido un error interno recuperando la información de las imágenes';
-                                        res.redirect('/backend/contents/');
-                                    });
-                                }, function(err) {
-                                    self.renderJson.error = 'Se ha producido un error interno recuperando las imágenes';
-                                    res.redirect('/backend/contents/');
-                                });
-                            }, function(err) {
-                                self.renderJson.error = 'Se ha producido un error interno recuperando el contenido';
-                                res.redirect('/backend/contents/');
-                            });
-                        }, function(err) {
-                            self.renderJson.error = 'Se ha producido un error interno recuperando los idiomas';
-                            res.redirect('/backend/contents/');
-                        });
-                    }, function(err) {
-                        self.renderJson.error = 'Se ha producido un error interno recuperando la información';
-                        res.redirect('/backend/contents/');
-                    });
-                }, function(err) {
-                    self.renderJson.error = 'Se ha producido un error interno recuperando información';
-                    res.redirect('/backend/contents/');
+                // Delete created tmp file.
+                fs.unlink(tmp, function(error) {
+                    if(error)
+                        console.log(error);
+                    else
+                        console.log('successfully deleted ' + tmp);
                 });
-            }, function(err) {
-                self.renderJson.error = 'Se ha producido un error recuperando información';
-                res.redirect('/backend/contents/');
+
+                // Path to the file, to be sabed in DB
+                food.photo = '/static/img/foods/' + file;
+            }
+
+            food.updateById(id_food).then(function(result) {
+                self.renderJson.msg = 'Se ha editado correctamente';
+
+                // Add the event to a new Activity Log
+                var ct = "Edición";
+                var desc = "Se ha editado el alimento " + food.name + food.ID;
+                var date = new Date();
+                var uid = self.renderJson.user.ID;
+                self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+
+                res.redirect('/backend/foods');
+            }, function(error) {
+                console.log(error);
+                self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/foods');
             });
         }
-        else {
+        else
             res.redirect('/');
+    });
+
+    self.routerBackend.route('/delete').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+        if(typeof self.renderJson.user !== 'undefined' && parseInt(self.renderJson.user.ADMIN)) {
+            var id_food = req.body.delete_id_food;
+            var delete_food = req.body.delete_food;
+
+            if(delete_food === 'yes') {
+                var food = Food.build();
+
+                // Get the user to get the photo to delete
+                food.retrieveById(id_food).then(function(result) {
+                    // delete the photo
+                    if(result.PHOTO !== '/static/img/img_not_available.png') {
+                        var dst = path.join(__dirname, '..', 'public') + result.PHOTO;
+
+                        fs.unlink(dst, function(error) {
+                            if(error)
+                                console.log(error);
+                            else
+                                console.log('successfully deleted ' + dst);
+                        });
+                    }
+
+                    var deleted_food = Food.build();
+
+                    deleted_food.removeById(id_food).then(function(result) {
+                        self.renderJson.msg = 'Se ha eliminado correctamente';
+
+                        // Add the event to a new Activity Log
+                        var ct = "Borrado";
+                        var desc = "Se ha eliminado el alimento con ID " + id_food;
+                        var date = new Date();
+                        var uid = self.renderJson.user.ID;
+                        self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+
+                        res.redirect('/backend/foods');
+                    }, function(err) {
+                        self.renderJson.error = 'Se ha producido un error interno borrando al usuario';
+                        res.redirect('/backend/foods');
+                    });
+                }, function(err) {
+                    self.renderJson.error = 'Se ha producido un error interno';
+                    res.redirect('/backend/foods');
+                });
+            }
+            else {
+                self.renderJson.error = 'No se ha efectuado su acción';
+                res.redirect('/backend/foods');
+            }
         }
+        else
+            res.redirect('/');
     });
 
     self.routerBackend.route('/image/add/:contentId').post(upload.array('content_image', 1), function(req, res) {
