@@ -1,0 +1,131 @@
+<div id="add_patient" class="modal modal_material modal-fixed-footer">
+	<div class="modal-header z-depth-1">
+		<h4>Añadir un nuevo paciente</h4>
+		<span><i class="modal_close modal-action modal-close material-icons right">close</i></span>
+	</div>
+	<form class="col s12 row" method="post" action="/backend/patients/add/" enctype="multipart/form-data" autocomplete="off">
+		<div class="modal-content">
+
+
+			<!-- DNI -->
+			<div class="input-field col s12 m4">
+				<input id="add_dni_patient" name="add_dni_patient" type="text" class="validate" required>
+				<label for="add_dni_patient">DNI</label>
+			</div>
+
+			<!-- Age -->
+			<div class="input-field col s12 m2">
+				<input id="add_age_patient" name="add_age_patient" type="number" class="validate" required>
+				<label for="add_age_patient">Edad</label>
+			</div>
+
+			<!-- Gender -->
+			<div class="input-field col s12 m6">
+				<p class="red-text text-darken-1">Sexo</p>
+				<!-- Confirmacion -->
+				<p><input name="add_gender_patient" type="radio" id="add_patient_male" value="0" /><label for="add_patient_male">Hombre</label></p>
+				<p><input name="add_gender_patient" type="radio" id="add_patient_female" value="1" checked /><label for="add_patient_female">Mujer</label></p>
+			</div>
+
+			<!-- Name -->
+			<div class="input-field col s12 m6">
+				<input id="add_name_patient" name="add_name_patient" type="text" class="validate" required>
+				<label for="add_name_patient">Nombre</label>
+			</div>
+
+			<!-- Surname -->
+			<div class="input-field col s12 m6">
+				<input id="add_surname_patient" name="add_surname_patient" type="text" class="validate" required>
+				<label for="add_surname_patient">Apellidos</label>
+			</div>
+
+			<!-- Address -->
+			<div class="input-field col s12">
+				<input id="add_address_patient" name="add_address_patient" type="text" class="validate" required>
+				<label for="add_address_patient">Dirección</label>
+			</div>
+
+			<!-- Email -->
+			<div class="input-field col s12">
+				<input id="add_email_patient" name="add_email_patient" type="email" class="validate" required>
+				<label for="add_email_patient">Correo electrónico</label>
+			</div>
+
+			<!-- Phone -->
+			<div class="input-field col s12">
+				<input id="add_phone_patient" name="add_phone_patient" type="number" class="validate" required>
+				<label for="add_phone_patient">Teléfono</label>
+			</div>
+
+			<!-- Username -->
+			<div class="input-field col s12">
+				<input id="add_username_patient" name="add_username_patient" type="text" class="validate" required>
+				<label for="add_username_patient">Nombre de usuario</label>
+			</div>
+
+			<!-- Password -->
+			<div class="input-field col s12">
+				<input id="add_password_patient" name="add_password_patient" type="password" class="validate" required>
+				<label for="add_password_patient">Contraseña</label>
+			</div>
+
+			<!-- Height -->
+			<div class="input-field col s12 m6">
+				<input id="add_height_patient" name="add_height_patient" type="number" class="validate" required>
+				<label for="add_height_patient">Altura</label>
+			</div>
+
+			<!-- Weight -->
+			<div class="input-field col s12 m6">
+				<input id="add_weight_patient" name="add_weight_patient" type="number" class="validate" required>
+				<label for="add_weight_patient">Peso</label>
+			</div>
+
+
+
+
+			<!-- activity level -->
+			<div class="input-field col s12">
+				<p class="red-text text-darken-1">Nivel de actividad</p>
+				<!-- Confirmacion -->
+				<p><input name="add_activity_level_patient" type="radio" id="add_activity_level_patient_1" value="0" /><label for="add_activity_level_patient_1">Sedentario</label></p>
+				<p><input name="add_activity_level_patient" type="radio" id="add_activity_level_patient_2" value="1" checked /><label for="add_activity_level_patient_2">Moderada</label></p>
+				<p><input name="add_activity_level_patient" type="radio" id="add_activity_level_patient_3" value="2" checked /><label for="add_activity_level_patient_3">Intensa</label></p>
+				<p><input name="add_activity_level_patient" type="radio" id="add_activity_level_patient_4" value="3" checked /><label for="add_activity_level_patient_4">Muy ntensa</label></p>
+			</div>
+
+            <!-- Photo -->
+            <div class="file-field input-field col s12 m6" >
+                <div class="btn">
+                    <span>Foto del alimento</span>
+                    <input id="add_photo_food" name="add_photo_food" type="file" >
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+
+            <!-- Photo Preview -->
+            <div class="col s12 m6 center-align">
+                <img id="addFoodImgViewer" class="imagePreview responsive-img" src="/static/img/img_not_available.png" alt=""/>
+            </div>
+
+
+
+
+
+
+
+
+		</div>
+		<div class="modal-footer">
+			<!-- Submit -->
+			<div class="input field col s12 center-align submit_modal">
+				<button class="btn waves-effect waves-light" type="submit" name="add_submit_patient">
+					<span>Enviar</span>
+					<i class="material-icons right">send</i>
+				</button>
+			</div>
+		</div>
+	</form>
+</div>

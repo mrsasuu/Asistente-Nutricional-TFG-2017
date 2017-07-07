@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<% include ../../partials/backend/head_backend %>
+		<link rel="stylesheet" href="/static/css/src/users_b.css">
+	</head>
+
+	<body>
+		<% include ../../partials/backend/sidemenu_backend %>
+
+		<main class="grey lighten-3">
+			<!-- Nav -->
+			<% include ../../partials/backend/header_backend %>
+
+			<div class="row content_start">
+				<div id="btn_add_container" class="col s12">
+					<!-- Button add patient -->
+					<a class="waves-effect waves-light btn modal-trigger" href="#add_patient">Añadir paciente</a>
+				</div>
+			</div>
+
+			<!-- Table all patient -->
+			<div id="users-table" class="row">
+				<table id="tabla_usuarios" class="striped">
+					<thead>
+						<tr>
+							<th data-field="id">#</th>
+							<th data-field="name">Nombre</th>
+							<th data-field="age">Edad</th>
+							<th data-field="dni">DNI</th>
+							<th data-field="phone">Teléfono</th>
+							<th data-field="action">Acción</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<% var count = 0;
+						for(var i=0; i<patients.length; i++) { %>
+                        <%count++; %>
+								<tr>
+								<td><%= patients[i].ID %></td>
+								<td><%= patients[i].NAME + ' ' + patients[i].SURNAME %></td>
+								<td><%= patients[i].AGE %></td>
+								<td><%= patients[i].DNI %></td>
+								<td><%= patients[i].PHONE %></td>
+								<td class="actions">
+                                    <a class="modal-trigger" href="#edit_patient"><i class="material-icons">perm_contact_calendar</i></a>
+									<a class="modal-trigger" href="#edit_patient"><i class="material-icons">mode_edit</i></a>
+									<a class="modal-trigger" href="#delete_patient"><i class="material-icons">delete</i></a>
+								</td>
+								</tr>
+						<% }
+						if(count == 0) { %>
+							<td colspan="5" id="no_patient">NO HAY PACIENTES ASIGNADOS</td>
+						<% } %>
+					</tbody>
+				</table>
+			</div>
+
+            <!-- Modal Add patient -->
+            <% include ../../partials/backend/modals/modal_add_patient %>
+            <!-- Modal delete patient -->
+            <% include ../../partials/backend/modals/modal_delete_patient %>
+
+
+
+
+
+		</main>
+
+		<footer class="page-footer">
+			<% include ../../partials/backend/footer_backend %>
+		</footer>
+
+		<% include ../../partials/backend/script_backend %>
+		<% include ../../partials/backend/server_messages %>
+		<script src="/static/js/src/patient_b.js"></script>
+	</body>
+</html>

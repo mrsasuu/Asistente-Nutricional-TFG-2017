@@ -4,6 +4,7 @@ var session = require('express-session');
 
 var IndexController = require('./IndexController');
 var UserController = require('./UserController');
+var PatientController = require('./PatientController');
 var FoodController = require('./FoodController');
 var ContentController = require('./ContentController');
 var ContentTypeController = require('./ContentTypeController');
@@ -34,6 +35,7 @@ Views.prototype.initPages = function() {
 	var userC = new UserController(self.renderJson, activityLogC);
 
     var foodC = new FoodController(self.renderJson, activityLogC);
+    var patientC = new PatientController(self.renderJson, activityLogC);
 
 	activityLogC.setUserController(userC);
 
@@ -48,6 +50,7 @@ Views.prototype.initPages = function() {
 	self.routerBackend.use(indexC.getRouterBackend());
 	self.routerBackend.use('/users', userC.getRouterBackend());
     self.routerBackend.use('/foods', foodC.getRouterBackend());
+    self.routerBackend.use('/patients', patientC.getRouterBackend());
 	self.routerBackend.use('/contentTypes', contentTypeC.getRouterBackend());
 	self.routerBackend.use('/localizations', localizationC.getRouterBackend());
 	self.routerBackend.use('/activityLogs', activityLogC.getRouterBackend());

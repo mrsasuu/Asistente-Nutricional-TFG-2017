@@ -32,33 +32,22 @@ $(document).ready(function() {
 		}
 		else if(action == '#edit_food') {
 
-            $("#edit_id_food").val(id_food);
-
-
-			/*$.ajax({
+			$.ajax({
 				type: "GET",
-				url: "/api/food/id/"+id_food+"?email="+$("#email").text(),
+				url: "/api/food/id/"+id_food,
 				datatype: "json",
 				success: function(jsondata) {
 					$("#edit_id_food").val(id_food);
 
-					$("#edit_email_food").val(jsondata.EMAIL);
-					$("#edit_password_food").val(jsondata.PASSWORD);
 					$("#edit_name_food").val(jsondata.NAME);
-					$("#edit_surname_food").val(jsondata.SURNAME);
+					$("#edit_proteins_food").val(jsondata.PROTEINS);
+					$("#edit_carbon_hydrates_food").val(jsondata.CARBON_HYDRATES);
+					$("#edit_lipids_food").val(jsondata.LIPIDS);
 
-					$("#editfoodImgViewer").attr('src', jsondata.PHOTO);
+
+					$("#editFoodImgViewer").attr('src', jsondata.PHOTO);
 					$("#edit_previous_photo_food").val(jsondata.PHOTO);
 
-					// marcamos el input type radio a la opcion correcta
-					var admin = parseInt(jsondata.ADMIN);
-					$("#edit_admin_yes").removeAttr('checked');
-					$("#edit_admin_no").removeAttr('checked');
-
-					if(admin)
-						$("#edit_admin_yes").prop('checked', true);
-					else
-						$("#edit_admin_no").prop('checked', true);
 
 					$('#food_loader').css('opacity', '0');
 					setTimeout(function() { $('#food_loader').css('display', 'none'); }, 1000);
@@ -67,7 +56,7 @@ $(document).ready(function() {
 					console.log(xhr);
 					console.log(status);
 				}
-			});*/
+			});
 
 
 		}

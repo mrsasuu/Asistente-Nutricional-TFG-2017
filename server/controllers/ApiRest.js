@@ -4,6 +4,7 @@ var express = require("express");
 var cors = require("cors");
 
 var UserService = require('../service/UserService');
+var FoodService = require('../service/FoodService');
 var ContentTypeService = require('../service/ContentTypeService');
 var ContentService = require('../service/ContentService');
 var LocalizationService = require('../service/LocalizationService');
@@ -17,6 +18,7 @@ function ApiRest() {
 	this.timeout = 10 * 60 * 1000;
 
 	this.opened_apis = ['user'];
+    console.log("Llega aqui");
 
 	this.serviceRouter = express.Router();
 	this.validateApiKey();
@@ -45,6 +47,7 @@ ApiRest.prototype.defineApiServices = function() {
 	this.serviceRouter.use('/content_type', new ContentTypeService().getRouter());
 	this.serviceRouter.use('/content', new ContentService().getRouter());
 	this.serviceRouter.use('/user', new UserService().getRouter());
+    this.serviceRouter.use('/food', new FoodService().getRouter());
 	this.serviceRouter.use('/localization', new LocalizationService().getRouter());
 	this.serviceRouter.use('/activity_log', new ActivityLogService().getRouter());
 	this.serviceRouter.use('/lang', new LangService().getRouter());

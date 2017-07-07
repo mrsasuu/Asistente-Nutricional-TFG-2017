@@ -16,7 +16,7 @@
   transform: translate(0px, 0px);
 }
 body {
-  background-image: url(../../img/museum.jpg);
+  background-image: url(../../img/background.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -25,12 +25,12 @@ body {
 }
 @media only screen and (min-width: 601px) and (max-width: 992px) {
   body {
-    background-image: url(../../img/museum_mobile.jpg);
+    background-image: url(../../img/background.jpg);
   }
 }
 @media only screen and (max-width: 600px) {
   body {
-    background-image: url(../../img/museum_mobile.jpg);
+    background-image: url(../../img/background.jpg);
   }
 }
 .row.container {
