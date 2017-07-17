@@ -96,6 +96,69 @@ $(document).ready(function() {
 			});
 
 
+		}else if(action == '#show_patient') {
+            $.ajax({
+                type: "GET",
+                url: "/api/patient/id/"+id_patient,
+                datatype: "json",
+                success: function(jsondata) {
+                    $("#show_id_patient").val(id_patient);
+
+                    var gender = parseInt(jsondata.GENDER);
+                    $("#show_patient_male").removeAttr('checked');
+                    $("#show_patient_female").removeAttr('checked');
+
+                    if(gender){
+                        $("#show_patient_female").prop('checked', true);
+                    }else{
+                        $("#show_patient_male").prop('checked', true);
+                    }
+
+                    var activity = parseInt(jsondata.ACTIVITY_LEVEL);
+                    $("#show_activity_level_patient_1").removeAttr('checked');
+                    $("#show_activity_level_patient_2").removeAttr('checked');
+                    $("#show_activity_level_patient_3").removeAttr('checked');
+                    $("#show_activity_level_patient_4").removeAttr('checked');
+
+                    switch(activity){
+                        case 0:
+                            $("#show_activity_level_patient_1").prop('checked', true);
+                            break;
+                        case 1:
+                            $("#show_activity_level_patient_2").prop('checked', true);
+                            break;
+                        case 2:
+                            $("#show_activity_level_patient_3").prop('checked', true);
+                            break;
+                        case 3:
+                            $("#show_activity_level_patient_4").prop('checked', true);
+                            break;
+                    }
+
+                    $("#show_name_patient").val(jsondata.NAME);
+                    $("#show_dni_patient").val(jsondata.DNI);
+                    $("#show_age_patient").val(jsondata.AGE);
+                    $("#show_surname_patient").val(jsondata.SURNAME);
+                    $("#show_address_patient").val(jsondata.ADDRESS);
+                    $("#show_email_patient").val(jsondata.EMAIL);
+                    $("#show_phone_patient").val(jsondata.PHONE);
+                    $("#show_username_patient").val(jsondata.USERNAME);
+                    $("#show_password_patient").val(jsondata.PASSWORD);
+                    $("#show_height_patient").val(jsondata.HEIGHT);
+                    $("#show_weight_patient").val(jsondata.WEIGHT);
+                    $("#showPatientImgViewer").attr('src', jsondata.PHOTO);
+                    $("#show_previous_photo_user").val(jsondata.PHOTO);
+
+
+
+                    $('#patient_loader').css('opacity', '0');
+                    setTimeout(function() { $('#patient_loader').css('display', 'none'); }, 1000);
+                },
+                error : function(xhr, status) {
+                    console.log(xhr);
+                    console.log(status);
+                }
+            });
 		}
 	});
 });

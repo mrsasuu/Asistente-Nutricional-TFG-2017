@@ -288,6 +288,89 @@ PatientController.prototype.initBackend = function() {
             res.redirect('/');
     });
 
+    //self.routerBackend.route('/show').post(upload.array('edit_photo_patient', 1), function(req, res) {
+    self.routerBackend.route('/show').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+        if(typeof self.renderJson.user !== 'undefined') {
+            var patient = Patient.build();
+
+            var id_patient = req.body.id_patient;
+
+            patient.name = req.body.edit_name_patient;
+            patient.dni = req.body.edit_dni_patient;
+            patient.age = req.body.edit_age_patient;
+            patient.surname = req.body.edit_surname_patient;
+            patient.gender = req.body.edit_gender_patient;
+            patient.activity_level = req.body.edit_activity_level_patient;
+            patient.address = req.body.edit_address_patient;
+            patient.email = req.body.edit_email_patient;
+            patient.phone = req.body.edit_phone_patient;
+            patient.username = req.body.edit_username_patient;
+            patient.password = req.body.edit_password_patient;
+            patient.height = req.body.edit_height_patient;
+            patient.weight = req.body.edit_weight_patient;
+            patient.photo = req.body.edit_photo_anterior_patient;
+
+            console.log(patient);
+
+            // Check if there're files to upload
+            if(req.files.length > 0) {
+                var file = Utils.normalizeStr(req.files[0].originalname);
+                var extension = '.'+file.substr(file.lastIndexOf('.')+1);
+
+                file = file.split('.').splice(0,1).join('.');
+                var dst = self.uploadimgpath + file + extension;
+
+                // Check if the file exist. If there's an error it doesn't exist
+                try {
+                    fs.accessSync(dst, fs.F_OK);
+
+                    file += Date.now();
+                    file += extension;
+                } catch(e) { 			// File not found
+                    file += extension;
+                }
+
+                dst = self.uploadimgpath + file;
+
+                var tmp = self.uploadpath+req.files[0].filename;
+
+                fs.createReadStream(tmp).pipe(fs.createWriteStream(dst));
+
+                // Delete created tmp file.
+                fs.unlink(tmp, function(error) {
+                    if(error)
+                        console.log(error);
+                    else
+                        console.log('successfully deleted ' + tmp);
+                });
+
+                // Path to the file, to be sabed in DB
+                patient.photo = '/static/img/foods/' + file;
+            }
+
+            patient.updateById(id_patient).then(function(result) {
+                self.renderJson.msg = 'Se ha editado correctamente';
+
+                // Add the event to a new Activity Log
+                var ct = "Edición";
+                var desc = "Se ha editado el paciente " + patient.name + patient.ID;
+                var date = new Date();
+                var uid = self.renderJson.user.ID;
+                self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+
+                res.redirect('/backend/patients');
+            }, function(error) {
+                console.log(error);
+                self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/patients');
+            });
+        }
+        else
+            res.redirect('/');
+    });
+
     self.routerBackend.route('/image/add/:contentId').post(upload.array('content_image', 1), function(req, res) {
         console.log('IMAGE ADD');
 

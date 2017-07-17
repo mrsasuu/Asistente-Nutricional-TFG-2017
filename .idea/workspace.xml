@@ -12,54 +12,34 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="modal_edit_patient.ejs" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_edit_patient.ejs">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="-415">
-                    <caret line="61" column="26" lean-forward="false" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="user_b.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/public/static/js/src/user_b.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="46" column="71" lean-forward="false" selection-start-line="45" selection-start-column="20" selection-end-line="46" selection-end-column="71" />
+            <state relative-caret-position="456">
+              <caret line="35" column="44" lean-forward="false" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modal_add_user.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_add_user.ejs">
+      <file leaf-file-name="patient_b.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/public/static/js/src/patient_b.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="41" lean-forward="false" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+            <state relative-caret-position="-1394">
+              <caret line="32" column="32" lean-forward="false" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modal_delete_user.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_delete_user.ejs">
+      <file leaf-file-name="modal_show_patient.ejs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_show_patient.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="93" lean-forward="false" selection-start-line="13" selection-start-column="93" selection-end-line="13" selection-end-column="93" />
+            <state relative-caret-position="395">
+              <caret line="142" column="14" lean-forward="false" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -115,21 +95,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserController.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/server/controllers/UserController.js">
+      <file leaf-file-name="patient.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/public/templates/pages/backend/patient.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="115" column="92" lean-forward="false" selection-start-line="115" selection-start-column="92" selection-end-line="115" selection-end-column="92" />
+            <state relative-caret-position="119">
+              <caret line="46" column="137" lean-forward="true" selection-start-line="46" selection-start-column="137" selection-end-line="46" selection-end-column="137" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sidemenu_backend.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/public/templates/partials/backend/sidemenu_backend.ejs">
+      <file leaf-file-name="PatientController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/controllers/PatientController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="138" lean-forward="false" selection-start-line="16" selection-start-column="138" selection-end-line="16" selection-end-column="138" />
+            <state relative-caret-position="235">
+              <caret line="296" column="0" lean-forward="true" selection-start-line="296" selection-start-column="0" selection-end-line="296" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -156,19 +136,22 @@
       <find>name</find>
       <find>add</find>
       <find>id_pat</find>
-      <find>user</find>
       <find>admin</find>
       <find>food</find>
       <find>console</find>
       <find>usuarios</find>
+      <find>user</find>
+      <find>sect</find>
+      <find>edit</find>
     </findStrings>
     <replaceStrings>
       <replace>AN</replace>
       <replace>food</replace>
       <replace>name</replace>
-      <replace>edit</replace>
       <replace>Patient</replace>
+      <replace>edit</replace>
       <replace>patient</replace>
+      <replace>show</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -196,11 +179,8 @@
         <option value="$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_add_food.ejs" />
         <option value="$PROJECT_DIR$/server/public/static/css/src/login_b.css" />
         <option value="$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_edit_patient.ejs" />
-        <option value="$PROJECT_DIR$/server/public/templates/pages/backend/patient.ejs" />
         <option value="$PROJECT_DIR$/server/controllers/ApiRest.js" />
-        <option value="$PROJECT_DIR$/server/public/static/js/src/patient_b.js" />
         <option value="$PROJECT_DIR$/server/models/Patient.js" />
-        <option value="$PROJECT_DIR$/server/controllers/PatientController.js" />
         <option value="$PROJECT_DIR$/server/service/PatientService.js" />
         <option value="$PROJECT_DIR$/server/public/templates/partials/backend/sidemenu_backend.ejs" />
         <option value="$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_add_user.ejs" />
@@ -208,6 +188,10 @@
         <option value="$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_edit_user.ejs" />
         <option value="$PROJECT_DIR$/server/public/templates/pages/backend/index.ejs" />
         <option value="$PROJECT_DIR$/server/controllers/UserController.js" />
+        <option value="$PROJECT_DIR$/server/public/templates/pages/backend/patient.ejs" />
+        <option value="$PROJECT_DIR$/server/controllers/PatientController.js" />
+        <option value="$PROJECT_DIR$/server/public/static/js/src/patient_b.js" />
+        <option value="$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_show_patient.ejs" />
       </list>
     </option>
   </component>
@@ -795,16 +779,15 @@
       <workItem from="1499173608129" duration="7727000" />
       <workItem from="1499353144326" duration="18809000" />
       <workItem from="1499522170747" duration="499000" />
-      <workItem from="1500314523090" duration="4767000" />
+      <workItem from="1500314523090" duration="5946000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46698000" />
+    <option name="totallyTimeSpent" value="47877000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36383602" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -841,13 +824,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/controllers/ActivityLogController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/controllers/ContentController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1080,14 +1056,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/public/templates/pages/backend/patient.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="61" column="74" lean-forward="false" selection-start-line="61" selection-start-column="74" selection-end-line="61" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/controllers/ApiRest.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
@@ -1104,34 +1072,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_edit_patient.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-415">
-          <caret line="61" column="26" lean-forward="false" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/public/static/js/src/patient_b.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="48" column="41" lean-forward="false" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/models/Patient.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="9" lean-forward="false" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/controllers/PatientController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="707" column="35" lean-forward="false" selection-start-line="707" selection-start-column="28" selection-end-line="707" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -1148,14 +1092,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="138" lean-forward="false" selection-start-line="16" selection-start-column="138" selection-end-line="16" selection-end-column="138" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/public/static/js/src/user_b.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="46" column="71" lean-forward="false" selection-start-line="45" selection-start-column="20" selection-end-line="46" selection-end-column="71" />
           <folding />
         </state>
       </provider>
@@ -1216,10 +1152,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_edit_patient.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-415">
+          <caret line="61" column="26" lean-forward="false" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/controllers/UserController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
           <caret line="115" column="92" lean-forward="false" selection-start-line="115" selection-start-column="92" selection-end-line="115" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/public/templates/pages/backend/patient.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="46" column="137" lean-forward="true" selection-start-line="46" selection-start-column="137" selection-end-line="46" selection-end-column="137" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/controllers/PatientController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="296" column="0" lean-forward="true" selection-start-line="296" selection-start-column="0" selection-end-line="296" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/public/static/js/src/user_b.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="35" column="44" lean-forward="false" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/public/static/js/src/patient_b.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1394">
+          <caret line="32" column="32" lean-forward="false" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/public/templates/partials/backend/modals/modal_show_patient.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="142" column="14" lean-forward="false" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
           <folding />
         </state>
       </provider>
