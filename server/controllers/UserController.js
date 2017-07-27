@@ -113,7 +113,7 @@ UserController.prototype.initBackend = function() {
 	var self = this;
 
 	self.routerBackend.route('/').get(function(req, res) {
-		self.renderJson.breadcrumb = { 'LINK': '/backend/users/', 'SECTION': 'Usuarios' };
+		self.renderJson.breadcrumb = { 'LINK': '/backend/users/', 'SECTION': 'Nutricionistas' };
 		self.renderJson.user = req.session.user;
 
 		if(typeof self.renderJson.user !== 'undefined' && parseInt(self.renderJson.user.ADMIN)) {

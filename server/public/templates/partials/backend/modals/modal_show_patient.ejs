@@ -1,0 +1,144 @@
+<div id="show_patient" class="modal modal_material modal-fixed-footer">
+	<div id="patient_loader" class="modal_loader preloader-wrapper big active">
+		<div class="spinner-layer spinner-custom">
+			<div class="circle-clipper left">
+				<div class="circle"></div>
+			</div>
+			<div class="gap-patch">
+				<div class="circle"></div>
+			</div>
+			<div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-header z-depth-1">
+		<h4>Editar Paciente</h4>
+		<span><i class="modal_close modal-action modal-close material-icons right">close</i></span>
+	</div>
+		<div class="modal-content">
+
+
+			<input id="show_id_patient" type="hidden" name="show_id_patient" />
+			<!-- DNI -->
+			<div class="input-field col s12 m4">
+				<input id="show_dni_patient" name="show_dni_patient" type="text" class="validate" required>
+				<label for="show_dni_patient">DNI</label>
+			</div>
+
+			<!-- Age -->
+			<div class="input-field col s12 m2">
+				<input id="show_age_patient" name="show_age_patient" type="number" class="validate" required>
+				<label for="show_age_patient">Edad</label>
+			</div>
+
+			<!-- Gender -->
+			<div class="input-field col s12 m6">
+				<p class="red-text text-darken-1">Sexo</p>
+				<!-- Confirmacion -->
+				<p><input name="show_gender_patient" type="radio" id="show_patient_male" value="0" /><label for="show_patient_male">Hombre</label></p>
+				<p><input name="show_gender_patient" type="radio" id="show_patient_female" value="1" checked /><label for="show_patient_female">Mujer</label></p>
+			</div>
+
+			<!-- Name -->
+			<div class="input-field col s12 m6">
+				<input id="show_name_patient" name="show_name_patient" type="text" class="validate" required>
+				<label for="show_name_patient">Nombre</label>
+			</div>
+
+			<!-- Surname -->
+			<div class="input-field col s12 m6">
+				<input id="show_surname_patient" name="show_surname_patient" type="text" class="validate" required>
+				<label for="show_surname_patient">Apellidos</label>
+			</div>
+
+			<!-- eddress -->
+			<div class="input-field col s12">
+				<input id="show_address_patient" name="show_address_patient" type="text" class="validate" required>
+				<label for="show_address_patient">Dirección</label>
+			</div>
+
+			<!-- Email -->
+			<div class="input-field col s12">
+				<input id="show_email_patient" name="show_email_patient" type="email" class="validate" required>
+				<label for="show_email_patient">Correo electrónico</label>
+			</div>
+
+			<!-- Phone -->
+			<div class="input-field col s12">
+				<input id="show_phone_patient" name="show_phone_patient" type="number" class="validate" required>
+				<label for="show_phone_patient">Teléfono</label>
+			</div>
+
+			<!-- Username -->
+			<div class="input-field col s12">
+				<input id="show_username_patient" name="show_username_patient" type="text" class="validate" required>
+				<label for="show_username_patient">Nombre de usuario</label>
+			</div>
+
+			<!-- Password -->
+			<div class="input-field col s12">
+				<input id="show_password_patient" name="show_password_patient" type="password" class="validate" required>
+				<label for="show_password_patient">Contraseña</label>
+			</div>
+
+			<!-- Height -->
+			<div class="input-field col s12 m6">
+				<input id="show_height_patient" name="show_height_patient" type="number" class="validate" required>
+				<label for="show_height_patient">Altura</label>
+			</div>
+
+			<!-- Weight -->
+			<div class="input-field col s12 m6">
+				<input id="show_weight_patient" name="show_weight_patient" type="number" class="validate" required>
+				<label for="show_weight_patient">Peso</label>
+			</div>
+
+
+
+
+			<!-- activity level -->
+			<div class="input-field col s12">
+				<p class="red-text text-darken-1">Nivel de actividad</p>
+				<!-- Confirmacion -->
+				<p><input name="show_activity_level_patient" type="radio" id="show_activity_level_patient_1" value="0" /><label for="show_activity_level_patient_1">Sedentario</label></p>
+				<p><input name="show_activity_level_patient" type="radio" id="show_activity_level_patient_2" value="1" checked /><label for="show_activity_level_patient_2">Moderada</label></p>
+				<p><input name="show_activity_level_patient" type="radio" id="show_activity_level_patient_3" value="2" checked /><label for="show_activity_level_patient_3">Intensa</label></p>
+				<p><input name="show_activity_level_patient" type="radio" id="show_activity_level_patient_4" value="3" checked /><label for="show_activity_level_patient_4">Muy ntensa</label></p>
+			</div>
+
+			<!-- Photo -->
+			<div class="file-field input-field col s12 m6" >
+				<div class="btn">
+					<span>Foto del paciente</span>
+					<input id="show_photo_patient" name="show_photo_patient" type="file" >
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+
+			<!-- Photo Preview -->
+			<div class="col s12 m6 center-align">
+				<img id="showPatientImgViewer" class="imagePreview responsive-img" src="/static/img/img_not_available.png" alt=""/>
+			</div>
+
+
+
+
+
+
+
+
+		</div>
+
+		<div class="modal-footer">
+			<!-- Submit -->
+			<div class="input field col s12 center-align submit_modal">
+				<button class="btn waves-effect waves-light" type="submit" name="show_submit_patient">
+					<span>Editar</span>
+					<i class="material-icons right">send</i>
+				</button>
+			</div>
+		</div>
+</div>

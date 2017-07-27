@@ -5,6 +5,7 @@ var cors = require("cors");
 
 var UserService = require('../service/UserService');
 var FoodService = require('../service/FoodService');
+var PatientService = require('../service/PatientService');
 var ContentTypeService = require('../service/ContentTypeService');
 var ContentService = require('../service/ContentService');
 var LocalizationService = require('../service/LocalizationService');
@@ -48,6 +49,7 @@ ApiRest.prototype.defineApiServices = function() {
 	this.serviceRouter.use('/content', new ContentService().getRouter());
 	this.serviceRouter.use('/user', new UserService().getRouter());
     this.serviceRouter.use('/food', new FoodService().getRouter());
+    this.serviceRouter.use('/patient', new PatientService().getRouter());
 	this.serviceRouter.use('/localization', new LocalizationService().getRouter());
 	this.serviceRouter.use('/activity_log', new ActivityLogService().getRouter());
 	this.serviceRouter.use('/lang', new LangService().getRouter());
