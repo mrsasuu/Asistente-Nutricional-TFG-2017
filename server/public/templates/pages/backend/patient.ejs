@@ -90,6 +90,8 @@
 
             $(document).ready(function() {
 
+
+
                 $('#calendar').fullCalendar({
 					lang:"es",
                     header: {
@@ -98,7 +100,7 @@
                         right: 'month,agendaWeek'
                     },
 					eventClick: function (event,jsEvent,view) {
-						alert(event.ide);
+						alert(event.tipo);
                     },
                     defaultDate: '2017-05-12',
                     navLinks: true, // can click day/week names to navigate views
@@ -107,10 +109,12 @@
                     editable: true,
                     select: function(start, end) {
                         var title = prompt('Event Titleee:');
+                        var tipo = prompt('Tipo:');
                         var eventData;
-                        if (title) {
+                        if (title && tipo) {
                             eventData = {
                                 title: title,
+								tipo: tipo,
                                 start: start,
                                 end: end
                             };
@@ -120,7 +124,7 @@
                     },
                     editable: true,
                     eventLimit: true, // allow "more" link when too many events
-                    events: [
+                    /*events: [
                         {
                             title: 'All Day Event',
                             start: '2017-05-01'
@@ -176,7 +180,7 @@
                             url: 'http://google.com/',
                             start: '2017-05-28'
                         }
-                    ]
+                    ]*/
                 });
 
             });

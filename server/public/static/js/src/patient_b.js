@@ -1,4 +1,15 @@
+var Patient_id = -1;
+var evento;
+var json1;
+var names = [];
+var horarios = [];
+var ids = [];
+var fechas = [];
+var cont = 0;
 $(document).ready(function() {
+
+
+
 	$('.modal-trigger').leanModal( {
 		complete: function() {
 			$('#patient_loader').css('opacity', '1');
@@ -22,6 +33,105 @@ $(document).ready(function() {
             $( "#card-description" ).addClass("modal-shown");
     });
 
+    $('#botonEv').on('click',function () {
+
+
+
+        $.ajax({
+            type: "GET",
+            url: "/api/food_register/id/"+Patient_id,
+            datatype: "json",
+            success: function(jsondata) {
+
+                json1 = jsondata;
+
+                for(var i = 0; i < jsondata.length; i++){
+                    ids.push(jsondata[i].FOODID);
+                    alert("Se ha pusheado" + ids[0]);
+                    fechas.push(jsondata[i].DATE);
+                }
+
+                alert("Array: " + ids);
+               alert(jsondata[0].FOODID);
+                alert(jsondata[0].FOODHOUR);
+
+                for(var i = 0; i < ids.length; i++){
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/food/id/"+ids[i],
+                        datatype: "json",
+                        success: function(jsondata2) {
+
+                            var conta = 0;
+
+                            for(var j = 0; j < ids.length; j++){
+                                if(ids[j]==jsondata2.ID){
+                                    conta =j;
+                                }
+                            }
+
+                            var evento2 = {
+                                title: jsondata2.NAME,
+                                tipo: "Registro",
+                                horario: horarios[conta],
+                                start: fechas[conta]
+                            };
+
+                            names.push(jsondata2.NAME);
+                            alert("Se ha pusheado alimento" + jsondata2.NAME);
+                            horarios.push(jsondata2.FOODHOUR);
+                            $('#calendar').fullCalendar('renderEvent', evento2, true);
+
+
+                        },
+                        error : function(xhr, status) {
+                            console.log(xhr);
+                            console.log(status);
+                        }
+                    });
+                }
+
+
+            },
+            error : function(xhr, status) {
+                console.log(xhr);
+                console.log(status);
+            }
+        });
+
+        for(var i = 0; i < ids.length; i++){
+            $.ajax({
+                type: "GET",
+                url: "/api/food/id/"+ids[i],
+                datatype: "json",
+                success: function(jsondata2) {
+
+                    names.push(jsondata2.NAME);
+                    alert("Se ha pusheado" + jsondata2.NAME);
+                    horarios.push(jsondata2.FOODHOUR);
+
+                },
+                error : function(xhr, status) {
+                    console.log(xhr);
+                    console.log(status);
+                }
+            });
+        }
+
+        for(var i = 0; i < ids.length; i++){
+            evento = {
+                title: names[i],
+                tipo: "Registro",
+                horario: horarios[i],
+                start: fechas[i]
+            };
+            $('#calendar').fullCalendar('renderEvent', evento, true);
+
+        }
+
+        //$('#calendar').fullCalendar('renderEvent', evento, true);
+    });
+
 	// If click on send but delete yes check is not checked close the modal
 	$('#delete_patient form').submit(function(event) {
 		if(document.getElementById("delete_patient_yes").checked)
@@ -36,6 +146,8 @@ $(document).ready(function() {
 		action = $(this).attr('href');
 		id_patient = $(this).parent().parent().children()[0].innerHTML;
 		id_patient = parseInt(id_patient);
+		Patient_id = id_patient;
+
 
 		if(action == '#delete_patient') {
 			name = $(this).parent().parent().children()[1].innerHTML;

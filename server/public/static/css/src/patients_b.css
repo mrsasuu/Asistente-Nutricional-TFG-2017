@@ -90,6 +90,11 @@ i.right {
     overflow-y: hidden;
 }
 
+.custom-card{
+    margin-left: 1.333333%!important;
+    width: 97.666667%!important;
+}
+
 #profile-page{
     padding-top: 0!important;
     margin-top: 0!important;
@@ -99,3 +104,6 @@ i.right {
     margin-top: 0!important;
 }
 
+.switch label{
+    width: 150px!important;
+}
