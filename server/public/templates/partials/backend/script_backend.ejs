@@ -7,3 +7,19 @@
 
 <!-- Common JS to all sections -->
 <script src="/static/js/src/common_b.js"></script>
+
+<script type="text/javascript">
+    // Toast Notification
+
+    $(window).on("load", function (e) {
+        setTimeout(function() {
+            Materialize.toast('<span>¡Bienvenido '+ $("#username").text()+'!</span>', 5000);
+        }, 500);
+
+        /*setTimeout(function() {
+            Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
+        }, 15000);*/
+
+    });
+
+</script>

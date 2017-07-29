@@ -8,7 +8,7 @@
 		"port": 3306,
 		"driver": "mariadb",
 		"username": "root",
-		"password": "root",
+		"password": "pepito11",
 		"database": "an"
 	},
 	"logs": {
