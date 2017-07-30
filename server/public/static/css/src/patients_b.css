@@ -57,6 +57,11 @@ i.right {
     color: #212121 !important;
 }
 
+.collapsible-body {
+    padding: 2rem;
+}
+
+
 .modal-shown{
     transition-duration: 1s;
     -ms-transform: translateY(-100%); /* IE 9 */

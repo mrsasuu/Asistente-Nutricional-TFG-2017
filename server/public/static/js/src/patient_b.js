@@ -9,40 +9,83 @@ var cont = 0;
 var datas;
 
 
-/*$('input.autocomplete').keypress(function() {
+$('input.autocomplete').keypress(function() {
     //$(".dropdown-content").remove();
 });
 
 
 $('input.autocomplete').keyup(function() {
-    //$(".autocomplete-content").remove();
-    if($('input.autocomplete').val().length >= 2){
-        $.ajax({
-            type: "GET",
-            url: "/api/food/name/"+$('input.autocomplete').val(),
-            datatype: "json",
-            success: function(jsondata) {
-
-                var datas2 = {};
-
-
-                for(var i  = 0; i < jsondata.length; i++){
-                    datas2[jsondata[i].NAME] = null;
-                }
-
-
-                $('input.autocomplete').autocomplete({
-                    data: datas2
-                });
-
-            },
-            error : function(xhr, status) {
-                console.log(xhr);
-                console.log(status);
-            }
-        });
+    for(var i = 0; i < datas.length; i++){
+        if($('input.autocomplete').val() == datas[i].NAME){
+            $("#name_food").text(datas[i].NAME);
+        }
     }
-});*/
+});
+
+$('input.autocomplete').focusout(function() {
+    for(var i = 0; i < datas.length; i++){
+        if($('input.autocomplete').val() == datas[i].NAME){
+            $("#name_food").text(datas[i].NAME);
+        }
+    }
+});
+
+
+$('input.autocomplete').bind('input', function() {
+    for(var i = 0; i < datas.length; i++){
+        if($('input.autocomplete').val() == datas[i].NAME){
+            $("#name_food").text(datas[i].NAME);
+        }
+    }
+});
+
+$('.autocomplete-content').on('click', "span",function() {
+    alert("hola");
+    for(var i = 0; i < datas.length; i++){
+        if($('input.autocomplete').val() == datas[i].NAME){
+            $("#name_food").text(datas[i].NAME);
+        }
+    }
+});
+
+$(".autocomplete-content ul").on('click', function() {
+    alert("hola");
+    for(var i = 0; i < datas.length; i++){
+        if($('input.autocomplete').val() == datas[i].NAME){
+            $("#name_food").text(datas[i].NAME);
+        }
+    }
+});
+
+$(".autocomplete-content li").on('click', function() {
+    alert("hola");
+    for(var i = 0; i < datas.length; i++){
+        if($('input.autocomplete').val() == datas[i].NAME){
+            $("#name_food").text(datas[i].NAME);
+        }
+    }
+});
+
+$("#autocompletar-tooltop li").on('click', function() {
+    alert("hola");
+    for(var i = 0; i < datas.length; i++){
+        if($('input.autocomplete').val() == datas[i].NAME){
+            $("#name_food").text(datas[i].NAME);
+        }
+    }
+});
+
+$("#acordeon").on('click', function() {
+    for(var i = 0; i < datas.length; i++){
+        if($('input.autocomplete').val() == datas[i].NAME){
+            $("#name_food").text(datas[i].NAME);
+        }
+    }
+});
+
+
+
+
 $(document).ready(function() {
 
     $.ajax({
@@ -58,12 +101,14 @@ $(document).ready(function() {
                 datas2[jsondata[i].NAME] = null;
             }
 
+            data = datas2;
+            datas = jsondata;
 
             $('input.autocomplete').autocomplete({
                 data: datas2,
                 limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
                 onAutocomplete: function(val) {
-                // Callback function when value is autcompleted.
+                    alert("test");
             },
             minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
             });

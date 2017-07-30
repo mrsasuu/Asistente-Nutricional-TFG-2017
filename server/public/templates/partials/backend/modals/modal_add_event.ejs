@@ -3,7 +3,7 @@
 		<h4>Añadir evento al calendario del paciente</h4>
 		<span><i class="modal_close modal-action modal-close material-icons right">close</i></span>
 	</div>
-	<div class="modal-content">
+	<div class="modal-content" style="overflow-y: scroll;">
 
 		<div id="profile-page-wall-share" class="row">
 			<div class="col s12">
@@ -37,12 +37,20 @@
 					</div>
 
 					<div class="row">
-						<div class="input-field col s6">
+						<div class="input-field col s12">
 							<i class="material-icons prefix">search</i>
 							<input type="text" id="autocomplete-input" autocomplete="off" class="autocomplete validate">
 							<label for="autocomplete-input">Buscar alimento:</label>
 
 						</div>
+					</div>
+					<div class="row">
+						<ul id="acordeon" class="collapsible" data-collapsible="accordion">
+							<li>
+								<div class="collapsible-header"><i class="material-icons">restaurant</i><p style="margin: 0" id="name_food"></p></div>
+								<div class="collapsible-body"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></div>
+							</li>
+						</ul>
 					</div>
 
 				</div>
