@@ -41,6 +41,21 @@ FoodService.prototype.initializeRouter = function() {
 			res.status(404).send("Food not found");
 		});
 	});
+
+    self.router.route('/name/:food_name').get(function(req, res) {
+        var name_food = req.params.food_name;
+
+        var food = Food.build();
+
+        food.retrieveAllByName(name_food).then(function(result) {
+            if(result)
+                res.json(result);
+            else
+                res.status(401).send("Food not found");
+        }, function(error) {
+            res.status(404).send("Food not found");
+        });
+    });
 };
 
 FoodService.prototype.getRouter = function() {

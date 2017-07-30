@@ -19,7 +19,10 @@ var Food = DBConnector.connectAN().define('FOOD', {
             },
             retrieveAllByListIds: function(listIds) {
                 return Food.findAll({ where: { ID: { in: listIds } } });
-            },retrieveAll: function() {
+            },retrieveAllByName: function(name) {
+                return Food.findAll({ where: { NAME: { like: name+"%" } } });
+            },
+            retrieveAll: function() {
                 return Food.findAll();
             },
             retrievePagination: function(inicio, fin){

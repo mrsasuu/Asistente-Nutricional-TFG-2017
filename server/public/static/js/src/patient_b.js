@@ -6,7 +6,74 @@ var horarios = [];
 var ids = [];
 var fechas = [];
 var cont = 0;
+var datas;
+
+
+/*$('input.autocomplete').keypress(function() {
+    //$(".dropdown-content").remove();
+});
+
+
+$('input.autocomplete').keyup(function() {
+    //$(".autocomplete-content").remove();
+    if($('input.autocomplete').val().length >= 2){
+        $.ajax({
+            type: "GET",
+            url: "/api/food/name/"+$('input.autocomplete').val(),
+            datatype: "json",
+            success: function(jsondata) {
+
+                var datas2 = {};
+
+
+                for(var i  = 0; i < jsondata.length; i++){
+                    datas2[jsondata[i].NAME] = null;
+                }
+
+
+                $('input.autocomplete').autocomplete({
+                    data: datas2
+                });
+
+            },
+            error : function(xhr, status) {
+                console.log(xhr);
+                console.log(status);
+            }
+        });
+    }
+});*/
 $(document).ready(function() {
+
+    $.ajax({
+        type: "GET",
+        url: "/api/food/",
+        datatype: "json",
+        success: function(jsondata) {
+
+            var datas2 = {};
+
+
+            for(var i  = 0; i < jsondata.length; i++){
+                datas2[jsondata[i].NAME] = null;
+            }
+
+
+            $('input.autocomplete').autocomplete({
+                data: datas2,
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                // Callback function when value is autcompleted.
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+
+        },
+        error : function(xhr, status) {
+            console.log(xhr);
+            console.log(status);
+        }
+    });
 
 
 
@@ -33,82 +100,77 @@ $(document).ready(function() {
             $( "#card-description" ).addClass("modal-shown");
     });
 
-    $('#botonEv').on('click',function () {
+    $("#alimentos").on('click', function() {
+        //$(".card-reveal").css({"transform":"translateY(0%)","display":"none"});
 
 
 
-        $.ajax({
-            type: "GET",
-            url: "/api/food_register/id/"+Patient_id,
-            datatype: "json",
-            success: function(jsondata) {
+        calendario();
+    });
 
-                json1 = jsondata;
+    function calendario() {
+        $('#calendar').fullCalendar( 'removeEvents');
 
-                for(var i = 0; i < jsondata.length; i++){
-                    ids.push(jsondata[i].FOODID);
-                    alert("Se ha pusheado" + ids[0]);
-                    fechas.push(jsondata[i].DATE);
-                }
+        names = [];
+        ids = [];
+        fechas = [];
+        horarios = [];
 
-                alert("Array: " + ids);
-               alert(jsondata[0].FOODID);
-                alert(jsondata[0].FOODHOUR);
-
-                for(var i = 0; i < ids.length; i++){
-                    $.ajax({
-                        type: "GET",
-                        url: "/api/food/id/"+ids[i],
-                        datatype: "json",
-                        success: function(jsondata2) {
-
-                            var conta = 0;
-
-                            for(var j = 0; j < ids.length; j++){
-                                if(ids[j]==jsondata2.ID){
-                                    conta =j;
-                                }
-                            }
-
-                            var evento2 = {
-                                title: jsondata2.NAME,
-                                tipo: "Registro",
-                                horario: horarios[conta],
-                                start: fechas[conta]
-                            };
-
-                            names.push(jsondata2.NAME);
-                            alert("Se ha pusheado alimento" + jsondata2.NAME);
-                            horarios.push(jsondata2.FOODHOUR);
-                            $('#calendar').fullCalendar('renderEvent', evento2, true);
-
-
-                        },
-                        error : function(xhr, status) {
-                            console.log(xhr);
-                            console.log(status);
-                        }
-                    });
-                }
-
-
-            },
-            error : function(xhr, status) {
-                console.log(xhr);
-                console.log(status);
-            }
-        });
-
-        for(var i = 0; i < ids.length; i++){
+        if($("#alimentos").is(":checked")){
             $.ajax({
                 type: "GET",
-                url: "/api/food/id/"+ids[i],
+                url: "/api/food_register/id/"+Patient_id,
                 datatype: "json",
-                success: function(jsondata2) {
+                success: function(jsondata) {
 
-                    names.push(jsondata2.NAME);
-                    alert("Se ha pusheado" + jsondata2.NAME);
-                    horarios.push(jsondata2.FOODHOUR);
+                    json1 = jsondata;
+
+                    for(var i = 0; i < jsondata.length; i++){
+                        ids.push(jsondata[i].FOODID);
+                        //alert("Se ha pusheado" + ids[0]);
+                        fechas.push(jsondata[i].DATE);
+                    }
+
+                    /*alert("Array: " + ids);
+                     alert(jsondata[0].FOODID);
+                     alert(jsondata[0].FOODHOUR);*/
+
+                    for(var i = 0; i < ids.length; i++){
+                        $.ajax({
+                            type: "GET",
+                            url: "/api/food/id/"+ids[i],
+                            datatype: "json",
+                            success: function(jsondata2) {
+
+                                var conta = 0;
+
+                                for(var j = 0; j < ids.length; j++){
+                                    if(ids[j]==jsondata2.ID){
+                                        conta =j;
+                                    }
+                                }
+
+                                var evento2 = {
+                                    title: jsondata2.NAME,
+                                    tipo: "Registro",
+                                    horario: horarios[conta],
+                                    start: fechas[conta]
+                                };
+
+                                names.push(jsondata2.NAME);
+                                //alert("Se ha pusheado alimento" + jsondata2.NAME);
+                                horarios.push(jsondata2.FOODHOUR);
+                                $('#calendar').fullCalendar('renderEvent', evento2, true);
+
+
+                            },
+                            error : function(xhr, status) {
+                                console.log(xhr);
+                                console.log(status);
+                            }
+                        });
+                    }
+
 
                 },
                 error : function(xhr, status) {
@@ -118,19 +180,7 @@ $(document).ready(function() {
             });
         }
 
-        for(var i = 0; i < ids.length; i++){
-            evento = {
-                title: names[i],
-                tipo: "Registro",
-                horario: horarios[i],
-                start: fechas[i]
-            };
-            $('#calendar').fullCalendar('renderEvent', evento, true);
-
-        }
-
-        //$('#calendar').fullCalendar('renderEvent', evento, true);
-    });
+    };
 
 	// If click on send but delete yes check is not checked close the modal
 	$('#delete_patient form').submit(function(event) {
@@ -230,6 +280,27 @@ $(document).ready(function() {
 
 		}else if(action == '#show_patient') {
 
+        $('#calendar').fullCalendar('today');
+
+        /*$('input.autocomplete').autocomplete({
+            data: {
+                "Apple": null,
+                "Apple2": null,
+                "Apple3": null,
+                "Microsoft": null,
+                "Google": 'https://placehold.it/250x250'
+            },
+            limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function(val) {
+                // Callback function when value is autcompleted.
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+        });
+*/
+        calendario();
+
+
+
             $.ajax({
                 type: "GET",
                 url: "/api/patient/id/"+id_patient,
@@ -320,3 +391,5 @@ $(document).ready(function() {
 		}
 	});
 });
+
+

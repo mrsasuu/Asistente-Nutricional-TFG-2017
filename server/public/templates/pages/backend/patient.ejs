@@ -65,7 +65,7 @@
             <% include ../../partials/backend/modals/modal_edit_patient %>
             <!-- Modal delete patient -->
             <% include ../../partials/backend/modals/modal_delete_patient %>
-
+            <% include ../../partials/backend/modals/modal_add_event %>
 			<!-- Modal show patient -->
             <% include ../../partials/backend/modals/modal_show_patient %>
 
@@ -92,6 +92,8 @@
 
 
 
+
+
                 $('#calendar').fullCalendar({
 					lang:"es",
                     header: {
@@ -100,7 +102,8 @@
                         right: 'month,agendaWeek'
                     },
 					eventClick: function (event,jsEvent,view) {
-						alert(event.tipo);
+						//alert(event.tipo);
+                        window.location.href = "#modalTest";
                     },
                     defaultDate: '2017-05-12',
                     navLinks: true, // can click day/week names to navigate views
@@ -108,7 +111,8 @@
                     selectHelper: true,
                     editable: true,
                     select: function(start, end) {
-                        var title = prompt('Event Titleee:');
+					    $("#add_event").openModal() ;
+                        /*var title = prompt('Event Titleee:');
                         var tipo = prompt('Tipo:');
                         var eventData;
                         if (title && tipo) {
@@ -119,7 +123,7 @@
                                 end: end
                             };
                             $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                        }
+                        }*/
                         $('#calendar').fullCalendar('unselect');
                     },
                     editable: true,

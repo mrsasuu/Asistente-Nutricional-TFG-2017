@@ -7,6 +7,10 @@
 
 
 }
+
+select{
+    display: inherit!important;
+}
 .material-icon-description{
     margin-right: 0.85%;
     vertical-align: bottom!important;
@@ -74,7 +78,7 @@ i.right {
 #calendar {
     max-width: 96%;
     margin: 0 auto;
-    padding: 100px;
+    padding: 50px;
     position: inherit!important;
 }
 
