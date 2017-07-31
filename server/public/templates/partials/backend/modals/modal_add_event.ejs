@@ -23,58 +23,83 @@
 
 					</div>
 
-					<div class="input-field row ">
+					<form class="formValidate" id="formValidate">
 
-						<p class="col s3 center-align">Horario de la ingesta:</p>
-						<select class="col s2">
-							<option value="" disabled selected>Elige el horario</option>
-							<option value="1">Desayuno</option>
-							<option value="2">Almuerzo</option>
-							<option value="3">Merienda</option>
-							<option value="4">Cena</option>
-							<option value="5">Otro</option>
-						</select>
-					</div>
+						<div class="input-field row ">
 
-					<div class="row">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">search</i>
-							<input type="text" id="autocomplete-input" autocomplete="off" class="autocomplete validate">
-							<label for="autocomplete-input">Buscar alimento:</label>
+							<p class="col s12 m3 center-align">Horario de la ingesta:</p>
+							<select id="selecthorario" class="col s12 m2">
+								<option value="" disabled selected>Elige el horario</option>
+								<option value="1">Desayuno</option>
+								<option value="2">Almuerzo</option>
+								<option value="3">Merienda</option>
+								<option value="4">Cena</option>
+								<option value="5">Otro</option>
+							</select>
+
+							<p class="col s12 offset-m1 m3 center-align">Fecha de la ingesta:</p>
+							<input id="datepick" type="text" class=" col m2 s12 datepicker ">
 
 						</div>
-					</div>
-					<div class="row">
-						<ul id="acordeon" class="collapsible" data-collapsible="accordion">
-							<li>
-								<div class="collapsible-header"><i class="material-icons">restaurant</i><p style="margin: 0" id="name_food"></p></div>
-								<div class="collapsible-body"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></div>
-							</li>
-						</ul>
-					</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">search</i>
+								<input type="text" id="autocompleteinput" autocomplete="off" class="autocomplete validate">
+								<label for="autocompleteinput">Buscar alimento:</label>
+
+							</div>
+						</div>
+						<div class="row">
+							<ul id="acordeon" class="collapsible" data-collapsible="accordion">
+								<li>
+									<div class="collapsible-header"><i class="material-icons">restaurant</i><p style="margin: 0" id="name_food"></p></div>
+									<div class="collapsible-body center-align">
+										<div style="display: none" id="content-food-registry">
+
+											<div class="row">
+												<p class="col s12 m6">Glúcidos:</p><p class="col s12 m6" id="food_gluc">25g</p>
+											</div>
+											<div class="row">
+												<p class="col s12 m6">Proteinas:</p><p class="col s12 m6" id="food_prot">12g</p>
+											</div>
+											<div class="row">
+												<p class="col s12 m6">Lípidos:</p><p class="col s12 m6" id="food_lipids">7g</p>
+											</div>
+
+											<h6>*Medidas cada 100g</h6>
+
+										</div>
+
+										<h6 id="error-food">No se ha seleccionado ninguna comida.</h6>
+
+
+
+									</div>
+								</li>
+							</ul>
+						</div>
+
+						<div class="row center-align">
+							<a class="col s12 offset-m5 m2 waves-effect waves-light btn" type="submit" name="action" id="botonEv">Añadir registro</a>
+						</div>
+
+
+					</form>
 
 				</div>
 
 				<!-- AddPhotos -->
 				<div id="Objetivo" class="tab-content col s12  grey lighten-4" style="display: none;">
-					<div class="row valign-wrapper">
-						<div class="col s10">
-							<h4 class="">Añadir objetivo</h4>
+					<div class="row center-align">
+						<div style="margin-top: 20px!important;" class="col s12">
+							<h5 class="">Añadir objetivo</h5>
+
+							<h2>Trabajando en ello.</h2>
+							<h5>En breve se terminará de crear esta sección de la web.</h5>
 						</div>
 
 
-					</div>
-
-					<div class="row">
-						<div class="input-field col s12">
-							<select>
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
-							</select>
-							<label>Materialize Select</label>
-						</div>
 					</div>
 
 				</div>

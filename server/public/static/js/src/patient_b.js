@@ -7,16 +7,126 @@ var ids = [];
 var fechas = [];
 var cont = 0;
 var datas;
-
+var bool = false;
 
 $('input.autocomplete').keypress(function() {
     //$(".dropdown-content").remove();
 });
 
+function calendario() {
+    $('#calendar').fullCalendar( 'removeEvents');
+
+    names = [];
+    ids = [];
+    fechas = [];
+    horarios = [];
+
+    if($("#alimentos").is(":checked")){
+        $.ajax({
+            type: "GET",
+            url: "/api/food_register/id/"+Patient_id,
+            datatype: "json",
+            success: function(jsondata) {
+
+                json1 = jsondata;
+
+                for(var i = 0; i < jsondata.length; i++){
+                    ids.push(jsondata[i].FOODID);
+                    horarios.push(jsondata[i].FOODHOUR);
+                    //alert("Se ha pusheado" + ids[0]);
+                    fechas.push(jsondata[i].DATE);
+                }
+
+
+
+                /*alert("Array: " + ids);
+                 alert(jsondata[0].FOODID);
+                 alert(jsondata[0].FOODHOUR);*/
+
+                for(var i = 0; i < ids.length; i++){
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/food/id/"+ids[i],
+                        datatype: "json",
+                        success: function(jsondata2) {
+
+                            var conta = -1;
+
+                            for(var j = 0; j < ids.length; j++){
+                                if(ids[j]==jsondata2.ID){
+                                    conta =j;
+                                }
+                            }
+
+                            var color="#7177E6";
+
+                            switch (horarios[conta]){
+                                case "ALMUERZO":
+                                    color="#00D639";
+                                    break;
+                                case "CENA":
+                                    color="#A54BB7";
+                                    break;
+                                case "MERIENDA":
+                                    color="#FFBC00";
+                                    break;
+                                case "OTRO":
+                                    color="#D60B00";
+                                    break;
+                            }
+                            var evento2 = {
+                                title: jsondata2.NAME,
+                                tipo: "Registro",
+                                allDay: true,
+                                color: color,
+                                horario: horarios[conta],
+                                start: fechas[conta]
+                            };
+
+                            if(conta > -1){
+                                ids.splice(conta,1);
+                                horarios.splice(conta,1);
+                                fechas.splice(conta,1);
+                            }
+
+
+                            names.push(jsondata2.NAME);
+                            horarios.push(jsondata2.FOODHOUR);
+                            $('#calendar').fullCalendar('renderEvent', evento2, true);
+
+
+                        },
+                        error : function(xhr, status) {
+                            console.log(xhr);
+                            console.log(status);
+                        }
+                    });
+                }
+
+
+            },
+            error : function(xhr, status) {
+                console.log(xhr);
+                console.log(status);
+            }
+        });
+    }
+
+};
+
 
 $('input.autocomplete').keyup(function() {
+
+    $(".collapsible-header").removeClass(function(){
+        return "active";
+    });
+    $(".collapsible").collapsible({accordion: true});
+    $(".collapsible").collapsible({accordion: false});
+    $("#name_food").text("");
+
+
     for(var i = 0; i < datas.length; i++){
-        if($('input.autocomplete').val() == datas[i].NAME){
+        if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
         }
     }
@@ -24,7 +134,7 @@ $('input.autocomplete').keyup(function() {
 
 $('input.autocomplete').focusout(function() {
     for(var i = 0; i < datas.length; i++){
-        if($('input.autocomplete').val() == datas[i].NAME){
+        if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
         }
     }
@@ -33,7 +143,7 @@ $('input.autocomplete').focusout(function() {
 
 $('input.autocomplete').bind('input', function() {
     for(var i = 0; i < datas.length; i++){
-        if($('input.autocomplete').val() == datas[i].NAME){
+        if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
         }
     }
@@ -42,7 +152,7 @@ $('input.autocomplete').bind('input', function() {
 $('.autocomplete-content').on('click', "span",function() {
     alert("hola");
     for(var i = 0; i < datas.length; i++){
-        if($('input.autocomplete').val() == datas[i].NAME){
+        if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
         }
     }
@@ -51,7 +161,7 @@ $('.autocomplete-content').on('click', "span",function() {
 $(".autocomplete-content ul").on('click', function() {
     alert("hola");
     for(var i = 0; i < datas.length; i++){
-        if($('input.autocomplete').val() == datas[i].NAME){
+        if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
         }
     }
@@ -60,7 +170,7 @@ $(".autocomplete-content ul").on('click', function() {
 $(".autocomplete-content li").on('click', function() {
     alert("hola");
     for(var i = 0; i < datas.length; i++){
-        if($('input.autocomplete').val() == datas[i].NAME){
+        if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
         }
     }
@@ -69,24 +179,133 @@ $(".autocomplete-content li").on('click', function() {
 $("#autocompletar-tooltop li").on('click', function() {
     alert("hola");
     for(var i = 0; i < datas.length; i++){
-        if($('input.autocomplete').val() == datas[i].NAME){
+        if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
         }
     }
 });
 
 $("#acordeon").on('click', function() {
-    for(var i = 0; i < datas.length; i++){
-        if($('input.autocomplete').val() == datas[i].NAME){
+
+    bool = false;
+
+    for(var i = 0; i < datas.length; i++) {
+        if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
+            $("#food_gluc").text(datas[i].CARBON_HYDRATES + "g*");
+            $("#food_prot").text(datas[i].PROTEINS + "g*");
+            $("#food_lipids").text(datas[i].LIPIDS + "g*");
+
+            bool = true;
+
+            //$("#acordeon").addClass("active");
         }
     }
+
+    if(bool){
+        $("#error-food").css("display", "none");
+        $("#content-food-registry").css("display", "inherit");
+    }else{
+        $("#error-food").css("display", "inherit");
+        $("#content-food-registry").css("display", "none");
+        $("#name_food").text("");
+
+        $(".collapsible-header").removeClass(function(){
+            return "active";
+        });
+        $(".collapsible").collapsible({accordion: true});
+        $(".collapsible").collapsible({accordion: false});
+    }
+});
+
+/*
+$('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: false // Close upon selecting a date,
+});*/
+
+
+$("#botonEv").on("click",function () {
+
+    //$("#Registro").validate();
+    var foodid = -1;
+    for(var i = 0; i < datas.length; i++){
+        if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
+           foodid = datas[i].ID;
+        }
+    }
+
+    if(foodid != -1 && $("#selecthorario").find(":selected").text().toUpperCase() != "ELIGE EL HORARIO" )
+    {
+        var formData = {PATIENTID: Patient_id,FOODHOUR: $("#selecthorario").find(":selected").text().toUpperCase(),FOODID:foodid,DATE: $("#datepick").val()}; //Array
+
+        //alert(formData.PATIENTID + " " + formData.FOODHOUR.toUpperCase() + " " + formData.FOODID + " " + formData.DATE);
+
+
+        $.ajax({
+            url : "/backend/patients/food_register",
+            type: "POST",
+            data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+                //alert("Se ha insertado el registro correctamente.")
+                calendario();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert("Ha ocurrido un error.")
+            }
+        });
+    }else{
+
+    }
+
 });
 
 
 
 
+
 $(document).ready(function() {
+
+    /*$("#formValidate").validate({
+        rules: {
+            selecthorario: {
+                required: true
+            },
+            datepick: {
+                required: true
+            },
+            autocompleteinput: {
+                required: true
+            }
+        },
+        //For custom messages
+        messages: {
+            selecthorario:{
+                required: "Selecciona un horario de comida"
+            },
+            datepick: {
+                required: "Selecciona la fecha del registro"
+            },
+            autocompleteinput: {
+                required: "Introduce el nombre del alimento"
+            }
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });*/
 
     $.ajax({
         type: "GET",
@@ -104,11 +323,11 @@ $(document).ready(function() {
             data = datas2;
             datas = jsondata;
 
+            //alert("Se actualiza el calendario");
             $('input.autocomplete').autocomplete({
                 data: datas2,
                 limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
                 onAutocomplete: function(val) {
-                    alert("test");
             },
             minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
             });
@@ -153,79 +372,6 @@ $(document).ready(function() {
         calendario();
     });
 
-    function calendario() {
-        $('#calendar').fullCalendar( 'removeEvents');
-
-        names = [];
-        ids = [];
-        fechas = [];
-        horarios = [];
-
-        if($("#alimentos").is(":checked")){
-            $.ajax({
-                type: "GET",
-                url: "/api/food_register/id/"+Patient_id,
-                datatype: "json",
-                success: function(jsondata) {
-
-                    json1 = jsondata;
-
-                    for(var i = 0; i < jsondata.length; i++){
-                        ids.push(jsondata[i].FOODID);
-                        //alert("Se ha pusheado" + ids[0]);
-                        fechas.push(jsondata[i].DATE);
-                    }
-
-                    /*alert("Array: " + ids);
-                     alert(jsondata[0].FOODID);
-                     alert(jsondata[0].FOODHOUR);*/
-
-                    for(var i = 0; i < ids.length; i++){
-                        $.ajax({
-                            type: "GET",
-                            url: "/api/food/id/"+ids[i],
-                            datatype: "json",
-                            success: function(jsondata2) {
-
-                                var conta = 0;
-
-                                for(var j = 0; j < ids.length; j++){
-                                    if(ids[j]==jsondata2.ID){
-                                        conta =j;
-                                    }
-                                }
-
-                                var evento2 = {
-                                    title: jsondata2.NAME,
-                                    tipo: "Registro",
-                                    horario: horarios[conta],
-                                    start: fechas[conta]
-                                };
-
-                                names.push(jsondata2.NAME);
-                                //alert("Se ha pusheado alimento" + jsondata2.NAME);
-                                horarios.push(jsondata2.FOODHOUR);
-                                $('#calendar').fullCalendar('renderEvent', evento2, true);
-
-
-                            },
-                            error : function(xhr, status) {
-                                console.log(xhr);
-                                console.log(status);
-                            }
-                        });
-                    }
-
-
-                },
-                error : function(xhr, status) {
-                    console.log(xhr);
-                    console.log(status);
-                }
-            });
-        }
-
-    };
 
 	// If click on send but delete yes check is not checked close the modal
 	$('#delete_patient form').submit(function(event) {

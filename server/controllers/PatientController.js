@@ -11,6 +11,7 @@ var Video = require('../models/Video');
 
 var Utils = require('../utils/Util');
 var Patient = require('../models/Patient');
+var FoodRegister = require('../models/FoodRegister');
 
 // Constructor for ContentController
 function PatientController(json, activityLogC) {
@@ -356,6 +357,49 @@ PatientController.prototype.initBackend = function() {
                 // Add the event to a new Activity Log
                 var ct = "Edición";
                 var desc = "Se ha editado el paciente " + patient.name + patient.ID;
+                var date = new Date();
+                var uid = self.renderJson.user.ID;
+                self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+
+                res.redirect('/backend/patients');
+            }, function(error) {
+                console.log(error);
+                self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/patients');
+            });
+        }
+        else
+            res.redirect('/');
+    });
+
+    self.routerBackend.route('/food_register').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+        if(typeof self.renderJson.user !== 'undefined') {
+            var foodRegister = FoodRegister.build();
+
+            var id_patient = req.body.PATIENTID;
+
+            var PATIENTID = id_patient;
+            var FOODHOUR = req.body.FOODHOUR;
+            var FOODID = req.body.FOODID;
+            var DATE = req.body.DATE;
+
+            //console.log(foodRegister);
+
+
+
+            foodRegister.add(
+                PATIENTID,
+                FOODID,
+                FOODHOUR,
+                DATE
+            ).then(function(result) {
+                self.renderJson.msg = 'Paciente añadido correctamente';
+
+                // Add the event to a new Activity Log
+                var ct = "Inserción";
+                var desc = "Se ha añadido un registro al paciente " + PATIENTID;
                 var date = new Date();
                 var uid = self.renderJson.user.ID;
                 self.activityLogController.addNewActivityLog(ct, desc, date, uid);

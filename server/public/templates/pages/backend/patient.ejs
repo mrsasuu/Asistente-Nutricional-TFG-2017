@@ -102,8 +102,8 @@
                         right: 'month,agendaWeek'
                     },
 					eventClick: function (event,jsEvent,view) {
-						//alert(event.tipo);
-                        window.location.href = "#modalTest";
+						alert(event.horario);
+
                     },
                     defaultDate: '2017-05-12',
                     navLinks: true, // can click day/week names to navigate views
@@ -112,6 +112,21 @@
                     editable: true,
                     select: function(start, end) {
 					    $("#add_event").openModal() ;
+					    //Reseteamos los valores del modal por si estaban completados anteriormente.
+                        $('input.autocomplete').val("");
+                        $('input.autocomplete').blur();
+                        $("#name_food").text("");
+                        $("#select-horario").prop('selectedIndex',0);
+
+                        var start2 = $.fullCalendar.formatDate(start, "YYYY-MM-DD");
+                        var startDay = $.fullCalendar.formatDate(start, "D");
+                        var endDay = $.fullCalendar.formatDate(end, "D");
+
+
+                        $('#datepick').val(start2);
+                        /*var input = $('.datepicker').pickadate()
+                        input.set('select', new Date(start));*/
+
                         /*var title = prompt('Event Titleee:');
                         var tipo = prompt('Tipo:');
                         var eventData;
