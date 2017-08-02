@@ -36,7 +36,10 @@ var FoodRegister = DBConnector.connectAN().define('FOODREGISTER', {
                 FOODHOUR: foodHour,
 				DATE: date
 			});
-		}
+		},
+        removeById: function(food_registry_id){
+            return FoodRegister.destroy({ where: {REGISTERID: food_registry_id} });
+        }
 	},
 	freezeTableName: true
 });

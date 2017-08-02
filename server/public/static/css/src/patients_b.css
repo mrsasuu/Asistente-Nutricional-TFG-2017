@@ -30,6 +30,18 @@ select{
     margin: 0;
 }
 
+.center-align p{
+    text-align: center!important;
+}
+
+#materialize-lean-overlay-3{
+    z-index: 1000!important;
+ }
+
+#modalDelete{
+    top: 10%;
+    z-index: 100;
+}
 
 i.right {
     float: right;

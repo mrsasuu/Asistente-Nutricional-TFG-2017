@@ -8,9 +8,42 @@ var fechas = [];
 var cont = 0;
 var datas;
 var bool = false;
+var registerIDs = [];
+var idRegistro = -1;
 
 $('input.autocomplete').keypress(function() {
     //$(".dropdown-content").remove();
+});
+
+$("#botonDel").on("click",function () {
+
+    $("#modalDelete").css("display","block","opacity","1","transform","scaleX(1)");
+
+});
+
+$("#agree").on("click",function () {
+
+
+    $.ajax({
+        url : "/backend/patients/food_register/delete",
+        type: "POST",
+        data : {REGISTRYID: $("#registerID").text()},
+        success: function(data, textStatus, jqXHR)
+        {
+            //alert("Se ha insertado el registro correctamente.")
+            calendario();
+            setTimeout(function() {
+                Materialize.toast('Se ha eliminado correctamente', 5000);
+            }, 500);
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            setTimeout(function() {
+                Materialize.toast('Ha ocurrido un error', 5000);
+            }, 500);
+        }
+    });
+
 });
 
 function calendario() {
@@ -20,6 +53,7 @@ function calendario() {
     ids = [];
     fechas = [];
     horarios = [];
+    registerIDs = [];
 
     if($("#alimentos").is(":checked")){
         $.ajax({
@@ -32,6 +66,7 @@ function calendario() {
 
                 for(var i = 0; i < jsondata.length; i++){
                     ids.push(jsondata[i].FOODID);
+                    registerIDs.push(jsondata[i].REGISTERID);
                     horarios.push(jsondata[i].FOODHOUR);
                     //alert("Se ha pusheado" + ids[0]);
                     fechas.push(jsondata[i].DATE);
@@ -39,9 +74,6 @@ function calendario() {
 
 
 
-                /*alert("Array: " + ids);
-                 alert(jsondata[0].FOODID);
-                 alert(jsondata[0].FOODHOUR);*/
 
                 for(var i = 0; i < ids.length; i++){
                     $.ajax({
@@ -77,6 +109,10 @@ function calendario() {
                             var evento2 = {
                                 title: jsondata2.NAME,
                                 tipo: "Registro",
+                                idRegistro: registerIDs[conta],
+                                prot: jsondata2.PROTEINS,
+                                gluc: jsondata2.CARBON_HYDRATES,
+                                lipids: jsondata2.LIPIDS,
                                 allDay: true,
                                 color: color,
                                 horario: horarios[conta],
@@ -86,6 +122,7 @@ function calendario() {
                             if(conta > -1){
                                 ids.splice(conta,1);
                                 horarios.splice(conta,1);
+                                registerIDs.splice(conta,1);
                                 fechas.splice(conta,1);
                             }
 
@@ -254,10 +291,18 @@ $("#botonEv").on("click",function () {
             {
                 //alert("Se ha insertado el registro correctamente.")
                 calendario();
+
+                $("#add_event").closeModal();
+                setTimeout(function() {
+                    Materialize.toast('Se ha añadido el evento correctamente', 5000);
+                }, 500);
+
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert("Ha ocurrido un error.")
+                setTimeout(function() {
+                    Materialize.toast('Ha ocurrido un error', 5000);
+                }, 500);
             }
         });
     }else{
@@ -271,6 +316,7 @@ $("#botonEv").on("click",function () {
 
 
 $(document).ready(function() {
+
 
     /*$("#formValidate").validate({
         rules: {

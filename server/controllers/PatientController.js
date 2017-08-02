@@ -395,7 +395,7 @@ PatientController.prototype.initBackend = function() {
                 FOODHOUR,
                 DATE
             ).then(function(result) {
-                self.renderJson.msg = 'Paciente añadido correctamente';
+                self.renderJson.msg = 'Registro añadido correctamente';
 
                 // Add the event to a new Activity Log
                 var ct = "Inserción";
@@ -408,6 +408,45 @@ PatientController.prototype.initBackend = function() {
             }, function(error) {
                 console.log(error);
                 self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/patients');
+            });
+        }
+        else
+            res.redirect('/');
+    });
+
+    self.routerBackend.route('/food_register/delete').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+
+        if(typeof self.renderJson.user !== 'undefined') {
+            var foodRegister = FoodRegister.build();
+
+            var foodRegistryId = req.body.REGISTRYID;
+
+
+
+
+            console.log("Se quiere eliminar: "+ foodRegistryId);
+
+
+
+            foodRegister.removeById(foodRegistryId).then(function(result) {
+                console.log("Se ha eliminado: "+ foodRegistryId);
+                self.renderJson.msg = 'Se ha eliminado correctamente';
+
+                // Add the event to a new Activity Log
+                var ct = "Borrado";
+                var desc = "Se ha eliminado el registro con ID " + foodRegistryId;
+                var date = new Date();
+                var uid = self.renderJson.user.ID;
+                self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+
+                res.redirect('/backend/patients');
+            }, function(err) {
+                console.log("Error con: "+ foodRegistryId);
+                console.log(err);
+                self.renderJson.error = 'Se ha producido un error interno borrando al usuario';
                 res.redirect('/backend/patients');
             });
         }

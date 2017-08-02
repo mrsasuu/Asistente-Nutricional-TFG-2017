@@ -66,6 +66,7 @@
             <!-- Modal delete patient -->
             <% include ../../partials/backend/modals/modal_delete_patient %>
             <% include ../../partials/backend/modals/modal_add_event %>
+            <% include ../../partials/backend/modals/modal_show_event %>
 			<!-- Modal show patient -->
             <% include ../../partials/backend/modals/modal_show_patient %>
 
@@ -102,7 +103,19 @@
                         right: 'month,agendaWeek'
                     },
 					eventClick: function (event,jsEvent,view) {
-						alert(event.horario);
+                        $("#modalDelete").css("display","none");
+                        $("#datepick_show").text($.fullCalendar.formatDate(event.start, "YYYY-MM-DD"));
+                        $("#selecthorario_show").text(event.horario);
+                        $("#name_food_show").text(event.title);
+                        $("#food_gluc_show").text(event.gluc);
+                        $("#food_prot_show").text(event.prot);
+                        $("#food_lipids_show").text(event.lipids);
+                        $("#registerID").text(event.idRegistro);
+
+
+
+
+					    $("#show_event").openModal();
 
                     },
                     defaultDate: '2017-05-12',
