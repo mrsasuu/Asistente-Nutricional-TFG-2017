@@ -4,7 +4,7 @@
 		<!-- profile-page-header -->
 		<div id="profile-page-header" class="card">
 			<div style="cursor: initial!important; "class="card-image waves-effect waves-block waves-light">
-				<img src="/static/img/user-profile-bg.jpg" alt="user background">
+				<img src="/static/img/background-show.jpg" alt="user background">
 			</div>
 			<figure class="card-profile-image">
 				<img id="show_patient_profile_picture" style="cursor: initial!important;" src="/static/img/no-photo.jpg" alt="profile image" class="circle z-depth-2 responsive-img ">
@@ -157,9 +157,259 @@
 						<div id="static_view" >
 							<div style="padding: 0;" class="col custom-card card ">
 								<h3 style="background-color: #345f7f;" class="white-text card-panel center-align ">Estadísticas del paciente</h3>
+
+								<!--<div class="row">
+
+									<div class="card col s12 m6">
+										<div class="card-image waves-effect waves-block waves-light">
+											<img class="activator" src="/static/img/breakfast-b.jpg">
+										</div>
+										<div class="card-content center-align">
+											<span class="card-title activator grey-text text-darken-4">Desayuno</span>
+										</div>
+										<div class="card-reveal ">
+											<span class="card-title grey-text text-darken-4 center-align">Media nutricional de los desayunos de esta semana<i class="material-icons right">close</i></span>
+											<div id="Desayuno" class="tab-content col s12 tab-table-custom ">
+
+												<ul id="profile-page-about-details" class="collection z-depth-1">
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Kcalorías</div>
+															<div id="kcal_bre"class="col s7 grey-text text-darken-4 right-align">575 Kcal</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1">Glúcidos(g)</div>
+															<div  id="gluc_bre" class="col s7 grey-text text-darken-4 right-align">50 g</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Proteinas(g)</div>
+															<div id="prot_bre" class="col s7 grey-text text-darken-4 right-align">42 g</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Grasas(g)</div>
+															<div id="lipid_bre" class="col s7 grey-text text-darken-4 right-align">23 g</div>
+														</div>
+													</li>
+												</ul>
+												&lt;!&ndash;<div class="row">
+                                                    <div class="col s12 m6 share-icons">
+                                                        <a href="#"><i class="mdi-image-camera-alt"></i></a>
+                                                        <a href="#"><i class="mdi-action-account-circle"></i></a>
+                                                        <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
+                                                        <a href="#"><i class="mdi-communication-location-on"></i></a>
+                                                    </div>
+                                                    &lt;!&ndash;<div class="col s12 m6 right-align">
+                                                        &lt;!&ndash; Dropdown Trigger &ndash;&gt;
+                                                        <a class="dropdown-button btn" href="#" data-activates="profliePost"><i class="mdi-action-language"></i> Public</a><ul id="profliePost" class="dropdown-content">
+                                                            <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
+                                                            <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
+                                                            <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
+                                                        </ul>
+
+                                                        &lt;!&ndash; Dropdown Structure &ndash;&gt;
+
+
+                                                        <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
+                                                    </div>&ndash;&gt;
+                                                </div>&ndash;&gt;
+											</div>
+										</div>
+									</div>
+									<div class="card col s12 m6">
+										<div class="card-image waves-effect waves-block waves-light">
+											<img class="activator" src="/static/img/lunch-b.jpg">
+										</div>
+										<div class="card-content center-align">
+											<span class="card-title activator grey-text text-darken-4">Almuerzo</span>
+										</div>
+										<div class="card-reveal ">
+											<span class="card-title grey-text text-darken-4 center-align">Media nutricional de los almuerzos de esta semana<i class="material-icons right">close</i></span>
+											<div id="Desayuno" class="tab-content col s12 tab-table-custom ">
+
+												<ul id="profile-page-about-details" class="collection z-depth-1">
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Kcalorías</div>
+															<div id="kcal_lunch" class="col s7 grey-text text-darken-4 right-align">800 Kcal</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1">Glúcidos(g)</div>
+															<div id="gluc_lunch" class="col s7 grey-text text-darken-4 right-align">77 g</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Proteinas(g)</div>
+															<div id="prot_lunch" class="col s7 grey-text text-darken-4 right-align">40 g</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Grasas(g)</div>
+															<div id="lipid_lunch" class="col s7 grey-text text-darken-4 right-align">53 g</div>
+														</div>
+													</li>
+												</ul>
+												&lt;!&ndash;<div class="row">
+                                                    <div class="col s12 m6 share-icons">
+                                                        <a href="#"><i class="mdi-image-camera-alt"></i></a>
+                                                        <a href="#"><i class="mdi-action-account-circle"></i></a>
+                                                        <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
+                                                        <a href="#"><i class="mdi-communication-location-on"></i></a>
+                                                    </div>
+                                                    &lt;!&ndash;<div class="col s12 m6 right-align">
+                                                        &lt;!&ndash; Dropdown Trigger &ndash;&gt;
+                                                        <a class="dropdown-button btn" href="#" data-activates="profliePost"><i class="mdi-action-language"></i> Public</a><ul id="profliePost" class="dropdown-content">
+                                                            <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
+                                                            <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
+                                                            <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
+                                                        </ul>
+
+                                                        &lt;!&ndash; Dropdown Structure &ndash;&gt;
+
+
+                                                        <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
+                                                    </div>&ndash;&gt;
+                                                </div>&ndash;&gt;
+											</div>
+										</div>
+									</div>
+									<div class="card col s12 m6">
+										<div class="card-image waves-effect waves-block waves-light">
+											<img class="activator" src="/static/img/lunch-b.jpg">
+										</div>
+										<div class="card-content center-align">
+											<span class="card-title activator grey-text text-darken-4">Almuerzo</span>
+										</div>
+										<div class="card-reveal ">
+											<span class="card-title grey-text text-darken-4 center-align">Media nutricional de los almuerzos de esta semana<i class="material-icons right">close</i></span>
+											<div id="Desayuno" class="tab-content col s12 tab-table-custom ">
+
+												<ul id="profile-page-about-details" class="collection z-depth-1">
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Kcalorías</div>
+															<div id="kcal_lunch" class="col s7 grey-text text-darken-4 right-align">800 Kcal</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1">Glúcidos(g)</div>
+															<div id="gluc_lunch" class="col s7 grey-text text-darken-4 right-align">77 g</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Proteinas(g)</div>
+															<div id="prot_lunch" class="col s7 grey-text text-darken-4 right-align">40 g</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Grasas(g)</div>
+															<div id="lipid_lunch" class="col s7 grey-text text-darken-4 right-align">53 g</div>
+														</div>
+													</li>
+												</ul>
+												&lt;!&ndash;<div class="row">
+                                                    <div class="col s12 m6 share-icons">
+                                                        <a href="#"><i class="mdi-image-camera-alt"></i></a>
+                                                        <a href="#"><i class="mdi-action-account-circle"></i></a>
+                                                        <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
+                                                        <a href="#"><i class="mdi-communication-location-on"></i></a>
+                                                    </div>
+                                                    &lt;!&ndash;<div class="col s12 m6 right-align">
+                                                        &lt;!&ndash; Dropdown Trigger &ndash;&gt;
+                                                        <a class="dropdown-button btn" href="#" data-activates="profliePost"><i class="mdi-action-language"></i> Public</a><ul id="profliePost" class="dropdown-content">
+                                                            <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
+                                                            <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
+                                                            <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
+                                                        </ul>
+
+                                                        &lt;!&ndash; Dropdown Structure &ndash;&gt;
+
+
+                                                        <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
+                                                    </div>&ndash;&gt;
+                                                </div>&ndash;&gt;
+											</div>
+										</div>
+									</div>
+									<div class="card col s12 m6">
+										<div class="card-image waves-effect waves-block waves-light">
+											<img class="activator" src="/static/img/lunch-b.jpg">
+										</div>
+										<div class="card-content center-align">
+											<span class="card-title activator grey-text text-darken-4">Almuerzo</span>
+										</div>
+										<div class="card-reveal ">
+											<span class="card-title grey-text text-darken-4 center-align">Media nutricional de los almuerzos de esta semana<i class="material-icons right">close</i></span>
+											<div id="Desayuno" class="tab-content col s12 tab-table-custom ">
+
+												<ul id="profile-page-about-details" class="collection z-depth-1">
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Kcalorías</div>
+															<div id="kcal_lunch" class="col s7 grey-text text-darken-4 right-align">800 Kcal</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1">Glúcidos(g)</div>
+															<div id="gluc_lunch" class="col s7 grey-text text-darken-4 right-align">77 g</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Proteinas(g)</div>
+															<div id="prot_lunch" class="col s7 grey-text text-darken-4 right-align">40 g</div>
+														</div>
+													</li>
+													<li class="collection-item">
+														<div class="row">
+															<div class="col s5 grey-text darken-1"> Grasas(g)</div>
+															<div id="lipid_lunch" class="col s7 grey-text text-darken-4 right-align">53 g</div>
+														</div>
+													</li>
+												</ul>
+												&lt;!&ndash;<div class="row">
+                                                    <div class="col s12 m6 share-icons">
+                                                        <a href="#"><i class="mdi-image-camera-alt"></i></a>
+                                                        <a href="#"><i class="mdi-action-account-circle"></i></a>
+                                                        <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
+                                                        <a href="#"><i class="mdi-communication-location-on"></i></a>
+                                                    </div>
+                                                    &lt;!&ndash;<div class="col s12 m6 right-align">
+                                                        &lt;!&ndash; Dropdown Trigger &ndash;&gt;
+                                                        <a class="dropdown-button btn" href="#" data-activates="profliePost"><i class="mdi-action-language"></i> Public</a><ul id="profliePost" class="dropdown-content">
+                                                            <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
+                                                            <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
+                                                            <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
+                                                        </ul>
+
+                                                        &lt;!&ndash; Dropdown Structure &ndash;&gt;
+
+
+                                                        <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
+                                                    </div>&ndash;&gt;
+                                                </div>&ndash;&gt;
+											</div>
+										</div>
+									</div>
+
+
+								</div>-->
 								<div style="padding: 0;" class="col custom-card card ">
 									<ul style="background-color: #345f7f;" class="tabs tab-profile z-depth-1" style="width: 100%;">
-										<li class="tab col s3" style="width: 33.3333%;"><a class="white-text waves-effect waves-light active" href="#Desayuno">Desayuno</a>
+										<li class="tab col s3" style="width: 33.3333%;"><a class="white-text waves-effect waves-light active" href="#Desayuno-tab">Desayuno</a>
 										</li>
 										<li class="tab col s3" style="width: 33.3333%;"><a class="white-text waves-effect waves-light" href="#Almuerzo"> Almuerzo</a>
 										</li>
@@ -172,8 +422,69 @@
 										<div class="indicator" style="right: 817px; left: 0px;"></div></ul>
 
 									<!-- DESAYUNO-->
-									<div id="Desayuno" class="tab-content col s12  grey lighten-4">
-										<div class="row valign-wrapper">
+									<div id="Desayuno-tab" class="tab-content col s12  grey lighten-4">
+										<div class="card col s12 ">
+											<div class="card-image waves-effect waves-block waves-light">
+												<img class="activator" src="/static/img/breakfast-b.jpg">
+											</div>
+											<div class="card-content center-align">
+												<span class="card-title activator grey-text text-darken-4">Desayuno</span>
+											</div>
+											<div class="card-reveal ">
+												<span class="card-title grey-text text-darken-4 center-align">Media nutricional de los desayunos de esta semana<i class="material-icons right">close</i></span>
+												<div id="Desayuno" class="tab-content col s12 tab-table-custom ">
+
+													<ul id="profile-page-about-details" class="collection z-depth-1">
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Kcalorías</div>
+																<div id="kcal_bre"class="col s7 grey-text text-darken-4 right-align">575 Kcal</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1">Glúcidos(g)</div>
+																<div  id="gluc_bre" class="col s7 grey-text text-darken-4 right-align">50 g</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Proteinas(g)</div>
+																<div id="prot_bre" class="col s7 grey-text text-darken-4 right-align">42 g</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Grasas(g)</div>
+																<div id="lipid_bre" class="col s7 grey-text text-darken-4 right-align">23 g</div>
+															</div>
+														</li>
+													</ul>
+													<!--<div class="row">
+                                                        <div class="col s12 m6 share-icons">
+                                                            <a href="#"><i class="mdi-image-camera-alt"></i></a>
+                                                            <a href="#"><i class="mdi-action-account-circle"></i></a>
+                                                            <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
+                                                            <a href="#"><i class="mdi-communication-location-on"></i></a>
+                                                        </div>
+                                                        &lt;!&ndash;<div class="col s12 m6 right-align">
+                                                            &lt;!&ndash; Dropdown Trigger &ndash;&gt;
+                                                            <a class="dropdown-button btn" href="#" data-activates="profliePost"><i class="mdi-action-language"></i> Public</a><ul id="profliePost" class="dropdown-content">
+                                                                <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
+                                                                <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
+                                                                <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
+                                                            </ul>
+
+                                                            &lt;!&ndash; Dropdown Structure &ndash;&gt;
+
+
+                                                            <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
+                                                        </div>&ndash;&gt;
+                                                    </div>-->
+												</div>
+											</div>
+										</div>
+										<!--<div class="row valign-wrapper">
 											<div class="col s2">
 												<img src="/static/img/breakfast.jpg" alt="" class="circle responsive-img valign profile-image-post">
 											</div>
@@ -208,32 +519,73 @@
 													<div id="lipid_bre" class="col s7 grey-text text-darken-4 right-align">23 g</div>
 												</div>
 											</li>
-										</ul>
-										<!--<div class="row">
-											<div class="col s12 m6 share-icons">
-												<a href="#"><i class="mdi-image-camera-alt"></i></a>
-												<a href="#"><i class="mdi-action-account-circle"></i></a>
-												<a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
-												<a href="#"><i class="mdi-communication-location-on"></i></a>
-											</div>
-											&lt;!&ndash;<div class="col s12 m6 right-align">
-												&lt;!&ndash; Dropdown Trigger &ndash;&gt;
-												<a class="dropdown-button btn" href="#" data-activates="profliePost"><i class="mdi-action-language"></i> Public</a><ul id="profliePost" class="dropdown-content">
-													<li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
-													<li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
-													<li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
-												</ul>
+										</ul>-->
 
-												&lt;!&ndash; Dropdown Structure &ndash;&gt;
-
-
-												<a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
-											</div>&ndash;&gt;
-										</div>-->
 									</div>
 									<!-- ALMUERZO -->
 									<div id="Almuerzo" class="tab-content col s12  grey lighten-4" style="display: none;">
-										<div class="row valign-wrapper">
+										<div class="card col s12 ">
+											<div class="card-image waves-effect waves-block waves-light">
+												<img class="activator" src="/static/img/lunch-b.jpg">
+											</div>
+											<div class="card-content center-align">
+												<span class="card-title activator grey-text text-darken-4">Almuerzo</span>
+											</div>
+											<div class="card-reveal ">
+												<span class="card-title grey-text text-darken-4 center-align">Media nutricional de los almuerzos de esta semana<i class="material-icons right">close</i></span>
+												<div id="Desayuno" class="tab-content col s12 tab-table-custom ">
+
+													<ul id="profile-page-about-details" class="collection z-depth-1">
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Kcalorías</div>
+																<div id="kcal_lunch" class="col s7 grey-text text-darken-4 right-align">800 Kcal</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1">Glúcidos(g)</div>
+																<div id="gluc_lunch" class="col s7 grey-text text-darken-4 right-align">77 g</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Proteinas(g)</div>
+																<div id="prot_lunch" class="col s7 grey-text text-darken-4 right-align">40 g</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Grasas(g)</div>
+																<div id="lipid_lunch" class="col s7 grey-text text-darken-4 right-align">53 g</div>
+															</div>
+														</li>
+													</ul>
+													<!--<div class="row">
+                                                        <div class="col s12 m6 share-icons">
+                                                            <a href="#"><i class="mdi-image-camera-alt"></i></a>
+                                                            <a href="#"><i class="mdi-action-account-circle"></i></a>
+                                                            <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
+                                                            <a href="#"><i class="mdi-communication-location-on"></i></a>
+                                                        </div>
+                                                        &lt;!&ndash;<div class="col s12 m6 right-align">
+                                                            &lt;!&ndash; Dropdown Trigger &ndash;&gt;
+                                                            <a class="dropdown-button btn" href="#" data-activates="profliePost"><i class="mdi-action-language"></i> Public</a><ul id="profliePost" class="dropdown-content">
+                                                                <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
+                                                                <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
+                                                                <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
+                                                            </ul>
+
+                                                            &lt;!&ndash; Dropdown Structure &ndash;&gt;
+
+
+                                                            <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
+                                                        </div>&ndash;&gt;
+                                                    </div>-->
+												</div>
+											</div>
+										</div>
+										<!--<div class="row valign-wrapper">
 											<div class="col s2">
 												<img src="/static/img/lunch.jpg" alt="" class="circle responsive-img valign profile-image-post">
 											</div>
@@ -268,12 +620,73 @@
 													<div id="lipid_lunch" class="col s7 grey-text text-darken-4 right-align">53 g</div>
 												</div>
 											</li>
-										</ul>
+										</ul>-->
 
 									</div>
 									<!-- MERIENDA -->
 									<div id="Merienda" class="tab-content col s12  grey lighten-4" style="display: none;">
-										<div class="row valign-wrapper">
+										<div class="card col s12 ">
+											<div class="card-image waves-effect waves-block waves-light">
+												<img class="activator" src="/static/img/lunch-b.jpg">
+											</div>
+											<div class="card-content center-align">
+												<span class="card-title activator grey-text text-darken-4">Merienda</span>
+											</div>
+											<div class="card-reveal ">
+												<span class="card-title grey-text text-darken-4 center-align">Media nutricional de las meriendas de esta semana<i class="material-icons right">close</i></span>
+												<div  class="tab-content col s12 tab-table-custom ">
+
+													<ul id="profile-page-about-details" class="collection z-depth-1">
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Kcalorías</div>
+																<div id="kcal_snack" class="col s7 grey-text text-darken-4 right-align">800 Kcal</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1">Glúcidos(g)</div>
+																<div id="gluc_snack" class="col s7 grey-text text-darken-4 right-align">77 g</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Proteinas(g)</div>
+																<div id="prot_snack" class="col s7 grey-text text-darken-4 right-align">40 g</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Grasas(g)</div>
+																<div id="lipid_snack" class="col s7 grey-text text-darken-4 right-align">53 g</div>
+															</div>
+														</li>
+													</ul>
+													<!--<div class="row">
+                                                        <div class="col s12 m6 share-icons">
+                                                            <a href="#"><i class="mdi-image-camera-alt"></i></a>
+                                                            <a href="#"><i class="mdi-action-account-circle"></i></a>
+                                                            <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
+                                                            <a href="#"><i class="mdi-communication-location-on"></i></a>
+                                                        </div>
+                                                        &lt;!&ndash;<div class="col s12 m6 right-align">
+                                                            &lt;!&ndash; Dropdown Trigger &ndash;&gt;
+                                                            <a class="dropdown-button btn" href="#" data-activates="profliePost"><i class="mdi-action-language"></i> Public</a><ul id="profliePost" class="dropdown-content">
+                                                                <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
+                                                                <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
+                                                                <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
+                                                            </ul>
+
+                                                            &lt;!&ndash; Dropdown Structure &ndash;&gt;
+
+
+                                                            <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
+                                                        </div>&ndash;&gt;
+                                                    </div>-->
+												</div>
+											</div>
+										</div>
+										<!--<div class="row valign-wrapper">
 											<div class="col s2">
 												<img src="/static/img/lunch.jpg" alt="" class="circle responsive-img valign profile-image-post">
 											</div>
@@ -309,12 +722,73 @@
 												</div>
 											</li>
 										</ul>
-
+-->
 
 									</div>
 									<!-- CENA -->
 									<div id="Cena" class="tab-content col s12  grey lighten-4" style="display: none;">
-										<div class="row valign-wrapper">
+										<div class="card col s12 ">
+											<div class="card-image waves-effect waves-block waves-light">
+												<img class="activator" src="/static/img/lunch-b.jpg">
+											</div>
+											<div class="card-content center-align">
+												<span class="card-title activator grey-text text-darken-4">Cena</span>
+											</div>
+											<div class="card-reveal ">
+												<span class="card-title grey-text text-darken-4 center-align">Media nutricional de las cenas de esta semana<i class="material-icons right">close</i></span>
+												<div class="tab-content col s12 tab-table-custom ">
+
+													<ul id="profile-page-about-details" class="collection z-depth-1">
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Kcalorías</div>
+																<div id="kcal_dinn" class="col s7 grey-text text-darken-4 right-align">800 Kcal</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1">Glúcidos(g)</div>
+																<div id="gluc_dinn" class="col s7 grey-text text-darken-4 right-align">77 g</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Proteinas(g)</div>
+																<div id="prot_dinn" class="col s7 grey-text text-darken-4 right-align">40 g</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Grasas(g)</div>
+																<div id="lipid_dinn" class="col s7 grey-text text-darken-4 right-align">53 g</div>
+															</div>
+														</li>
+													</ul>
+													<!--<div class="row">
+                                                        <div class="col s12 m6 share-icons">
+                                                            <a href="#"><i class="mdi-image-camera-alt"></i></a>
+                                                            <a href="#"><i class="mdi-action-account-circle"></i></a>
+                                                            <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
+                                                            <a href="#"><i class="mdi-communication-location-on"></i></a>
+                                                        </div>
+                                                        &lt;!&ndash;<div class="col s12 m6 right-align">
+                                                            &lt;!&ndash; Dropdown Trigger &ndash;&gt;
+                                                            <a class="dropdown-button btn" href="#" data-activates="profliePost"><i class="mdi-action-language"></i> Public</a><ul id="profliePost" class="dropdown-content">
+                                                                <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
+                                                                <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
+                                                                <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
+                                                            </ul>
+
+                                                            &lt;!&ndash; Dropdown Structure &ndash;&gt;
+
+
+                                                            <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
+                                                        </div>&ndash;&gt;
+                                                    </div>-->
+												</div>
+											</div>
+										</div>
+										<!--<div class="row valign-wrapper">
 											<div class="col s2">
 												<img src="/static/img/lunch.jpg" alt="" class="circle responsive-img valign profile-image-post">
 											</div>
@@ -349,12 +823,73 @@
 													<div id="lipid_dinn" class="col s7 grey-text text-darken-4 right-align">53 g</div>
 												</div>
 											</li>
-										</ul>
+										</ul>-->
 
 									</div>
 									<!-- OTROS -->
 									<div id="Otros" class="tab-content col s12  grey lighten-4" style="display: none;">
-										<div class="row valign-wrapper">
+										<div class="card col s12 ">
+											<div class="card-image waves-effect waves-block waves-light">
+												<img class="activator" src="/static/img/lunch-b.jpg">
+											</div>
+											<div class="card-content center-align">
+												<span class="card-title activator grey-text text-darken-4">Otros</span>
+											</div>
+											<div class="card-reveal ">
+												<span class="card-title grey-text text-darken-4 center-align">Media nutricional de los tentenpiésde esta semana<i class="material-icons right">close</i></span>
+												<div  class="tab-content col s12 tab-table-custom ">
+
+													<ul id="profile-page-about-details" class="collection z-depth-1">
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Kcalorías</div>
+																<div id="kcal_oth" class="col s7 grey-text text-darken-4 right-align">800 Kcal</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1">Glúcidos(g)</div>
+																<div id="gluc_oth" class="col s7 grey-text text-darken-4 right-align">77 g</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Proteinas(g)</div>
+																<div id="prot_oth" class="col s7 grey-text text-darken-4 right-align">40 g</div>
+															</div>
+														</li>
+														<li class="collection-item">
+															<div class="row">
+																<div class="col s5 grey-text darken-1"> Grasas(g)</div>
+																<div id="lipid_oth" class="col s7 grey-text text-darken-4 right-align">53 g</div>
+															</div>
+														</li>
+													</ul>
+													<!--<div class="row">
+                                                        <div class="col s12 m6 share-icons">
+                                                            <a href="#"><i class="mdi-image-camera-alt"></i></a>
+                                                            <a href="#"><i class="mdi-action-account-circle"></i></a>
+                                                            <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
+                                                            <a href="#"><i class="mdi-communication-location-on"></i></a>
+                                                        </div>
+                                                        &lt;!&ndash;<div class="col s12 m6 right-align">
+                                                            &lt;!&ndash; Dropdown Trigger &ndash;&gt;
+                                                            <a class="dropdown-button btn" href="#" data-activates="profliePost"><i class="mdi-action-language"></i> Public</a><ul id="profliePost" class="dropdown-content">
+                                                                <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
+                                                                <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
+                                                                <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
+                                                            </ul>
+
+                                                            &lt;!&ndash; Dropdown Structure &ndash;&gt;
+
+
+                                                            <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
+                                                        </div>&ndash;&gt;
+                                                    </div>-->
+												</div>
+											</div>
+										</div>
+										<!--<div class="row valign-wrapper">
 											<div class="col s2">
 												<img src="/static/img/lunch.jpg" alt="" class="circle responsive-img valign profile-image-post">
 											</div>
@@ -389,7 +924,7 @@
 													<div id="lipid_oth" class="col s7 grey-text text-darken-4 right-align">53 g</div>
 												</div>
 											</li>
-										</ul>
+										</ul>-->
 
 
 									</div>

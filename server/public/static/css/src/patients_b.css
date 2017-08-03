@@ -20,6 +20,10 @@ select{
     height: 250px;
 }
 
+.tab-table-custom{
+    padding: 50px!important;
+}
+
 #profile-page-header .card-profile-image {
     width: 110px;
     position: absolute;
