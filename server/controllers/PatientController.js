@@ -588,7 +588,11 @@ PatientController.prototype.initBackend = function() {
                             var lipids_b = 0;
                             var gluc_b = 0;
                             var foodHour = "DESAYUNO";
-                            var num = breakfast.length;
+                           // var num = breakfast.length;
+                            var num = new Date().getDay();
+
+                            if(num == 0)
+                                num=7;
 
                             var kcal_b = 0;
 
@@ -609,10 +613,10 @@ PatientController.prototype.initBackend = function() {
 
                                 statics.push({
                                     FOODHOUR: foodHour,
-                                    PROTEINS: prot_b,
-                                    LIPIDS: lipids_b,
-                                    GLUCIDS: gluc_b,
-                                    KCAL: kcal_b
+                                    PROTEINS: prot_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    LIPIDS: lipids_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    GLUCIDS: gluc_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    KCAL: kcal_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
                                 });
 
                             }
@@ -623,7 +627,7 @@ PatientController.prototype.initBackend = function() {
                             lipids_b = 0;
                             gluc_b = 0;
                             foodHour = "ALMUERZO";
-                            num = lunch.length;
+                           // num = lunch.length;
 
                             kcal_b = 0;
 
@@ -644,10 +648,10 @@ PatientController.prototype.initBackend = function() {
 
                                 statics.push({
                                     FOODHOUR: foodHour,
-                                    PROTEINS: prot_b,
-                                    LIPIDS: lipids_b,
-                                    GLUCIDS: gluc_b,
-                                    KCAL: kcal_b
+                                    PROTEINS: prot_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    LIPIDS: lipids_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    GLUCIDS: gluc_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    KCAL: kcal_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
                                 });
 
                             }
@@ -658,7 +662,7 @@ PatientController.prototype.initBackend = function() {
                             lipids_b = 0;
                             gluc_b = 0;
                             foodHour = "MERIENDA";
-                            num = snacks.length;
+                            //num = snacks.length;
 
                             kcal_b = 0;
 
@@ -679,10 +683,10 @@ PatientController.prototype.initBackend = function() {
 
                                 statics.push({
                                     FOODHOUR: foodHour,
-                                    PROTEINS: prot_b,
-                                    LIPIDS: lipids_b,
-                                    GLUCIDS: gluc_b,
-                                    KCAL: kcal_b
+                                    PROTEINS: prot_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    LIPIDS: lipids_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    GLUCIDS: gluc_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    KCAL: kcal_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
                                 });
 
                             }
@@ -693,7 +697,7 @@ PatientController.prototype.initBackend = function() {
                             lipids_b = 0;
                             gluc_b = 0;
                             foodHour = "CENA";
-                            num = dinner.length;
+                            //num = dinner.length;
 
                             kcal_b = 0;
 
@@ -714,10 +718,10 @@ PatientController.prototype.initBackend = function() {
 
                                 statics.push({
                                     FOODHOUR: foodHour,
-                                    PROTEINS: prot_b,
-                                    LIPIDS: lipids_b,
-                                    GLUCIDS: gluc_b,
-                                    KCAL: kcal_b
+                                    PROTEINS: prot_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    LIPIDS: lipids_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    GLUCIDS: gluc_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    KCAL: kcal_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
                                 });
 
                             }
@@ -728,7 +732,7 @@ PatientController.prototype.initBackend = function() {
                             lipids_b = 0;
                             gluc_b = 0;
                             foodHour = "OTRO";
-                            num = other.length;
+                            //num = other.length;
 
                             kcal_b = 0;
 
@@ -749,10 +753,10 @@ PatientController.prototype.initBackend = function() {
 
                                 statics.push({
                                     FOODHOUR: foodHour,
-                                    PROTEINS: prot_b,
-                                    LIPIDS: lipids_b,
-                                    GLUCIDS: gluc_b,
-                                    KCAL: kcal_b
+                                    PROTEINS: prot_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    LIPIDS: lipids_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    GLUCIDS: gluc_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    KCAL: kcal_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
                                 });
 
                             }
