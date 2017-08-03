@@ -15,6 +15,8 @@ $('input.autocomplete').keypress(function() {
     //$(".dropdown-content").remove();
 });
 
+
+
 $("#botonDel").on("click",function () {
 
     $("#modalDelete").css("display","block","opacity","1","transform","scaleX(1)");
@@ -90,7 +92,7 @@ function calendario() {
                                 }
                             }
 
-                            var color="#7177E6";
+                            var color="#bcbff7";
 
                             switch (horarios[conta]){
                                 case "ALMUERZO":
@@ -519,112 +521,193 @@ $(document).ready(function() {
 
         $('#calendar').fullCalendar('today');
 
-        /*$('input.autocomplete').autocomplete({
-            data: {
-                "Apple": null,
-                "Apple2": null,
-                "Apple3": null,
-                "Microsoft": null,
-                "Google": 'https://placehold.it/250x250'
-            },
-            limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-            onAutocomplete: function(val) {
-                // Callback function when value is autcompleted.
-            },
-            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-        });
-*/
-        calendario();
+
+            $("#kcal_bre").text("0 Kcal");
+            $("#gluc_bre").text("0 g");
+            $("#prot_bre").text("0 g");
+            $("#lipid_bre").text("0 g");
+
+            $("#kcal_lunch").text("0 Kcal");
+            $("#gluc_lunch").text("0 g");
+            $("#prot_lunch").text("0 g");
+            $("#lipid_lunch").text("0 g");
+
+            $("#kcal_snack").text("0 Kcal");
+            $("#gluc_snack").text("0 g");
+            $("#prot_snack").text("0 g");
+            $("#lipid_snack").text("0 g");
+
+            $("#kcal_dinn").text("0 Kcal");
+            $("#gluc_dinn").text("0 g");
+            $("#prot_dinn").text("0 g");
+            $("#lipid_dinn").text("0 g");
+
+            $("#kcal_oth").text("0 Kcal");
+            $("#gluc_oth").text("0 g");
+            $("#prot_oth").text("0 g");
+            $("#lipid_oth").text("0 g");
 
 
 
             $.ajax({
-                type: "GET",
-                url: "/api/patient/id/"+id_patient,
-                datatype: "json",
-                success: function(jsondata) {
-                    $("#show_id_patient").val(id_patient);
+                url : "/backend/patients/food_register/lastweek",
+                type: "POST",
+                data : {PATIENTID: Patient_id},
+                success: function(data, textStatus, jqXHR)
+                {
+                    //alert("Se ha insertado el registro correctamente.")
+                    /*calendario();
 
-                    var gender = parseInt(jsondata.GENDER);
-                    $("#show_patient_male").removeAttr('checked');
-                    $("#show_patient_female").removeAttr('checked');
+                    $("#add_event").closeModal();
+                    setTimeout(function() {
+                        Materialize.toast('Se ha añadido el evento correctamente', 5000);
+                    }, 500);*/
 
 
 
-                    var activity = parseInt(jsondata.ACTIVITY_LEVEL);
-                    $("#show_activity_level_patient_1").removeAttr('checked');
-                    $("#show_activity_level_patient_2").removeAttr('checked');
-                    $("#show_activity_level_patient_3").removeAttr('checked');
-                    $("#show_activity_level_patient_4").removeAttr('checked');
+                    for(var i = 0; i < data.length; i++){
+                        /*var day = new Date(data[i].DATE).getDay();
+                        alert(data[i].DATE + " dia de la semana: " + day );*/
+                        //alert("Kcalorias: " + data[i].KCAL);
 
-                    switch(activity){
-                        case 0:
-                            $("#show_patient_activity").text("Sedentario");
-                            break;
-                        case 1:
-                            $("#show_patient_activity").text("Moderada");
-                            break;
-                        case 2:
-                            $("#show_patient_activity").text("Intensa");
-                            break;
-                        case 3:
-                            $("#show_patient_activity").text("Muy intensa");
-                            break;
+                        switch (data[i].FOODHOUR){
+                            case "DESAYUNO":
+                                alert("Desayuno");
+                                $("#kcal_bre").text(data[i].KCAL + " Kcal");
+                                $("#gluc_bre").text(data[i].GLUCIDS + " g");
+                                $("#prot_bre").text(data[i].PROTEINS+ " g");
+                                $("#lipid_bre").text(data[i].LIPIDS+ " g");
+
+                                break;
+                            case "ALMUERZO":
+                                $("#kcal_lunch").text(data[i].KCAL + " Kcal");
+                                $("#gluc_lunch").text(data[i].GLUCIDS+  " g");
+                                $("#prot_lunch").text(data[i].PROTEINS+ " g");
+                                $("#lipid_lunch").text(data[i].LIPIDS+ " g");
+                                break;
+                            case "MERIENDA":
+                                $("#kcal_snack").text(data[i].KCAL + " Kcal");
+                                $("#gluc_snack").text(data[i].GLUCIDS+ " g");
+                                $("#prot_snack").text(data[i].PROTEINS+ " g");
+                                $("#lipid_snack").text(data[i].LIPIDS+ " g");
+                                break;
+                            case "CENA":
+                                $("#kcal_dinn").text(data[i].KCAL + " Kcal");
+                                $("#gluc_dinn").text(data[i].GLUCIDS+ " g");
+                                $("#prot_dinn").text(data[i].PROTEINS+ " g");
+                                $("#lipid_dinn").text(data[i].LIPIDS+ " g");
+                                break;
+                            case "OTRO":
+                                $("#kcal_oth").text(data[i].KCAL + " Kcal");
+                                $("#gluc_oth").text(data[i].GLUCIDS+ " g");
+                                $("#prot_oth").text(data[i].PROTEINS+ " g");
+                                $("#lipid_oth").text(data[i].LIPIDS+ " g");
+                                break;
+                        }
+
                     }
 
-                    $("#show_patient_name_1").text(jsondata.NAME + " " + jsondata.SURNAME);
-                    $("#show_patient_name_2").text(jsondata.NAME + " " + jsondata.SURNAME);
-                    $("#show_patient_email").text(jsondata.EMAIL);
-
-                    $("#show_patient_dni_1").text(jsondata.DNI);
-                    $("#show_patient_dni_2").text(jsondata.DNI);
-
-                    $("#show_patient_age").text(jsondata.AGE);
-                    $("#show_patient_username").text(jsondata.USERNAME);
-
-                    $("#show_patient_height").text(jsondata.HEIGHT + " cm");
-                    $("#show_patient_weight").text(jsondata.WEIGHT + " Kg");
-
-                    if(jsondata.PHOTO != null)
-                        $("#show_patient_profile_picture").attr('src', jsondata.PHOTO);
-
-                    $("#show_patient_address").text(jsondata.ADDRESS);
-                    $("#show_patient_phone").text(jsondata.PHONE);
-
-
-                    if(gender){
-                        $("#show_patient_gender").text("Mujer");
-                    }else{
-                        $("#show_patient_gender").text("Hombre");
-                    }
-
-
-
-
-
-                    $("#show_dni_patient").val(jsondata.DNI);
-                    $("#show_age_patient").val(jsondata.AGE);
-                    $("#show_surname_patient").val(jsondata.SURNAME);
-                    $("#show_address_patient").val(jsondata.ADDRESS);
-                    $("#show_email_patient").val(jsondata.EMAIL);
-                    $("#show_phone_patient").val(jsondata.PHONE);
-                    $("#show_username_patient").val(jsondata.USERNAME);
-                    $("#show_password_patient").val(jsondata.PASSWORD);
-                    $("#show_height_patient").val(jsondata.HEIGHT);
-                    $("#show_weight_patient").val(jsondata.WEIGHT);
-                    $("#showPatientImgViewer").attr('src', jsondata.PHOTO);
-                    $("#show_previous_photo_user").val(jsondata.PHOTO);
-
-
-
-                    $('#patient_loader').css('opacity', '0');
-                    setTimeout(function() { $('#patient_loader').css('display', 'none'); }, 1000);
                 },
-                error : function(xhr, status) {
-                    console.log(xhr);
-                    console.log(status);
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    setTimeout(function() {
+                        Materialize.toast('Ha ocurrido un error', 5000);
+                    }, 500);
                 }
             });
+
+
+        calendario();
+
+
+
+        $.ajax({
+            type: "GET",
+            url: "/api/patient/id/"+id_patient,
+            datatype: "json",
+            success: function(jsondata) {
+                $("#show_id_patient").val(id_patient);
+
+                var gender = parseInt(jsondata.GENDER);
+                $("#show_patient_male").removeAttr('checked');
+                $("#show_patient_female").removeAttr('checked');
+
+
+
+                var activity = parseInt(jsondata.ACTIVITY_LEVEL);
+                $("#show_activity_level_patient_1").removeAttr('checked');
+                $("#show_activity_level_patient_2").removeAttr('checked');
+                $("#show_activity_level_patient_3").removeAttr('checked');
+                $("#show_activity_level_patient_4").removeAttr('checked');
+
+                switch(activity){
+                    case 0:
+                        $("#show_patient_activity").text("Sedentario");
+                        break;
+                    case 1:
+                        $("#show_patient_activity").text("Moderada");
+                        break;
+                    case 2:
+                        $("#show_patient_activity").text("Intensa");
+                        break;
+                    case 3:
+                        $("#show_patient_activity").text("Muy intensa");
+                        break;
+                }
+
+                $("#show_patient_name_1").text(jsondata.NAME + " " + jsondata.SURNAME);
+                $("#show_patient_name_2").text(jsondata.NAME + " " + jsondata.SURNAME);
+                $("#show_patient_email").text(jsondata.EMAIL);
+
+                $("#show_patient_dni_1").text(jsondata.DNI);
+                $("#show_patient_dni_2").text(jsondata.DNI);
+
+                $("#show_patient_age").text(jsondata.AGE);
+                $("#show_patient_username").text(jsondata.USERNAME);
+
+                $("#show_patient_height").text(jsondata.HEIGHT + " cm");
+                $("#show_patient_weight").text(jsondata.WEIGHT + " Kg");
+
+                if(jsondata.PHOTO != null)
+                    $("#show_patient_profile_picture").attr('src', jsondata.PHOTO);
+
+                $("#show_patient_address").text(jsondata.ADDRESS);
+                $("#show_patient_phone").text(jsondata.PHONE);
+
+
+                if(gender){
+                    $("#show_patient_gender").text("Mujer");
+                }else{
+                    $("#show_patient_gender").text("Hombre");
+                }
+
+
+
+
+
+                $("#show_dni_patient").val(jsondata.DNI);
+                $("#show_age_patient").val(jsondata.AGE);
+                $("#show_surname_patient").val(jsondata.SURNAME);
+                $("#show_address_patient").val(jsondata.ADDRESS);
+                $("#show_email_patient").val(jsondata.EMAIL);
+                $("#show_phone_patient").val(jsondata.PHONE);
+                $("#show_username_patient").val(jsondata.USERNAME);
+                $("#show_password_patient").val(jsondata.PASSWORD);
+                $("#show_height_patient").val(jsondata.HEIGHT);
+                $("#show_weight_patient").val(jsondata.WEIGHT);
+                $("#showPatientImgViewer").attr('src', jsondata.PHOTO);
+                $("#show_previous_photo_user").val(jsondata.PHOTO);
+
+
+
+                $('#patient_loader').css('opacity', '0');
+                setTimeout(function() { $('#patient_loader').css('display', 'none'); }, 1000);
+            },
+            error : function(xhr, status) {
+                console.log(xhr);
+                console.log(status);
+            }
+        });
 		}
 	});
 });

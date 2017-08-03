@@ -13,6 +13,34 @@ var Utils = require('../utils/Util');
 var Patient = require('../models/Patient');
 var FoodRegister = require('../models/FoodRegister');
 
+var Food = require("../models/Food");
+
+function getWeek(d,dowOffset) {
+    dowOffset = typeof(dowOffset) == 'int' ? dowOffset : 1; //default dowOffset to zero
+    var newYear = new Date(d.getFullYear(),0,1);
+    var day = newYear.getDay() - dowOffset; //the day of week the year begins on
+    day = (day >= 0 ? day : day + 7);
+    var daynum = Math.floor((d.getTime() - newYear.getTime() -
+            (d.getTimezoneOffset()-newYear.getTimezoneOffset())*60000)/86400000) + 1;
+    var weeknum;
+    //if the year starts before the middle of a week
+    if(day < 4) {
+        weeknum = Math.floor((daynum+day-1)/7) + 1;
+        if(weeknum > 52) {
+            nYear = new Date(d.getFullYear() + 1,0,1);
+            nday = nYear.getDay() - dowOffset;
+            nday = nday >= 0 ? nday : nday + 7;
+            /*if the next year starts before the middle of
+             the week, it is week #1 of that year*/
+            weeknum = nday < 4 ? 1 : 53;
+        }
+    }
+    else {
+        weeknum = Math.floor((daynum+day-1)/7);
+    }
+    return weeknum;
+}
+
 // Constructor for ContentController
 function PatientController(json, activityLogC) {
     this.renderJson = json;
@@ -453,6 +481,327 @@ PatientController.prototype.initBackend = function() {
         else
             res.redirect('/');
     });
+
+    self.routerBackend.route('/food_register/lastweek').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+
+        if(typeof self.renderJson.user !== 'undefined') {
+            var foodRegister = FoodRegister.build();
+
+            var patientId = req.body.PATIENTID;
+
+            var date_today = new Date();
+
+            var week_number = getWeek(date_today,1);
+
+
+
+
+
+
+
+            console.log("Se consulta: "+ patientId);
+
+
+
+            foodRegister.retrieveByPatientIdLastWeek(patientId).then(function(result) {
+                var result2 = [];
+                var num_elemets_b = 0;
+                var num_elemets_l = 0;
+                var num_elemets_ = 0;
+                var dayofweeks = [];
+                var breakfast = [];
+                var lunch = [];
+                var snacks = [];
+                var dinner = [];
+                var other = [];
+                var statics = [];
+
+                if(result)
+                {
+
+
+                    var food = Food.build();
+
+                    food.retrieveAll().then(function(result2) {
+                        if(result2){
+                            for(var i  = 0; i < result.length; i++) {
+                                var newDate = new Date(result[i].DATE);
+                                console.log("Semana:" + getWeek(newDate, 1));
+
+                                if(getWeek(newDate,1) == week_number && result[i].FOODHOUR == "DESAYUNO"){
+                                    result2.push(result[i]);
+
+                                    for(var j = 0; j < result2.length; j++){
+                                        if(result2[j].ID == result[i].FOODID){
+                                            breakfast.push(result2[j]);
+                                            console.log("Alimento: " + result2[j].NAME);
+                                        }
+                                    }
+                                    console.log("Numero de elementos en el desayuno: " + breakfast.length);
+
+                                }else if(getWeek(newDate,1) == week_number && result[i].FOODHOUR == "ALMUERZO"){
+                                    result2.push(result[i]);
+
+                                    for(var j = 0; j < result2.length; j++){
+                                        if(result2[j].ID == result[i].FOODID){
+                                            lunch.push(result2[j]);
+                                            console.log("Alimento: " + result2[j].NAME);
+                                        }
+                                    }
+                                    console.log("Numero de elementos en el almuerzo: " + lunch.length);
+                                }else if(getWeek(newDate,1) == week_number && result[i].FOODHOUR == "MERIENDA"){
+                                    result2.push(result[i]);
+
+                                    for(var j = 0; j < result2.length; j++){
+                                        if(result2[j].ID == result[i].FOODID){
+                                            snacks.push(result2[j]);
+                                            console.log("Alimento: " + result2[j].NAME);
+                                        }
+                                    }
+                                    console.log("Numero de elementos en la merienda: " + snacks.length);
+                                }else if(getWeek(newDate,1) == week_number && result[i].FOODHOUR == "CENA"){
+                                    result2.push(result[i]);
+
+                                    for(var j = 0; j < result2.length; j++){
+                                        if(result2[j].ID == result[i].FOODID){
+                                            dinner.push(result2[j]);
+                                            console.log("Alimento: " + result2[j].NAME);
+                                        }
+                                    }
+                                    console.log("Numero de elementos en la cena: " + dinner.length);
+                                }else if(getWeek(newDate,1) == week_number && result[i].FOODHOUR == "OTRO"){
+                                    result2.push(result[i]);
+
+                                    for(var j = 0; j < result2.length; j++){
+                                        if(result2[j].ID == result[i].FOODID){
+                                            other.push(result2[j]);
+                                            console.log("Alimento: " + result2[j].NAME);
+                                        }
+                                    }
+                                    console.log("Numero de elementos en otros: " + other.length);
+                                }
+                            }
+
+                            var prot_b = 0;
+                            var lipids_b = 0;
+                            var gluc_b = 0;
+                            var foodHour = "DESAYUNO";
+                            var num = breakfast.length;
+
+                            var kcal_b = 0;
+
+                            for(var i = 0; i < breakfast.length; i++){
+                                prot_b += breakfast[i].PROTEINS;
+                                lipids_b += breakfast[i].LIPIDS;
+                                gluc_b += breakfast[i].CARBON_HYDRATES;
+                            }
+
+                            if(num > 0){
+                                prot_b = (prot_b)/num;
+                                lipids_b = (lipids_b)/num;
+                                gluc_b = (gluc_b)/num;
+
+
+                                kcal_b = prot_b*4 + lipids_b*9 + gluc_b*4;
+
+
+                                statics.push({
+                                    FOODHOUR: foodHour,
+                                    PROTEINS: prot_b,
+                                    LIPIDS: lipids_b,
+                                    GLUCIDS: gluc_b,
+                                    KCAL: kcal_b
+                                });
+
+                            }
+
+                            //Calculo de las estadisticas del almuerzo
+
+                            prot_b = 0;
+                            lipids_b = 0;
+                            gluc_b = 0;
+                            foodHour = "ALMUERZO";
+                            num = lunch.length;
+
+                            kcal_b = 0;
+
+                            for(var i = 0; i < lunch.length; i++){
+                                prot_b += lunch[i].PROTEINS;
+                                lipids_b += lunch[i].LIPIDS;
+                                gluc_b += lunch[i].CARBON_HYDRATES;
+                            }
+
+                            if(num > 0){
+                                prot_b = (prot_b)/num;
+                                lipids_b = (lipids_b)/num;
+                                gluc_b = (gluc_b)/num;
+
+
+                                kcal_b = prot_b*4 + lipids_b*9 + gluc_b*4;
+
+
+                                statics.push({
+                                    FOODHOUR: foodHour,
+                                    PROTEINS: prot_b,
+                                    LIPIDS: lipids_b,
+                                    GLUCIDS: gluc_b,
+                                    KCAL: kcal_b
+                                });
+
+                            }
+
+                            //Calculo de las estadisticas de la merienda
+
+                            prot_b = 0;
+                            lipids_b = 0;
+                            gluc_b = 0;
+                            foodHour = "MERIENDA";
+                            num = snacks.length;
+
+                            kcal_b = 0;
+
+                            for(var i = 0; i < snacks.length; i++){
+                                prot_b += snacks[i].PROTEINS;
+                                lipids_b += snacks[i].LIPIDS;
+                                gluc_b += snacks[i].CARBON_HYDRATES;
+                            }
+
+                            if(num > 0){
+                                prot_b = (prot_b)/num;
+                                lipids_b = (lipids_b)/num;
+                                gluc_b = (gluc_b)/num;
+
+
+                                kcal_b = prot_b*4 + lipids_b*9 + gluc_b*4;
+
+
+                                statics.push({
+                                    FOODHOUR: foodHour,
+                                    PROTEINS: prot_b,
+                                    LIPIDS: lipids_b,
+                                    GLUCIDS: gluc_b,
+                                    KCAL: kcal_b
+                                });
+
+                            }
+
+                            //Calculo de las estadisticas de la cena
+
+                            prot_b = 0;
+                            lipids_b = 0;
+                            gluc_b = 0;
+                            foodHour = "CENA";
+                            num = dinner.length;
+
+                            kcal_b = 0;
+
+                            for(var i = 0; i < dinner.length; i++){
+                                prot_b += dinner[i].PROTEINS;
+                                lipids_b += dinner[i].LIPIDS;
+                                gluc_b += dinner[i].CARBON_HYDRATES;
+                            }
+
+                            if(num > 0){
+                                prot_b = (prot_b)/num;
+                                lipids_b = (lipids_b)/num;
+                                gluc_b = (gluc_b)/num;
+
+
+                                kcal_b = prot_b*4 + lipids_b*9 + gluc_b*4;
+
+
+                                statics.push({
+                                    FOODHOUR: foodHour,
+                                    PROTEINS: prot_b,
+                                    LIPIDS: lipids_b,
+                                    GLUCIDS: gluc_b,
+                                    KCAL: kcal_b
+                                });
+
+                            }
+
+                            //Calculo de las estadisticas de otros
+
+                            prot_b = 0;
+                            lipids_b = 0;
+                            gluc_b = 0;
+                            foodHour = "OTRO";
+                            num = other.length;
+
+                            kcal_b = 0;
+
+                            for(var i = 0; i < other.length; i++){
+                                prot_b += other[i].PROTEINS;
+                                lipids_b += other[i].LIPIDS;
+                                gluc_b += other[i].CARBON_HYDRATES;
+                            }
+
+                            if(num > 0){
+                                prot_b = (prot_b)/num;
+                                lipids_b = (lipids_b)/num;
+                                gluc_b = (gluc_b)/num;
+
+
+                                kcal_b = prot_b*4 + lipids_b*9 + gluc_b*4;
+
+
+                                statics.push({
+                                    FOODHOUR: foodHour,
+                                    PROTEINS: prot_b,
+                                    LIPIDS: lipids_b,
+                                    GLUCIDS: gluc_b,
+                                    KCAL: kcal_b
+                                });
+
+                            }
+
+
+
+                           // res.json(statics);
+                            res.json(statics);
+                            console.log(statics);
+
+
+
+
+
+
+                        }
+                        else
+                            res.status(401).send("Food not found");
+
+
+                    }, function(error) {
+                        res.status(404).send("Food not found");
+                    });
+
+
+                }
+
+               // console.log("Se ha eliminado: "+ foodRegistryId);
+                //self.renderJson.msg = 'Se ha eliminado correctamente';
+
+                /*// Add the event to a new Activity Log
+                var ct = "Borrado";
+                var desc = "Se ha eliminado el registro con ID " + foodRegistryId;
+                var date = new Date();
+                var uid = self.renderJson.user.ID;
+                self.activityLogController.addNewActivityLog(ct, desc, date, uid);*/
+
+                //res.redirect('/backend/patients');
+            }, function(err) {
+                console.log("Error con: "+ patientId);
+                console.log(err);
+                self.renderJson.error = 'Se ha producido un error interno borrando al usuario';
+                res.redirect('/backend/patients');
+            });
+        }
+        else
+            res.redirect('/');
+    });
+
 
     self.routerBackend.route('/image/add/:contentId').post(upload.array('content_image', 1), function(req, res) {
         console.log('IMAGE ADD');

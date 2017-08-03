@@ -1,6 +1,16 @@
 var Sequelize = require("sequelize");
 var DBConnector = require("../utils/DBConnector");
 
+Date.prototype.yyyymmdd = function() {
+    var mm = this.getMonth() + 1; // getMonth() is zero-based
+    var dd = this.getDate();
+
+    return [this.getFullYear(),
+        (mm>9 ? '' : '0') + mm,
+        (dd>9 ? '' : '0') + dd
+    ].join('');
+};
+
 // Export an anonymous function
 var FoodRegister = DBConnector.connectAN().define('FOODREGISTER', {
 	REGISTERID: {type: Sequelize.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true},
@@ -15,6 +25,10 @@ var FoodRegister = DBConnector.connectAN().define('FOODREGISTER', {
 			return FoodRegister.findOne({where: {REGISTERID: id}});
 		},
         retrieveByPatientId: function(patientId) {
+            return FoodRegister.findAll({where: {PATIENTID: patientId}});
+        },
+		retrieveByPatientIdLastWeek: function(patientId) {
+
             return FoodRegister.findAll({where: {PATIENTID: patientId}});
         },
         retrieveByPatientIdAndDate: function(patientId,date) {
