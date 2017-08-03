@@ -27,6 +27,38 @@ $("#botonDel").on("click",function () {
 
 function statics() {
 
+    $("#last_registry").text("-");
+
+    $.ajax({
+        type: "GET",
+        url: "/api/food_register/id/last_register/"+Patient_id,
+        datatype: "json",
+        success: function(date_res) {
+            var date_temp = new Date(date_res);
+            var month,day;
+            if((date_temp.getMonth()+1)<10){
+                month = "0" + (date_temp.getMonth()+1);
+            }else{
+                month = (date_temp.getMonth()+1);
+            }
+
+            if(date_temp.getUTCDate() < 10){
+                day = "0"+date_temp.getUTCDate();
+            }else {
+                day = date_temp.getUTCDate();
+            }
+
+
+            $("#last_registry").text(day + "/" + month + "/" + date_temp.getUTCFullYear());
+
+        },
+        error : function(xhr, status) {
+            console.log(xhr);
+            console.log(status);
+        }
+    });
+
+
     $.ajax({
         url : "/backend/patients/food_register/lastweek",
         type: "POST",

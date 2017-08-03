@@ -34,6 +34,9 @@ var FoodRegister = DBConnector.connectAN().define('FOODREGISTER', {
         retrieveByPatientIdAndDate: function(patientId,date) {
             return FoodRegister.findOne({where: {PATIENTID: patientId,DATE: date}});
         },
+		retrieveLastAdded: function(patientId) {
+            return FoodRegister.findOne( { where:{PATIENTID: patientId },order: 'DATE DESC' });
+        },
         retrieveByIdAndFoodHour: function(patientId,foodhour) {
             return FoodRegister.findOne({where: {PATIENTID: patientId,FOODHOUR: foodhour}});
         },

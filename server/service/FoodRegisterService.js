@@ -24,6 +24,21 @@ FoodRegisterService.prototype.initializeRouter = function() {
 				res.send("No se ha podido completar su solicitud");
 		});
 	});
+
+    self.router.route('/id/last_register/:id').get(function(req, res) {
+        var patient_id = req.params.id;
+        console.log(patient_id);
+        var foodRegister = FoodRegister.build();
+
+        foodRegister.retrieveLastAdded(patient_id).then(function(result) {
+            if(result)
+                res.json(result.DATE);
+            else
+                res.status(401).send("Patient register Log not found");
+        }, function(error) {
+            res.send("No se ha podido completar su solicitud");
+        });
+    });
 };
 
 FoodRegisterService.prototype.getRouter = function() {
