@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<% include ../../partials/backend/head_backend %>
+		<link rel="stylesheet" href="/static/css/src/users_b.css">
+	</head>
+
+	<body>
+		<% include ../../partials/backend/sidemenu_backend %>
+
+		<main class="grey lighten-3">
+			<!-- Nav -->
+			<% include ../../partials/backend/header_backend %>
+
+			<div class="row content_start">
+				<div id="btn_add_container" class="col s12">
+					<!-- Button add RDA -->
+					<a class="waves-effect waves-light btn modal-trigger" href="#add_rda">Añadir tabla</a>
+				</div>
+			</div>
+
+			<!-- Table all Food -->
+			<div id="users-table" class="row">
+				<table id="tabla_usuarios" class="striped">
+					<thead>
+						<tr>
+							<th data-field="id">#</th>
+							<th data-field="name">Nombre</th>
+							<th data-field="min_age">Edad mínima</th>
+							<th data-field="max_age">Edad máxima</th>
+							<th data-field="gender">Sexo</th>
+							<th data-field="activity_level">N. Actividad</th>
+							<th data-field="action">Acción</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<% var count = 0;
+						for(var i=0; i<rdas.length; i++) { %>
+                        <%count++; %>
+								<tr>
+								<td><%= rdas[i].TABLE_ID %></td>
+								<td><%= rdas[i].NAME %></td>
+								<td><%= rdas[i].MIN_AGE_RANGE %></td>
+								<td><%= rdas[i].MAX_AGE_RANGE%></td>
+								<td><% if(!parseInt(rdas[i].GENDER)) { %>
+									<span>Hombre</span>
+                                    <% }
+									else { %>
+									<span>Mujer</span>
+                                    <% } %></td>
+								<td><% if(parseInt(rdas[i].ACTIVITY_LEVEL)==0) { %>
+									<span>Sedentario</span>
+                                    <% }
+									else if(parseInt(rdas[i].ACTIVITY_LEVEL)==1) { %>
+									<span>Moderada</span>
+									<% }
+									else if(parseInt(rdas[i].ACTIVITY_LEVEL)==2) { %>
+									<span>Intensa</span>
+                                    <% }
+									else { %>
+									<span>Muy intensa</span>
+									<%}%></td>
+								<td class="actions">
+									<a class="modal-trigger" href="#edit_rda"><i class="material-icons">mode_edit</i></a>
+									<a class="modal-trigger" href="#delete_rda"><i class="material-icons">delete</i></a>
+								</td>
+								</tr>
+						<% }
+						if(count == 0) { %>
+							<td colspan="5" id="no_rda">NO HAY TABLAS ACTUALMENTE</td>
+						<% } %>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Modal Add Food -->
+            <% include ../../partials/backend/modals/modal_add_RDA %>
+
+			<!-- Modal Edit Food -->
+            <% include ../../partials/backend/modals/modal_edit_food %>
+
+			<!-- Modal Delete Food -->
+            <% include ../../partials/backend/modals/modal_delete_food %>
+
+		</main>
+
+		<footer class="page-footer">
+			<% include ../../partials/backend/footer_backend %>
+		</footer>
+
+		<% include ../../partials/backend/script_backend %>
+		<% include ../../partials/backend/server_messages %>
+		<script src="/static/js/src/imagePrevisualization.js"></script>
+		<script src="/static/js/src/rda.js"></script>
+	</body>
+</html>

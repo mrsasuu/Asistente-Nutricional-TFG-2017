@@ -6,6 +6,7 @@ var IndexController = require('./IndexController');
 var UserController = require('./UserController');
 var PatientController = require('./PatientController');
 var FoodController = require('./FoodController');
+var RDAController = require('./RDAController');
 var ContentController = require('./ContentController');
 var ContentTypeController = require('./ContentTypeController');
 var LocalizationController = require('./LocalizationController');
@@ -35,6 +36,7 @@ Views.prototype.initPages = function() {
 	var userC = new UserController(self.renderJson, activityLogC);
 
     var foodC = new FoodController(self.renderJson, activityLogC);
+    var rdaC = new RDAController(self.renderJson, activityLogC);
     var patientC = new PatientController(self.renderJson, activityLogC);
 
 	activityLogC.setUserController(userC);
@@ -50,6 +52,7 @@ Views.prototype.initPages = function() {
 	self.routerBackend.use(indexC.getRouterBackend());
 	self.routerBackend.use('/users', userC.getRouterBackend());
     self.routerBackend.use('/foods', foodC.getRouterBackend());
+    self.routerBackend.use('/rda', rdaC.getRouterBackend());
     self.routerBackend.use('/patients', patientC.getRouterBackend());
 	self.routerBackend.use('/contentTypes', contentTypeC.getRouterBackend());
 	self.routerBackend.use('/localizations', localizationC.getRouterBackend());

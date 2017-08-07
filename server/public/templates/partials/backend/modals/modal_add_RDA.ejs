@@ -1,0 +1,179 @@
+<div id="add_rda" class="modal modal_material modal-fixed-footer">
+	<div class="modal-header z-depth-1">
+		<h4>Añadir una nueva tabla</h4>
+		<span><i class="modal_close modal-action modal-close material-icons right">close</i></span>
+	</div>
+	<form id="add_rda_form" class="col s12 row" method="post" action="/backend/rda/add/" enctype="multipart/form-data" autocomplete="off">
+		<div class="modal-content">
+			<h5 class="center-align" style="margin: 20px!important;">Datos de la tabla:</h5>
+			<!-- Nombre -->
+			<div class="input-field col s12">
+				<input id="add_name_rda" name="add_name_rda" type="text" class="validate" required>
+				<label for="add_name_rda">Nombre de la tabla</label>
+			</div>
+
+
+			<!-- Edad mínima -->
+			<div class="input-field col s12 m6">
+				<input id="add_min_age_table" name="add_min_age_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_min_age_table">Edad mínima</label>
+			</div>
+
+			<!-- Edad máxima -->
+			<div class="input-field col s12 m6">
+				<input id="add_max_age_table" name="add_max_age_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_max_age_table">Edad máxima</label>
+			</div>
+
+			<div class="row m12">
+				<!-- activity level -->
+				<div class="input-field col s12 m6">
+					<p class="red-text text-darken-1">Nivel de actividad</p>
+					<!-- Confirmacion -->
+					<p><input name="add_activity_level_table" type="radio" id="add_activity_level_table_1" value="0" checked /><label for="add_activity_level_table_1">Sedentario</label></p>
+					<p><input name="add_activity_level_table" type="radio" id="add_activity_level_table_2" value="1"  /><label for="add_activity_level_table_2">Moderada</label></p>
+					<p><input name="add_activity_level_table" type="radio" id="add_activity_level_table_3" value="2"  /><label for="add_activity_level_table_3">Intensa</label></p>
+					<p><input name="add_activity_level_table" type="radio" id="add_activity_level_table_4" value="3"   /><label for="add_activity_level_table_4">Muy ntensa</label></p>
+				</div>
+
+				<!-- Gender -->
+				<div class="input-field col s12 m6">
+					<p class="red-text text-darken-1">Sexo</p>
+					<!-- Confirmacion -->
+					<p><input name="add_gender_table" type="radio" id="add_table_male" value="0" checked /><label for="add_table_male">Hombre</label></p>
+					<p><input name="add_gender_table" type="radio" id="add_table_female" value="1"  /><label for="add_table_female">Mujer</label></p>
+				</div>
+			</div>
+
+
+
+			<h5 class="center-align" style="margin: 20px!important;">Datos diarios recomendados:</h5>
+
+			<!-- KCAL -->
+			<div class="input-field col s12 m6">
+				<input id="add_kcal_table" name="add_kcal_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_kcal_table">Kcalorias</label>
+			</div>
+
+			<!-- Proteinas -->
+			<div class="input-field col s12 m6">
+				<input id="add_proteins_table" name="add_proteins_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_proteins_table">Proteinas</label>
+			</div>
+
+			<!-- Proteinas % -->
+			<div class="input-field col s12 m6">
+				<input id="add_percentage_proteins_table" name="add_percentage_proteins_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_percentage_proteins_table">Proteinas %</label>
+			</div>
+
+			<!-- Lipidos -->
+			<div class="input-field col s12 m6">
+				<input id="add_lipids_table" name="add_lipids_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_lipids_table">Lípidos</label>
+			</div>
+
+			<!-- Lipidos % -->
+			<div class="input-field col s12 m6">
+				<input id="add_percentage_lipids_table" name="add_percentage_lipids_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_percentage_lipids_table">Lípidos %</label>
+			</div>
+
+			<!-- Hidratos -->
+			<div class="input-field col s12 m6">
+				<input id="add_carbon_hydrates_table" name="add_carbon_hydrates_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_carbon_hydrates_table">Hidratos de carbono</label>
+			</div>
+
+			<!-- percentage_carbon_hydrates -->
+			<div class="input-field col s12 m6">
+				<input id="add_percentage_carbon_hydrates_table" name="add_percentage_carbon_hydrates_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_percentage_carbon_hydrates_table">Hidratos de carbono %</label>
+			</div>
+
+			<!-- V_A -->
+			<div class="input-field col s12 m6">
+				<input id="add_v_a_table" name="add_v_a_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_v_a_table">Vitamina A</label>
+			</div>
+
+			<!-- V_C -->
+			<div class="input-field col s12 m6">
+				<input id="add_v_c_table" name="add_v_c_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_v_c_table">Vitamina C</label>
+			</div>
+
+			<!-- v_D -->
+			<div class="input-field col s12 m6">
+				<input id="add_v_d_table" name="add_v_d_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_v_d_table">Vitamina D</label>
+			</div>
+
+			<!-- V_E -->
+			<div class="input-field col s12 m6">
+				<input id="add_v_e_table" name="add_v_e_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_v_e_table">Vitamina E</label>
+			</div>
+
+			<!-- Calcio -->
+			<div class="input-field col s12 m6">
+				<input id="add_calcium_table" name="add_calcium_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_calcium_table">Calcio</label>
+			</div>
+
+			<!-- Hierro -->
+			<div class="input-field col s12 m6">
+				<input id="add_iron_table" name="add_iron_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_iron_table">Hierro</label>
+			</div>
+
+			<!-- Magnesio -->
+			<div class="input-field col s12 m6">
+				<input id="add_magnesium_table" name="add_magnesium_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_magnesium_table">Magnesio</label>
+			</div>
+
+			<!-- Potasio -->
+			<div class="input-field col s12 m6">
+				<input id="add_potassium_table" name="add_potassium_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_potassium_table">Potasio</label>
+			</div>
+
+			<!-- Fósforo -->
+			<div class="input-field col s12 m6">
+				<input id="add_phosphorus_table" name="add_phosphorus_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_phosphorus_table">Fósforo</label>
+			</div>
+
+			<!-- Sodio -->
+			<div class="input-field col s12 m6">
+				<input id="add_sodium_table" name="add_sodium_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_sodium_table">Sodio</label>
+			</div>
+
+			<!-- Colesterol -->
+			<div class="input-field col s12 m6">
+				<input id="add_cholesterol_table" name="add_cholesterol_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_cholesterol_table">Colesterol</label>
+			</div>
+
+			<!-- Saturadas -->
+			<div class="input-field col s12 m6">
+				<input id="add_saturated_table" name="add_saturated_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_saturated_table">G.Saturadas</label>
+			</div>
+
+
+
+		</div>
+		<div class="modal-footer">
+			<!-- Submit -->
+			<div class="input field col s12 center-align submit_modal">
+				<button class="btn waves-effect waves-light" type="submit" name="add_submit_food">
+					<span>Enviar</span>
+					<i class="material-icons right">send</i>
+				</button>
+			</div>
+		</div>
+	</form>
+</div>

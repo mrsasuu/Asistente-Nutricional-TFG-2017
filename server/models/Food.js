@@ -8,9 +8,9 @@ var Food = DBConnector.connectAN().define('FOOD', {
         ID: { type: Sequelize.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true },
         NAME: { type: Sequelize.STRING(200), allowNull: false },
         PHOTO: {type: Sequelize.STRING(500), allowNull: true},
-        PROTEINS: { type: Sequelize.INTEGER, allowNull: false },
-        CARBON_HYDRATES: { type: Sequelize.INTEGER, allowNull: false },
-        LIPIDS: { type: Sequelize.INTEGER, allowNull: false },
+        PROTEINS: { type: Sequelize.DOUBLE, allowNull: false },
+        CARBON_HYDRATES: { type: Sequelize.DOUBLE, allowNull: false },
+        LIPIDS: { type: Sequelize.DOUBLE, allowNull: false },
     },
     {
         instanceMethods: {
