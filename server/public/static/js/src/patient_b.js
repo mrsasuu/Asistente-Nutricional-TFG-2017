@@ -75,11 +75,59 @@ $("#btnCompare").on("click",function () {
                        content += '<div style="padding: 50px;" class="row"><table class="bordered col s12" style="padding: 50px!important;"><thead><tr class="row"><th class="col s12 m4">Ácidos grasos</th><th class="col s12 m4">Estadísticas del paciente</th><th class="col s12 m4">Cantidad recomendada(CDR)</th></tr></thead> ' +
                            '<tbody><tr class="row"><td class="col s12 m4">Colesterol</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
                            '<tbody><tr class="row"><td class="col s12 m4">Saturados</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
-                           '</tbody></table></div>';
+                           '</tbody></table></div> ';
+
+
+                       content+='<div class="row"><canvas id="myChart" width="800" height="800" class="col s12 offset-m3 m6"></canvas></div>';
 
 
                        $("#estadisticas").html(content);
+
+                       var ctx = $("#myChart");
+
+                       var myChart = new Chart(ctx, {
+                           type: 'pie',
+                           data: {
+                               labels: ["Proteinas", "Lípidos", "Carbohidratos"],
+                               datasets: [{
+                                   label: '%',
+                                   data: [data2.P_PERCENT, data2.L_PERCENT, data2.CH_PERCENT],
+                                   backgroundColor: [
+                                       'rgba(234, 59, 59, 1)',
+                                       'rgba(255, 140, 0, 1)',
+                                       'rgba(74, 144, 247, 1)'
+                                   ],
+                                   borderColor: [
+                                       'rgba(255,255,255,1)',
+                                       'rgba(255, 255, 255, 1)',
+                                       'rgba(255, 255, 255, 1)'
+                                   ],
+                                   borderWidth: 3
+                               }]
+                           },
+                           options :{
+                               responsive:false,
+                               maintainAspectRatio:false,
+                               scales: {
+                                   xAxes: [{
+                                       display: this.scalesdisplay,
+                                       ticks: {
+                                           beginAtZero:this.beginzero,
+                                       }
+                                   }],
+                                   yAxes: [{
+                                       display: this.scalesdisplay,
+                                       ticks: {
+                                           beginAtZero:this.beginzero,
+                                       }
+                                   }]
+                               }
+                            }
+                       });
+
                        $("#estadisticas").css("display","block");
+
+
 
 
                        setTimeout(function() {

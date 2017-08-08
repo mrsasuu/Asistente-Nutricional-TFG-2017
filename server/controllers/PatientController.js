@@ -889,12 +889,26 @@ PatientController.prototype.initBackend = function() {
 
                                 kcal_b = prot_b*4 + lipids_b*9 + gluc_b*4;
 
+                                var prot_percent = 0;
+                                var lipids_percent = 0;
+                                var gluc_percent = 0;
+
+                                if(kcal_b!= null && kcal_b != 0){
+                                    prot_percent = ((prot_b*4)/kcal_b)*100;
+                                    lipids_percent = ((lipids_b*9)/kcal_b)*100;
+                                    gluc_percent = ((gluc_b*4)/kcal_b)*100;
+                                }
+
+                                
 
                                 var statics={
                                    // FOODHOUR: foodHour,
                                     PROTEINS: prot_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
                                     LIPIDS: lipids_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
                                     GLUCIDS: gluc_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    P_PERCENT: prot_percent.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    L_PERCENT: lipids_percent.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    CH_PERCENT: gluc_percent.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
                                     KCAL: kcal_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
                                 };
 
