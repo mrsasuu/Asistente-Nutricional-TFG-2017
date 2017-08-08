@@ -48,13 +48,13 @@ var RDA = DBConnector.connectAN().define('RDA', {
             },
             updateById: function(rda_id){
                 return RDA.update({
-                    NUTRITIONIST_ID: this.nutritionist_id,
-                    TABLE_ID: this.table_id,
-                    NAME: this.name,
-                    MIN_AGE_RANGE: this.min_age_range,
-                    MAX_AGE_RANGE: this.max_age_range,
-                    GENDER: this.gender,
-                    ACTIVITY_LEVEL: this.activity_level
+                    NUTRITIONIST_ID: this.NUTRITIONIST_ID,
+                    //TABLE_ID: this.TABLE_ID,
+                    NAME: this.NAME,
+                    MIN_AGE_RANGE: this.MIN_AGE_RANGE,
+                    MAX_AGE_RANGE: this.MAX_AGE_RANGE,
+                    GENDER: this.GENDER,
+                    ACTIVITY_LEVEL: this.ACTIVITY_LEVEL
                 }, { where: {ID: rda_id} });
             },
             removeById: function(rda_id){

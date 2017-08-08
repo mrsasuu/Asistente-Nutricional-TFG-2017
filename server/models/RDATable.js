@@ -91,7 +91,7 @@ var RDATable = DBConnector.connectAN().define('rdatable', {
                     SODIUM: this.SODIUM,
                     CHOLESTEROL: this.CHOLESTEROL,
                     SATURATED: this.SATURATED
-                }, { where: {ID: rdatable_id} });
+                }, { where: {TABLE_ID: rdatable_id} });
             },
             removeById: function(rdatable_id){
                 return RDATable.destroy({ where: {TABLE_ID: rdatable_id} });

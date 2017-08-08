@@ -171,71 +171,152 @@ RDAController.prototype.initBackend = function() {
             res.redirect('/');
     });
 
+    self.routerBackend.route('/get').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+        if(typeof self.renderJson.user !== 'undefined') {
+            var id_rda = req.body.id_rda;
+
+
+
+
+
+            var rda = RDA.build();
+            var rdaTable = RDATable.build();
+
+
+
+            rda.retrieveById(id_rda).then(function(result) {
+
+
+
+                rdaTable.retrieveById(result.TABLE_ID).then(function(result2) {
+
+
+
+                    var response ={
+                        NAME: result.NAME,
+                        MIN_AGE: result.MIN_AGE_RANGE,
+                        MAX_AGE: result.MAX_AGE_RANGE,
+                        GENDER: result.GENDER,
+                        ACTIVITY_LEVEL: result.ACTIVITY_LEVEL,
+
+                        KCAL: result2.KCAL,
+                        PROTEINS: result2.PROTEINS,
+                        LIPIDS: result2.LIPIDS,
+                        CARBON_HYDRATES: result2.CARBON_HYDRATES,
+                        PROTEINS_PERCENTAGE: result2.PROTEINS_PERCENTAGE,
+                        LIPIDS_PERCENTAGE: result2.LIPIDS_PERCENTAGE,
+                        CARBON_HYDRATES_PERCENTAGE: result2.CARBON_HYDRATES_PERCENTAGE,
+                        V_A: result2.V_A,
+                        V_D: result2.V_D,
+                        V_E: result2.V_E,
+                        V_C: result2.V_C,
+                        CALCIUM: result2.CALCIUM,
+                        IRON: result2.IRON,
+                        MAGNESIUM: result2.MAGNESIUM,
+                        PHOSPHORUS: result2.PHOSPHORUS,
+                        POTASSIUM: result2.POTASSIUM,
+                        SODIUM: result2.SODIUM,
+                        CHOLESTEROL: result2.CHOLESTEROL,
+                        SATURATED: result2.SATURATED
+                    };
+
+                    res.json(response);
+
+
+                }, function(err) {
+                    self.renderJson.error = 'Se ha producido un error interno';
+                    res.redirect('/backend/rda');
+                });
+
+            }, function(err) {
+                self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/rda');
+            });
+
+        }
+        else
+            res.redirect('/');
+    });
+
+
     self.routerBackend.route('/edit').post(upload.array('edit_photo_food', 1), function(req, res) {
         self.renderJson.user = req.session.user;
 
-        if(typeof self.renderJson.user !== 'undefined' && parseInt(self.renderJson.user.ADMIN)) {
-            var food = RDA.build();
+        if(typeof self.renderJson.user !== 'undefined') {
+            var rda = RDA.build();
+            var rdaTable = RDATable.build();
 
-            var id_food = req.body.edit_id_food;
+            var rda_id = req.body.edit_id_rda;
 
-            food.name = req.body.edit_name_food;
-            food.proteins = req.body.edit_proteins_food;
-            food.carbon_hydrates = req.body.edit_carbon_hydrates_food;
-            food.lipids = req.body.edit_lipids_food;
-            food.photo = req.body.edit_photo_anterior_food;
+            rda.NUTRITIONIST_ID = self.renderJson.user.ID;
+            rda.NAME = req.body.edit_name_rda;
+            rda.MIN_AGE_RANGE = req.body.edit_min_age_range_rda;
+            rda.MAX_AGE_RANGE = req.body.edit_max_age_range_rda;
+            rda.GENDER = req.body.edit_gender_rda;
+            rda.ACTIVITY_LEVEL = req.body.edit_activity_level_rda;
 
-            // Check if there're files to upload
-            if(req.files.length > 0) {
-                var file = Utils.normalizeStr(req.files[0].originalname);
-                var extension = '.'+file.substr(file.lastIndexOf('.')+1);
+            rdaTable.KCAL = req.body.edit_kcal_table;
+            rdaTable.PROTEINS = req.body.edit_proteins_table;
+            rdaTable.LIPIDS = req.body.edit_lipids_table;
+            rdaTable.CARBON_HYDRATES = req.body.edit_carbon_hydrates_table;
+            rdaTable.PROTEINS_PERCENTAGE = req.body.edit_percentage_proteins_table;
+            rdaTable.LIPIDS_PERCENTAGE = req.body.edit_percentage_lipids_table;
+            rdaTable.CARBON_HYDRATES_PERCENTAGE = req.body.edit_percentage_carbon_hydrates_table;
+            rdaTable.V_A = req.body.edit_v_a_table;
+            rdaTable.V_D = req.body.edit_v_d_table;
+            rdaTable.V_E = req.body.edit_v_e_table;
+            rdaTable.V_C = req.body.edit_v_c_table;
+            rdaTable.CALCIUM = req.body.edit_calcium_table;
+            rdaTable.IRON = req.body.edit_iron_table;
+            rdaTable.MAGNESIUM = req.body.edit_magnesium_table;
+            rdaTable.POTASSIUM = req.body.edit_potassium_table;
+            rdaTable.PHOSPHORUS = req.body.edit_phosphorus_table;
+            rdaTable.SODIUM = req.body.edit_sodium_table;
+            rdaTable.CHOLESTEROL = req.body.edit_cholesterol_table;
+            rdaTable.SATURATED = req.body.edit_saturated_table;
 
-                file = file.split('.').splice(0,1).join('.');
-                var dst = self.uploadimgpath + file + extension;
 
-                // Check if the file exist. If there's an error it doesn't exist
-                try {
-                    fs.accessSync(dst, fs.F_OK);
 
-                    file += Date.now();
-                    file += extension;
-                } catch(e) { 			// File not found
-                    file += extension;
-                }
 
-                dst = self.uploadimgpath + file;
 
-                var tmp = self.uploadpath+req.files[0].filename;
+            rda.updateById(rda_id).then(function(result) {
 
-                fs.createReadStream(tmp).pipe(fs.createWriteStream(dst));
+                console.log("Se h actualizado y la tabla asociada es: " + result.TABLE_ID);
 
-                // Delete created tmp file.
-                fs.unlink(tmp, function(error) {
-                    if(error)
+                rda.retrieveById(rda_id).then(function(result2) {
+
+                    console.log("Se h actualizado y la tabla asociada2 es: " + result2.TABLE_ID);
+
+                    rdaTable.updateById(result2.TABLE_ID).then(function(result3) {
+                        self.renderJson.msg = 'Se ha editado correctamente';
+                        res.redirect('/backend/rda');
+                    }, function(error) {
                         console.log(error);
-                    else
-                        console.log('successfully deleted ' + tmp);
+                        self.renderJson.error = 'Se ha producido un error interno';
+                        res.redirect('/backend/rda');
+                    });
+
+                }, function(error) {
+                    console.log(error);
+                    self.renderJson.error = 'Se ha producido un error interno';
+                    res.redirect('/backend/rda');
                 });
 
-                // Path to the file, to be sabed in DB
-                food.photo = '/static/img/foods/' + file;
-            }
+                rdaTable.updateById(result.TABLE_ID).then(function(result2) {
+                    self.renderJson.msg = 'Se ha editado correctamente';
+                    res.redirect('/backend/rda');
+                }, function(error) {
+                    console.log(error);
+                    self.renderJson.error = 'Se ha producido un error interno';
+                    res.redirect('/backend/rda');
+                });
 
-            food.updateById(id_food).then(function(result) {
-                self.renderJson.msg = 'Se ha editado correctamente';
-
-                // Add the event to a new Activity Log
-                var ct = "Edición";
-                var desc = "Se ha editado el alimento " + food.name + food.ID;
-                var date = new Date();
-                var uid = self.renderJson.user.ID;
-                self.activityLogController.addNewActivityLog(ct, desc, date, uid);
-
-                res.redirect('/backend/foods');
             }, function(error) {
                 console.log(error);
                 self.renderJson.error = 'Se ha producido un error interno';
-                res.redirect('/backend/foods');
+                res.redirect('/backend/rda');
             });
         }
         else
@@ -245,53 +326,46 @@ RDAController.prototype.initBackend = function() {
     self.routerBackend.route('/delete').post(function(req, res) {
         self.renderJson.user = req.session.user;
 
-        if(typeof self.renderJson.user !== 'undefined' && parseInt(self.renderJson.user.ADMIN)) {
-            var id_food = req.body.delete_id_food;
-            var delete_food = req.body.delete_food;
+        if(typeof self.renderJson.user !== 'undefined') {
+            var id_rda = req.body.delete_id_rda;
+            var delete_rda = req.body.delete_rda;
 
-            if(delete_food === 'yes') {
-                var food = RDA.build();
+            if(delete_rda === 'yes') {
+                var rda = RDA.build();
+                var rdaTable = RDA.build();
+
+                var table_id;
 
                 // Get the user to get the photo to delete
-                food.retrieveById(id_food).then(function(result) {
-                    // delete the photo
-                    if(result.PHOTO !== '/static/img/img_not_available.png') {
-                        var dst = path.join(__dirname, '..', 'public') + result.PHOTO;
+                rda.retrieveById(id_rda).then(function(result) {
 
-                        fs.unlink(dst, function(error) {
-                            if(error)
-                                console.log(error);
-                            else
-                                console.log('successfully deleted ' + dst);
+                    table_id = result.TABLE_ID;
+
+                    var deleted_rda = RDA.build();
+
+                    deleted_rda.removeById(id_rda).then(function(result) {
+                        self.renderJson.msg = 'Se ha eliminado correctamente el RDA';
+
+                        var deleted_table_rda = RDATable.build();
+
+                        deleted_table_rda.removeById(table_id).then(function(result) {
+                            self.renderJson.msg = 'Se ha eliminado correctamente la tabla';
+
+                            res.redirect('/backend/rda');
+                        }, function(err) {
+                            self.renderJson.error = 'Se ha producido un error interno borrando la tabla de datos';
+                            res.redirect('/backend/rda');
                         });
-                    }
-
-                    var deleted_food = RDA.build();
-
-                    deleted_food.removeById(id_food).then(function(result) {
-                        self.renderJson.msg = 'Se ha eliminado correctamente';
-
-                        // Add the event to a new Activity Log
-                        var ct = "Borrado";
-                        var desc = "Se ha eliminado el alimento con ID " + id_food;
-                        var date = new Date();
-                        var uid = self.renderJson.user.ID;
-                        self.activityLogController.addNewActivityLog(ct, desc, date, uid);
-
-                        res.redirect('/backend/foods');
                     }, function(err) {
-                        self.renderJson.error = 'Se ha producido un error interno borrando al usuario';
-                        res.redirect('/backend/foods');
+                        self.renderJson.error = 'Se ha producido un error interno';
+                        res.redirect('/backend/rda');
                     });
-                }, function(err) {
-                    self.renderJson.error = 'Se ha producido un error interno';
-                    res.redirect('/backend/foods');
-                });
-            }
-            else {
-                self.renderJson.error = 'No se ha efectuado su acción';
-                res.redirect('/backend/foods');
-            }
+
+                    }, function(err) {
+                        self.renderJson.error = 'Se ha producido un error interno borrando el CDR';
+                        res.redirect('/backend/rda');
+                    });
+                }
         }
         else
             res.redirect('/');

@@ -39,7 +39,7 @@
 						for(var i=0; i<rdas.length; i++) { %>
                         <%count++; %>
 								<tr>
-								<td><%= rdas[i].TABLE_ID %></td>
+								<td><%= rdas[i].ID %></td>
 								<td><%= rdas[i].NAME %></td>
 								<td><%= rdas[i].MIN_AGE_RANGE %></td>
 								<td><%= rdas[i].MAX_AGE_RANGE%></td>
@@ -78,10 +78,10 @@
             <% include ../../partials/backend/modals/modal_add_RDA %>
 
 			<!-- Modal Edit Food -->
-            <% include ../../partials/backend/modals/modal_edit_food %>
+            <% include ../../partials/backend/modals/modal_edit_RDA %>
 
 			<!-- Modal Delete Food -->
-            <% include ../../partials/backend/modals/modal_delete_food %>
+            <% include ../../partials/backend/modals/modal_delete_RDA %>
 
 		</main>
 
