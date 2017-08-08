@@ -240,6 +240,64 @@ RDAController.prototype.initBackend = function() {
             res.redirect('/');
     });
 
+    self.routerBackend.route('/table').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+        var id_rda_table = req.body.id_rda_table;
+
+
+
+
+
+        if(typeof self.renderJson.user !== 'undefined') {
+            var rdaTable = RDATable.build();
+
+            //
+            rdaTable.retrieveById(id_rda_table).then(function(result) {
+
+                console.log(result);
+                res.json(result);
+
+
+
+
+
+            }, function(err) {
+                self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/rda');
+            });
+
+        }
+        else
+            res.redirect('/');
+    });
+
+    self.routerBackend.route('/all').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+        if(typeof self.renderJson.user !== 'undefined') {
+
+            var rda = RDA.build();
+            //console.log(result);
+            rda.retrieveAll(self.renderJson.user.ID).then(function(result) {
+
+                console.log(result);
+                res.json(result);
+
+
+
+
+
+            }, function(err) {
+                self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/rda');
+            });
+
+        }
+        else
+            res.redirect('/');
+    });
+
 
     self.routerBackend.route('/edit').post(upload.array('edit_photo_food', 1), function(req, res) {
         self.renderJson.user = req.session.user;
@@ -283,11 +341,9 @@ RDAController.prototype.initBackend = function() {
 
             rda.updateById(rda_id).then(function(result) {
 
-                console.log("Se h actualizado y la tabla asociada es: " + result.TABLE_ID);
 
                 rda.retrieveById(rda_id).then(function(result2) {
 
-                    console.log("Se h actualizado y la tabla asociada2 es: " + result2.TABLE_ID);
 
                     rdaTable.updateById(result2.TABLE_ID).then(function(result3) {
                         self.renderJson.msg = 'Se ha editado correctamente';

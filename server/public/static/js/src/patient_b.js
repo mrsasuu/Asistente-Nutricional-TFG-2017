@@ -22,7 +22,99 @@ $("#botonDel").on("click",function () {
     $("#modalDelete").css("display","block","opacity","1","transform","scaleX(1)");
 
 });
+$("#btnCompare").on("click",function () {
 
+    var table_id = $("#selectRDA :selected").val();
+    var date = $("#statics_date :selected").val();
+
+   if(table_id != -1){
+       $.ajax({
+           url : "/backend/rda/table/",
+           type: "POST",
+           data:{id_rda_table: table_id},
+           success: function(data, textStatus, jqXHR)
+           {
+
+               $.ajax({
+                   url : "/backend/patients/food_register/statics",
+                   type: "POST",
+                   data : {PATIENTID: Patient_id,statics_date: date},
+                   success: function(data2, textStatus, jqXHR)
+                   {
+                       //alert("Se ha insertado el registro correctamente.")
+                       /*calendario();
+
+                        $("#add_event").closeModal();
+                        setTimeout(function() {
+                        Materialize.toast('Se ha añadido el evento correctamente', 5000);
+                        }, 500);*/
+
+                       var content = '<div style="padding: 50px;" class="row"><table class="bordered col s12 " style="padding: 50px!important;"><tr class="row"><th class="col s12 m4">Macronutrientes</th><th class="col s12 m4">Estadísticas del paciente</th><th class="col s12 m4">Cantidad recomendada(CDR)</th></tr></thead> ' +
+                           '<tbody><tr class="row"><td class="col s12 m4">Kcalorias</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Proteinas</td><td class="col s12 m4">'+ data2.PROTEINS + " g"+'</td><td class="col s12 m4">'+ data.PROTEINS + " g"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Lípidos</td><td class="col s12 m4">'+data2.LIPIDS + " g"+'</td><td class="col s12 m4">'+data.LIPIDS + " g"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">H.Carbono</td><td class="col s12 m4">'+data2.GLUCIDS + " g"+'</td><td class="col s12 m4">'+data.CARBON_HYDRATES + " g"+'</td></tr>'+
+                            '</tbody></table></div> ';
+
+                       content += '<div style="padding: 50px;" class="row"><table class="bordered col s12" style="padding: 50px!important;"><thead><tr class="row"><th class="col s12 m4">Vitaminas</th><th class="col s12 m4">Estadísticas del paciente</th><th class="col s12 m4">Cantidad recomendada(CDR)</th></tr></thead> ' +
+                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina A</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina C</td><td class="col s12 m4">'+ data2.PROTEINS + " g"+'</td><td class="col s12 m4">'+ data.PROTEINS + " g"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina D</td><td class="col s12 m4">'+data2.LIPIDS + " g"+'</td><td class="col s12 m4">'+data.LIPIDS + " g"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina E</td><td class="col s12 m4">'+data2.GLUCIDS + " g"+'</td><td class="col s12 m4">'+data.CARBON_HYDRATES + " g"+'</td></tr>'+
+                           '</tbody></table></div>';
+
+                       content += '<div style="padding: 50px;" class="row"><table class="bordered col s12" style="padding: 50px!important;"><thead><tr class="row"><th class="col s12 m4">Minerales</th><th class="col s12 m4">Estadísticas del paciente</th><th class="col s12 m4">Cantidad recomendada(CDR)</th></tr></thead> ' +
+                           '<tbody><tr class="row"><td class="col s12 m4">Calcio</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Hierro</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Magnesio</td><td class="col s12 m4">'+ data2.PROTEINS + " g"+'</td><td class="col s12 m4">'+ data.PROTEINS + " g"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Potasio</td><td class="col s12 m4">'+data2.LIPIDS + " g"+'</td><td class="col s12 m4">'+data.LIPIDS + " g"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Fósforo</td><td class="col s12 m4">'+data2.GLUCIDS + " g"+'</td><td class="col s12 m4">'+data.CARBON_HYDRATES + " g"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">sodio</td><td class="col s12 m4">'+data2.GLUCIDS + " g"+'</td><td class="col s12 m4">'+data.CARBON_HYDRATES + " g"+'</td></tr>'+
+                           '</tbody></table></div>';
+
+                       content += '<div style="padding: 50px;" class="row"><table class="bordered col s12" style="padding: 50px!important;"><thead><tr class="row"><th class="col s12 m4">Ácidos grasos</th><th class="col s12 m4">Estadísticas del paciente</th><th class="col s12 m4">Cantidad recomendada(CDR)</th></tr></thead> ' +
+                           '<tbody><tr class="row"><td class="col s12 m4">Colesterol</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Saturados</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
+                           '</tbody></table></div>';
+
+
+                       $("#estadisticas").html(content);
+                       $("#estadisticas").css("display","block");
+
+
+                       setTimeout(function() {
+                           Materialize.toast('Se ha consultado correctamente la tabla RDA', 5000);
+                       }, 500);
+
+
+
+
+
+
+                   },
+                   error: function (jqXHR, textStatus, errorThrown)
+                   {
+                       setTimeout(function() {
+                           Materialize.toast('Ha ocurrido un error', 5000);
+                       }, 500);
+                   }
+               });
+
+
+
+
+           },
+           error: function (jqXHR, textStatus, errorThrown)
+           {
+               setTimeout(function() {
+                   Materialize.toast('Ha ocurrido un error RDA', 5000);
+               }, 500);
+           }
+       });
+
+   }
+
+});
 
 
 function statics() {
@@ -426,6 +518,9 @@ $("#botonEv").on("click",function () {
 
 
 $(document).ready(function() {
+    $(document).ready(function() {
+        $('select').material_select();
+    });
 
 
     /*$("#formValidate").validate({
@@ -519,6 +614,8 @@ $(document).ready(function() {
             $( "#card-description" ).removeClass("modal-hidden");
             $( "#card-description" ).addClass("modal-shown");
     });
+
+
 
     $("#alimentos").on('click', function() {
         //$(".card-reveal").css({"transform":"translateY(0%)","display":"none"});
@@ -628,7 +725,55 @@ $(document).ready(function() {
 		}else if(action == '#show_patient') {
 
         $('#calendar').fullCalendar('today');
+        $("#estadisticas").css("display","none");
+        $("#selectRDA").empty();
 
+            $.ajax({
+                url : "/backend/rda/all/",
+                type: "POST",
+                success: function(data, textStatus, jqXHR)
+                {
+                    var actividad;
+                    var sexo;
+
+                    $('#selectRDA').append('<option value="-1" disabled selected>Elige una tabla de comparación de CDR</option>');
+                    for( var i = 0; i < data.length; i++){
+                        switch (data[i].ACTIVITY_LEVEL){
+                            case 0:
+                                actividad = "Sedentario";
+                                break;
+                            case 1:
+                                actividad = "Moderada";
+                                break;
+                            case 2:
+                                actividad = "Intensa";
+                                break;
+                            case 3:
+                                actividad = "Muy intensa";
+                                break;
+                        }
+
+                        if(data[i].GENDER){
+                            sexo = "Mujer";
+                        }else{
+                            sexo = "Hombre"
+                        }
+
+                        $('#selectRDA').append('<option value="'+ data[i].TABLE_ID +'">'+ "Nombre: "+data[i].NAME+ ", Edades: " + data[i].MIN_AGE_RANGE +"-"+data[i].MAX_AGE_RANGE + ", Acticidad: " + actividad + ", Sexo: " + sexo + '</option>');
+                    }
+
+                    $('select').material_select();
+                    setTimeout(function() {
+                        Materialize.toast('Se ha actualizado correctamente la lista RDA', 5000);
+                    }, 500);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    setTimeout(function() {
+                        Materialize.toast('Ha ocurrido un error RDA', 5000);
+                    }, 500);
+                }
+            });
 
         $("#kcal_bre").text("0 Kcal");
         $("#gluc_bre").text("0 g");

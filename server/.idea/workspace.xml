@@ -13,63 +13,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DockManager">
-    <window id="2">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="modal_edit_RDA.ejs" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_edit_RDA.ejs">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="153">
-                    <caret line="9" column="67" lean-forward="false" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="RDAController.js" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/controllers/RDAController.js">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="442">
-                    <caret line="351" column="61" lean-forward="true" selection-start-line="351" selection-start-column="61" selection-end-line="351" selection-end-column="61" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
     <window id="1">
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="modal_add_RDA.ejs" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_RDA.ejs">
+            <file leaf-file-name="RDAController.js" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/controllers/RDAController.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="528">
-                    <caret line="165" column="0" lean-forward="true" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="RDA.js" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/models/RDA.js">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="564">
-                    <caret line="51" column="22" lean-forward="false" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="RDATable.js" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/models/RDATable.js">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="652">
-                    <caret line="93" column="37" lean-forward="false" selection-start-line="93" selection-start-column="37" selection-end-line="93" selection-end-column="37" />
+                  <state relative-caret-position="751">
+                    <caret line="281" column="27" lean-forward="false" selection-start-line="281" selection-start-column="27" selection-end-line="281" selection-end-column="27" />
                     <folding />
                   </state>
                 </provider>
@@ -86,28 +38,8 @@
       <file leaf-file-name="PatientController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/PatientController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1139">
-              <caret line="766" column="28" lean-forward="true" selection-start-line="766" selection-start-column="28" selection-end-line="767" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Food.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/Food.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Patient.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/Patient.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="10" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="33" selection-end-column="10" />
+            <state relative-caret-position="493">
+              <caret line="851" column="69" lean-forward="false" selection-start-line="851" selection-start-column="69" selection-end-line="851" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -116,18 +48,73 @@
       <file leaf-file-name="rda.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/templates/pages/backend/rda.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="766">
-              <caret line="97" column="0" lean-forward="true" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+            <state relative-caret-position="1201">
+              <caret line="79" column="36" lean-forward="true" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rda.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="rda.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/static/js/src/rda.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="527">
               <caret line="31" column="72" lean-forward="false" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modal_add_RDA.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_RDA.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="258">
+              <caret line="17" column="94" lean-forward="false" selection-start-line="17" selection-start-column="94" selection-end-line="17" selection-end-column="94" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modal_show_patient.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_show_patient.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="271">
+              <caret line="443" column="67" lean-forward="false" selection-start-line="443" selection-start-column="67" selection-end-line="443" selection-end-column="67" />
+              <folding>
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h5#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#3;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#4;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <marker date="1502206115502" expanded="false" signature="10983:11065" ph="..." />
+                <marker date="1502206115502" expanded="false" signature="14808:14890" ph="..." />
+                <marker date="1502206115502" expanded="false" signature="18633:18715" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RDA.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/RDA.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="632">
+              <caret line="46" column="19" lean-forward="true" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modal_edit_RDA.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_edit_RDA.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="120" column="12" lean-forward="false" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="84" />
               <folding />
             </state>
           </provider>
@@ -143,42 +130,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modal_edit_user.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_edit_user.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="77" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="77" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="patient_b.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="patient_b.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/static/js/src/patient_b.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="637">
-              <caret line="595" column="21" lean-forward="true" selection-start-line="576" selection-start-column="20" selection-end-line="595" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="246">
+              <caret line="727" column="46" lean-forward="false" selection-start-line="727" selection-start-column="46" selection-end-line="727" selection-end-column="46" />
+              <folding>
+                <marker date="1502206294870" expanded="true" signature="1454:1468" ph="..." />
+                <marker date="1502206294870" expanded="true" signature="1522:1546" ph="..." />
+                <marker date="1502206294870" expanded="true" signature="2642:2656" ph="..." />
+                <marker date="1502206294870" expanded="true" signature="2709:2733" ph="..." />
+                <marker date="1502206294870" expanded="true" signature="3834:3848" ph="..." />
+                <marker date="1502206294870" expanded="true" signature="3901:3925" ph="..." />
+                <marker date="1502206294870" expanded="true" signature="5417:5431" ph="..." />
+                <marker date="1502206294870" expanded="true" signature="5484:5508" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modal_add_food.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_food.ejs">
+      <file leaf-file-name="modal_add_event.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_event.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="94" lean-forward="false" selection-start-line="27" selection-start-column="94" selection-end-line="27" selection-end-column="94" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="modal_add_patient.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_patient.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="27" column="18" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="27" selection-end-column="18" />
-              <folding />
+            <state relative-caret-position="306">
+              <caret line="30" column="67" lean-forward="false" selection-start-line="30" selection-start-column="67" selection-end-line="30" selection-end-column="67" />
+              <folding>
+                <element signature="n#style#0;n#select#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -187,13 +165,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>35729</find>
-      <find>lastw</find>
-      <find>getW</find>
-      <find>getWe</find>
-      <find>num</find>
-      <find>last</find>
-      <find>show</find>
       <find>agree</find>
       <find>kcal</find>
       <find>alert(&quot;desayuno</find>
@@ -216,24 +187,16 @@
       <find>user</find>
       <find>KKK</find>
       <find>if</find>
+      <find>ready</find>
+      <find>#sh</find>
+      <find>#show</find>
+      <find>lastw</find>
       <find>kkk</find>
+      <find>las</find>
+      <find>&lt;td&gt;</find>
+      <find>disabled</find>
     </findStrings>
     <replaceStrings>
-      <replace>v_a</replace>
-      <replace>v_c</replace>
-      <replace>v_d</replace>
-      <replace>v_e</replace>
-      <replace>calcium</replace>
-      <replace>magnesium</replace>
-      <replace>potassium</replace>
-      <replace>phosphorus</replace>
-      <replace>sodium</replace>
-      <replace>cholesterol</replace>
-      <replace>saturated</replace>
-      <replace>KCAL</replace>
-      <replace>PROTEINS</replace>
-      <replace>LIPIDS</replace>
-      <replace>CARBON_HYDRATES</replace>
       <replace>PROTEINS_PERCENTAGE</replace>
       <replace>LIPIDS_PERCENTAGE</replace>
       <replace>CARBON_HYDRATES_PERCENTAGE</replace>
@@ -249,6 +212,21 @@
       <replace>CHOLESTEROL</replace>
       <replace>rda</replace>
       <replace>SATURATED</replace>
+      <replace>&lt;th class=&quot;col s12 m4&quot;&gt;</replace>
+      <replace>&lt;tr class=&quot;row&quot;&gt;</replace>
+      <replace>Enero</replace>
+      <replace>Febrero</replace>
+      <replace>Marzo</replace>
+      <replace>Abril</replace>
+      <replace>Mayo</replace>
+      <replace>Junio</replace>
+      <replace>Julio</replace>
+      <replace>Agosto</replace>
+      <replace>Septiembre</replace>
+      <replace>Octubre</replace>
+      <replace>Noviembre</replace>
+      <replace>Diciembre</replace>
+      <replace>&lt;td class=&quot;col s12 m4&quot;&gt;</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\Sasu\Documents\Asistente Nutricional\Asistente-Nutricional-TFG-2017\server</dir>
@@ -262,25 +240,26 @@
         <option value="$PROJECT_DIR$/node_modules/grunt-contrib-watch/tasks/lib/livereload.js" />
         <option value="$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_food.ejs" />
         <option value="$PROJECT_DIR$/public/templates/partials/backend/modals/modal_edit_food.ejs" />
-        <option value="$PROJECT_DIR$/controllers/PatientController.js" />
         <option value="$PROJECT_DIR$/public/templates/pages/backend/patient.ejs" />
         <option value="$PROJECT_DIR$/public/static/css/src/patients_b.css" />
         <option value="$PROJECT_DIR$/models/FoodRegister.js" />
         <option value="$PROJECT_DIR$/service/FoodRegisterService.js" />
-        <option value="$PROJECT_DIR$/public/templates/partials/backend/modals/modal_show_patient.ejs" />
-        <option value="$PROJECT_DIR$/public/static/js/src/patient_b.js" />
         <option value="$PROJECT_DIR$/controllers/Views.js" />
         <option value="$PROJECT_DIR$/public/templates/partials/backend/sidemenu_backend.ejs" />
         <option value="$PROJECT_DIR$/public/templates/pages/backend/index.ejs" />
         <option value="$PROJECT_DIR$/models/Food.js" />
-        <option value="$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_RDA.ejs" />
-        <option value="$PROJECT_DIR$/public/templates/partials/backend/modals/modal_edit_RDA.ejs" />
         <option value="$PROJECT_DIR$/models/RDA.js" />
         <option value="$PROJECT_DIR$/models/RDATable.js" />
         <option value="$PROJECT_DIR$/public/templates/partials/backend/modals/modal_delete_RDA.ejs" />
         <option value="$PROJECT_DIR$/public/templates/pages/backend/rda.ejs" />
         <option value="$PROJECT_DIR$/public/static/js/src/rda.js" />
+        <option value="$PROJECT_DIR$/public/templates/partials/backend/modals/modal_edit_RDA.ejs" />
+        <option value="$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_RDA.ejs" />
         <option value="$PROJECT_DIR$/controllers/RDAController.js" />
+        <option value="$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_event.ejs" />
+        <option value="$PROJECT_DIR$/controllers/PatientController.js" />
+        <option value="$PROJECT_DIR$/public/templates/partials/backend/modals/modal_show_patient.ejs" />
+        <option value="$PROJECT_DIR$/public/static/js/src/patient_b.js" />
       </list>
     </option>
   </component>
@@ -318,7 +297,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -586,6 +564,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -700,12 +679,13 @@
       <workItem from="1501672452059" duration="4501000" />
       <workItem from="1501752235767" duration="22051000" />
       <workItem from="1501861060066" duration="1316000" />
-      <workItem from="1502103720272" duration="18567000" />
+      <workItem from="1502103720272" duration="19301000" />
+      <workItem from="1502191592906" duration="10666000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52695000" />
+    <option name="totallyTimeSpent" value="64095000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -758,18 +738,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/controllers/PatientController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8228">
-          <caret line="484" column="30" lean-forward="true" selection-start-line="484" selection-start-column="30" selection-end-line="484" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/FoodRegister.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -781,7 +755,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="19" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -790,9 +763,20 @@
         <state relative-caret-position="8993">
           <caret line="529" column="110" lean-forward="false" selection-start-line="529" selection-start-column="110" selection-end-line="529" selection-end-column="110" />
           <folding>
-            <marker date="1501778216767" expanded="false" signature="10983:11065" ph="..." />
-            <marker date="1501778216767" expanded="false" signature="14808:14890" ph="..." />
-            <marker date="1501778216767" expanded="false" signature="18633:18715" ph="..." />
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h5#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <marker date="1502206115502" expanded="false" signature="10983:11065" ph="..." />
+            <marker date="1502206115502" expanded="false" signature="14808:14890" ph="..." />
+            <marker date="1502206115502" expanded="false" signature="18633:18715" ph="..." />
           </folding>
         </state>
       </provider>
@@ -801,7 +785,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8908">
           <caret line="524" column="0" lean-forward="true" selection-start-line="524" selection-start-column="0" selection-end-line="524" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1502206294870" expanded="true" signature="1454:1468" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="1522:1546" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="2642:2656" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="2709:2733" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="3834:3848" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="3901:3925" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="5417:5431" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="5484:5508" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -861,7 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="19" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -934,7 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="45" column="100" lean-forward="false" selection-start-line="45" selection-start-column="100" selection-end-line="45" selection-end-column="100" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -942,7 +933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
           <caret line="44" column="119" lean-forward="false" selection-start-line="44" selection-start-column="105" selection-end-line="44" selection-end-column="119" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -988,19 +978,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="51" column="54" lean-forward="true" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_show_patient.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="23" column="83" lean-forward="false" selection-start-line="23" selection-start-column="83" selection-end-line="23" selection-end-column="83" />
-          <folding>
-            <marker date="1501778216767" expanded="false" signature="10983:11065" ph="..." />
-            <marker date="1501778216767" expanded="false" signature="14808:14890" ph="..." />
-            <marker date="1501778216767" expanded="false" signature="18633:18715" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1008,7 +985,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="49" column="40" lean-forward="true" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1016,7 +992,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="123" lean-forward="true" selection-start-line="19" selection-start-column="123" selection-end-line="19" selection-end-column="123" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1024,7 +999,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
           <caret line="43" column="57" lean-forward="false" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1032,14 +1006,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_patient.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="27" column="18" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="27" selection-end-column="18" />
+        <state relative-caret-position="459">
+          <caret line="27" column="18" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="27" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1055,7 +1028,7 @@
     <entry file="file://$PROJECT_DIR$/models/Patient.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
-          <caret line="33" column="10" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="33" selection-end-column="10" />
+          <caret line="33" column="10" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="33" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -1064,7 +1037,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
           <caret line="38" column="10" lean-forward="false" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1076,49 +1048,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/PatientController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="766" column="28" lean-forward="true" selection-start-line="766" selection-start-column="28" selection-end-line="767" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/js/src/patient_b.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="637">
-          <caret line="595" column="21" lean-forward="true" selection-start-line="576" selection-start-column="20" selection-end-line="595" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_RDA.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="165" column="0" lean-forward="true" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_edit_user.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="21" column="77" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_edit_RDA.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="67" lean-forward="false" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
+          <caret line="21" column="77" lean-forward="false" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="77" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/RDATable.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="652">
+        <state relative-caret-position="666">
           <caret line="93" column="37" lean-forward="false" selection-start-line="93" selection-start-column="37" selection-end-line="93" selection-end-column="37" />
           <folding />
         </state>
@@ -1132,10 +1072,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/templates/pages/backend/rda.ejs">
+    <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_edit_RDA.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="766">
-          <caret line="97" column="0" lean-forward="true" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="120" column="12" lean-forward="false" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="84" />
           <folding />
         </state>
       </provider>
@@ -1150,17 +1090,91 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/RDA.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="51" column="22" lean-forward="false" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+        <state relative-caret-position="632">
+          <caret line="46" column="19" lean-forward="true" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_RDA.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="17" column="94" lean-forward="false" selection-start-line="17" selection-start-column="94" selection-end-line="17" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_add_event.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="30" column="67" lean-forward="false" selection-start-line="30" selection-start-column="67" selection-end-line="30" selection-end-column="67" />
+          <folding>
+            <element signature="n#style#0;n#select#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/RDAController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="351" column="61" lean-forward="true" selection-start-line="351" selection-start-column="61" selection-end-line="351" selection-end-column="61" />
+        <state relative-caret-position="751">
+          <caret line="281" column="27" lean-forward="false" selection-start-line="281" selection-start-column="27" selection-end-line="281" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/PatientController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="851" column="69" lean-forward="false" selection-start-line="851" selection-start-column="69" selection-end-line="851" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/templates/pages/backend/rda.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1201">
+          <caret line="79" column="36" lean-forward="true" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/templates/partials/backend/modals/modal_show_patient.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="443" column="67" lean-forward="false" selection-start-line="443" selection-start-column="67" selection-end-line="443" selection-end-column="67" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h5#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <marker date="1502206115502" expanded="false" signature="10983:11065" ph="..." />
+            <marker date="1502206115502" expanded="false" signature="14808:14890" ph="..." />
+            <marker date="1502206115502" expanded="false" signature="18633:18715" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/js/src/patient_b.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="727" column="46" lean-forward="false" selection-start-line="727" selection-start-column="46" selection-end-line="727" selection-end-column="46" />
+          <folding>
+            <marker date="1502206294870" expanded="true" signature="1454:1468" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="1522:1546" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="2642:2656" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="2709:2733" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="3834:3848" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="3901:3925" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="5417:5431" ph="..." />
+            <marker date="1502206294870" expanded="true" signature="5484:5508" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

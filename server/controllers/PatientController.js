@@ -763,7 +763,6 @@ PatientController.prototype.initBackend = function() {
 
 
 
-                           // res.json(statics);
                             res.json(statics);
                             console.log(statics);
 
@@ -793,6 +792,147 @@ PatientController.prototype.initBackend = function() {
                 var date = new Date();
                 var uid = self.renderJson.user.ID;
                 self.activityLogController.addNewActivityLog(ct, desc, date, uid);*/
+
+                //res.redirect('/backend/patients');
+            }, function(err) {
+                console.log("Error con: "+ patientId);
+                console.log(err);
+                self.renderJson.error = 'Se ha producido un error interno borrando al usuario';
+                res.redirect('/backend/patients');
+            });
+        }
+        else
+            res.redirect('/');
+    });
+
+    self.routerBackend.route('/food_register/statics').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+
+        if(typeof self.renderJson.user !== 'undefined') {
+            var foodRegister = FoodRegister.build();
+
+            var patientId = req.body.PATIENTID;
+            var statics_date = req.body.statics_date;
+
+            console.log("Mes que buscar: " + statics_date);
+
+            var date_today = new Date();
+
+            var week_number = getWeek(date_today,1);
+
+
+
+
+
+
+
+            console.log("Se consulta: "+ patientId);
+
+
+
+            foodRegister.retrieveByPatientIdLastWeek(patientId).then(function(result) {
+                //var result2 = [];
+                var breakfast = [];
+
+
+
+                if(result)
+                {
+
+
+                    var food = Food.build();
+
+                    food.retrieveAll().then(function(result2) {
+                        if(result2){
+                            for(var i  = 0; i < result.length; i++) {
+                                var newDate = new Date(result[i].DATE);
+                                console.log("Semana:" + getWeek(newDate, 1));
+
+                                if(newDate.getMonth() == statics_date){
+                                    //result2.push(result[i]);
+
+                                    for(var j = 0; j < result2.length; j++){
+                                        if(result2[j].ID == result[i].FOODID){
+                                            breakfast.push(result2[j]);
+                                            console.log("Alimento: " + result2[j].NAME);
+                                        }
+                                    }
+                                    console.log("Numero de elementos : " + breakfast.length);
+
+                                }
+                            }
+
+                            var prot_b = 0;
+                            var lipids_b = 0;
+                            var gluc_b = 0;
+                            //var foodHour = "DESAYUNO";
+                            // var num = breakfast.length;
+                            var num = new Date().getDay();
+
+                            if(num == 0)
+                                num=7;
+
+                            var kcal_b = 0;
+
+                            for(var i = 0; i < breakfast.length; i++){
+                                prot_b += breakfast[i].PROTEINS;
+                                lipids_b += breakfast[i].LIPIDS;
+                                gluc_b += breakfast[i].CARBON_HYDRATES;
+                            }
+
+                            if(num > 0){
+                                prot_b = (prot_b)/num;
+                                lipids_b = (lipids_b)/num;
+                                gluc_b = (gluc_b)/num;
+
+
+                                kcal_b = prot_b*4 + lipids_b*9 + gluc_b*4;
+
+
+                                var statics={
+                                   // FOODHOUR: foodHour,
+                                    PROTEINS: prot_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    LIPIDS: lipids_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    GLUCIDS: gluc_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    KCAL: kcal_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
+                                };
+
+                            }
+
+
+
+
+                            console.log("Día del mes: "+date_today.getDate());
+                            res.json(statics);
+
+
+
+
+
+
+
+                        }
+                        else
+                            res.status(401).send("Food not found");
+
+
+                    }, function(error) {
+                        res.status(404).send("Food not found");
+                    });
+
+
+                }
+
+                // console.log("Se ha eliminado: "+ foodRegistryId);
+                //self.renderJson.msg = 'Se ha eliminado correctamente';
+
+                /*// Add the event to a new Activity Log
+                 var ct = "Borrado";
+                 var desc = "Se ha eliminado el registro con ID " + foodRegistryId;
+                 var date = new Date();
+                 var uid = self.renderJson.user.ID;
+                 self.activityLogController.addNewActivityLog(ct, desc, date, uid);*/
 
                 //res.redirect('/backend/patients');
             }, function(err) {
