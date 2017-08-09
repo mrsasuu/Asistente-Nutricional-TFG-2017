@@ -89,6 +89,15 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
 
 		<script>
+            function eventFire(el, etype){
+                if (el.fireEvent) {
+                    el.fireEvent('on' + etype);
+                } else {
+                    var evObj = document.createEvent('Events');
+                    evObj.initEvent(etype, true, false);
+                    el.dispatchEvent(evObj);
+                }
+            }
 
             $(document).ready(function() {
 
@@ -104,16 +113,38 @@
                         right: 'month,agendaWeek'
                     },
 					eventClick: function (event,jsEvent,view) {
-                        $("#modalDelete").css("display","none");
-                        $("#datepick_show").text($.fullCalendar.formatDate(event.start, "YYYY-MM-DD"));
-                        $("#selecthorario_show").text(event.horario);
-                        $("#name_food_show").text(event.title);
-                        $("#food_gluc_show").text(event.gluc + "g");
-                        $("#food_prot_show").text(event.prot + "g");
-                        $("#food_lipids_show").text(event.lipids + "g");
-                        $("#registerID").text(event.idRegistro);
 
+					    alert(event.tipo);
 
+					    if(event.tipo == "Registro"){
+                            $("#modalDelete").css("display","none");
+                            $("#datepick_show").text($.fullCalendar.formatDate(event.start, "YYYY-MM-DD"));
+                            $("#selecthorario_show").text(event.horario);
+                            $("#name_food_show").text(event.title);
+                            $("#food_gluc_show").text(event.gluc + "g");
+                            $("#food_prot_show").text(event.prot + "g");
+                            $("#food_lipids_show").text(event.lipids + "g");
+                            $("#registerID").text(event.idRegistro);
+                            $("#amount_show").text(event.amount);
+						}else if(event.tipo == "Objetivo"){
+                            $("#modalDelete").css("display","none");
+                            $("#objetiveID").text(event.idRegistro);
+
+                            $("#datepick2_show").text($.fullCalendar.formatDate(event.start, "YYYY-MM-DD"));
+                            $("#datepick3_show").text($.fullCalendar.formatDate(event.end, "YYYY-MM-DD"));
+                            $("#selecthorario2_show").text(event.horario);
+                            $("#name_food2_show").text(event.title);
+                            $("#food_gluc2_show").text(event.gluc + "g");
+                            $("#food_prot2_show").text(event.prot + "g");
+                            $("#food_lipids2_show").text(event.lipids + "g");
+                            $("#amount2_show").text(event.amount);
+                            $("#progress_show").text(event.progress + "/" + event.amount);
+                            if(event.completed)
+                            	$("#completed_show").text("Completado");
+                            else
+                                $("#completed_show").text("No completado");
+
+						}
 
 
 					    $("#show_event").openModal();
@@ -126,14 +157,38 @@
                     select: function(start, end) {
 					    $("#add_event").openModal() ;
 					    //Reseteamos los valores del modal por si estaban completados anteriormente.
+
                         $('input.autocomplete').val("");
                         $('input.autocomplete').blur();
                         $("#name_food").text("");
                         $("#select-horario").prop('selectedIndex',0);
 
                         var start2 = $.fullCalendar.formatDate(start, "YYYY-MM-DD");
+
+                        var end2 = $.fullCalendar.formatDate(end, "YYYY-MM");
+
                         var startDay = $.fullCalendar.formatDate(start, "D");
                         var endDay = $.fullCalendar.formatDate(end, "D");
+
+                        if((endDay-1)<10)
+                        	end2 += "-0" + (endDay-1);
+                        else
+                            end2 += "-" + (endDay-1);
+
+
+
+                        if(endDay - startDay == 1){
+                            $('#datepick').val(start2);
+                            eventFire(document.getElementById('aRegistro'), 'click');
+
+						}else{
+                            $('#datepick2').val(start2);
+                            $('#datepick3').val(end2);
+                            eventFire(document.getElementById('aObjetivo'), 'click');
+						}
+
+                        //alert(endDay +" " + startDay);
+                        //alert(endDay - startDay);
 
 
                         $('#datepick').val(start2);

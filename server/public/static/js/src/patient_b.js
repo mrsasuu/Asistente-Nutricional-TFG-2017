@@ -3,8 +3,12 @@ var evento;
 var json1;
 var names = [];
 var horarios = [];
+var amounts = [];
+var progress = [];
+var completed = [];
 var ids = [];
 var fechas = [];
+var fechas_end = [];
 var cont = 0;
 var datas;
 var bool = false;
@@ -301,6 +305,7 @@ function calendario() {
     ids = [];
     fechas = [];
     horarios = [];
+    amounts = [];
     registerIDs = [];
 
     if($("#alimentos").is(":checked")){
@@ -316,6 +321,7 @@ function calendario() {
                     ids.push(jsondata[i].FOODID);
                     registerIDs.push(jsondata[i].REGISTERID);
                     horarios.push(jsondata[i].FOODHOUR);
+                    amounts.push(jsondata[i].AMOUNT);
                     //alert("Se ha pusheado" + ids[0]);
                     fechas.push(jsondata[i].DATE);
                 }
@@ -361,6 +367,7 @@ function calendario() {
                                 prot: jsondata2.PROTEINS,
                                 gluc: jsondata2.CARBON_HYDRATES,
                                 lipids: jsondata2.LIPIDS,
+                                amount: amounts[conta],
                                 allDay: true,
                                 color: color,
                                 horario: horarios[conta],
@@ -372,6 +379,7 @@ function calendario() {
                                 horarios.splice(conta,1);
                                 registerIDs.splice(conta,1);
                                 fechas.splice(conta,1);
+                                amounts.splice(conta,1);
                             }
 
 
@@ -397,6 +405,117 @@ function calendario() {
         });
     }
 
+    names = [];
+    ids = [];
+    fechas = [];
+    horarios = [];
+    amounts = [];
+    registerIDs = [];
+    completed = [];
+    progress = [];
+    fechas_end = [];
+
+    if($("#objetivos").is(":checked")){
+        $.ajax({
+            type: "GET",
+            url: "/api/objetive/id/"+Patient_id,
+            datatype: "json",
+            success: function(jsondata3) {
+
+
+                json1 = jsondata3;
+
+                for(var i = 0; i < jsondata3.length; i++){
+                    ids.push(jsondata3[i].FOOD_ID);
+                    //alert("Alimento numero: "+ jsondata[i].FOOD_ID);
+                    registerIDs.push(jsondata3[i].ID);
+                    horarios.push(jsondata3[i].FOODHOUR);
+                    //alert("Se ha pusheado" + ids[0]);
+                    fechas.push(jsondata3[i].START_DATE);
+                    fechas.push(jsondata3[i].END_DATE);
+                    amounts.push(jsondata3[i].AMOUNT);
+                    completed.push(jsondata3[i].COMPLETED);
+                    progress.push(jsondata3[i].PROGRESS);
+                }
+
+
+
+
+                for(var i = 0; i < ids.length; i++){
+                    //alert("llega y hay objetivos: " + jsondata.length);
+                    //alert("Se va a buscar el alimento: " + ids[i]);
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/food/id/"+ids[i],
+                        datatype: "json",
+                        success: function(jsondata2) {
+
+                            var conta = -1;
+
+                            //alert("llega y hay: " + jsondata2.length + " alimentos");
+
+                            for(var j = 0; j < ids.length; j++){
+                                if(ids[j]==jsondata2.ID){
+                                    conta =j;
+                                }
+                            }
+
+
+
+                            var evento3 = {
+                                title: jsondata2.NAME,
+                                tipo: "Objetivo",
+                                idRegistro: registerIDs[conta],
+                                prot: jsondata2.PROTEINS,
+                                gluc: jsondata2.CARBON_HYDRATES,
+                                lipids: jsondata2.LIPIDS,
+                                amount: amounts[conta],
+                                progress: progress[conta],
+                                completed: completed[conta],
+                                allDay: true,
+                                color: "#345f7f",
+                                horario: horarios[conta],
+                                start: fechas[conta],
+                                end: fechas_end[conta]
+                            };
+
+                            //alert(evento2);
+
+                            if(conta > -1){
+                                ids.splice(conta,1);
+                                horarios.splice(conta,1);
+                                registerIDs.splice(conta,1);
+                                fechas.splice(conta,1);
+                                fechas_end.splice(conta,1);
+                                amounts.splice(conta,1);
+                                completed.splice(conta,1);
+                                progress.splice(conta,1);
+
+                            }
+
+
+                            names.push(jsondata2.NAME);
+                            horarios.push(jsondata2.FOODHOUR);
+                            $('#calendar').fullCalendar('renderEvent', evento3, true);
+
+
+                        },
+                        error : function(xhr, status) {
+                            alert("error");
+                            console.log(xhr);
+                            console.log(status);
+                        }
+                    });
+                }
+
+
+            },
+            error : function(xhr, status) {
+                console.log(xhr);
+                console.log(status);
+            }
+        });
+    }
 };
 
 
@@ -408,11 +527,31 @@ $('input.autocomplete').keyup(function() {
     $(".collapsible").collapsible({accordion: true});
     $(".collapsible").collapsible({accordion: false});
     $("#name_food").text("");
+    $("#name_food2").text("");
 
 
     for(var i = 0; i < datas.length; i++){
         if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
+            $("#name_food2").text(datas[i].NAME);
+        }
+    }
+});
+
+$('#autocompleteinput2').keyup(function() {
+
+    $(".collapsible-header").removeClass(function(){
+        return "active";
+    });
+    $(".collapsible").collapsible({accordion: true});
+    $(".collapsible").collapsible({accordion: false});
+    $("#name_food").text("");
+    $("#name_food2").text("");
+
+
+    for(var i = 0; i < datas.length; i++){
+        if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
+            $("#name_food2").text(datas[i].NAME);
         }
     }
 });
@@ -421,6 +560,7 @@ $('input.autocomplete').focusout(function() {
     for(var i = 0; i < datas.length; i++){
         if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
+            $("#name_food2").text(datas[i].NAME);
         }
     }
 });
@@ -430,6 +570,7 @@ $('input.autocomplete').bind('input', function() {
     for(var i = 0; i < datas.length; i++){
         if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
+            $("#name_food2").text(datas[i].NAME);
         }
     }
 });
@@ -439,6 +580,7 @@ $('.autocomplete-content').on('click', "span",function() {
     for(var i = 0; i < datas.length; i++){
         if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
+            $("#name_food2").text(datas[i].NAME);
         }
     }
 });
@@ -448,6 +590,7 @@ $(".autocomplete-content ul").on('click', function() {
     for(var i = 0; i < datas.length; i++){
         if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
+            $("#name_food2").text(datas[i].NAME);
         }
     }
 });
@@ -457,6 +600,7 @@ $(".autocomplete-content li").on('click', function() {
     for(var i = 0; i < datas.length; i++){
         if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
+            $("#name_food2").text(datas[i].NAME);
         }
     }
 });
@@ -466,6 +610,7 @@ $("#autocompletar-tooltop li").on('click', function() {
     for(var i = 0; i < datas.length; i++){
         if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
             $("#name_food").text(datas[i].NAME);
+            $("#name_food2").text(datas[i].NAME);
         }
     }
 });
@@ -503,6 +648,39 @@ $("#acordeon").on('click', function() {
     }
 });
 
+$("#acordeon2").on('click', function() {
+
+    bool = false;
+
+    for(var i = 0; i < datas.length; i++) {
+        if($('#autocompleteinput2').val().toUpperCase() == datas[i].NAME.toUpperCase()){
+            $("#name_food2").text(datas[i].NAME);
+            $("#food_gluc2").text(datas[i].CARBON_HYDRATES + "g*");
+            $("#food_prot2").text(datas[i].PROTEINS + "g*");
+            $("#food_lipids2").text(datas[i].LIPIDS + "g*");
+
+            bool = true;
+
+            //$("#acordeon").addClass("active");
+        }
+    }
+
+    if(bool){
+        $("#error-food2").css("display", "none");
+        $("#content-food-registry2").css("display", "inherit");
+    }else{
+        $("#error-food2").css("display", "inherit");
+        $("#content-food-registry2").css("display", "none");
+        $("#name_food2").text("");
+
+        $(".collapsible-header").removeClass(function(){
+            return "active";
+        });
+        $(".collapsible").collapsible({accordion: true});
+        $(".collapsible").collapsible({accordion: false});
+    }
+});
+
 /*
 $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
@@ -520,13 +698,13 @@ $("#botonEv").on("click",function () {
     var foodid = -1;
     for(var i = 0; i < datas.length; i++){
         if($('input.autocomplete').val().toUpperCase() == datas[i].NAME.toUpperCase()){
-           foodid = datas[i].ID;
+            foodid = datas[i].ID;
         }
     }
 
     if(foodid != -1 && $("#selecthorario").find(":selected").text().toUpperCase() != "ELIGE EL HORARIO" )
     {
-        var formData = {PATIENTID: Patient_id,FOODHOUR: $("#selecthorario").find(":selected").text().toUpperCase(),FOODID:foodid,DATE: $("#datepick").val()}; //Array
+        var formData = {PATIENTID: Patient_id,FOODHOUR: $("#selecthorario").find(":selected").text().toUpperCase(),FOODID:foodid,DATE: $("#datepick").val(),AMOUNT: $("#amountRegistry").val()}; //Array
 
         //alert(formData.PATIENTID + " " + formData.FOODHOUR.toUpperCase() + " " + formData.FOODID + " " + formData.DATE);
 
@@ -555,8 +733,55 @@ $("#botonEv").on("click",function () {
         });
 
         statics();
-    }else{
+    }
 
+});
+
+$("#botonEvOb").on("click",function () {
+
+    //$("#Registro").validate();
+    var foodid = -1;
+    for(var i = 0; i < datas.length; i++){
+        if($('#autocompleteinput2').val().toUpperCase() == datas[i].NAME.toUpperCase()){
+            foodid = datas[i].ID;
+        }
+    }
+    //$("#selecthorario").find(":selected").text().toUpperCase() != "ELIGE EL HORARIO"
+    if(foodid != -1)
+    {
+        if($("#selecthorario").find(":selected").text().toUpperCase() != "ELIGE EL HORARIO")
+            var formData = {PATIENTID: Patient_id,FOODHOUR: $("#selecthorario").find(":selected").text().toUpperCase(),FOODID:foodid,START_DATE: $("#datepick2").val(),END_DATE: $("#datepick3").val(),AMOUNT:$("#amount_objetive").val()}; //Array
+        else{
+            var formData = {PATIENTID: Patient_id,FOODID:foodid,START_DATE: $("#datepick2").val(),END_DATE: $("#datepick3").val(),AMOUNT:$("#amount_objetive").val()}; //Array
+        }
+
+        //alert(formData.PATIENTID + " " + formData.FOODHOUR.toUpperCase() + " " + formData.FOODID + " " + formData.DATE);
+
+
+        $.ajax({
+            url : "/backend/patients/objetive",
+            type: "POST",
+            data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+                //alert("Se ha insertado el registro correctamente.")
+                calendario();
+
+                $("#add_event").closeModal();
+                setTimeout(function() {
+                    Materialize.toast('Se ha añadido el evento correctamente', 5000);
+                }, 500);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                setTimeout(function() {
+                    Materialize.toast('Ha ocurrido un error', 5000);
+                }, 500);
+            }
+        });
+
+        statics();
     }
 
 });
@@ -569,6 +794,8 @@ $(document).ready(function() {
     $(document).ready(function() {
         $('select').material_select();
     });
+
+
 
 
     /*$("#formValidate").validate({
@@ -666,6 +893,14 @@ $(document).ready(function() {
 
 
     $("#alimentos").on('click', function() {
+        //$(".card-reveal").css({"transform":"translateY(0%)","display":"none"});
+
+
+
+        calendario();
+    });
+
+    $("#objetivos").on('click', function() {
         //$(".card-reveal").css({"transform":"translateY(0%)","display":"none"});
 
 

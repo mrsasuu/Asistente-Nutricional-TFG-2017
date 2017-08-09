@@ -12,6 +12,7 @@ var Video = require('../models/Video');
 var Utils = require('../utils/Util');
 var Patient = require('../models/Patient');
 var FoodRegister = require('../models/FoodRegister');
+var Objetive = require('../models/Objetive');
 
 var Food = require("../models/Food");
 
@@ -412,8 +413,9 @@ PatientController.prototype.initBackend = function() {
             var FOODHOUR = req.body.FOODHOUR;
             var FOODID = req.body.FOODID;
             var DATE = req.body.DATE;
+            var AMOUNT = req.body.AMOUNT;
 
-            //console.log(foodRegister);
+            console.log(AMOUNT);
 
 
 
@@ -421,13 +423,101 @@ PatientController.prototype.initBackend = function() {
                 PATIENTID,
                 FOODID,
                 FOODHOUR,
-                DATE
+                DATE,
+                AMOUNT
             ).then(function(result) {
                 self.renderJson.msg = 'Registro añadido correctamente';
+
+                var objetivos = Objetive.build();
+
+                objetivos.retrieveByPatientId(id_patient).then(function(result2) {
+                    self.renderJson.msg = 'Registro añadido correctamente';
+
+                    var date_regis = new Date(DATE).getTime();
+
+                    for(var i = 0; i < result2.length; i++){
+                        var min_date = new Date(result2.START_DATE).getTime();
+                        var max_date = new Date(result2.END_DATE).getTime();
+
+                        if(min_date <= date_regis <= max_date){
+                            var progress = parseFloat(result2.progress);
+
+                            progress += AMOUNT;
+                        }
+                    }
+
+
+
+
+
+
+                    // Add the event to a new Activity Log
+                    var ct = "Inserción";
+                    var desc = "Se ha añadido un registro al paciente " + PATIENTID;
+                    var date = new Date();
+                    var uid = self.renderJson.user.ID;
+                    self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+
+                    res.redirect('/backend/patients');
+                }, function(error) {
+                    console.log(error);
+                    self.renderJson.error = 'Se ha producido un error interno';
+                    res.redirect('/backend/patients');
+                });
+
 
                 // Add the event to a new Activity Log
                 var ct = "Inserción";
                 var desc = "Se ha añadido un registro al paciente " + PATIENTID;
+                var date = new Date();
+                var uid = self.renderJson.user.ID;
+                self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+
+                res.redirect('/backend/patients');
+            }, function(error) {
+                console.log(error);
+                self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/patients');
+            });
+        }
+        else
+            res.redirect('/');
+    });
+
+    self.routerBackend.route('/objetive').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+        if(typeof self.renderJson.user !== 'undefined') {
+            var objetive = Objetive.build();
+
+            var id_patient = req.body.PATIENTID;
+
+            var PATIENTID = id_patient;
+            var FOODHOUR = req.body.FOODHOUR;
+            var FOODID = req.body.FOODID;
+            var AMOUNT = req.body.AMOUNT;
+            var NUTRITIONIST_ID = self.renderJson.user.ID;
+            var START_DATE = req.body.START_DATE;
+            var END_DATE = req.body.END_DATE;
+
+            console.log("Se va a insertar un objetivo del paciente: " + id_patient);
+
+
+
+            objetive.add(
+                NUTRITIONIST_ID,
+                PATIENTID,
+                FOODID,
+                AMOUNT,
+                FOODHOUR,
+                START_DATE,
+                END_DATE
+            ).then(function(result) {
+                self.renderJson.msg = 'Objetivo añadido correctamente';
+
+                // Add the event to a new Activity Log
+                var ct = "Inserción";
+                var desc = "Se ha añadido un objetivo al paciente " + PATIENTID;
                 var date = new Date();
                 var uid = self.renderJson.user.ID;
                 self.activityLogController.addNewActivityLog(ct, desc, date, uid);
@@ -899,7 +989,7 @@ PatientController.prototype.initBackend = function() {
                                     gluc_percent = ((gluc_b*4)/kcal_b)*100;
                                 }
 
-                                
+
 
                                 var statics={
                                    // FOODHOUR: foodHour,

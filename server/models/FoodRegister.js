@@ -17,7 +17,8 @@ var FoodRegister = DBConnector.connectAN().define('FOODREGISTER', {
 	PATIENTID: {type: Sequelize.INTEGER, allowNull: false, autoIncrement: false},
 	FOODID: {type: Sequelize.INTEGER, allowNull: false},
 	FOODHOUR: {type: Sequelize.STRING(45), allowNull: false},
-	DATE: {type: Sequelize.DATE, allowNull: false}
+	DATE: {type: Sequelize.DATE, allowNull: false},
+	AMOUNT: {type: Sequelize.DOUBLE, allowNull: false}
 },
 {
 	instanceMethods: {
@@ -46,12 +47,13 @@ var FoodRegister = DBConnector.connectAN().define('FOODREGISTER', {
 		retrievePagination: function(inicio, fin){
 			return FoodRegister.findAll({order: 'ID DESC', offset: parseInt(inicio) - 1, limit: parseInt(fin) });
 		},
-		add: function(patientId, foodId, foodHour,date) {
+		add: function(patientId, foodId, foodHour,date,amount) {
 			return FoodRegister.create({
 				PATIENTID: patientId,
 				FOODID: foodId,
                 FOODHOUR: foodHour,
-				DATE: date
+				DATE: date,
+				AMOUNT: amount
 			});
 		},
         removeById: function(food_registry_id){

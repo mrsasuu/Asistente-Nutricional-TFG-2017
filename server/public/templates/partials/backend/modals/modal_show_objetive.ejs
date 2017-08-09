@@ -1,6 +1,6 @@
-<div id="show_event" class="modal modal_material modal-fixed-footer">
+<div id="show_objetive" class="modal modal_material modal-fixed-footer">
 	<div class="modal-header z-depth-1">
-		<h4>Registro alimentario del paciente</h4>
+		<h4>Objetivo del paciente</h4>
 		<span><i class="modal_close modal-action modal-close material-icons right">close</i></span>
 	</div>
 	<div class="modal-content" style="overflow-y: scroll;">
@@ -8,50 +8,63 @@
 		<div id="profile-page-wall-share" class="row">
 			<div class="col s12">
 				<ul class="tabs tab-profile z-depth-1 light-blue" style="width: 100%;">
-					<li class="tab col s3" style="width: 33.3333%;"><a class="white-text waves-effect waves-light active" href="#Registro">Registro comida</a>
+					<li class="tab col s3" style="width: 33.3333%;"><a class="white-text waves-effect waves-light active" href="#Registro">Objetivo</a>
 					</li>
 					<div class="indicator" style="right: 817px; left: 0px;"></div></ul>
-				<!-- Registro-->
+				<!-- Objetivo-->
 				<div id="Registro" class="tab-content col s12  grey lighten-4">
 					<div class="row center-align">
 						<div style="margin-top: 20px!important;" class="col s12">
-							<h5 class="">Registro de comida</h5>
+							<h5 class="">Objetivo</h5>
 						</div>
 
 
 					</div>
 
-					<form class="formValidate" id="formValidate">
-						<p id="registerID" style="display: none"></p>
+					<form class="formValidate" >
+						<p id="objetiveID" style="display: none"></p>
 
 						<div class="input-field row ">
 
-							<p class="col s12 m2 center-align">Horario de la ingesta:</p>
-							<p id="selecthorario_show" class="col s12 m2"></p>
 
-							<p class="col s12 m2 center-align">Fecha de la ingesta:</p>
-							<p id="datepick_show" class=" col m2 s12 "></p>
 
-							<p class="col s12 m2 center-align">Cantidad:</p>
-							<p id="amount_show" class=" col m2 s12 "></p>
+							<p class="col s12 m3 center-align">Fecha inicio del objetivo:</p>
+							<p id="datepick2_show" class=" col m3 s12 "></p>
+
+							<p class="col s12 m3 center-align">Fecha fin del objetivo:</p>
+							<p id="datepick3_show" class=" col m3 s12 "></p>
+
+							<p class="col s12 m3 center-align">Horario del objetivo:</p>
+							<p id="selecthorario2_show" class="col s12 m3"></p>
+
+							<p class="col s12 m3 center-align">Cantidad:</p>
+							<p id="amount2_show" class=" col m3 s12 "></p>
+
+							<p class="col s12 m3 center-align">Progreso:</p>
+							<p id="progress_show" class="col s12 m3"></p>
+
+							<p class="col s12 m3 center-align">Completado:</p>
+							<p id="completed_show" class=" col m3 s12 "></p>
+
+
 
 						</div>
 
 						<div class="row">
 							<ul class="collapsible" data-collapsible="accordion">
 								<li>
-									<div class="collapsible-header"><i class="material-icons">restaurant</i><p style="margin: 0" id="name_food_show"></p></div>
+									<div class="collapsible-header"><i class="material-icons">restaurant</i><p style="margin: 0" id="name_food2_show"></p></div>
 									<div class="collapsible-body center-align">
 
 
 										<div class="row center-align" style="text-align: center!important;">
-											<p class="col s12 m6">Glúcidos:</p><p class="col s12 m6" id="food_gluc_show">25g</p>
+											<p class="col s12 m6">Glúcidos:</p><p class="col s12 m6" id="food_gluc2_show">25g</p>
 										</div>
 										<div class="row center-align">
-											<p class="col s12 m6">Proteinas:</p><p class="col s12 m6" id="food_prot_show">12g</p>
+											<p class="col s12 m6">Proteinas:</p><p class="col s12 m6" id="food_prot2_show">12g</p>
 										</div>
 										<div class="row center-align">
-											<p class="col s12 m6">Lípidos:</p><p class="col s12 m6" id="food_lipids_show">7g</p>
+											<p class="col s12 m6">Lípidos:</p><p class="col s12 m6" id="food_lipids2_show">7g</p>
 										</div>
 
 										<h6>*Medidas cada 100g</h6>

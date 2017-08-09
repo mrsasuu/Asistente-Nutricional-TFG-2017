@@ -7,12 +7,12 @@
 
 		<div id="profile-page-wall-share" class="row">
 			<div class="col s12">
-				<ul class="tabs tab-profile z-depth-1 light-blue" style="width: 100%;">
-					<li class="tab col s3" style="width: 33.3333%;"><a class="white-text waves-effect waves-light active" href="#Registro">Registro comida</a>
+				<ul class="tabs tab-profile z-depth-1 light-blue" style="width: 100%; overflow-x: hidden!important;">
+					<li class="tab col s3" style="width: 33.3333%;"><a id="aRegistro" class="white-text waves-effect waves-light active" href="#Registro">Registro comida</a>
 					</li>
-					<li class="tab col s3" style="width: 33.3333%;"><a class="white-text waves-effect waves-light" href="#Objetivo"> Objetivo</a>
+					<li class="tab col s3" style="width: 33.3333%;"><a id="aObjetivo" class="white-text waves-effect waves-light" href="#Objetivo"> Objetivo</a>
 					</li>
-					<div class="indicator" style="right: 817px; left: 0px;"></div></ul>
+					<div class="indicator" style="right: 300px; left: 0px;"></div></ul>
 				<!-- Registro-->
 				<div id="Registro" class="tab-content col s12  grey lighten-4">
 					<div class="row center-align">
@@ -27,7 +27,7 @@
 
 						<div class="input-field row ">
 
-							<p class="col s12 m3 center-align">Horario de la ingesta:</p>
+							<p class="col s12 m2 center-align">Horario de la ingesta:</p>
 							<select style="display: none!important;" id="selecthorario" class="col s12 m2">
 								<option value="" disabled selected>Elige el horario</option>
 								<option value="1">Desayuno</option>
@@ -37,8 +37,11 @@
 								<option value="5">Otro</option>
 							</select>
 
-							<p class="col s12 offset-m1 m3 center-align">Fecha de la ingesta:</p>
-							<input id="datepick" type="text" class=" col m2 s12 datepicker ">
+							<p class="col s12 m2 center-align">Fecha de la ingesta:</p>
+							<input id="datepick" type="date" class=" col m2 s12 datepicker ">
+
+							<p class="col s12 m2 center-align">Cantidad:</p>
+							<input id="amountRegistry" type="number" step="0.01" value="1.0" required class=" col m2 s12">
 
 						</div>
 
@@ -89,14 +92,81 @@
 
 				</div>
 
-				<!-- AddPhotos -->
+				<!-- Objetivo -->
 				<div id="Objetivo" class="tab-content col s12  grey lighten-4" style="display: none;">
 					<div class="row center-align">
 						<div style="margin-top: 20px!important;" class="col s12">
 							<h5 class="">Añadir objetivo</h5>
 
-							<h2>Trabajando en ello.</h2>
-							<h5>En breve se terminará de crear esta sección de la web.</h5>
+							<form class="formValidate" >
+
+								<div class="input-field row ">
+
+									<p class="col s12 m3 center-align">Fecha inicio del objetivo:</p>
+									<input id="datepick2" type="date" class=" col m3 s12 datepicker ">
+
+									<p class="col s12 m3 center-align">Fecha final del objetivo:</p>
+									<input id="datepick3" type="date" class=" col m3 s12 datepicker ">
+
+									<p class="col s12 m3 center-align">Horario del objetivo:</p>
+									<select style="display: none!important;" id="selecthorario2" class="col s12 m4">
+										<option value="" selected>Elige el horario</option>
+										<option value="1">Desayuno</option>
+										<option value="2">Almuerzo</option>
+										<option value="3">Merienda</option>
+										<option value="4">Cena</option>
+										<option value="5">Otro</option>
+									</select>
+
+									<p class="col s12 m2 center-align">Cantidad:</p>
+									<input id="amount_objetive" type="number" step="0.01" value="1.0" class=" col m3 s12">
+
+								</div>
+
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">search</i>
+										<input type="text" id="autocompleteinput2" autocomplete="off" class="autocomplete validate">
+										<label for="autocompleteinput2">Buscar alimento:</label>
+
+									</div>
+								</div>
+								<div class="row">
+									<ul id="acordeon2" class="collapsible" data-collapsible="accordion">
+										<li>
+											<div class="collapsible-header"><i class="material-icons">restaurant</i><p style="margin: 0" id="name_food2"></p></div>
+											<div class="collapsible-body center-align">
+												<div style="display: none" id="content-food-registry2">
+
+													<div class="row">
+														<p class="col s12 m6">Glúcidos:</p><p class="col s12 m6" id="food_gluc2">25g</p>
+													</div>
+													<div class="row">
+														<p class="col s12 m6">Proteinas:</p><p class="col s12 m6" id="food_prot2">12g</p>
+													</div>
+													<div class="row">
+														<p class="col s12 m6">Lípidos:</p><p class="col s12 m6" id="food_lipids2">7g</p>
+													</div>
+
+													<h6>*Medidas cada 100g</h6>
+
+												</div>
+
+												<h6 id="error-food2">No se ha seleccionado ninguna comida.</h6>
+
+
+
+											</div>
+										</li>
+									</ul>
+								</div>
+
+								<div class="row center-align">
+									<a class="col s12 offset-m4 m4 waves-effect waves-light btn" type="submit" name="action" id="botonEvOb">Añadir objetivo</a>
+								</div>
+
+
+							</form>
 						</div>
 
 
