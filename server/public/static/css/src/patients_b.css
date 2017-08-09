@@ -38,11 +38,12 @@ select{
     text-align: center!important;
 }
 
+
 #materialize-lean-overlay-3{
     z-index: 1000!important;
  }
 
-#modalDelete{
+#modalDelete, #modalDelete2{
     top: 10%;
     z-index: 100;
 }

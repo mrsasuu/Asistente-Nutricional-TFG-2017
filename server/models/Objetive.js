@@ -74,6 +74,12 @@ var Objetive = DBConnector.connectAN().define('OBJETIVE', {
                 COMPLETED: this.completed
             }, { where: {ID: objetive_id} });
         },
+		updateProgressAndComplete: function (objetive_id) {
+            return Objetive.update({
+                PROGRESS: this.progress,
+                COMPLETED: this.completed
+            }, { where: {ID: objetive_id} });
+        },
         removeById: function(food_registry_id){
             return Objetive.destroy({ where: {ID: food_registry_id} });
         }

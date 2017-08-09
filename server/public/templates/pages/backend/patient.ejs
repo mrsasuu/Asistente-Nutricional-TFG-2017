@@ -67,6 +67,7 @@
             <% include ../../partials/backend/modals/modal_delete_patient %>
             <% include ../../partials/backend/modals/modal_add_event %>
             <% include ../../partials/backend/modals/modal_show_event %>
+            <% include ../../partials/backend/modals/modal_show_objetive %>
 			<!-- Modal show patient -->
             <% include ../../partials/backend/modals/modal_show_patient %>
 
@@ -114,8 +115,6 @@
                     },
 					eventClick: function (event,jsEvent,view) {
 
-					    alert(event.tipo);
-
 					    if(event.tipo == "Registro"){
                             $("#modalDelete").css("display","none");
                             $("#datepick_show").text($.fullCalendar.formatDate(event.start, "YYYY-MM-DD"));
@@ -126,13 +125,17 @@
                             $("#food_lipids_show").text(event.lipids + "g");
                             $("#registerID").text(event.idRegistro);
                             $("#amount_show").text(event.amount);
+                            $("#show_event").openModal();
 						}else if(event.tipo == "Objetivo"){
-                            $("#modalDelete").css("display","none");
+                            $("#modalDelete2").css("display","none");
                             $("#objetiveID").text(event.idRegistro);
 
                             $("#datepick2_show").text($.fullCalendar.formatDate(event.start, "YYYY-MM-DD"));
                             $("#datepick3_show").text($.fullCalendar.formatDate(event.end, "YYYY-MM-DD"));
-                            $("#selecthorario2_show").text(event.horario);
+                            if(event.horario == null)
+                                $("#selecthorario2_show").text("No especificado");
+                            else
+                                $("#selecthorario2_show").text(event.horario);
                             $("#name_food2_show").text(event.title);
                             $("#food_gluc2_show").text(event.gluc + "g");
                             $("#food_prot2_show").text(event.prot + "g");
@@ -144,10 +147,12 @@
                             else
                                 $("#completed_show").text("No completado");
 
+                            $("#show_objetive").openModal();
+
 						}
 
 
-					    $("#show_event").openModal();
+
 
                     },
                     navLinks: true, // can click day/week names to navigate views
@@ -165,23 +170,26 @@
 
                         var start2 = $.fullCalendar.formatDate(start, "YYYY-MM-DD");
 
-                        var end2 = $.fullCalendar.formatDate(end, "YYYY-MM");
+                        var end2 = $.fullCalendar.formatDate(end, "YYYY-MM-DD");
 
                         var startDay = $.fullCalendar.formatDate(start, "D");
                         var endDay = $.fullCalendar.formatDate(end, "D");
 
-                        if((endDay-1)<10)
+                        /*if((endDay-1)<10)
                         	end2 += "-0" + (endDay-1);
                         else
-                            end2 += "-" + (endDay-1);
+                            end2 += "-" + (endDay-1);*/
 
 
 
                         if(endDay - startDay == 1){
                             $('#datepick').val(start2);
+                            $('#datepick2').val(start2);
+                            $('#datepick3').val(end2);
                             eventFire(document.getElementById('aRegistro'), 'click');
 
 						}else{
+                            $('#datepick').val(start2);
                             $('#datepick2').val(start2);
                             $('#datepick3').val(end2);
                             eventFire(document.getElementById('aObjetivo'), 'click');

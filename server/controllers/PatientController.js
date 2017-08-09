@@ -215,7 +215,7 @@ PatientController.prototype.initBackend = function() {
             patient.weight = req.body.edit_weight_patient;
             patient.photo = req.body.edit_photo_anterior_patient;
 
-            console.log(patient);
+
 
             // Check if there're files to upload
             if(req.files.length > 0) {
@@ -342,7 +342,7 @@ PatientController.prototype.initBackend = function() {
             patient.weight = req.body.edit_weight_patient;
             patient.photo = req.body.edit_photo_anterior_patient;
 
-            console.log(patient);
+
 
             // Check if there're files to upload
             if(req.files.length > 0) {
@@ -415,7 +415,6 @@ PatientController.prototype.initBackend = function() {
             var DATE = req.body.DATE;
             var AMOUNT = req.body.AMOUNT;
 
-            console.log(AMOUNT);
 
 
 
@@ -435,30 +434,72 @@ PatientController.prototype.initBackend = function() {
 
                     var date_regis = new Date(DATE).getTime();
 
-                    for(var i = 0; i < result2.length; i++){
-                        var min_date = new Date(result2.START_DATE).getTime();
-                        var max_date = new Date(result2.END_DATE).getTime();
+                    var boole = false;
+                    var progress;
+                    var progressObj;
+                    var amountObj;
+                    var objId;
+                    for(var i = 0; i < result2.length && !boole ; i++){
 
-                        if(min_date <= date_regis <= max_date){
-                            var progress = parseFloat(result2.progress);
+                        var min_date = new Date(result2[i].START_DATE).getTime();
+                        var max_date = new Date(result2[i].END_DATE).getTime();
 
-                            progress += AMOUNT;
+                        if((min_date <= date_regis) && (date_regis <= max_date)){
+
+                            if(result2[i].FOOD_ID == FOODID){
+
+                                boole = true;
+                                objId = result2[i].ID;
+                                amountObj = parseFloat(result2[i].AMOUNT);
+
+                                progressObj = parseFloat(result2[i].PROGRESS);
+                                progress = parseFloat(progressObj) + parseFloat(AMOUNT);
+                            }
+
                         }
                     }
 
+                    if(boole)
+                    {
+                        objetivos = Objetive.build();
+
+                        if(parseFloat(progress) >= amountObj){
 
 
+                            objetivos.progress = progress;
+                            objetivos.completed = 1;
 
+                            objetivos.updateProgressAndComplete(objId).then(function(result) {
+                                self.renderJson.msg = 'Objetivo actualizado y completado correctamente';
+                                console.log("Objetivo actualizado y completado correctamente.");
 
+                                res.redirect('/backend/patients');
+                            },function(error) {
+                                console.log(error);
+                                self.renderJson.error = 'Se ha producido un error actualizando el objetivo.';
+                                res.redirect('/backend/patients');
+                            });
+                        }else {
+                            objetivos.progress = progress;
 
-                    // Add the event to a new Activity Log
-                    var ct = "Inserción";
-                    var desc = "Se ha añadido un registro al paciente " + PATIENTID;
-                    var date = new Date();
-                    var uid = self.renderJson.user.ID;
-                    self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+                            objetivos.updateProgress(objId).then(function(result) {
+                                self.renderJson.msg = 'Objetivo actualizado correctamente';
+                                console.log("Objetivo actualizado correctamente.");
 
-                    res.redirect('/backend/patients');
+                                res.redirect('/backend/patients');
+                            },function(error) {
+                                console.log(error);
+                                self.renderJson.error = 'Se ha producido un error actualizando el objetivo.';
+                                res.redirect('/backend/patients');
+                            });
+                        }
+
+                    }else{
+                        self.renderJson.msg = 'Registro insertado correctamente';
+                        console.log("Registro insertado correctamente.");
+                        res.redirect('/backend/patients');
+                    }
+
                 }, function(error) {
                     console.log(error);
                     self.renderJson.error = 'Se ha producido un error interno';
@@ -472,8 +513,6 @@ PatientController.prototype.initBackend = function() {
                 var date = new Date();
                 var uid = self.renderJson.user.ID;
                 self.activityLogController.addNewActivityLog(ct, desc, date, uid);
-
-                res.redirect('/backend/patients');
             }, function(error) {
                 console.log(error);
                 self.renderJson.error = 'Se ha producido un error interno';
@@ -533,6 +572,85 @@ PatientController.prototype.initBackend = function() {
             res.redirect('/');
     });
 
+    self.routerBackend.route('/objetive/delete').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+        if(typeof self.renderJson.user !== 'undefined') {
+            var objetive = Objetive.build();
+
+            var idObjetive = req.body.OBJETIVE_ID;
+
+
+
+            console.log("Se va a eliminar un objetivo id: " + idObjetive);
+
+
+
+            objetive.removeById(idObjetive).then(function(result) {
+                self.renderJson.msg = 'Objetivo eliminado correctamente';
+
+                res.redirect('/backend/patients');
+            }, function(error) {
+                console.log(error);
+                self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/patients');
+            });
+        }
+        else
+            res.redirect('/');
+    });
+
+
+    self.routerBackend.route('/objetive/lastweek').post(function(req, res) {
+        self.renderJson.user = req.session.user;
+
+        if(typeof self.renderJson.user !== 'undefined') {
+            var objetive = Objetive.build();
+
+            var id_patient = req.body.patient_id;
+
+            var weekday = getWeek(new Date(),1);
+            var cont = 0;
+            var num_objetives_week = 0;
+            var date_s;
+            var date_e;
+            var date_today = new Date();
+
+
+            objetive.retrieveByPatientId(id_patient).then(function(result) {
+
+                for(var i = 0; i < result.length; i++){
+                    date_s =  new Date(result[i].START_DATE);
+                    date_e =  new Date(result[i].END_DATE);
+
+                    if(date_s.getTime() <= date_today.getTime() && date_today.getTime() <= date_e.getTime()){
+                        num_objetives_week++;
+
+                        if(parseInt(result[i].COMPLETED) == 1){
+                            cont++;
+                        }
+                    }
+                }
+
+                var resultLastWeek = {
+                    OBJETIVES: num_objetives_week,
+                    COMPLETED: cont
+                };
+
+                res.json(resultLastWeek);
+
+            }, function(error) {
+                console.log(error);
+                self.renderJson.error = 'Se ha producido un error interno';
+                res.redirect('/backend/patients');
+            });
+        }
+        else
+            res.redirect('/');
+    });
+
+
+
     self.routerBackend.route('/food_register/delete').post(function(req, res) {
         self.renderJson.user = req.session.user;
 
@@ -545,28 +663,121 @@ PatientController.prototype.initBackend = function() {
 
 
 
-            console.log("Se quiere eliminar: "+ foodRegistryId);
+
+
+            foodRegister.retrieveById(foodRegistryId).then(function(result) {
+                var foodRegister = FoodRegister.build();
+
+                foodRegister.removeById(foodRegistryId).then(function(result2) {
+
+                    self.renderJson.msg = 'Se ha eliminado correctamente';
+
+
+                    var objetivos = Objetive.build();
+
+                    objetivos.retrieveByPatientId(result.PATIENTID).then(function(result3) {
+
+                        var date_regis = new Date(result.DATE).getTime();
+
+                        var boole = false;
+                        var progress;
+                        var progressObj;
+                        var amountObj;
+                        var objId;
+                        var amountR = result.AMOUNT;
+                        for(var i = 0; i < result3.length && !boole ; i++){
+
+                            var min_date = new Date(result3[i].START_DATE).getTime();
+                            var max_date = new Date(result3[i].END_DATE).getTime();
+
+                            if((min_date <= date_regis) && (date_regis <= max_date)){
+
+                                if(result3[i].FOOD_ID == result.FOODID){
+
+                                    boole = true;
+                                    objId = result3[i].ID;
+                                    amountObj = parseFloat(result3[i].AMOUNT);
+
+                                    progressObj = parseFloat(result3[i].PROGRESS);
+                                    progress = parseFloat(progressObj) - parseFloat(amountR);
+                                }
+
+                            }
+                        }
+
+                        if(boole)
+                        {
+                            objetivos = Objetive.build();
+
+                            if(parseFloat(progress) < amountObj){
+
+
+                                objetivos.progress = progress;
+                                objetivos.completed = 0;
+
+                                objetivos.updateProgressAndComplete(objId).then(function(result) {
+                                    self.renderJson.msg = 'Objetivo actualizado y completado correctamente';
+
+
+                                    res.redirect('/backend/patients');
+                                },function(error) {
+                                    console.log(error);
+                                    self.renderJson.error = 'Se ha producido un error actualizando el objetivo.';
+                                    res.redirect('/backend/patients');
+                                });
+                            }else {
+                                objetivos.progress = progress;
+
+                                objetivos.updateProgress(objId).then(function(result) {
+                                    self.renderJson.msg = 'Objetivo actualizado correctamente';
+
+
+                                    res.redirect('/backend/patients');
+                                },function(error) {
+                                    console.log(error);
+                                    self.renderJson.error = 'Se ha producido un error actualizando el objetivo.';
+                                    res.redirect('/backend/patients');
+                                });
+                            }
+
+                        }else{
+                            self.renderJson.msg = 'Registro insertado correctamente';
+                            console.log("Registro insertado correctamente.");
+                            res.redirect('/backend/patients');
+                        }
+
+                    }, function(error) {
+                        console.log(error);
+                        self.renderJson.error = 'Se ha producido un error interno';
+                        res.redirect('/backend/patients');
+                    });
 
 
 
-            foodRegister.removeById(foodRegistryId).then(function(result) {
-                console.log("Se ha eliminado: "+ foodRegistryId);
-                self.renderJson.msg = 'Se ha eliminado correctamente';
 
-                // Add the event to a new Activity Log
-                var ct = "Borrado";
-                var desc = "Se ha eliminado el registro con ID " + foodRegistryId;
-                var date = new Date();
-                var uid = self.renderJson.user.ID;
-                self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+                    // Add the event to a new Activity Log
+                    var ct = "Borrado";
+                    var desc = "Se ha eliminado el registro con ID " + foodRegistryId;
+                    var date = new Date();
+                    var uid = self.renderJson.user.ID;
+                    self.activityLogController.addNewActivityLog(ct, desc, date, uid);
+
+
+                }, function(err) {
+                    console.log("Error con: "+ foodRegistryId);
+                    console.log(err);
+                    self.renderJson.error = 'Se ha producido un error interno borrando al usuario';
+                    res.redirect('/backend/patients');
+                });
 
                 res.redirect('/backend/patients');
             }, function(err) {
-                console.log("Error con: "+ foodRegistryId);
+                console.log("Error buscando a: "+ foodRegistryId);
                 console.log(err);
-                self.renderJson.error = 'Se ha producido un error interno borrando al usuario';
+                self.renderJson.error = 'Se ha producido un error borrando al usuario';
                 res.redirect('/backend/patients');
             });
+
         }
         else
             res.redirect('/');
@@ -588,13 +799,6 @@ PatientController.prototype.initBackend = function() {
 
 
 
-
-
-
-            console.log("Se consulta: "+ patientId);
-
-
-
             foodRegister.retrieveByPatientIdLastWeek(patientId).then(function(result) {
                 var result2 = [];
                 var num_elemets_b = 0;
@@ -602,6 +806,11 @@ PatientController.prototype.initBackend = function() {
                 var num_elemets_ = 0;
                 var dayofweeks = [];
                 var breakfast = [];
+                var amountB = [];
+                var amountL = [];
+                var amountS = [];
+                var amountD = [];
+                var amountO = [];
                 var lunch = [];
                 var snacks = [];
                 var dinner = [];
@@ -618,7 +827,7 @@ PatientController.prototype.initBackend = function() {
                         if(result2){
                             for(var i  = 0; i < result.length; i++) {
                                 var newDate = new Date(result[i].DATE);
-                                console.log("Semana:" + getWeek(newDate, 1));
+
 
                                 if(getWeek(newDate,1) == week_number && result[i].FOODHOUR == "DESAYUNO"){
                                     result2.push(result[i]);
@@ -626,10 +835,11 @@ PatientController.prototype.initBackend = function() {
                                     for(var j = 0; j < result2.length; j++){
                                         if(result2[j].ID == result[i].FOODID){
                                             breakfast.push(result2[j]);
-                                            console.log("Alimento: " + result2[j].NAME);
+                                            amountB.push(result[i].AMOUNT);
+
                                         }
                                     }
-                                    console.log("Numero de elementos en el desayuno: " + breakfast.length);
+
 
                                 }else if(getWeek(newDate,1) == week_number && result[i].FOODHOUR == "ALMUERZO"){
                                     result2.push(result[i]);
@@ -637,40 +847,44 @@ PatientController.prototype.initBackend = function() {
                                     for(var j = 0; j < result2.length; j++){
                                         if(result2[j].ID == result[i].FOODID){
                                             lunch.push(result2[j]);
-                                            console.log("Alimento: " + result2[j].NAME);
+                                            amountL.push(result[i].AMOUNT);
+
                                         }
                                     }
-                                    console.log("Numero de elementos en el almuerzo: " + lunch.length);
+
                                 }else if(getWeek(newDate,1) == week_number && result[i].FOODHOUR == "MERIENDA"){
                                     result2.push(result[i]);
 
                                     for(var j = 0; j < result2.length; j++){
                                         if(result2[j].ID == result[i].FOODID){
                                             snacks.push(result2[j]);
-                                            console.log("Alimento: " + result2[j].NAME);
+                                            amountS.push(result[i].AMOUNT);
+
                                         }
                                     }
-                                    console.log("Numero de elementos en la merienda: " + snacks.length);
+
                                 }else if(getWeek(newDate,1) == week_number && result[i].FOODHOUR == "CENA"){
                                     result2.push(result[i]);
 
                                     for(var j = 0; j < result2.length; j++){
                                         if(result2[j].ID == result[i].FOODID){
                                             dinner.push(result2[j]);
-                                            console.log("Alimento: " + result2[j].NAME);
+                                            amountD.push(result[i].AMOUNT);
+
                                         }
                                     }
-                                    console.log("Numero de elementos en la cena: " + dinner.length);
+
                                 }else if(getWeek(newDate,1) == week_number && result[i].FOODHOUR == "OTRO"){
                                     result2.push(result[i]);
 
                                     for(var j = 0; j < result2.length; j++){
                                         if(result2[j].ID == result[i].FOODID){
                                             other.push(result2[j]);
-                                            console.log("Alimento: " + result2[j].NAME);
+                                            amountO.push(result[i].AMOUNT);
+
                                         }
                                     }
-                                    console.log("Numero de elementos en otros: " + other.length);
+
                                 }
                             }
 
@@ -687,9 +901,9 @@ PatientController.prototype.initBackend = function() {
                             var kcal_b = 0;
 
                             for(var i = 0; i < breakfast.length; i++){
-                                prot_b += breakfast[i].PROTEINS;
-                                lipids_b += breakfast[i].LIPIDS;
-                                gluc_b += breakfast[i].CARBON_HYDRATES;
+                                prot_b += (breakfast[i].PROTEINS * amountB[i]);
+                                lipids_b += (breakfast[i].LIPIDS * amountB[i]);
+                                gluc_b += (breakfast[i].CARBON_HYDRATES * amountB[i]);
                             }
 
                             if(num > 0){
@@ -722,9 +936,9 @@ PatientController.prototype.initBackend = function() {
                             kcal_b = 0;
 
                             for(var i = 0; i < lunch.length; i++){
-                                prot_b += lunch[i].PROTEINS;
-                                lipids_b += lunch[i].LIPIDS;
-                                gluc_b += lunch[i].CARBON_HYDRATES;
+                                prot_b += (lunch[i].PROTEINS * amountL[i]);
+                                lipids_b += (lunch[i].LIPIDS* amountL[i]);
+                                gluc_b += (lunch[i].CARBON_HYDRATES* amountL[i]);
                             }
 
                             if(num > 0){
@@ -757,9 +971,9 @@ PatientController.prototype.initBackend = function() {
                             kcal_b = 0;
 
                             for(var i = 0; i < snacks.length; i++){
-                                prot_b += snacks[i].PROTEINS;
-                                lipids_b += snacks[i].LIPIDS;
-                                gluc_b += snacks[i].CARBON_HYDRATES;
+                                prot_b += (snacks[i].PROTEINS * amountS[i]);
+                                lipids_b += (snacks[i].LIPIDS* amountS[i]);
+                                gluc_b += (snacks[i].CARBON_HYDRATES* amountS[i]);
                             }
 
                             if(num > 0){
@@ -792,9 +1006,9 @@ PatientController.prototype.initBackend = function() {
                             kcal_b = 0;
 
                             for(var i = 0; i < dinner.length; i++){
-                                prot_b += dinner[i].PROTEINS;
-                                lipids_b += dinner[i].LIPIDS;
-                                gluc_b += dinner[i].CARBON_HYDRATES;
+                                prot_b += (dinner[i].PROTEINS * amountD[i]);
+                                lipids_b += (dinner[i].LIPIDS * amountD[i]);
+                                gluc_b += (dinner[i].CARBON_HYDRATES * amountD[i]);
                             }
 
                             if(num > 0){
@@ -827,9 +1041,9 @@ PatientController.prototype.initBackend = function() {
                             kcal_b = 0;
 
                             for(var i = 0; i < other.length; i++){
-                                prot_b += other[i].PROTEINS;
-                                lipids_b += other[i].LIPIDS;
-                                gluc_b += other[i].CARBON_HYDRATES;
+                                prot_b += (other[i].PROTEINS * amountO[i]);
+                                lipids_b += (other[i].LIPIDS * amountO[i]);
+                                gluc_b += (other[i].CARBON_HYDRATES * amountO[i]);
                             }
 
                             if(num > 0){
@@ -854,7 +1068,7 @@ PatientController.prototype.initBackend = function() {
 
 
                             res.json(statics);
-                            console.log(statics);
+
 
 
 
@@ -873,17 +1087,6 @@ PatientController.prototype.initBackend = function() {
 
                 }
 
-               // console.log("Se ha eliminado: "+ foodRegistryId);
-                //self.renderJson.msg = 'Se ha eliminado correctamente';
-
-                /*// Add the event to a new Activity Log
-                var ct = "Borrado";
-                var desc = "Se ha eliminado el registro con ID " + foodRegistryId;
-                var date = new Date();
-                var uid = self.renderJson.user.ID;
-                self.activityLogController.addNewActivityLog(ct, desc, date, uid);*/
-
-                //res.redirect('/backend/patients');
             }, function(err) {
                 console.log("Error con: "+ patientId);
                 console.log(err);
@@ -905,7 +1108,7 @@ PatientController.prototype.initBackend = function() {
             var patientId = req.body.PATIENTID;
             var statics_date = req.body.statics_date;
 
-            console.log("Mes que buscar: " + statics_date);
+
 
             var date_today = new Date();
 
@@ -914,16 +1117,10 @@ PatientController.prototype.initBackend = function() {
 
 
 
-
-
-
-            console.log("Se consulta: "+ patientId);
-
-
-
             foodRegister.retrieveByPatientIdLastWeek(patientId).then(function(result) {
                 //var result2 = [];
                 var breakfast = [];
+                var amounts = [];
 
 
 
@@ -937,7 +1134,7 @@ PatientController.prototype.initBackend = function() {
                         if(result2){
                             for(var i  = 0; i < result.length; i++) {
                                 var newDate = new Date(result[i].DATE);
-                                console.log("Semana:" + getWeek(newDate, 1));
+
 
                                 if(newDate.getMonth() == statics_date){
                                     //result2.push(result[i]);
@@ -945,10 +1142,11 @@ PatientController.prototype.initBackend = function() {
                                     for(var j = 0; j < result2.length; j++){
                                         if(result2[j].ID == result[i].FOODID){
                                             breakfast.push(result2[j]);
-                                            console.log("Alimento: " + result2[j].NAME);
+                                            amounts.push(result[i].AMOUNT);
+
                                         }
                                     }
-                                    console.log("Numero de elementos : " + breakfast.length);
+
 
                                 }
                             }
@@ -958,7 +1156,7 @@ PatientController.prototype.initBackend = function() {
                             var gluc_b = 0;
                             //var foodHour = "DESAYUNO";
                             // var num = breakfast.length;
-                            var num = new Date().getDay();
+                            var num = new Date().getDate();
 
                             if(num == 0)
                                 num=7;
@@ -966,9 +1164,9 @@ PatientController.prototype.initBackend = function() {
                             var kcal_b = 0;
 
                             for(var i = 0; i < breakfast.length; i++){
-                                prot_b += breakfast[i].PROTEINS;
-                                lipids_b += breakfast[i].LIPIDS;
-                                gluc_b += breakfast[i].CARBON_HYDRATES;
+                                prot_b += (breakfast[i].PROTEINS * amounts[i]);
+                                lipids_b += (breakfast[i].LIPIDS * amounts[i]);
+                                gluc_b += (breakfast[i].CARBON_HYDRATES * amounts[i]);
                             }
 
                             if(num > 0){
@@ -1007,7 +1205,7 @@ PatientController.prototype.initBackend = function() {
 
 
 
-                            console.log("Día del mes: "+date_today.getDate());
+
                             res.json(statics);
 
 
@@ -1028,17 +1226,7 @@ PatientController.prototype.initBackend = function() {
 
                 }
 
-                // console.log("Se ha eliminado: "+ foodRegistryId);
-                //self.renderJson.msg = 'Se ha eliminado correctamente';
 
-                /*// Add the event to a new Activity Log
-                 var ct = "Borrado";
-                 var desc = "Se ha eliminado el registro con ID " + foodRegistryId;
-                 var date = new Date();
-                 var uid = self.renderJson.user.ID;
-                 self.activityLogController.addNewActivityLog(ct, desc, date, uid);*/
-
-                //res.redirect('/backend/patients');
             }, function(err) {
                 console.log("Error con: "+ patientId);
                 console.log(err);

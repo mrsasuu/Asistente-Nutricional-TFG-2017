@@ -2,17 +2,24 @@ var Patient_id = -1;
 var evento;
 var json1;
 var names = [];
+var names2 = [];
 var horarios = [];
+var horarios2 = [];
 var amounts = [];
+var amounts2 = [];
 var progress = [];
 var completed = [];
 var ids = [];
+var ids2 = [];
 var fechas = [];
+var fechas_start = [];
 var fechas_end = [];
 var cont = 0;
+var cont2 = 0;
 var datas;
 var bool = false;
 var registerIDs = [];
+var objetiveIDs = [];
 var idRegistro = -1;
 
 $('input.autocomplete').keypress(function() {
@@ -24,6 +31,12 @@ $('input.autocomplete').keypress(function() {
 $("#botonDel").on("click",function () {
 
     $("#modalDelete").css("display","block","opacity","1","transform","scaleX(1)");
+
+});
+
+$("#botonDel2").on("click",function () {
+
+    $("#modalDelete2").css("display","block","opacity","1","transform","scaleX(1)");
 
 });
 $("#btnCompare").on("click",function () {
@@ -172,6 +185,60 @@ $("#btnCompare").on("click",function () {
 function statics() {
 
     $("#last_registry").text("-");
+    $("#progresoPorcent").text("-");
+    $("#objetivosProgreso").text("-");
+
+    $.ajax({
+        type: "POST",
+        url: "/backend/patients/objetive/lastweek/",
+        data: {patient_id: Patient_id},
+        datatype: "json",
+        success: function(date_res2) {
+
+
+            $("#objetivosProgreso").text( date_res2.COMPLETED + "/" + date_res2.OBJETIVES);
+
+
+            if(parseInt(date_res2.OBJETIVES) != 0)
+                $("#progresoPorcent").text( ((parseInt(date_res2.COMPLETED)/parseInt(date_res2.OBJETIVES))*100) + "%");
+
+            $("#last_registry").text(day + "/" + month + "/" + date_temp.getUTCFullYear());
+
+        },
+        error : function(xhr, status) {
+            console.log(xhr);
+            console.log(status);
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        url: "/api/food_register/id/last_register/"+Patient_id,
+        datatype: "json",
+        success: function(date_res) {
+            var date_temp = new Date(date_res);
+            var month,day;
+            if((date_temp.getMonth()+1)<10){
+                month = "0" + (date_temp.getMonth()+1);
+            }else{
+                month = (date_temp.getMonth()+1);
+            }
+
+            if(date_temp.getUTCDate() < 10){
+                day = "0"+date_temp.getUTCDate();
+            }else {
+                day = date_temp.getUTCDate();
+            }
+
+
+            $("#last_registry").text(day + "/" + month + "/" + date_temp.getUTCFullYear());
+
+        },
+        error : function(xhr, status) {
+            console.log(xhr);
+            console.log(status);
+        }
+    });
 
     $.ajax({
         type: "GET",
@@ -282,6 +349,7 @@ $("#agree").on("click",function () {
         {
             //alert("Se ha insertado el registro correctamente.")
             calendario();
+            statics();
             setTimeout(function() {
                 Materialize.toast('Se ha eliminado correctamente', 5000);
             }, 500);
@@ -294,9 +362,38 @@ $("#agree").on("click",function () {
         }
     });
 
-    statics();
+
 
 });
+
+$("#agree2").on("click",function () {
+
+
+    $.ajax({
+        url : "/backend/patients/objetive/delete",
+        type: "POST",
+        data : {OBJETIVE_ID: $("#objetiveID").text()},
+        success: function(data, textStatus, jqXHR)
+        {
+            //alert("Se ha insertado el registro correctamente.")
+            calendario();
+            statics();
+            setTimeout(function() {
+                Materialize.toast('Se ha eliminado correctamente', 5000);
+            }, 500);
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            setTimeout(function() {
+                Materialize.toast('Ha ocurrido un error', 5000);
+            }, 500);
+        }
+    });
+
+
+
+});
+
 
 function calendario() {
     $('#calendar').fullCalendar( 'removeEvents');
@@ -405,12 +502,12 @@ function calendario() {
         });
     }
 
-    names = [];
-    ids = [];
-    fechas = [];
-    horarios = [];
-    amounts = [];
-    registerIDs = [];
+    names2 = [];
+    ids2 = [];
+    fechas_start = [];
+    horarios2 = [];
+    amounts2 = [];
+    objetiveIDs = [];
     completed = [];
     progress = [];
     fechas_end = [];
@@ -423,17 +520,17 @@ function calendario() {
             success: function(jsondata3) {
 
 
-                json1 = jsondata3;
+                //json1 = jsondata3;
 
                 for(var i = 0; i < jsondata3.length; i++){
-                    ids.push(jsondata3[i].FOOD_ID);
+                    ids2.push(jsondata3[i].FOOD_ID);
                     //alert("Alimento numero: "+ jsondata[i].FOOD_ID);
-                    registerIDs.push(jsondata3[i].ID);
-                    horarios.push(jsondata3[i].FOODHOUR);
+                    objetiveIDs.push(jsondata3[i].ID);
+                    horarios2.push(jsondata3[i].FOODHOUR);
                     //alert("Se ha pusheado" + ids[0]);
-                    fechas.push(jsondata3[i].START_DATE);
-                    fechas.push(jsondata3[i].END_DATE);
-                    amounts.push(jsondata3[i].AMOUNT);
+                    fechas_start.push(jsondata3[i].START_DATE);
+                    fechas_end.push(jsondata3[i].END_DATE);
+                    amounts2.push(jsondata3[i].AMOUNT);
                     completed.push(jsondata3[i].COMPLETED);
                     progress.push(jsondata3[i].PROGRESS);
                 }
@@ -441,22 +538,22 @@ function calendario() {
 
 
 
-                for(var i = 0; i < ids.length; i++){
+                for(var i = 0; i < ids2.length; i++){
                     //alert("llega y hay objetivos: " + jsondata.length);
                     //alert("Se va a buscar el alimento: " + ids[i]);
                     $.ajax({
                         type: "GET",
-                        url: "/api/food/id/"+ids[i],
+                        url: "/api/food/id/"+ids2[i],
                         datatype: "json",
                         success: function(jsondata2) {
 
-                            var conta = -1;
+                            var conta2 = -1;
 
                             //alert("llega y hay: " + jsondata2.length + " alimentos");
 
-                            for(var j = 0; j < ids.length; j++){
-                                if(ids[j]==jsondata2.ID){
-                                    conta =j;
+                            for(var j = 0; j < ids2.length; j++){
+                                if(ids2[j]==jsondata2.ID){
+                                    conta2 =j;
                                 }
                             }
 
@@ -465,38 +562,39 @@ function calendario() {
                             var evento3 = {
                                 title: jsondata2.NAME,
                                 tipo: "Objetivo",
-                                idRegistro: registerIDs[conta],
+                                idRegistro: objetiveIDs[conta2],
                                 prot: jsondata2.PROTEINS,
                                 gluc: jsondata2.CARBON_HYDRATES,
                                 lipids: jsondata2.LIPIDS,
-                                amount: amounts[conta],
-                                progress: progress[conta],
-                                completed: completed[conta],
+                                amount: amounts2[conta2],
+                                progress: progress[conta2],
+                                completed: completed[conta2],
                                 allDay: true,
                                 color: "#345f7f",
-                                horario: horarios[conta],
-                                start: fechas[conta],
-                                end: fechas_end[conta]
+                                horario: horarios2[conta2],
+                                start: fechas_start[conta2],
+                                end: fechas_end[conta2]
                             };
 
-                            //alert(evento2);
+                            //alert(evento3.title + " " + evento3.tipo + " " + evento3.start + " - "+ evento3.end + " color: " + evento3.color);
+                            $('#calendar').fullCalendar('renderEvent', evento3, true);
 
-                            if(conta > -1){
-                                ids.splice(conta,1);
-                                horarios.splice(conta,1);
-                                registerIDs.splice(conta,1);
-                                fechas.splice(conta,1);
-                                fechas_end.splice(conta,1);
-                                amounts.splice(conta,1);
-                                completed.splice(conta,1);
-                                progress.splice(conta,1);
+                            if(conta2 > -1){
+                                ids2.splice(conta2,1);
+                                horarios2.splice(conta2,1);
+                                objetiveIDs.splice(conta2,1);
+                                fechas_start.splice(conta2,1);
+                                fechas_end.splice(conta2,1);
+                                amounts2.splice(conta2,1);
+                                completed.splice(conta2,1);
+                                progress.splice(conta2,1);
 
                             }
 
 
-                            names.push(jsondata2.NAME);
-                            horarios.push(jsondata2.FOODHOUR);
-                            $('#calendar').fullCalendar('renderEvent', evento3, true);
+                            names2.push(jsondata2.NAME);
+                            horarios2.push(jsondata2.FOODHOUR);
+
 
 
                         },
@@ -717,6 +815,7 @@ $("#botonEv").on("click",function () {
             {
                 //alert("Se ha insertado el registro correctamente.")
                 calendario();
+                statics();
 
                 $("#add_event").closeModal();
                 setTimeout(function() {
@@ -732,7 +831,7 @@ $("#botonEv").on("click",function () {
             }
         });
 
-        statics();
+
     }
 
 });
@@ -766,6 +865,7 @@ $("#botonEvOb").on("click",function () {
             {
                 //alert("Se ha insertado el registro correctamente.")
                 calendario();
+                statics();
 
                 $("#add_event").closeModal();
                 setTimeout(function() {
@@ -781,7 +881,7 @@ $("#botonEvOb").on("click",function () {
             }
         });
 
-        statics();
+
     }
 
 });
