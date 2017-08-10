@@ -57,6 +57,14 @@
 
 		<% include ../../partials/backend/script_backend %>
 		<% include ../../partials/backend/server_messages %>
-		<!-- <script src="/static/js/src/index_b.js"></script> -->
+
+		<script>
+            $(window).on("load", function (e) {
+                setTimeout(function() {
+                    Materialize.toast('<span>¡Bienvenido '+ $("#username").text()+'!</span>', 5000);
+                }, 500);
+
+            });
+		</script>
 	</body>
 </html>

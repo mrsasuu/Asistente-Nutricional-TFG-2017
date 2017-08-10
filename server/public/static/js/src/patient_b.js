@@ -58,13 +58,7 @@ $("#btnCompare").on("click",function () {
                    data : {PATIENTID: Patient_id,statics_date: date},
                    success: function(data2, textStatus, jqXHR)
                    {
-                       //alert("Se ha insertado el registro correctamente.")
-                       /*calendario();
 
-                        $("#add_event").closeModal();
-                        setTimeout(function() {
-                        Materialize.toast('Se ha añadido el evento correctamente', 5000);
-                        }, 500);*/
 
                        var content = '<div style="padding: 50px;" class="row"><table class="bordered col s12 " style="padding: 50px!important;"><tr class="row"><th class="col s12 m4">Macronutrientes</th><th class="col s12 m4">Estadísticas del paciente</th><th class="col s12 m4">Cantidad recomendada(CDR)</th></tr></thead> ' +
                            '<tbody><tr class="row"><td class="col s12 m4">Kcalorias</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
@@ -74,24 +68,30 @@ $("#btnCompare").on("click",function () {
                             '</tbody></table></div> ';
 
                        content += '<div style="padding: 50px;" class="row"><table class="bordered col s12" style="padding: 50px!important;"><thead><tr class="row"><th class="col s12 m4">Vitaminas</th><th class="col s12 m4">Estadísticas del paciente</th><th class="col s12 m4">Cantidad recomendada(CDR)</th></tr></thead> ' +
-                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina A</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
-                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina C</td><td class="col s12 m4">'+ data2.PROTEINS + " g"+'</td><td class="col s12 m4">'+ data.PROTEINS + " g"+'</td></tr>'+
-                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina D</td><td class="col s12 m4">'+data2.LIPIDS + " g"+'</td><td class="col s12 m4">'+data.LIPIDS + " g"+'</td></tr>'+
-                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina E</td><td class="col s12 m4">'+data2.GLUCIDS + " g"+'</td><td class="col s12 m4">'+data.CARBON_HYDRATES + " g"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina A</td><td class="col s12 m4">' + data2.V_A + " µg" +'</td><td class="col s12 m4">'+ data.V_A + " µg"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina C</td><td class="col s12 m4">'+ data2.V_C + " mg"+'</td><td class="col s12 m4">'+ data.V_C + " mg"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina D</td><td class="col s12 m4">'+data2.V_D + " µg"+'</td><td class="col s12 m4">'+data.V_D + " µg"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Vitamina E</td><td class="col s12 m4">'+data2.V_E + " mg"+'</td><td class="col s12 m4">'+data.V_E + " mg"+'</td></tr>'+
                            '</tbody></table></div>';
 
                        content += '<div style="padding: 50px;" class="row"><table class="bordered col s12" style="padding: 50px!important;"><thead><tr class="row"><th class="col s12 m4">Minerales</th><th class="col s12 m4">Estadísticas del paciente</th><th class="col s12 m4">Cantidad recomendada(CDR)</th></tr></thead> ' +
-                           '<tbody><tr class="row"><td class="col s12 m4">Calcio</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
-                           '<tbody><tr class="row"><td class="col s12 m4">Hierro</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
-                           '<tbody><tr class="row"><td class="col s12 m4">Magnesio</td><td class="col s12 m4">'+ data2.PROTEINS + " g"+'</td><td class="col s12 m4">'+ data.PROTEINS + " g"+'</td></tr>'+
-                           '<tbody><tr class="row"><td class="col s12 m4">Potasio</td><td class="col s12 m4">'+data2.LIPIDS + " g"+'</td><td class="col s12 m4">'+data.LIPIDS + " g"+'</td></tr>'+
-                           '<tbody><tr class="row"><td class="col s12 m4">Fósforo</td><td class="col s12 m4">'+data2.GLUCIDS + " g"+'</td><td class="col s12 m4">'+data.CARBON_HYDRATES + " g"+'</td></tr>'+
-                           '<tbody><tr class="row"><td class="col s12 m4">sodio</td><td class="col s12 m4">'+data2.GLUCIDS + " g"+'</td><td class="col s12 m4">'+data.CARBON_HYDRATES + " g"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Calcio</td><td class="col s12 m4">' + data2.CALCIUM + " mg" +'</td><td class="col s12 m4">'+ data.CALCIUM + " mg"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Hierro</td><td class="col s12 m4">' + data2.IRON + " mg" +'</td><td class="col s12 m4">'+ data.IRON + " mg"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Magnesio</td><td class="col s12 m4">'+ data2.MAGNESIUM + " mg"+'</td><td class="col s12 m4">'+ data.MAGNESIUM + " mg"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Potasio</td><td class="col s12 m4">'+data2.POTASSIUM + " mg"+'</td><td class="col s12 m4">'+data.POTASSIUM + " mg"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Fósforo</td><td class="col s12 m4">'+data2.PHOSPHORUS + " mg"+'</td><td class="col s12 m4">'+data.PHOSPHORUS + " mg"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">sodio</td><td class="col s12 m4">'+data2.SODIUM + " mg"+'</td><td class="col s12 m4">'+data.SODIUM + " mg"+'</td></tr>'+
                            '</tbody></table></div>';
 
                        content += '<div style="padding: 50px;" class="row"><table class="bordered col s12" style="padding: 50px!important;"><thead><tr class="row"><th class="col s12 m4">Ácidos grasos</th><th class="col s12 m4">Estadísticas del paciente</th><th class="col s12 m4">Cantidad recomendada(CDR)</th></tr></thead> ' +
-                           '<tbody><tr class="row"><td class="col s12 m4">Colesterol</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
-                           '<tbody><tr class="row"><td class="col s12 m4">Saturados</td><td class="col s12 m4">' + data2.KCAL + " Kcal" +'</td><td class="col s12 m4">'+ data.KCAL + " Kcal"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Colesterol</td><td class="col s12 m4">' + data2.CHOLESTEROL + " mg" +'</td><td class="col s12 m4">'+ data.CHOLESTEROL + " mg"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Saturados</td><td class="col s12 m4">' + data2.SATURATED + " g" +'</td><td class="col s12 m4">'+ data.SATURATED + " g"+'</td></tr>'+
+                           '</tbody></table></div> ';
+
+                       content += '<div style="padding: 50px;" class="row"><table class="bordered col s12" style="padding: 50px!important;"><thead><tr class="row"><th class="col s12 m4">Composición en macronutrientes</th><th class="col s12 m4">Estadísticas del paciente</th><th class="col s12 m4">Cantidad recomendada(CDR)</th></tr></thead> ' +
+                           '<tbody><tr class="row"><td class="col s12 m4">Proteinas %</td><td class="col s12 m4">' + data2.P_PERCENT + "%" +'</td><td class="col s12 m4">'+ data.PROTEINS_PERCENTAGE + "%"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">Lípidos %</td><td class="col s12 m4">' + data2.L_PERCENT + "%" +'</td><td class="col s12 m4">'+ data.LIPIDS_PERCENTAGE + "%"+'</td></tr>'+
+                           '<tbody><tr class="row"><td class="col s12 m4">H.Carbono %</td><td class="col s12 m4">' + data2.CH_PERCENT + "%" +'</td><td class="col s12 m4">'+ data.CARBON_HYDRATES_PERCENTAGE + "%"+'</td></tr>'+
                            '</tbody></table></div> ';
 
 

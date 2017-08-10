@@ -6,24 +6,22 @@ $(document).ready(function() {
 
 	var active_li;
 
-	if(pathname.indexOf('contents') > 0)
-		active_li = setActiveLi("Contenido");
-	else if (pathname.indexOf('contents') > 0)
-		active_li = setActiveLi("Contenido");
-	else if (pathname.indexOf('localizations') > 0)
-		active_li = setActiveLi("Localizaciones");
-	else if (pathname.indexOf('contentTypes') > 0)
-		active_li = setActiveLi("Tipos");
+	if(pathname.indexOf('patients') > 0)
+		active_li = setActiveLi("Pacientes");
+	else if (pathname.indexOf('foods') > 0)
+		active_li = setActiveLi("Alimentos");
+	else if (pathname.indexOf('rda') > 0)
+		active_li = setActiveLi("Tablas CDR");
 	else if (pathname.indexOf('activityLogs') > 0)
 		active_li = setActiveLi("Histórico");
-	else if (pathname.indexOf('guided_visits') > 0)
-		active_li = setActiveLi("Visitas Guiadas");
 	else if (pathname.indexOf('users') > 0)
-		active_li = setActiveLi("Usuarios");
-	else if (pathname.indexOf('langs') > 0)
-		active_li = setActiveLi("Idiomas");
-	else
-		active_li = setActiveLi("Inicio");
+		active_li = setActiveLi("Nutricionistas");
+	else{
+
+        active_li = setActiveLi("Inicio");
+
+	}
+
 });
 
 function setActiveLi(section) {

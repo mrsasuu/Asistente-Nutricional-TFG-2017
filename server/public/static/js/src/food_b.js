@@ -43,10 +43,35 @@ $(document).ready(function() {
 					$("#edit_proteins_food").val(jsondata.PROTEINS);
 					$("#edit_carbon_hydrates_food").val(jsondata.CARBON_HYDRATES);
 					$("#edit_lipids_food").val(jsondata.LIPIDS);
+                    $("#edit_kcal_table").val(jsondata.KCAL);
+                    $("#edit_v_a_table").val(jsondata.V_A);
+                    $("#edit_v_c_table").val(jsondata.V_C);
+                    $("#edit_v_d_table").val(jsondata.V_D);
+                    $("#edit_v_e_table").val(jsondata.V_E);
+                    $("#edit_calcium_table").val(jsondata.CALCIUM);
+                    $("#edit_iron_table").val(jsondata.IRON);
+                    $("#edit_magnesium_table").val(jsondata.MAGNESIUM);
+                    $("#edit_potassium_table").val(jsondata.POTASSIUM);
+                    $("#edit_phosphorus_table").val(jsondata.PHOSPHORUS);
+                    $("#edit_sodium_table").val(jsondata.SODIUM);
+                    $("#edit_cholesterol_table").val(jsondata.CHOLESTEROL);
+                    $("#edit_saturated_table").val(jsondata.SATURATED);
+
+
+
 
 
 					$("#editFoodImgViewer").attr('src', jsondata.PHOTO);
 					$("#edit_previous_photo_food").val(jsondata.PHOTO);
+
+                    $("#editFoodImgViewer2").attr('src', jsondata.MIN_PHOTO);
+                    $("#edit_previous_min_photo_food").val(jsondata.MIN_PHOTO);
+
+                    $("#editFoodImgViewer3").attr('src', jsondata.MED_PHOTO);
+                    $("#edit_previous_med_photo_food").val(jsondata.MED_PHOTO);
+
+                    $("#editFoodImgViewer4").attr('src', jsondata.MAX_PHOTO);
+                    $("#edit_previous_max_photo_food").val(jsondata.MAX_PHOTO);
 
 
 					$('#food_loader').css('opacity', '0');

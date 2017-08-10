@@ -29,10 +29,92 @@
 				<label for="add_lipids_food">Lípidos</label>
 			</div>
 
+
+			<!-- KCAL -->
+			<div class="input-field col s12 m12">
+				<input id="add_kcal_table" name="add_kcal_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_kcal_table">Kcalorias</label>
+			</div>
+
+			<h5 class="center-align" style="margin: 20px!important;">Vitaminas:</h5>
+			<!-- V_A -->
+			<div class="input-field col s12 m6">
+				<input id="add_v_a_table" name="add_v_a_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_v_a_table">Vitamina A</label>
+			</div>
+
+			<!-- V_C -->
+			<div class="input-field col s12 m6">
+				<input id="add_v_c_table" name="add_v_c_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_v_c_table">Vitamina C</label>
+			</div>
+
+			<!-- v_D -->
+			<div class="input-field col s12 m6">
+				<input id="add_v_d_table" name="add_v_d_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_v_d_table">Vitamina D</label>
+			</div>
+
+			<!-- V_E -->
+			<div class="input-field col s12 m6">
+				<input id="add_v_e_table" name="add_v_e_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_v_e_table">Vitamina E</label>
+			</div>
+			<h5 class="center-align" style="margin: 20px!important;">Minerales:</h5>
+			<!-- Calcio -->
+			<div class="input-field col s12 m6">
+				<input id="add_calcium_table" name="add_calcium_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_calcium_table">Calcio</label>
+			</div>
+
+			<!-- Hierro -->
+			<div class="input-field col s12 m6">
+				<input id="add_iron_table" name="add_iron_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_iron_table">Hierro</label>
+			</div>
+
+			<!-- Magnesio -->
+			<div class="input-field col s12 m6">
+				<input id="add_magnesium_table" name="add_magnesium_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_magnesium_table">Magnesio</label>
+			</div>
+
+			<!-- Potasio -->
+			<div class="input-field col s12 m6">
+				<input id="add_potassium_table" name="add_potassium_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_potassium_table">Potasio</label>
+			</div>
+
+			<!-- Fósforo -->
+			<div class="input-field col s12 m6">
+				<input id="add_phosphorus_table" name="add_phosphorus_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_phosphorus_table">Fósforo</label>
+			</div>
+
+			<!-- Sodio -->
+			<div class="input-field col s12 m6">
+				<input id="add_sodium_table" name="add_sodium_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_sodium_table">Sodio</label>
+			</div>
+			<h5 class="center-align" style="margin: 20px!important;">Ácidos:</h5>
+			<!-- Colesterol -->
+			<div class="input-field col s12 m6">
+				<input id="add_cholesterol_table" name="add_cholesterol_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_cholesterol_table">Colesterol</label>
+			</div>
+
+			<!-- Saturadas -->
+			<div class="input-field col s12 m6">
+				<input id="add_saturated_table" name="add_saturated_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_saturated_table">G.Saturadas</label>
+			</div>
+
+
+
 			<!-- Photo -->
 			<div class="file-field input-field col s12 m6">
 				<div class="btn">
-					<span>Foto</span>
+					<span>Foto del alimento</span>
 					<input id="add_photo_food" name="add_photo_food" type="file" required>
 				</div>
 					<div class="file-path-wrapper">
@@ -44,6 +126,69 @@
 			<div class="col s12 m6 center-align">
 				<img id="addFoodImgViewer" class="imagePreview responsive-img" src="/static/img/img_not_available.png" alt=""/>
 			</div>
+
+			<!-- P.pequeña -->
+			<div class="input-field col s12 m4">
+				<input id="add_min_amount_table" name="add_min_amount_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_min_amount_table">Porción pequeña</label>
+			</div>
+			<!-- P.Mediana -->
+			<div class="input-field col s12 m4">
+				<input id="add_med_amount_table" name="add_med_amount_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_med_amount_table">Porción mediana</label>
+			</div>
+			<!-- P.Grande -->
+			<div class="input-field col s12 m4">
+				<input id="add_max_amount_table" name="add_max_amount_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_max_amount_table">Porción grande</label>
+			</div>
+			<!-- Photo -->
+			<div class="file-field input-field col s12 m6">
+				<div class="btn">
+					<span>Fotografía de la porción más pequeña</span>
+					<input id="add_min_photo_food" name="add_photo_food" type="file" required>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+
+			<!-- Photo Preview -->
+			<div class="col s12 m6 center-align">
+				<img id="addFoodImgViewer2" class="imagePreview responsive-img" src="/static/img/img_not_available.png" alt=""/>
+			</div>
+			<!-- Photo -->
+			<div class="file-field input-field col s12 m6">
+				<div class="btn">
+					<span>Fotografía de la porción mediana</span>
+					<input id="add_med_photo_food" name="add_photo_food" type="file" required>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+
+			<!-- Photo Preview -->
+			<div class="col s12 m6 center-align">
+				<img id="addFoodImgViewer3" class="imagePreview responsive-img" src="/static/img/img_not_available.png" alt=""/>
+			</div>
+			<!-- Photo -->
+			<div class="file-field input-field col s12 m6">
+				<div class="btn">
+					<span>Fotografía de la porción más grande</span>
+					<input id="add_max_photo_food" name="add_photo_food" type="file" required>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+
+			<!-- Photo Preview -->
+			<div class="col s12 m6 center-align">
+				<img id="addFoodImgViewer4" class="imagePreview responsive-img" src="/static/img/img_not_available.png" alt=""/>
+			</div>
+
+
 		</div>
 		<div class="modal-footer">
 			<!-- Submit -->

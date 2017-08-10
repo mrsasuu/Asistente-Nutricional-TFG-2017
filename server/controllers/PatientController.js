@@ -623,7 +623,7 @@ PatientController.prototype.initBackend = function() {
                     date_s =  new Date(result[i].START_DATE);
                     date_e =  new Date(result[i].END_DATE);
 
-                    if(date_s.getTime() <= date_today.getTime() && date_today.getTime() <= date_e.getTime()){
+                    if(getWeek(date_s,1)== getWeek(date_today,1) || getWeek(date_e,1)== getWeek(date_today,1)){
                         num_objetives_week++;
 
                         if(parseInt(result[i].COMPLETED) == 1){
@@ -1154,12 +1154,23 @@ PatientController.prototype.initBackend = function() {
                             var prot_b = 0;
                             var lipids_b = 0;
                             var gluc_b = 0;
+                            var v_a = 0;
+                            var v_c = 0;
+                            var v_d = 0;
+                            var v_e = 0;
+                            var calcium = 0;
+                            var iron = 0;
+                            var magnesium = 0;
+                            var phosphorus = 0;
+                            var potassium = 0;
+                            var sodium = 0;
+                            var cholesterol = 0;
+                            var saturated = 0;
+
                             //var foodHour = "DESAYUNO";
                             // var num = breakfast.length;
                             var num = new Date().getDate();
 
-                            if(num == 0)
-                                num=7;
 
                             var kcal_b = 0;
 
@@ -1167,12 +1178,37 @@ PatientController.prototype.initBackend = function() {
                                 prot_b += (breakfast[i].PROTEINS * amounts[i]);
                                 lipids_b += (breakfast[i].LIPIDS * amounts[i]);
                                 gluc_b += (breakfast[i].CARBON_HYDRATES * amounts[i]);
+                                v_a += (breakfast[i].V_A * amounts[i]);
+                                v_c += (breakfast[i].V_C * amounts[i]);
+                                v_d += (breakfast[i].V_D * amounts[i]);
+                                v_e += (breakfast[i].V_E * amounts[i]);
+                                calcium += (breakfast[i].CALCIUM * amounts[i]);
+                                iron += (breakfast[i].IRON * amounts[i]);
+                                magnesium += (breakfast[i].MAGNESIUM * amounts[i]);
+                                phosphorus += (breakfast[i].PHOSPHORUS * amounts[i]);
+                                potassium += (breakfast[i].POTASSIUM * amounts[i]);
+                                sodium += (breakfast[i].SODIUM * amounts[i]);
+                                cholesterol += (breakfast[i].CHOLESTEROL * amounts[i]);
+                                saturated += (breakfast[i].SATURATED * amounts[i]);
+
                             }
 
                             if(num > 0){
                                 prot_b = (prot_b)/num;
                                 lipids_b = (lipids_b)/num;
                                 gluc_b = (gluc_b)/num;
+                                v_a = (v_a)/num;
+                                v_c = (v_c)/num;
+                                v_d = (v_d)/num;
+                                v_e = (v_e)/num;
+                                iron = (iron)/num;
+                                magnesium = (magnesium)/num;
+                                phosphorus = (phosphorus)/num;
+                                potassium = (potassium)/num;
+                                sodium = (sodium)/num;
+                                cholesterol = (cholesterol)/num;
+                                saturated = (saturated)/num;
+
 
 
                                 kcal_b = prot_b*4 + lipids_b*9 + gluc_b*4;
@@ -1197,7 +1233,19 @@ PatientController.prototype.initBackend = function() {
                                     P_PERCENT: prot_percent.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
                                     L_PERCENT: lipids_percent.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
                                     CH_PERCENT: gluc_percent.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
-                                    KCAL: kcal_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
+                                    KCAL: kcal_b.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    V_A: v_a.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    V_C: v_c.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    V_D: v_d.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    V_E: v_e.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    CALCIUM: calcium.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    IRON: iron.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    MAGNESIUM: magnesium.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    PHOSPHORUS: phosphorus.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    POTASSIUM: potassium.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    SODIUM: sodium.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    CHOLESTEROL: cholesterol.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0],
+                                    SATURATED: saturated.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
                                 };
 
                             }
