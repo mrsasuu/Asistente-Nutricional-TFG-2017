@@ -6,14 +6,10 @@ var cors = require("cors");
 var UserService = require('../service/UserService');
 var FoodService = require('../service/FoodService');
 var PatientService = require('../service/PatientService');
-var ContentTypeService = require('../service/ContentTypeService');
-var ContentService = require('../service/ContentService');
-var LocalizationService = require('../service/LocalizationService');
 var ActivityLogService = require('../service/ActivityLogService');
 var FoodRegisterLogService = require('../service/FoodRegisterService');
 var ObjetiveService = require('../service/ObjetiveService');
-var LangService = require('../service/LangService');
-var GuidedVisitService = require('../service/GuidedVisitService');
+
 
 function ApiRest() {
 	this.publicTokenList = [];
@@ -21,7 +17,6 @@ function ApiRest() {
 	this.timeout = 10 * 60 * 1000;
 
 	this.opened_apis = ['user'];
-    console.log("Llega aqui");
 
 	this.serviceRouter = express.Router();
 	this.validateApiKey();
@@ -47,17 +42,12 @@ ApiRest.prototype.validateApiKey = function() {
 ApiRest.prototype.defineApiServices = function() {
 	var self = this;
 
-	this.serviceRouter.use('/content_type', new ContentTypeService().getRouter());
-	this.serviceRouter.use('/content', new ContentService().getRouter());
 	this.serviceRouter.use('/user', new UserService().getRouter());
     this.serviceRouter.use('/food', new FoodService().getRouter());
     this.serviceRouter.use('/patient', new PatientService().getRouter());
     this.serviceRouter.use('/food_register', new FoodRegisterLogService().getRouter());
     this.serviceRouter.use('/objetive', new ObjetiveService().getRouter());
-	this.serviceRouter.use('/localization', new LocalizationService().getRouter());
 	this.serviceRouter.use('/activity_log', new ActivityLogService().getRouter());
-	this.serviceRouter.use('/lang', new LangService().getRouter());
-	this.serviceRouter.use('/guided_visit', new GuidedVisitService().getRouter());
 };
 
 // Get Router of API Rest

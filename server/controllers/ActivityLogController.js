@@ -88,19 +88,7 @@ ActivityLogController.prototype.getRouterFrontend = function() {
 	return this.routerFrontend;
 };
 
-// Get an Activity Log by its ID
-ActivityLogController.prototype.getLocalizationById = function(id) {
-	var activityLog = ActivityLog.build();
 
-	return activityLog.retrieveById(id);
-};
-
-// Get all the Activty Logs by their IDs
-ActivityLogController.prototype.getAllLocalizationWidthIds = function(listIds) {
-	var activityLog = ActivityLog.build();
-
-	return activityLog.retrieveAllByListIds(listIds);
-};
 
 // Clear all the messages
 ActivityLogController.prototype.clearMessages = function() {

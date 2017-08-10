@@ -54,7 +54,7 @@ UserController.prototype.initFrontend = function() {
 
 				// Correct Password
 				if(hashed_password == result.PASSWORD) {
-                //if(password == result.PASSWORD) {
+
 					self.renderJson.user = result;
 					page = '/';
 

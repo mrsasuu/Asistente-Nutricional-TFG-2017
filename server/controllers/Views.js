@@ -7,12 +7,8 @@ var UserController = require('./UserController');
 var PatientController = require('./PatientController');
 var FoodController = require('./FoodController');
 var RDAController = require('./RDAController');
-var ContentController = require('./ContentController');
-var ContentTypeController = require('./ContentTypeController');
-var LocalizationController = require('./LocalizationController');
 var ActivityLogController = require('./ActivityLogController');
-var LangController = require('./LangController');
-var GuidedVisitController = require('./GuidedVisitController');
+
 
 function Views(app) {
 	this.expressContext = app;
@@ -41,11 +37,6 @@ Views.prototype.initPages = function() {
 
 	activityLogC.setUserController(userC);
 
-	var contentTypeC = new ContentTypeController(self.renderJson);
-	var localizationC = new LocalizationController(self.renderJson);
-	var langC = new LangController(self.renderJson, activityLogC);
-	var contentC = new ContentController(self.renderJson, activityLogC, contentTypeC, localizationC, langC);
-	var guidedVisitC = new GuidedVisitController(self.renderJson, activityLogC, localizationC);
 
 
 	// -- BACKEND VIEWS --
@@ -54,12 +45,9 @@ Views.prototype.initPages = function() {
     self.routerBackend.use('/foods', foodC.getRouterBackend());
     self.routerBackend.use('/rda', rdaC.getRouterBackend());
     self.routerBackend.use('/patients', patientC.getRouterBackend());
-	self.routerBackend.use('/contentTypes', contentTypeC.getRouterBackend());
-	self.routerBackend.use('/localizations', localizationC.getRouterBackend());
+
+
 	self.routerBackend.use('/activityLogs', activityLogC.getRouterBackend());
-	self.routerBackend.use('/contents', contentC.getRouterBackend());
-	self.routerBackend.use('/langs', langC.getRouterBackend());
-	self.routerBackend.use('/guided_visits', guidedVisitC.getRouterBackend());
 
 	// -- FRONTEND VIEWS --
 	self.routerFrontend.use(indexC.getRouterFrontend());
