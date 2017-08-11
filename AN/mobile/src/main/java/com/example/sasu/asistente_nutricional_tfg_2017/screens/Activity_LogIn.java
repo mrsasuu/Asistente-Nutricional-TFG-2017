@@ -24,6 +24,7 @@ public class Activity_LogIn extends AppCompatActivity implements LoginFragment.O
     EditText input_user;
     EditText input_password;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

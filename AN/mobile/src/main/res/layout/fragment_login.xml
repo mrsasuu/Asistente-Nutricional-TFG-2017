@@ -35,7 +35,7 @@
             android:background="@drawable/border_input"
             android:singleLine="true"
             android:inputType="textEmailAddress"
-            android:hint="Nombre de usuario o e-mail" />
+            android:hint="@string/prompt_id" />
     </LinearLayout>
 
     <LinearLayout

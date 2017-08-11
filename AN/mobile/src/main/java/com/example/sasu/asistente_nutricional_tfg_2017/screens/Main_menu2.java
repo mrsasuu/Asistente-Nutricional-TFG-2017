@@ -19,15 +19,28 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 
+import com.example.sasu.asistente_nutricional_tfg_2017.Api;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Inicio;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Loging_Loading;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Registro;
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
 import com.example.sasu.asistente_nutricional_tfg_2017.database.RegistroDB;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.ApiError;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.LoginBody;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Patient;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
+import com.example.sasu.asistente_nutricional_tfg_2017.prefs.SessionPrefs;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.ControllerPreferences;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Main_menu2 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Inicio.OnFragmentInteractionListener, Registro.OnFragmentInteractionListener {
@@ -38,6 +51,7 @@ public class Main_menu2 extends AppCompatActivity
     LinearLayout fb2L,fb3L,fb4L,fb5L,fb6L,fb7L;
     FrameLayout fondo;
     ControllerPreferences controller = ControllerPreferences.getInstance();
+    private Api api;
     int position = 0;
     Animation fabOpen, fabClose, fabClockw, fabAntiClockw;
     boolean isOpen = false;
@@ -373,7 +387,67 @@ public class Main_menu2 extends AppCompatActivity
 
         */
 
+        api = controller.getApi();
 
+
+        Call<Alimento> foodCall = api.foodCount();
+        foodCall.enqueue(new Callback<Alimento>() {
+            @Override
+            public void onResponse(Call<Alimento> call, Response<Alimento> response) {
+                // Mostrar progreso
+                String error = "Ha ocurrido un error. No se ha podido actualizar la base de datos de alimentos. ";
+                // Procesar errores
+                if (!response.isSuccessful()) {
+
+                    if (response.errorBody()
+                            .contentType()
+                            .subtype()
+                            .equals("json")) {
+                        ApiError apiError = ApiError.fromResponseBody(response.errorBody());
+                        showError(error);
+
+                        error += apiError.getMessage();
+                        Log.d("LoginActivity", apiError.getDeveloperMessage());
+                    } else {
+                        try {
+                            // Reportar causas de error no relacionado con la API
+                            showError(error);
+                            Log.d("LoginActivity", response.errorBody().string());
+                        } catch (IOException e) {
+                            showError(error);
+                            e.printStackTrace();
+                        }
+                    }
+                    showError(error);
+                    return;
+                }
+
+                String numAlimentos = response.RESP;
+
+                showError("Numero de alimentos: " + numAlimentos);
+                System.out.println("Se llama");
+
+                System.out.println("Respuesta: " + response);
+
+
+
+
+
+
+            }
+
+
+
+            @Override
+            public void onFailure(Call<Alimento> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void showError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_LONG).show();
     }
 
     public void inicio(View v){

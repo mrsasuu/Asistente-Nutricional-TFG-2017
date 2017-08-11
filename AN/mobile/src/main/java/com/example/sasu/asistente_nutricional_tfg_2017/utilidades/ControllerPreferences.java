@@ -3,6 +3,7 @@ package com.example.sasu.asistente_nutricional_tfg_2017.utilidades;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.sasu.asistente_nutricional_tfg_2017.Api;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Comida;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
@@ -13,10 +14,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ControllerPreferences {
     private static ControllerPreferences instance = null;
     private Comida comida;
     private HorarioComida horarioRegistrar;
+    private Api api;
+    private Retrofit mRestAdapter;
 
     public Date fechaActual;
 
@@ -77,6 +83,13 @@ public class ControllerPreferences {
 
         comida = new Comida();
         fechaActual = new Date();
+
+        mRestAdapter = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        api =  mRestAdapter.create(Api.class);
     }
 
     public Comida getComida(){
@@ -113,6 +126,10 @@ public class ControllerPreferences {
         return comida;
     }
 
+    public Api getApi(){
+        return api;
+    }
+
     public static ControllerPreferences getInstance() {
          if(instance == null)
          {
@@ -120,4 +137,6 @@ public class ControllerPreferences {
          }
         return instance;
     }
+
+
 }

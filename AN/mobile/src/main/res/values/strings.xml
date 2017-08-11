@@ -22,4 +22,15 @@
     <string name="title_activity_registrar_comida">registrarComida</string>
     <string name="title_activity_registrar_comida_tab">registrarComidaTab</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="prompt_id">nombre de usuario o e-mail </string>
+    <string name="password">Contraseña</string>
+    <string name="action_sign_in">Iniciar sesión</string>
+    <string name="action_sign_in_short">Iniciar sesión</string>
+    <string name="error_invalid_user_id">Número de identificación inválido</string>
+    <string name="error_incorrect_password">La contraseña es incorrecta</string>
+    <string name="error_field_required">Este campo es requerido</string>
+    <string name="error_server">Error en el servidor</string>
+    <string name="error_incorrect_user_id">Número de identificación no registrado</string>
+    <string name="error_network">Conexión de red no disponible</string>
+    <string name="error_invalid_password">Contraseña inválida</string>
 </resources>

@@ -5,20 +5,22 @@ package com.example.sasu.asistente_nutricional_tfg_2017.screens;
  */
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
+import com.example.sasu.asistente_nutricional_tfg_2017.prefs.SessionPrefs;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class ActivitySplashScreen extends Activity {
-    /*Context context;
-
+    Context context;
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +70,7 @@ public class ActivitySplashScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        context = this.getApplicationContext();
         // Set portrait orientation
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // Hide title bar
@@ -81,9 +83,19 @@ public class ActivitySplashScreen extends Activity {
             public void run() {
 
                 // Start the next activity
-                Intent mainIntent = new Intent().setClass(
-                        ActivitySplashScreen.this, Activity_LogIn.class);
-                startActivity(mainIntent);
+
+                // Redirección al Login
+                if (!SessionPrefs.get(context).isLoggedIn()) {
+                    //startActivity(new Intent(context, LoginActivity.class));
+                    startActivity(new Intent(context, Main_menu2.class));
+                    finish();
+                    return;
+                }else {
+                    Intent mainIntent = new Intent().setClass(
+                            //ActivitySplashScreen.this, LoginActivity.class);
+                            ActivitySplashScreen.this, Main_menu2.class);
+                    startActivity(mainIntent);
+                }
 
                 // Close the activity so the user won't able to go back this
                 // activity pressing Back button

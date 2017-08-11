@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sasu.asistente_nutricional_tfg_2017">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
+
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -46,6 +50,12 @@
             android:label="Asistente nutricional"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".screens.LoginActivity"
+            android:label="Inicio de sesión" />
+        <activity
+            android:name=".AppointmentsActivity"
+            android:label="Asistente nutricional" />
+        <activity
             android:name=".screens.registrarComida"
             android:label="@string/title_activity_registrar_comida"
             android:theme="@style/NoActionBar" />
@@ -53,6 +63,7 @@
             android:name=".screens.registrarComidaTab"
             android:label="@string/title_activity_registrar_comida_tab"
             android:theme="@style/NoActionBar"></activity>
+
     </application>
 
 </manifest>

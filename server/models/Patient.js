@@ -36,7 +36,7 @@ var Patient = DBConnector.connectAN().define('PATIENT', {
 			return Patient.findAll({ where: { ID: { in: listIds } } });
 		},
         retrieveByUserName: function(username){
-            return Patient.findOne({ where: { EMAIL: username } });
+            return Patient.findOne({ where: { USERNAME: username } });
         },
 		retrieveByEmail: function(email){
 			return Patient.findOne({ where: { EMAIL: email } });
