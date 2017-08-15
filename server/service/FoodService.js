@@ -27,6 +27,27 @@ FoodService.prototype.initializeRouter = function() {
         });
     });
 
+    self.router.route('/count').post(function(req, res) {
+
+
+        console.log("Se ha llamado a count");
+
+        var food = Food.build();
+
+        food.retrieveAll().then(function(result) {
+            if(result){
+                console.log("Numero de alimentos post: " + result.length)
+
+                var respuesta = result.length;
+                res.json({rows: respuesta});
+            }
+            else
+                res.status(401).send("Food not found");
+        }, function(error) {
+            res.status(404).send("Food not found");
+        });
+    });
+
     self.router.route('/count').get(function(req, res) {
 
 
@@ -36,10 +57,10 @@ FoodService.prototype.initializeRouter = function() {
 
         food.retrieveAll().then(function(result) {
             if(result){
-                console.log("Numero de alimentos: " + result.length)
+                console.log("Numero de alimentos get: " + result.length)
 
-                var respuesta = {RESP: result.length};
-                res.json(respuesta);
+                var respuesta = result.length;
+                res.json({rows: respuesta});
             }
             else
                 res.status(401).send("Food not found");

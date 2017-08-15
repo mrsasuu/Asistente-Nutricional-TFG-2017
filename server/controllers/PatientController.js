@@ -546,6 +546,19 @@ PatientController.prototype.initBackend = function() {
             ).then(function(result) {
                 self.renderJson.msg = 'Objetivo añadido correctamente';
 
+                var patient = Patient.build();
+
+                patient.news = 1;
+
+                patient.updateNews(id_patient).then(function(result2) {
+                    console.log("Se han actualizado las novedades del paciente");
+                    res.redirect('/backend/patients');
+                }, function(error) {
+                    console.log(error);
+                    self.renderJson.error = 'Se ha producido un error interno';
+                    res.redirect('/backend/patients');
+                });
+
                 // Add the event to a new Activity Log
                 var ct = "Inserción";
                 var desc = "Se ha añadido un objetivo al paciente " + PATIENTID;
@@ -553,7 +566,7 @@ PatientController.prototype.initBackend = function() {
                 var uid = self.renderJson.user.ID;
                 self.activityLogController.addNewActivityLog(ct, desc, date, uid);
 
-                res.redirect('/backend/patients');
+
             }, function(error) {
                 console.log(error);
                 self.renderJson.error = 'Se ha producido un error interno';
@@ -581,7 +594,19 @@ PatientController.prototype.initBackend = function() {
             objetive.removeById(idObjetive).then(function(result) {
                 self.renderJson.msg = 'Objetivo eliminado correctamente';
 
-                res.redirect('/backend/patients');
+                var patient = Patient.build();
+
+                patient.news = 1;
+
+                patient.updateNews(id_patient).then(function(result2) {
+                    console.log("Se han actualizado las novedades del paciente");
+                    res.redirect('/backend/patients');
+                }, function(error) {
+                    console.log(error);
+                    self.renderJson.error = 'Se ha producido un error interno';
+                    res.redirect('/backend/patients');
+                });
+
             }, function(error) {
                 console.log(error);
                 self.renderJson.error = 'Se ha producido un error interno';

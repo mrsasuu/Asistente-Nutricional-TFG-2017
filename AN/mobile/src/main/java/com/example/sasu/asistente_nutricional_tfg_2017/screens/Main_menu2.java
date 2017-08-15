@@ -22,21 +22,13 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
-import com.example.sasu.asistente_nutricional_tfg_2017.Api;
+import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.Api;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Inicio;
-import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Loging_Loading;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Registro;
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
-import com.example.sasu.asistente_nutricional_tfg_2017.database.RegistroDB;
-import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
-import com.example.sasu.asistente_nutricional_tfg_2017.models.ApiError;
-import com.example.sasu.asistente_nutricional_tfg_2017.models.LoginBody;
-import com.example.sasu.asistente_nutricional_tfg_2017.models.Patient;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Row;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
-import com.example.sasu.asistente_nutricional_tfg_2017.prefs.SessionPrefs;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.ControllerPreferences;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -390,12 +382,12 @@ public class Main_menu2 extends AppCompatActivity
         api = controller.getApi();
 
 
-        Call<Alimento> foodCall = api.foodCount();
-        foodCall.enqueue(new Callback<Alimento>() {
+        Call<Row> foodCall = api.foodCount("count");
+        foodCall.enqueue(new Callback<Row>() {
             @Override
-            public void onResponse(Call<Alimento> call, Response<Alimento> response) {
+            public void onResponse(Call<Row> call, Response<Row> response) {
                 // Mostrar progreso
-                String error = "Ha ocurrido un error. No se ha podido actualizar la base de datos de alimentos. ";
+                /*String error = "Ha ocurrido un error. No se ha podido actualizar la base de datos de alimentos. ";
                 // Procesar errores
                 if (!response.isSuccessful()) {
 
@@ -420,14 +412,8 @@ public class Main_menu2 extends AppCompatActivity
                     }
                     showError(error);
                     return;
-                }
+                }*/
 
-                String numAlimentos = response.RESP;
-
-                showError("Numero de alimentos: " + numAlimentos);
-                System.out.println("Se llama");
-
-                System.out.println("Respuesta: " + response);
 
 
 
@@ -439,12 +425,18 @@ public class Main_menu2 extends AppCompatActivity
 
 
             @Override
-            public void onFailure(Call<Alimento> call, Throwable t) {
-
+            public void onFailure(Call<Row> call, Throwable t) {
+              showError("Ha ocurrido un error");
             }
         });
 
+
+
+
+
     }
+
+
 
     private void showError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_LONG).show();

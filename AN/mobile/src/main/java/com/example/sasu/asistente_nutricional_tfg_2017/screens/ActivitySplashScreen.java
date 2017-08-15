@@ -87,7 +87,7 @@ public class ActivitySplashScreen extends Activity {
                 // Redirección al Login
                 if (!SessionPrefs.get(context).isLoggedIn()) {
                     //startActivity(new Intent(context, LoginActivity.class));
-                    startActivity(new Intent(context, Main_menu2.class));
+                    startActivity(new Intent(context, LoginActivity.class));
                     finish();
                     return;
                 }else {

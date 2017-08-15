@@ -23,6 +23,7 @@ var Patient = DBConnector.connectAN().define('PATIENT', {
 	NEWS: { type: Sequelize.INTEGER, allowNull: true },
 	NUTRICIONIST_ID: { type: Sequelize.INTEGER, allowNull: false },
 	PHOTO: { type: Sequelize.STRING(500), allowNull: true },
+	TOKEN: { type: Sequelize.STRING(1000), allowNull: true },
 },
 {
 	instanceMethods: {
@@ -93,9 +94,12 @@ var Patient = DBConnector.connectAN().define('PATIENT', {
 				PHOTO: this.photo
 			}, { where: {ID: user_id} });
 		},
-		updateNews: function(id,news) {
+		updateNews: function(id) {
 			return Patient.update({NEWS: this.news},{ where: {ID: id} });
 		},
+        updateToken: function(id) {
+            return Patient.update({TOKEN: this.token},{ where: {ID: id} });
+        },
 		removeById: function(user_id){
 			return Patient.destroy({ where: {ID: user_id} });
 		}

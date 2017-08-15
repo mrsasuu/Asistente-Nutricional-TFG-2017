@@ -1,18 +1,10 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.utilidades;
 
-import android.util.Log;
-import android.widget.Toast;
-
-import com.example.sasu.asistente_nutricional_tfg_2017.Api;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Comida;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
 
-import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

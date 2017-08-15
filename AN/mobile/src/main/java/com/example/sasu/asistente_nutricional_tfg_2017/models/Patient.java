@@ -5,57 +5,77 @@ package com.example.sasu.asistente_nutricional_tfg_2017.models;
  */
 public class Patient {
 
-    private String id;
-    private String name;
-    private String address;
-    private String gender;
-    private String token;
+    private int ID;
+    private String NAME;
+    private String SURNAME;
+    private String USERNAME;
+    private int NEWS;
+    private int NUTRITIONIST_ID;
+    private String TOKEN;
 
-    public Patient(String id, String name, String address, String gender, String token) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.gender = gender;
-        this.token = token;
+    public Patient(int ID, String NAME, String SURNAME, String USERNAME, int NEWS, int NUTRITIONIST_ID, String TOKEN) {
+        this.ID = ID;
+        this.NAME = NAME;
+        this.SURNAME = SURNAME;
+        this.USERNAME = USERNAME;
+        this.NEWS = NEWS;
+        this.NUTRITIONIST_ID = NUTRITIONIST_ID;
+        this.TOKEN = TOKEN;
     }
 
-    public String getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public String getName() {
-        return name;
+    public String getNAME() {
+        return NAME;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNAME(String NAME) {
+        this.NAME = NAME;
     }
 
-    public String getAddress() {
-        return address;
+    public String getSURNAME() {
+        return SURNAME;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setSURNAME(String SURNAME) {
+        this.SURNAME = SURNAME;
     }
 
-    public String getGender() {
-        return gender;
+    public String getUSERNAME() {
+        return USERNAME;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setUSERNAME(String USERNAME) {
+        this.USERNAME = USERNAME;
     }
 
-    public String getToken() {
-        return token;
+    public int getNEWS() {
+        return NEWS;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setNEWS(int NEWS) {
+        this.NEWS = NEWS;
+    }
+
+    public int getNUTRITIONIST_ID() {
+        return NUTRITIONIST_ID;
+    }
+
+    public void setNUTRITIONIST_ID(int NUTRITIONIST_ID) {
+        this.NUTRITIONIST_ID = NUTRITIONIST_ID;
+    }
+
+    public String getTOKEN() {
+        return TOKEN;
+    }
+
+    public void setTOKEN(String TOKEN) {
+        this.TOKEN = TOKEN;
     }
 }

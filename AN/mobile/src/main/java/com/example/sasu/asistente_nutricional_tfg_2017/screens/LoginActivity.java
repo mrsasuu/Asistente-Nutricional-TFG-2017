@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
-import com.example.sasu.asistente_nutricional_tfg_2017.Api;
+import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.Api;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.ApiError;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.LoginBody;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Patient;
@@ -182,9 +182,11 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     // Guardar afiliado en preferencias
-                    SessionPrefs.get(LoginActivity.this).saveAffiliate(response.body());
+                    SessionPrefs.get(LoginActivity.this).savePatient(response.body());
 
-                    // Ir a la citas médicas
+
+
+                    // Ir al menu
                     showAppointmentsScreen();
                 }
 
@@ -232,6 +234,7 @@ public class LoginActivity extends AppCompatActivity {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnected();
     }
+
 
     @Override
     public void onBackPressed() {
