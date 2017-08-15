@@ -29,6 +29,7 @@ import com.example.sasu.asistente_nutricional_tfg_2017.models.ApiError;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.LoginBody;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Patient;
 import com.example.sasu.asistente_nutricional_tfg_2017.prefs.SessionPrefs;
+import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.UpdateController;
 
 import java.io.IOException;
 
@@ -183,6 +184,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     // Guardar afiliado en preferencias
                     SessionPrefs.get(LoginActivity.this).savePatient(response.body());
+                    UpdateController.get(LoginActivity.this).updateDB();
 
 
 

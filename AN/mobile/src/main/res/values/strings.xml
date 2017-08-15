@@ -22,7 +22,7 @@
     <string name="title_activity_registrar_comida">registrarComida</string>
     <string name="title_activity_registrar_comida_tab">registrarComidaTab</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="prompt_id">nombre de usuario o e-mail </string>
+    <string name="prompt_id">NAME de usuario o e-mail </string>
     <string name="password">Contraseña</string>
     <string name="action_sign_in">Iniciar sesión</string>
     <string name="action_sign_in_short">Iniciar sesión</string>

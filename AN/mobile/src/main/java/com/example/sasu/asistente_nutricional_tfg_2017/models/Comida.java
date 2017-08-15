@@ -197,10 +197,10 @@ public class Comida{
         for(int i = 0; i < comidas.size() ; i++){
             values.put(RegistroDB.AlimentosEntrada.ID, comidas.get(i).getId());
 
-            values.put(RegistroDB.AlimentosEntrada.NOMBRE, comidas.get(i).getNombre());
+            values.put(RegistroDB.AlimentosEntrada.NOMBRE, comidas.get(i).getNAME());
             values.put(RegistroDB.AlimentosEntrada.GRUPO, comidas.get(i).getGrupo());
             values.put(RegistroDB.AlimentosEntrada.SUB_GRUPO, comidas.get(i).getSub_Grupo());
-            values.put(RegistroDB.AlimentosEntrada.PORCION, comidas.get(i).getPorcion());
+            values.put(RegistroDB.AlimentosEntrada.PORCION, comidas.get(i).getMINAMOUNT());
             values.put(RegistroDB.AlimentosEntrada.PROTEINAS, comidas.get(i).getProteinas());
             values.put(RegistroDB.AlimentosEntrada.CARBOHIDRATOS, comidas.get(i).getCarbohidratos());
             values.put(RegistroDB.AlimentosEntrada.GRASAS, comidas.get(i).getGrasas());

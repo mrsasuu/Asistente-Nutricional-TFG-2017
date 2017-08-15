@@ -12,14 +12,10 @@ import android.widget.TextView;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
-import com.example.sasu.asistente_nutricional_tfg_2017.models.Comida;
-import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
 import com.example.sasu.asistente_nutricional_tfg_2017.screens.Main_menu2;
-import com.example.sasu.asistente_nutricional_tfg_2017.screens.registrarComidaTab;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.ControllerPreferences;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by mrsas on 08/06/2017.
@@ -53,7 +49,7 @@ public class AdapterRegistrarAlimento extends RecyclerView.Adapter<AdapterRegist
         public void onClick(View view) {
             controller.registrarComidaHorario(alimento);
 
-            Log.println(Log.INFO,"Nombre",alimento.getNombre());
+            Log.println(Log.INFO,"Nombre",alimento.getNAME());
 
             Intent intent = new Intent(context, Main_menu2.class);
             context.startActivity(intent);
@@ -77,7 +73,7 @@ public class AdapterRegistrarAlimento extends RecyclerView.Adapter<AdapterRegist
     public void onBindViewHolder(RegistroViewHolder holder, int position) {
         holder.alimento = listaAlimentos.get(position);
         holder.cardviewAlimento.setBackgroundResource(R.drawable.sunny);
-        holder.nombre.setText(listaAlimentos.get(position).getNombre());
+        holder.nombre.setText(listaAlimentos.get(position).getNAME());
     }
 
 

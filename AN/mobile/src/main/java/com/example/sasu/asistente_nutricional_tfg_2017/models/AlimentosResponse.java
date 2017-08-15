@@ -2,15 +2,16 @@ package com.example.sasu.asistente_nutricional_tfg_2017.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class News {
-    @SerializedName("news")
-    private int NEWS;
-    private String ERROR;
+import java.util.List;
 
-    public News() {
+public class AlimentosResponse {
+    @SerializedName("al")
+    private List<Alimento> al;
+
+    public AlimentosResponse() {
     }
-
-    public News(int NEWS, String ERROR) {
+/*
+    public AlimentosResponse(int NEWS, String ERROR) {
         this.NEWS = NEWS;
         this.ERROR = ERROR;
     }
@@ -29,5 +30,5 @@ public class News {
 
     public void setERROR(String ERROR) {
         this.ERROR = ERROR;
-    }
+    }*/
 }

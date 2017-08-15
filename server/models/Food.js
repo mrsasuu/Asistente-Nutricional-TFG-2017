@@ -30,6 +30,7 @@ var Food = DBConnector.connectAN().define('FOOD', {
         MIN_AMOUNT: { type: Sequelize.DOUBLE, allowNull: false },
         MED_AMOUNT: { type: Sequelize.DOUBLE, allowNull: false },
         MAX_AMOUNT: { type: Sequelize.DOUBLE, allowNull: false },
+        CREATETIME: {type: Sequelize.DATE, allowNull: false}
     },
     {
         instanceMethods: {
@@ -40,6 +41,8 @@ var Food = DBConnector.connectAN().define('FOOD', {
                 return Food.findAll({ where: { ID: { in: listIds } } });
             },retrieveAllByName: function(name) {
                 return Food.findAll({ where: { NAME: { like: name+"%" } } });
+            },retrieveAllOrdered: function() {
+                return Food.findAll({ order: 'CREATETIME DESC' });
             },
             retrieveAll: function() {
                 return Food.findAll();
@@ -51,6 +54,8 @@ var Food = DBConnector.connectAN().define('FOOD', {
                 return Food.findOne( { order: 'ID DESC' });
             },
             add: function(name, photo,minphoto,medphoto,maxphoto, proteins, carbon_hydrates, lipids,kcal,v_a, v_d, v_e, v_c, calcium, iron, magnesium, phosphorus, potassium, sodium, cholesterol, saturated,minamount,medamount,maxamount) {
+
+                var now = new Date();
 
                 return Food.create({
                     NAME: name,
@@ -76,11 +81,13 @@ var Food = DBConnector.connectAN().define('FOOD', {
                     SATURATED: saturated,
                     MIN_AMOUNT: minamount,
                     MED_AMOUNT: medamount,
-                    MAX_AMOUNT: maxamount
+                    MAX_AMOUNT: maxamount,
+                    CREATETIME: now
 
                 });
             },
             updateById: function(food_id){
+                var now = new Date();
                 return Food.update({
                     NAME: this.name,
                     PHOTO: this.photo,
@@ -105,7 +112,8 @@ var Food = DBConnector.connectAN().define('FOOD', {
                     SATURATED: this.saturated,
                     MIN_AMOUNT: this.minamount,
                     MED_AMOUNT: this.medamount,
-                    MAX_AMOUNT: this.maxamount
+                    MAX_AMOUNT: this.maxamount,
+                    CREATETIME: now
                 }, { where: {ID: food_id} });
             },
             removeById: function(food_id){

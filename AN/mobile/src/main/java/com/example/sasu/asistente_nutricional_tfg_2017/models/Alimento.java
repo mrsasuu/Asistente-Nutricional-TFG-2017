@@ -1,36 +1,155 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.models;
 
-import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.Grupo;
-import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.SubGrupo;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
-import com.orm.dsl.Unique;
+
+import java.util.Date;
 
 /**
  * Created by Sasu on 06/06/2017.
  */
 
 public class Alimento extends SugarRecord{
-    private Grupo grupo_alimentario;
-    private SubGrupo categoria;
+    /*private Grupo grupo_alimentario;
+    private SubGrupo categoria;*/
 
 
     //private Long id;
-    private String nombre;
-    private String url_imagen;
-    //private Porcion porcion;
-    private double porcion; // Debe ser 1, 0.75, 0.5 o 0.25 donde 1 significa todo el plato, 0.75 significa tres cuartos del plato etc.
+    @SerializedName("FOODID")
+    @Expose
+    private int FOODID;
+    @SerializedName("NAME")
+    @Expose
+    private String NAME;
+    @SerializedName("PHOTO")
+    @Expose
+    private String PHOTO;
+    @SerializedName("MINPHOTO")
+    @Expose
+    private String MINPHOTO;
+    @SerializedName("MEDPHOTO")
+    @Expose
+    private String MEDPHOTO;
+    @SerializedName("MAXPHOTO")
+    @Expose
+    private String MAXPHOTO;
+    @SerializedName("CREATETIME")
+    @Expose
+    private Date CREATETIME;
+    @SerializedName("MINAMOUNT")
+    @Expose
+    private double MINAMOUNT;
+    @SerializedName("MEDAMOUNT")
+    @Expose
+    private double MEDAMOUNT;
+    @SerializedName("MAXAMOUNT")
+    @Expose
+    private double MAXAMOUNT;
 
-    //Macronutrientes
-    private double proteinas;
-    private double carbohidratos;
-    private double grasas;
 
-    PrioridadComida prioridad;
+    //PrioridadComida prioridad;
+
+
+    public Alimento(int FOODID, String NAME, String PHOTO, String MINPHOTO, String MEDPHOTO, String MAXPHOTO, Date CREATETIME, double MINAMOUNT, double MEDAMOUNT, double MAXAMOUNT) {
+        this.FOODID = FOODID;
+        this.NAME = NAME;
+        this.PHOTO = PHOTO;
+        this.MINPHOTO = MINPHOTO;
+        this.MEDPHOTO = MEDPHOTO;
+        this.MAXPHOTO = MAXPHOTO;
+        this.CREATETIME = CREATETIME;
+        this.MINAMOUNT = MINAMOUNT;
+        this.MEDAMOUNT = MEDAMOUNT;
+        this.MAXAMOUNT = MAXAMOUNT;
+    }
+
 
 
     public Alimento() {
     }
 
+    public int getFOODID() {
+        return FOODID;
+    }
+
+    public void setFOODID(int FOODID) {
+        this.FOODID = FOODID;
+    }
+
+    public String getNAME() {
+        return NAME;
+    }
+
+    public void setNAME(String NAME) {
+        this.NAME = NAME;
+    }
+
+    public String getPHOTO() {
+        return PHOTO;
+    }
+
+    public void setPHOTO(String PHOTO) {
+        this.PHOTO = PHOTO;
+    }
+
+    public String getMINPHOTO() {
+        return MINPHOTO;
+    }
+
+    public void setMINPHOTO(String MINPHOTO) {
+        this.MINPHOTO = MINPHOTO;
+    }
+
+    public String getMEDPHOTO() {
+        return MEDPHOTO;
+    }
+
+    public void setMEDPHOTO(String MEDPHOTO) {
+        this.MEDPHOTO = MEDPHOTO;
+    }
+
+    public String getMAXPHOTO() {
+        return MAXPHOTO;
+    }
+
+    public void setMAXPHOTO(String MAXPHOTO) {
+        this.MAXPHOTO = MAXPHOTO;
+    }
+
+    public Date getCREATETIME() {
+        return CREATETIME;
+    }
+
+    public void setCREATETIME(Date CREATETIME) {
+        this.CREATETIME = CREATETIME;
+    }
+
+    public double getMINAMOUNT() {
+        return MINAMOUNT;
+    }
+
+    public void setMINAMOUNT(double MINAMOUNT) {
+        this.MINAMOUNT = MINAMOUNT;
+    }
+
+    public double getMEDAMOUNT() {
+        return MEDAMOUNT;
+    }
+
+    public void setMEDAMOUNT(double MEDAMOUNT) {
+        this.MEDAMOUNT = MEDAMOUNT;
+    }
+
+    public double getMAXAMOUNT() {
+        return MAXAMOUNT;
+    }
+
+    public void setMAXAMOUNT(double MAXAMOUNT) {
+        this.MAXAMOUNT = MAXAMOUNT;
+    }
+
+    /*
     public Grupo getGrupo_alimentario() {
         return grupo_alimentario;
     }
@@ -46,29 +165,37 @@ public class Alimento extends SugarRecord{
     public void setCategoria(SubGrupo categoria) {
         this.categoria = categoria;
     }
-/*
+
+    public Date getCREATETIME() {
+        return CREATETIME;
+    }
+
+    public void setCREATETIME(Date CREATETIME) {
+        this.CREATETIME = CREATETIME;
+    }
+
     public Long getIde() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }*/
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
-    public String getUrl_imagen() {
-        return url_imagen;
+    public void setNAME(String NAME) {
+        this.NAME = NAME;
     }
 
-    public void setUrl_imagen(String url_imagen) {
-        this.url_imagen = url_imagen;
+    public String getPHOTO() {
+        return PHOTO;
     }
 
-    public void setPorcion(double porcion) {
-        this.porcion = porcion;
+    public void setPHOTO(String PHOTO) {
+        this.PHOTO = PHOTO;
+    }
+
+    public void setMINAMOUNT(double MINAMOUNT) {
+        this.MINAMOUNT = MINAMOUNT;
     }
 
     public void setProteinas(double proteinas) {
@@ -83,21 +210,34 @@ public class Alimento extends SugarRecord{
         this.grasas = grasas;
     }
 
-    public Alimento(Long id, String nombre, String url_imagen, double porcion, double proteinas, double carbohidratos, double grasas, Grupo grupo_alimentario, SubGrupo categoria){
+    public Alimento(Long id, String NAME, String PHOTO, double MINAMOUNT, double proteinas, double carbohidratos, double grasas, Grupo grupo_alimentario, SubGrupo categoria){
         //this.id = id;
-        this.nombre = nombre;
-        this.url_imagen = url_imagen;
-        this.porcion = porcion;
+        this.NAME = NAME;
+        this.PHOTO = PHOTO;
+        this.MINAMOUNT = MINAMOUNT;
         this.proteinas = proteinas;
         this.carbohidratos = carbohidratos;
         this.grasas = grasas;
         this.grupo_alimentario = grupo_alimentario;
         this.categoria = categoria;
     }
+    public Alimento(Long id, String NAME, String PHOTO, double MINAMOUNT, double proteinas, double carbohidratos, double grasas, Grupo grupo_alimentario, SubGrupo categoria, Date date){
+        //this.id = id;
+        this.NAME = NAME;
+        this.PHOTO = PHOTO;
+        this.MINAMOUNT = MINAMOUNT;
+        this.proteinas = proteinas;
+        this.carbohidratos = carbohidratos;
+        this.grasas = grasas;
+        this.grupo_alimentario = grupo_alimentario;
+        this.categoria = categoria;
+        this.CREATETIME = date;
+    }
 
-    public Alimento(String nombre)
+    public Alimento(String NAME)
     {
-        this.nombre = nombre;
+        this.NAME = NAME;
+        this.CREATETIME = new Date();
     }
 
 
@@ -109,13 +249,13 @@ public class Alimento extends SugarRecord{
         this.prioridad = prioridad;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNAME() {
+        return NAME;
     }
-/*
+
     public Long getIdAl() {
         return id;
-    }*/
+    }
 
     public String getGrupo() {
         return grupo_alimentario.toString();
@@ -125,8 +265,8 @@ public class Alimento extends SugarRecord{
         return categoria.toString();
     }
 
-    public double getPorcion() {
-        return porcion;
+    public double getMINAMOUNT() {
+        return MINAMOUNT;
     }
 
     public double getProteinas() {
@@ -142,9 +282,9 @@ public class Alimento extends SugarRecord{
     }
 
     public String getUrl() {
-        return url_imagen;
+        return PHOTO;
     }
-
+*/
     //Micronutrientes como vitaminas, sales minerales
     //FALTA POR IMPLEMENTAR EL RESTO DE ELEMENTOS
 

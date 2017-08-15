@@ -27,6 +27,39 @@ FoodService.prototype.initializeRouter = function() {
         });
     });
 
+    self.router.route('/app').get(function(req, res) {
+
+        var food = Food.build();
+
+        food.retrieveAll().then(function(result) {
+            if(result){
+                var response = [];
+
+                for(var i = 0; i < result.length; i++){
+                    response.push({
+                        FOODID: result[i].ID,
+                        NAME: result[i].NAME,
+                        PHOTO: result[i].PHOTO,
+                        MINPHOTO: result[i].MIN_PHOTO,
+                        MEDPHOTO: result[i].MED_PHOTO,
+                        MAXPHOTO: result[i].MAX_PHOTO,
+                        MINAMOUNT: result[i].MIN_AMOUNT,
+                        MEDAMOUNT: result[i].MED_AMOUNT,
+                        MAXAMOUNT: result[i].MAX_AMOUNT,
+                        CREATETIME: result[i].CREATETIME
+                    });
+                }
+
+                console.log("Se envian los alimentos: " + response);
+                res.json(response);
+            }
+            else
+                res.status(401).send("Food not found");
+        }, function(error) {
+            res.status(404).send("Food not found");
+        });
+    });
+
     self.router.route('/count').post(function(req, res) {
 
 
@@ -39,7 +72,7 @@ FoodService.prototype.initializeRouter = function() {
                 console.log("Numero de alimentos post: " + result.length)
 
                 var respuesta = result.length;
-                res.json({rows: respuesta});
+                res.json({ROWS: respuesta});
             }
             else
                 res.status(401).send("Food not found");
@@ -55,15 +88,18 @@ FoodService.prototype.initializeRouter = function() {
 
         var food = Food.build();
 
-        food.retrieveAll().then(function(result) {
+        food.retrieveAllOrdered().then(function(result) {
             if(result){
-                console.log("Numero de alimentos get: " + result.length)
+                console.log("Numero de alimentos get etgretgv4e : " + result.length)
 
                 var respuesta = result.length;
-                res.json({rows: respuesta});
+                var milisec = new Date(result[0].CREATETIME).getTime();
+                res.json({ROWS: respuesta,TIME: milisec,ERROR:null});
             }
-            else
+            else {
+                res.json({ROWS: null,TIME: null,ERROR:"FOOD ERROR"});
                 res.status(401).send("Food not found");
+            }
         }, function(error) {
             res.status(404).send("Food not found");
         });

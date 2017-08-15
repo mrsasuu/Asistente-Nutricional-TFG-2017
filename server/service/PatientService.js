@@ -5,10 +5,14 @@ var Patient = require("../models/Patient");
 
 var patientToken;
 
+
+
 function PatientService() {
 	this.router = express.Router();
 	this.initializeRouter();
 }
+
+
 
 PatientService.prototype.initializeRouter = function() {
 	var self = this;
@@ -139,7 +143,7 @@ PatientService.prototype.initializeRouter = function() {
 
                     patient.news = 0;
 
-                    patient.updateNews(id_patient).then(function(result2) {
+                    patient.updateNews(result.ID).then(function(result2) {
                         console.log("Se han actualizado las novedades del paciente");
                         res.json({NEWS: result.NEWS,ERROR: null});
                     }, function(error) {

@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.Api;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Inicio;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Registro;
@@ -29,6 +30,9 @@ import com.example.sasu.asistente_nutricional_tfg_2017.R;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Row;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.ControllerPreferences;
+import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.UpdateController;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -379,58 +383,10 @@ public class Main_menu2 extends AppCompatActivity
 
         */
 
-        api = controller.getApi();
-
-
-        Call<Row> foodCall = api.foodCount("count");
-        foodCall.enqueue(new Callback<Row>() {
-            @Override
-            public void onResponse(Call<Row> call, Response<Row> response) {
-                // Mostrar progreso
-                /*String error = "Ha ocurrido un error. No se ha podido actualizar la base de datos de alimentos. ";
-                // Procesar errores
-                if (!response.isSuccessful()) {
-
-                    if (response.errorBody()
-                            .contentType()
-                            .subtype()
-                            .equals("json")) {
-                        ApiError apiError = ApiError.fromResponseBody(response.errorBody());
-                        showError(error);
-
-                        error += apiError.getMessage();
-                        Log.d("LoginActivity", apiError.getDeveloperMessage());
-                    } else {
-                        try {
-                            // Reportar causas de error no relacionado con la API
-                            showError(error);
-                            Log.d("LoginActivity", response.errorBody().string());
-                        } catch (IOException e) {
-                            showError(error);
-                            e.printStackTrace();
-                        }
-                    }
-                    showError(error);
-                    return;
-                }*/
 
 
 
-
-
-
-
-            }
-
-
-
-            @Override
-            public void onFailure(Call<Row> call, Throwable t) {
-              showError("Ha ocurrido un error");
-            }
-        });
-
-
+        UpdateController.get(this).updateDB();
 
 
 

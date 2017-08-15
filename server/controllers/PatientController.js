@@ -406,6 +406,7 @@ PatientController.prototype.initBackend = function() {
             var FOODID = req.body.FOODID;
             var DATE = req.body.DATE;
             var AMOUNT = req.body.AMOUNT;
+            var TIMENOW = new Date();
 
 
 
@@ -415,7 +416,8 @@ PatientController.prototype.initBackend = function() {
                 FOODID,
                 FOODHOUR,
                 DATE,
-                AMOUNT
+                AMOUNT,
+                TIMENOW
             ).then(function(result) {
                 self.renderJson.msg = 'Registro añadido correctamente';
 

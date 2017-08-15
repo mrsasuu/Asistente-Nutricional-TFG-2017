@@ -12,8 +12,6 @@ import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
 
 import java.util.List;
 
-import static com.example.sasu.asistente_nutricional_tfg_2017.R.layout.row_item;
-
 /**
  * Created by mrsas on 08/06/2017.
  */
@@ -50,7 +48,7 @@ public class AdapterRegistro extends RecyclerView.Adapter<AdapterRegistro.Regist
     @Override
     public void onBindViewHolder(RegistroViewHolder holder, int position) {
         holder.cardviewAlimento.setBackgroundResource(R.drawable.sunny);
-        holder.nombre.setText(listaAlimentos.get(position).getNombre());
+        holder.nombre.setText(listaAlimentos.get(position).getNAME());
     }
 
 
