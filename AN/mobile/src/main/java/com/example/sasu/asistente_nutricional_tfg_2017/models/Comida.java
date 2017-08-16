@@ -108,7 +108,7 @@ public class Comida{
             alimentos.add(al);
             comidas.put(h,alimentos);
         }
-        Tabla nuevo = new Tabla(fecha,h.toString(),al.getId(),new Date().toString());
+        Tabla nuevo = new Tabla(fecha,h.toString(),al.getId(),new Date().getTime());
         nuevo.save();
     }
 
@@ -162,7 +162,7 @@ public class Comida{
             List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
 
             for(int j = 0; j < alim.size(); j++){
-                Tabla comida = new Tabla(fecha,horarios.get(i).toString(),alim.get(j).getId(),new Date().toString());
+                Tabla comida = new Tabla(fecha,horarios.get(i).toString(),alim.get(j).getId(),new Date().getTime());
                 if(!listaPorHorario.contains(comida)){
                     comida.save();
                     //alim.get(i).save();

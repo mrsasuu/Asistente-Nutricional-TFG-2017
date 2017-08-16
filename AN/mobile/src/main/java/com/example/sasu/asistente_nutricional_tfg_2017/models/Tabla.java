@@ -24,7 +24,7 @@ public class Tabla extends SugarRecord{
     private Long id_alimento;
     @SerializedName("CREATETIME")
     @Expose
-    private String CREATETIME;
+    private Long CREATETIME;
 
 
     public Tabla() {
@@ -36,14 +36,14 @@ public class Tabla extends SugarRecord{
         this.id_alimento = id_alimento;
     }
 
-    public Tabla(String fecha, String horario_comida, Long id_alimento, String CREATETIME) {
+    public Tabla(String fecha, String horario_comida, Long id_alimento, Long CREATETIME) {
         this.fecha = fecha;
         this.horario_comida = horario_comida;
         this.id_alimento = id_alimento;
         this.CREATETIME = CREATETIME;
     }
 
-    public Tabla(String fecha, String horario_comida, double amount, Long id_alimento, String CREATETIME) {
+    public Tabla(String fecha, String horario_comida, double amount, Long id_alimento, Long CREATETIME) {
         this.fecha = fecha;
         this.horario_comida = horario_comida;
         this.amount = amount;
@@ -51,11 +51,11 @@ public class Tabla extends SugarRecord{
         this.CREATETIME = CREATETIME;
     }
 
-    public String getCREATETIME() {
+    public Long getCREATETIME() {
         return CREATETIME;
     }
 
-    public void setCREATETIME(String CREATETIME) {
+    public void setCREATETIME(Long CREATETIME) {
         this.CREATETIME = CREATETIME;
     }
 

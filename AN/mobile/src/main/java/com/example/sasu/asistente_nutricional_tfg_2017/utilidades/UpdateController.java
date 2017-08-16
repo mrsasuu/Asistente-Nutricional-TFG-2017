@@ -177,7 +177,7 @@ public class UpdateController {
                     applyError(response.body().getERROR());
                 } else {
 
-                    List<Tabla> aList = Tabla.find(Tabla.class, null, null, null, "createtime DESC", "1");
+                    List<Tabla> aList = Tabla.find(Tabla.class, null, null, null, "CREATETIME DESC", "100");
 
                     Date date = new Date(Long.parseLong(response.body().getTIME()));
 
@@ -191,7 +191,9 @@ public class UpdateController {
 
                     }
 
-                    if (al == null || new Date(al.getCREATETIME()).getTime() < Long.parseLong(response.body().getTIME())) {
+                    if( al != null && new Date(al.getCREATETIME()).getTime() == Long.parseLong(response.body().getTIME())){
+
+                    } else if(al == null || new Date(al.getCREATETIME()).getTime() < Long.parseLong(response.body().getTIME())) {
                         syncFoodRegisterDBDownload();
                     }else{
                         syncFoodRegisterDBUpload();

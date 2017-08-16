@@ -172,7 +172,7 @@ public class ControllerPreferences {
         {
             al = aList.get(0);
 
-            al.setCREATETIME(new Date().toString());
+            al.setCREATETIME(new Date().getTime());
 
             al.save();
 
