@@ -166,13 +166,33 @@ public class Main_menu2 extends AppCompatActivity
 
         fondo = (FrameLayout) findViewById(R.id.fondo);
 
-        Inicio inicioFragment = new Inicio();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
-        transaction.add(R.id.fragment_container,inicioFragment);
+        Bundle extras = getIntent().getExtras();
 
-        transaction.commit();
+        if(extras == null){
+            position = 0;
+            Inicio inicioFragment = new Inicio();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+            transaction.add(R.id.fragment_container,inicioFragment);
+
+            transaction.commit();
+        }else{
+            position = 1;
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+            transaction.addToBackStack(transaction.toString());
+            transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+            //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
+            transaction.replace(R.id.fragment_container, Registro.newInstance());
+
+
+            transaction.commit();
+        }
+
+
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 

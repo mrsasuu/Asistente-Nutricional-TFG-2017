@@ -85,6 +85,8 @@ FoodController.prototype.initBackend = function() {
             var med_photo_food = '/static/img/img_not_available.png';
             var max_photo_food = '/static/img/img_not_available.png';
 
+            console.log("min: " + minamount + " med: " + medamount);
+
             // Check if there's files to upload
             if(req.files.length > 0) {
                 var file = Utils.normalizeStr(req.files[0].originalname);

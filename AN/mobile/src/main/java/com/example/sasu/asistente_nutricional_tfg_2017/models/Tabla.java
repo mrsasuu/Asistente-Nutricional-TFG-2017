@@ -1,9 +1,13 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.models;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 import com.orm.dsl.Column;
 import com.orm.dsl.Table;
+
+import java.util.Date;
 
 /**
  * Created by Sasu on 17/06/2017.
@@ -14,8 +18,14 @@ public class Tabla extends SugarRecord{
     private String fecha;
     @Column(name = "horario")
     private String horario_comida;
+    @Column(name = "amount")
+    private double amount;
     @Column(name = "alim")
     private Long id_alimento;
+    @SerializedName("CREATETIME")
+    @Expose
+    private String CREATETIME;
+
 
     public Tabla() {
     }
@@ -24,6 +34,37 @@ public class Tabla extends SugarRecord{
         this.fecha = fecha;
         this.horario_comida = horario_comida;
         this.id_alimento = id_alimento;
+    }
+
+    public Tabla(String fecha, String horario_comida, Long id_alimento, String CREATETIME) {
+        this.fecha = fecha;
+        this.horario_comida = horario_comida;
+        this.id_alimento = id_alimento;
+        this.CREATETIME = CREATETIME;
+    }
+
+    public Tabla(String fecha, String horario_comida, double amount, Long id_alimento, String CREATETIME) {
+        this.fecha = fecha;
+        this.horario_comida = horario_comida;
+        this.amount = amount;
+        this.id_alimento = id_alimento;
+        this.CREATETIME = CREATETIME;
+    }
+
+    public String getCREATETIME() {
+        return CREATETIME;
+    }
+
+    public void setCREATETIME(String CREATETIME) {
+        this.CREATETIME = CREATETIME;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public String getFecha() {

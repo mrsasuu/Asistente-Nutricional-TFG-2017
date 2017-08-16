@@ -2,9 +2,12 @@ package com.example.sasu.asistente_nutricional_tfg_2017.utilidades;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Comida;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Tabla;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,6 +20,7 @@ public class ControllerPreferences {
     private Retrofit mRestAdapter;
 
     public Date fechaActual;
+    public String segundaFecha;
 
     public HorarioComida getHorarioRegistrar() {
         return horarioRegistrar;
@@ -84,6 +88,14 @@ public class ControllerPreferences {
         api =  mRestAdapter.create(Api.class);
     }
 
+    public String getSegundaFecha() {
+        return segundaFecha;
+    }
+
+    public void setSegundaFecha(String segundaFecha) {
+        this.segundaFecha = segundaFecha;
+    }
+
     public Comida getComida(){
         /*Date hoy = new Date();
         Calendar cal = Calendar.getInstance();
@@ -118,17 +130,58 @@ public class ControllerPreferences {
         return comida;
     }
 
+
+
     public Api getApi(){
         return api;
     }
 
     public static ControllerPreferences getInstance() {
-         if(instance == null)
-         {
-             instance = new ControllerPreferences();
-         }
+        if(instance == null)
+            instance = new ControllerPreferences();
         return instance;
     }
 
 
+    public void eliminarComida(Alimento alimento) {
+
+
+        Date hoy = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(hoy);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH) - 1;
+        String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
+
+
+        List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ? and alim = ?", comida.getFecha(),horarioRegistrar.toString(),alimento.getId().toString());
+
+        if(listaPorHorario.size() > 0)
+        {
+            Tabla del = listaPorHorario.get(0);
+            del.delete();
+        }
+
+
+        List<Tabla> aList = Tabla.find(Tabla.class, null, null, null, "createtime DESC", "1");
+
+        Tabla al;
+
+        if (aList.size() != 0)
+        {
+            al = aList.get(0);
+
+            al.setCREATETIME(new Date().toString());
+
+            al.save();
+
+        }
+
+
+
+
+
+        this.comida = new Comida();
+    }
 }

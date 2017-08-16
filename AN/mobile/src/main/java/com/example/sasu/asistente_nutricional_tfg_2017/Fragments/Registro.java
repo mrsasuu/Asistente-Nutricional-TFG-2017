@@ -72,7 +72,7 @@ public class Registro extends Fragment {
 
         //List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
 
-        AdapterRegistro adaptador= new AdapterRegistro(alimentos);
+        AdapterRegistro adaptador= new AdapterRegistro(alimentos,getContext());
         rv.setAdapter(adaptador);
     }
 
@@ -118,7 +118,7 @@ public class Registro extends Fragment {
 
         //List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
 
-        AdapterRegistro adaptador= new AdapterRegistro(alimentos);
+        AdapterRegistro adaptador= new AdapterRegistro(alimentos,getContext());
         rv.setAdapter(adaptador);
 
         atras = (Button) rootView.findViewById(R.id.diaAtras);
@@ -141,6 +141,7 @@ public class Registro extends Fragment {
                 int month = cal.get(Calendar.MONTH)+1;
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
+                controllerPreferences.setSegundaFecha(fechaB);
                 Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
 
                 Comida c = controllerPreferences.getComida(fechaB);
@@ -152,7 +153,7 @@ public class Registro extends Fragment {
 
                 //List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
 
-                AdapterRegistro adaptador= new AdapterRegistro(alimentos);
+                AdapterRegistro adaptador= new AdapterRegistro(alimentos,getContext());
                 rv.setAdapter(adaptador);
             }
         });
@@ -176,7 +177,7 @@ public class Registro extends Fragment {
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
                 Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
-
+                controllerPreferences.setSegundaFecha(fechaB);
                 Comida c = controllerPreferences.getComida(fechaB);
 
                 List<Alimento> alimentos = c.getLista(HorarioComida.DESAYUNO);
@@ -186,7 +187,7 @@ public class Registro extends Fragment {
 
                 //List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
 
-                AdapterRegistro adaptador= new AdapterRegistro(alimentos);
+                AdapterRegistro adaptador= new AdapterRegistro(alimentos,getContext());
                 rv.setAdapter(adaptador);
             }
         });

@@ -57,7 +57,7 @@ public class Comida{
             List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
 
             List<Alimento> alimentos =  new ArrayList<>();
-            for(int j = 0; (j < listaPorHorario.size())&&(listaPorHorario!=null);j++){
+            for(int j = 0; ((listaPorHorario!=null) && j < listaPorHorario.size());j++){
                 Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(j).getId_alimento());
                 alimentos.add(al);
             }
@@ -108,7 +108,7 @@ public class Comida{
             alimentos.add(al);
             comidas.put(h,alimentos);
         }
-        Tabla nuevo = new Tabla(fecha,h.toString(),al.getId());
+        Tabla nuevo = new Tabla(fecha,h.toString(),al.getId(),new Date().toString());
         nuevo.save();
     }
 
@@ -133,7 +133,7 @@ public class Comida{
         for(int i = 0; i < horarios.size(); i++){
             List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
             List<Alimento> alimentos =  new ArrayList<>();
-            for(int j = 0; (j < listaPorHorario.size())&&(listaPorHorario!=null);j++){
+            for(int j = 0; (listaPorHorario!=null)&&(j < listaPorHorario.size());j++){
                 Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(j).getId_alimento());
                 alimentos.add(al);
             }
@@ -162,7 +162,7 @@ public class Comida{
             List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
 
             for(int j = 0; j < alim.size(); j++){
-                Tabla comida = new Tabla(fecha,horarios.get(i).toString(),alim.get(j).getId());
+                Tabla comida = new Tabla(fecha,horarios.get(i).toString(),alim.get(j).getId(),new Date().toString());
                 if(!listaPorHorario.contains(comida)){
                     comida.save();
                     //alim.get(i).save();

@@ -11,6 +11,7 @@
         android:elevation="3dp"
         app:cardCornerRadius="20dp"
         android:background="@drawable/sunny">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,18 +21,24 @@
                 android:background="@mipmap/close"
                 android:id="@+id/eliminarItem"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
-            <Button
+                android:layout_height="50dp"
+                />
+            <!--<Button
                 android:background="@mipmap/edit"
                 android:id="@+id/modificarItem"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp" />-->
         </LinearLayout>
         <LinearLayout
             android:layout_gravity="center|bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:id="@+id/fotoAlimento"/>
+
             <TextView
                 android:elevation="1dp"
                 android:id="@+id/nombreAlimento"

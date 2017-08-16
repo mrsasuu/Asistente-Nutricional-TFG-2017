@@ -8,6 +8,8 @@ import com.example.sasu.asistente_nutricional_tfg_2017.models.LoginBody;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.News;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.NewsBody;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Patient;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Registros;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Response;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Row;
 
 
@@ -39,6 +41,9 @@ public interface Api {
 
     @POST("food_register/week_number")
     Call<Row> numberRegisters(@Body FoodRegistryBody foodRegistryBody);
+
+    @POST("food_register/sync")
+    Call<Response> syncUpload(@Body Registros registros);
 
     /*@POST("food/count")
     Call<Row> foodCount(@Body Row rows);*/

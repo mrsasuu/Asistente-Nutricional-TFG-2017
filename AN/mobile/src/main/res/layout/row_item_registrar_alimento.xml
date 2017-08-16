@@ -17,6 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <!--<ImageView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:id="@+id/fotoAlimento"/>-->
             <TextView
                 android:elevation="1dp"
                 android:id="@+id/nombreAlimento"

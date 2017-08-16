@@ -136,7 +136,7 @@ public class registrarComidaTab extends AppCompatActivity {
                 }
             }*/
 
-            AdapterRegistrarAlimento adaptador= new AdapterRegistrarAlimento(alimentos);
+            AdapterRegistrarAlimento adaptador= new AdapterRegistrarAlimento(alimentos,getContext());
             rv.setAdapter(adaptador);
             return rootView;
         }

@@ -1,5 +1,6 @@
 var express = require("express");
 var FoodRegister = require("../models/FoodRegister");
+var Objetive = require('../models/Objetive');
 
 function getWeek(d,dowOffset) {
     dowOffset = typeof(dowOffset) == 'int' ? dowOffset : 1; //default dowOffset to zero
@@ -66,6 +67,119 @@ FoodRegisterService.prototype.initializeRouter = function() {
         });
     });
 
+
+    self.router.route('/sync').post(function(req, res) {
+        var foodRegister = FoodRegister.build();
+
+        var id_patient = req.body.PATIENTID;
+
+        var PATIENTID = id_patient;
+        var FOODHOUR = req.body.FOODHOUR;
+        var FOODID = req.body.FOODID;
+        var DATE = new Date(req.body.DATE);
+        var AMOUNT = req.body.AMOUNT;
+        var TIMENOW = new Date(req.body.CREATETIME);
+
+
+
+        console.log("Patient: " + PATIENTID + " comida: " + FOODID + " Hora: " + FOODHOUR + " fecha: " + DATE + " amount: " + AMOUNT + " creacion: " + TIMENOW);
+
+
+        foodRegister.add(
+            PATIENTID,
+            FOODID,
+            FOODHOUR,
+            DATE,
+            AMOUNT,
+            TIMENOW
+        ).then(function(result) {
+            console.log('Registro añadido correctamente');
+
+            var objetivos = Objetive.build();
+
+            objetivos.retrieveByPatientId(id_patient).then(function(result2) {
+                console.log('Objetivos consultados correctamente');
+
+                var date_regis = new Date(DATE).getTime();
+
+                var boole = false;
+                var progress;
+                var progressObj;
+                var amountObj;
+                var objId;
+                for(var i = 0; i < result2.length && !boole ; i++){
+
+                    var min_date = new Date(result2[i].START_DATE).getTime();
+                    var max_date = new Date(result2[i].END_DATE).getTime();
+
+                    if((min_date <= date_regis) && (date_regis <= max_date)){
+
+                        if(result2[i].FOOD_ID == FOODID){
+
+                            boole = true;
+                            objId = result2[i].ID;
+                            amountObj = parseFloat(result2[i].AMOUNT);
+
+                            progressObj = parseFloat(result2[i].PROGRESS);
+                            progress = parseFloat(progressObj) + parseFloat(AMOUNT);
+                        }
+
+                    }
+                }
+
+                if(boole)
+                {
+                    objetivos = Objetive.build();
+
+                    if(parseFloat(progress) >= amountObj){
+
+
+                        objetivos.progress = progress;
+                        objetivos.completed = 1;
+
+                        objetivos.updateProgressAndComplete(objId).then(function(result) {
+
+                            console.log("Objetivo actualizado y completado correctamente.");
+
+                            res.json({MSG:"Insertado con exito",TIME: new Date().getTime(), ERROR: null});
+                        },function(error) {
+                            console.log(error);
+                            res.json({MSG:"ERROR",TIME: new Date().getTime(), ERROR: "Error en objetivos"});
+                        });
+                    }else {
+                        objetivos.progress = progress;
+
+                        objetivos.updateProgress(objId).then(function(result) {
+                            console.log("Objetivo actualizado correctamente.");
+                            res.json({MSG:"Insertado con exito",TIME: new Date().getTime(), ERROR: null});
+
+
+                        },function(error) {
+                            console.log(error);
+                            res.json({MSG:"ERROR",TIME: new Date().getTime(), ERROR: "Error en objetivos"});
+                        });
+                    }
+
+                }else{
+                    console.log("Registro insertado correctamente.");
+                    res.json({MSG:"Insertado con exito",TIME: new Date().getTime(), ERROR: null});
+                }
+
+            }, function(error) {
+                console.log(error);
+                res.json({MSG:"ERROR",TIME: new Date().getTime(), ERROR: "Error en objetivos"});
+            });
+
+
+
+        }, function(error) {
+            console.log(error);
+            res.json({MSG:"ERROR",TIME: new Date().getTime(), ERROR: "Error en la insercción"});
+        });
+    });
+
+
+
     self.router.route('/week_number').post(function(req, res) {
         var patient_id = req.body.id;
         var date= getWeek(new Date(req.body.date),1);
@@ -93,7 +207,7 @@ FoodRegisterService.prototype.initializeRouter = function() {
 
                 console.log("numero de registros: " + response.length);
 
-                res.json({ROWS: response.length, TIME: result[0].CREATETIME ,ERROR: null});
+                res.json({ROWS: response.length, TIME: new Date(result[0].CREATETIME).getTime() ,ERROR: null});
 			}
             else {
                 res.json({ROWS: null.length, ERROR: "ERROR FOODREGISTER"});

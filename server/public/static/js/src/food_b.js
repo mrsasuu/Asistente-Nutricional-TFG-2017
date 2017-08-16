@@ -57,6 +57,10 @@ $(document).ready(function() {
                     $("#edit_cholesterol_table").val(jsondata.CHOLESTEROL);
                     $("#edit_saturated_table").val(jsondata.SATURATED);
 
+                    $("#edit_min_amount_table").val(jsondata.MIN_AMOUNT);
+                    $("#edit_med_amount_table").val(jsondata.MED_AMOUNT);
+                    $("#edit_max_amount_table").val(jsondata.MAX_AMOUNT);
+
 
 
 

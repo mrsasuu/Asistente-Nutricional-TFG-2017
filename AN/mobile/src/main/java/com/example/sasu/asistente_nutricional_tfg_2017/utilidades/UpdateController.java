@@ -1,21 +1,36 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.utilidades;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Environment;
+import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.widget.Toast;
+
 
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.FoodRegistryBody;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.News;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.NewsBody;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Patient;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Registros;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Row;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Tabla;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -99,7 +114,7 @@ public class UpdateController {
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-                System.out.println("Ha fallado");
+                System.out.println("Ha fallado 2: " + t);
             }
         });
 
@@ -144,7 +159,8 @@ public class UpdateController {
             @Override
             public void onFailure(Call<Row> call, Throwable t) {
 
-                System.out.println("Ha fallado");
+
+                System.out.println("Ha fallado: " + t);
             }
 
         });
@@ -160,18 +176,34 @@ public class UpdateController {
                 if (response.body().getERROR() != null) {
                     applyError(response.body().getERROR());
                 } else {
-                    int num_registros = Tabla.listAll(Tabla.class).size();
 
-                    if (num_registros != response.body().getROWS()) {
-                        syncFoodRegisterDB();
+                    List<Tabla> aList = Tabla.find(Tabla.class, null, null, null, "createtime DESC", "1");
+
+                    Date date = new Date(Long.parseLong(response.body().getTIME()));
+
+                    DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+                    Tabla al=null;
+
+                    if (aList.size() != 0)
+                    {
+                        al = aList.get(0);
+
                     }
+
+                    if (al == null || new Date(al.getCREATETIME()).getTime() < Long.parseLong(response.body().getTIME())) {
+                        syncFoodRegisterDBDownload();
+                    }else{
+                        syncFoodRegisterDBUpload();
+                    }
+
                 }
 
             }
 
             @Override
             public void onFailure(Call<Row> call, Throwable t) {
-                System.out.println("Ha fallado");
+                System.out.println("Ha fallado 3: " + t);
             }
 
         });
@@ -198,7 +230,10 @@ public class UpdateController {
                 List<Alimento> rs = response.body();
 
                 for (int i = 0; i < rs.size(); i++) {
+                    rs.get(i).setPHOTO(loadImages(rs.get(i).getPHOTO()));
+
                     rs.get(i).save();
+
                 }
 
             }
@@ -211,6 +246,64 @@ public class UpdateController {
         });
     }
 
+    public String loadImages(String url){
+
+        String urlServer = "http://mrsasuu.hopto.org";
+        String fileName = urlServer + url;
+        /*String fileName = url.substring(18);
+
+        Picasso.with(c)
+                .load(urlServer + url)
+                .into(getTarget(fileName));*/
+
+        return fileName;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void checkPermission(){
+       /*if(c.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+
+       }*/
+    }
+
+    private static Target getTarget(final String url){
+        Target target = new Target(){
+
+            @Override
+            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
+                new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        File file = new File(Environment.getExternalStorageDirectory().getPath() + "/" + url);
+                        try {
+                            file.createNewFile();
+                            FileOutputStream ostream = new FileOutputStream(file);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, ostream);
+                            ostream.flush();
+                            ostream.close();
+                        } catch (IOException e) {
+                            Log.e("IOException", e.getLocalizedMessage());
+                        }
+                    }
+                }).start();
+
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+        return target;
+    }
+
     /**
      * Método para sincronizar los registros locales de los objetivos
      */
@@ -221,8 +314,74 @@ public class UpdateController {
     /**
      * Método para sincronizar los registros alimentarios locales
      */
-    private void syncFoodRegisterDB() {
+    private void syncFoodRegisterDBUpload() {
+        int id = Integer.parseInt(mPrefs.getString(PREF_PATIENT_ID, null));
+        Registros request = null;
 
+        List<Tabla> aList = Tabla.listAll(Tabla.class);
+
+        for(int i  = 0; i < aList.size(); i++){
+
+            Alimento al = Alimento.findById(Alimento.class,aList.get(i).getId());
+
+            String fecha = "";
+
+            String[] parts = aList.get(i).getFecha().split("-");
+
+            fecha = parts[0]+ "-0"+parts[1]+"-"+parts[2];
+
+
+           // Date date = new Date(fecha);
+
+            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+
+            Date dataFrom = new Date();
+            try {
+                dataFrom = df.parse(fecha);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+            request = new Registros(id,al.getFOODID(),aList.get(i).getHorario_comida(),dataFrom.getTime(),0,new Date(aList.get(i).getCREATETIME()).getTime());
+
+            Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> uploadRegistry = api.syncUpload(request);
+            uploadRegistry.enqueue(new Callback<com.example.sasu.asistente_nutricional_tfg_2017.models.Response>()
+
+            {
+                @Override
+                public void onResponse(Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> call, Response<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> response) {
+
+                    System.out.println(response.body().getMSG());
+
+
+                }
+
+                @Override
+                public void onFailure(Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> call, Throwable t) {
+                    System.out.println("Ha fallado la subida del registro: " + t);
+                }
+
+            });
+
+        }
+
+    }
+
+    /**
+     * Método para sincronizar los registros alimentarios locales
+     */
+    private void syncFoodRegisterDBDownload() {
+
+        List<Tabla> aList = Tabla.find(Tabla.class, null, null, null, "createtime DESC", "1");
+
+        Tabla al;
+
+        if (aList.size() != 0)
+        {
+            al = aList.get(0);
+
+        }
     }
 
     private void applyError(String error) {
