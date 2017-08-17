@@ -60,6 +60,27 @@ var FoodRegister = DBConnector.connectAN().define('FOODREGISTER', {
 		},
         removeById: function(food_registry_id){
             return FoodRegister.destroy({ where: {REGISTERID: food_registry_id} });
+        },
+        removeLastWeek: function(id_patient){
+        	var date = new Date();
+
+        	console.log(date);
+
+        	var fecha = "";
+            var ayer = "";
+            var antesayer = "";
+
+            fecha += "20"+(date.getYear()%100) + "-0" + (date.getMonth()+1) + "-" + date.getDate();
+            ayer += "20"+(date.getYear()%100) + "-0" + (date.getMonth()+1) + "-" + (date.getDate()-1);
+            antesayer += "20"+(date.getYear()%100) + "-0" + (date.getMonth()+1) + "-" + (date.getDate()-2);
+
+            console.log("Fechas:");
+
+        	console.log(fecha);
+            console.log(ayer);
+            console.log(antesayer);
+
+            return FoodRegister.destroy({ where: {DATE: [fecha,ayer,antesayer], PATIENTID: id_patient} });
         }
 	},
 	freezeTableName: true

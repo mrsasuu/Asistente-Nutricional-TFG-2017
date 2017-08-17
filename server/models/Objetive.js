@@ -64,6 +64,12 @@ var Objetive = DBConnector.connectAN().define('OBJETIVE', {
 				PROGRESS: 0
 			});
 		},
+        resetProgress: function (listids) {
+            return Objetive.update({
+                PROGRESS: 0,
+                COMPLETED: 0
+            }, { where: {ID: listids} });
+        },
 		updateProgress: function (objetive_id) {
             return Objetive.update({
                 PROGRESS: this.progress

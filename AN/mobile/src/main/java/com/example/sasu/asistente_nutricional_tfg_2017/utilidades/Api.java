@@ -51,6 +51,9 @@ public interface Api {
     @GET("food/{route}")
     Call<Row> foodCount(@Path("route") String route);
 
+    @POST("food_register/week_number/delete")
+    Call<Response> deleteWeek(@Body NewsBody newsBody);
+
     @GET("food/{routes}")
     Call<List<Alimento>> food(@Path("routes") String routes);
 

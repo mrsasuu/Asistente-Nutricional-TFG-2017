@@ -31,6 +31,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -191,6 +192,9 @@ public class UpdateController {
 
                     }
 
+                    Date uno = new Date(al.getCREATETIME());
+                    Date dos = new Date(Long.parseLong(response.body().getTIME()));
+
                     if( al != null && new Date(al.getCREATETIME()).getTime() == Long.parseLong(response.body().getTIME())){
 
                     } else if(al == null || new Date(al.getCREATETIME()).getTime() < Long.parseLong(response.body().getTIME())) {
@@ -313,18 +317,19 @@ public class UpdateController {
 
     }
 
-    /**
-     * Método para sincronizar los registros alimentarios locales
-     */
-    private void syncFoodRegisterDBUpload() {
+    private void upload(){
         int id = Integer.parseInt(mPrefs.getString(PREF_PATIENT_ID, null));
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -2);
+        Date time = cal.getTime();
+
         Registros request = null;
 
         List<Tabla> aList = Tabla.listAll(Tabla.class);
 
         for(int i  = 0; i < aList.size(); i++){
 
-            Alimento al = Alimento.findById(Alimento.class,aList.get(i).getId());
 
             String fecha = "";
 
@@ -333,9 +338,10 @@ public class UpdateController {
             fecha = parts[0]+ "-0"+parts[1]+"-"+parts[2];
 
 
-           // Date date = new Date(fecha);
+            // Date date = new Date(fecha);
 
             DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+
 
             Date dataFrom = new Date();
             try {
@@ -344,8 +350,41 @@ public class UpdateController {
                 e.printStackTrace();
             }
 
+            if(dataFrom.getTime() < time.getTime()){
+                aList.get(i).delete();
+            }
+        }
 
-            request = new Registros(id,al.getFOODID(),aList.get(i).getHorario_comida(),dataFrom.getTime(),0,new Date(aList.get(i).getCREATETIME()).getTime());
+        List<Tabla> aList2 = Tabla.listAll(Tabla.class);
+
+            for(int j = 0;j < aList2.size();j++)
+            {
+
+                Alimento al = Alimento.findById(Alimento.class,aList2.get(j).getId());
+
+                String fecha = "";
+
+                String[] parts = aList2.get(j).getFecha().split("-");
+
+                fecha = parts[0]+ "-0"+parts[1]+"-"+parts[2];
+
+
+                // Date date = new Date(fecha);
+
+                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+
+
+
+
+
+                Date dataFrom = new Date();
+                try {
+                    dataFrom = df.parse(fecha);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+            request = new Registros(id,al.getFOODID(),aList2.get(j).getHorario_comida(),dataFrom.getTime(),0,aList2.get(j).getCREATETIME());
 
             Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> uploadRegistry = api.syncUpload(request);
             uploadRegistry.enqueue(new Callback<com.example.sasu.asistente_nutricional_tfg_2017.models.Response>()
@@ -367,6 +406,48 @@ public class UpdateController {
             });
 
         }
+
+    }
+
+    /**
+     * Método para sincronizar los registros alimentarios locales
+     */
+    private void syncFoodRegisterDBUpload() {
+        int id = Integer.parseInt(mPrefs.getString(PREF_PATIENT_ID, null));
+
+
+        Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> deleteWeek = api.deleteWeek(new NewsBody(id,""));
+        deleteWeek.enqueue(new Callback<com.example.sasu.asistente_nutricional_tfg_2017.models.Response>()
+
+        {
+            @Override
+            public void onResponse(Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> call, Response<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> response) {
+
+
+
+                int progress = Integer.parseInt(response.body().getMSG());
+
+
+                if( progress == 1){
+                    upload();
+                    System.out.println("Llega");
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> call, Throwable t) {
+                System.out.println("Ha fallado la orden de eliminar: " + t);
+            }
+
+        });
+
+
+
+
+
+
 
     }
 
