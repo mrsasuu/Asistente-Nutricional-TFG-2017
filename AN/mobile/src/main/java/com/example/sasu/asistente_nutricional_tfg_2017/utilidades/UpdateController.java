@@ -373,12 +373,12 @@ public class UpdateController {
 
                 String[] parts = aList2.get(j).getFecha().split("-");
 
-                fecha = parts[0]+ "-0"+parts[1]+"-"+parts[2];
+                fecha = Integer.toString(Integer.parseInt(parts[0]))+ "-0"+parts[1]+"-"+parts[2] +" 04:00" ;
 
 
                 // Date date = new Date(fecha);
 
-                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
 
 

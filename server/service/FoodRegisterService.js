@@ -2,6 +2,8 @@ var express = require("express");
 var FoodRegister = require("../models/FoodRegister");
 var Objetive = require('../models/Objetive');
 
+var moment = require('moment-timezone');
+moment().tz('Europe/Amsterdam').format();
 
 function getWeek(d,dowOffset) {
     dowOffset = typeof(dowOffset) == 'int' ? dowOffset : 1; //default dowOffset to zero

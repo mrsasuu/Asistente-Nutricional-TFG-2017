@@ -12,6 +12,8 @@ app.use(bodyParser());
 app.use(compression());
 app.use(helmet());
 
+
+
 // sesion of 30 min
 var sessionTimeout = 30 * 60 * 1000;
 app.use(session({
@@ -25,6 +27,10 @@ var http = require('http').Server(app);
 
 // Util to format dates
 var moment = require('moment');
+
+//moment.tz.setDefault("America/New_York");
+
+moment.locale('es');
 
 // Our own utils
 var Utils = require('./utils/Util');
