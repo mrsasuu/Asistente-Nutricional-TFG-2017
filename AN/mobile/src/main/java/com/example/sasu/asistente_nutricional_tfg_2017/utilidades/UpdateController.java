@@ -191,9 +191,16 @@ public class UpdateController {
                         al = aList.get(0);
 
                     }
+                    Date uno;
 
-                    Date uno = new Date(al.getCREATETIME());
+                    if(al != null)
+                        uno = new Date(al.getCREATETIME());
+
                     Date dos = new Date(Long.parseLong(response.body().getTIME()));
+
+                    Long d = new Long("1503046683353");
+
+                    Date prueba = new Date(d);
 
                     if( al != null && new Date(al.getCREATETIME()).getTime() == Long.parseLong(response.body().getTIME())){
 
@@ -386,7 +393,7 @@ public class UpdateController {
 
             request = new Registros(id,al.getFOODID(),aList2.get(j).getHorario_comida(),dataFrom.getTime(),0,aList2.get(j).getCREATETIME());
 
-            Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> uploadRegistry = api.syncUpload(request);
+             Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> uploadRegistry = api.syncUpload(request);
             uploadRegistry.enqueue(new Callback<com.example.sasu.asistente_nutricional_tfg_2017.models.Response>()
 
             {

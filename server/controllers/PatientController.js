@@ -406,7 +406,7 @@ PatientController.prototype.initBackend = function() {
             var FOODID = req.body.FOODID;
             var DATE = req.body.DATE;
             var AMOUNT = req.body.AMOUNT;
-            var TIMENOW = new Date();
+            var TIMENOW = new Date().getTime();
 
 
 

@@ -19,7 +19,7 @@ var FoodRegister = DBConnector.connectAN().define('FOODREGISTER', {
 	FOODHOUR: {type: Sequelize.STRING(45), allowNull: false},
 	DATE: {type: Sequelize.DATE, allowNull: false},
 	AMOUNT: {type: Sequelize.DOUBLE, allowNull: false},
-	CREATETIME: {type: Sequelize.DATE, allowNull: false}
+	CREATETIME: {type: Sequelize.BIGINT, allowNull: false}
 },
 {
 	instanceMethods: {

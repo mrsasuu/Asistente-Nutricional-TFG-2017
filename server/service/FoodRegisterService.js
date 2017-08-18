@@ -94,7 +94,7 @@ FoodRegisterService.prototype.initializeRouter = function() {
         var TIMENOW = new Date(req.body.CREATETIME);
 
 
-
+        console.log("Tiempo consulta: " + req.body.CREATETIME + " fecha creada: " + TIMENOW + " milisegundos nueva fecha: " + TIMENOW.getTime());
         console.log("Patient: " + PATIENTID + " comida: " + FOODID + " Hora: " + FOODHOUR + " fecha: " + DATE + " amount: " + AMOUNT + " creacion: " + TIMENOW);
 
 
@@ -104,7 +104,7 @@ FoodRegisterService.prototype.initializeRouter = function() {
             FOODHOUR,
             DATE,
             AMOUNT,
-            TIMENOW
+            req.body.CREATETIME
         ).then(function(result) {
             console.log('Registro añadido correctamente');
 
@@ -467,8 +467,16 @@ FoodRegisterService.prototype.initializeRouter = function() {
 
 
                 console.log("numero de registros: " + response.length);
+               if(result.length > 0)
+               {
+                   console.log("Fecha: " + result[0].CREATETIME + " milisegundos: " + new Date(result[0].CREATETIME).getTime() + " fecha js: " + new Date(result[0].CREATETIME) );
 
-                res.json({ROWS: response.length, TIME: new Date(result[0].CREATETIME).getTime() ,ERROR: null});
+                   res.json({ROWS: response.length, TIME: new Date(result[0].CREATETIME).getTime() ,ERROR: null});
+               }else{
+                   console.log("Fecha: NO DISPONIBLE"  + " milisegundos: NO DISPONIBLE ");
+
+                   res.json({ROWS: response.length, TIME: 0 ,ERROR: null});
+               }
 			}
             else {
                 res.json({ROWS: null.length, ERROR: "ERROR FOODREGISTER"});
