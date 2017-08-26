@@ -58,7 +58,7 @@ public class Comida{
 
             List<Alimento> alimentos =  new ArrayList<>();
             for(int j = 0; ((listaPorHorario!=null) && j < listaPorHorario.size());j++){
-                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(j).getId_alimento());
+                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(j).getIdAlimento());
                 alimentos.add(al);
             }
 
@@ -134,7 +134,7 @@ public class Comida{
             List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
             List<Alimento> alimentos =  new ArrayList<>();
             for(int j = 0; (listaPorHorario!=null)&&(j < listaPorHorario.size());j++){
-                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(j).getId_alimento());
+                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(j).getIdAlimento());
                 alimentos.add(al);
             }
 
@@ -178,7 +178,7 @@ public class Comida{
             List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", fecha,horarios.get(i).toString());
             //Tabla comida = new Tabla(fecha,horarios.get(i).toString(),alim.get(i).getId());
             for(int j = 0; j < listaPorHorario.size(); j++){
-                Alimento al = Alimento.findById(Alimento.class,listaPorHorario.get(j).getId_alimento());
+                Alimento al = Alimento.findById(Alimento.class,listaPorHorario.get(j).getIdAlimento());
                 if(!alim.contains(al)){
                     al.delete();
                     //alim.get(i).save();

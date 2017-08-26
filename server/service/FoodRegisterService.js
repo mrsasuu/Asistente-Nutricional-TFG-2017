@@ -194,8 +194,82 @@ FoodRegisterService.prototype.initializeRouter = function() {
     });
 
 
+    self.router.route('/patient').post(function(req, res) {
+
+        var patient_id = req.body.id;
+
+        var foodRegister = FoodRegister.build();
+
+
+
+
+        foodRegister.retrieveByPatientId(patient_id).then(function(result2) {
+            var idsL = [];
+
+            var Today = new Date();
+            var msToday = Today.getTime();
+            var yesterday = new Date();
+
+            yesterday.setDate(Today.getDate()-1);
+            var msYesterday= yesterday.getTime();
+            var beforeyesterday = new Date();
+
+
+            beforeyesterday.setDate(yesterday.getDate()-1);
+            var msbeforeyesterday = beforeyesterday.getTime();
+
+
+            console.log("Hoy: " + Today);
+            console.log("Ayer: " + yesterday);
+            console.log("Anteayer: " + beforeyesterday);
+
+            for(var i = 0; i < result2.length; i++){
+                var msStart = new Date(result2[i].DATE).getTime();
+
+                if(msbeforeyesterday <= msStart){
+                    console.log("Entra");
+                    console.log("Fecha: " + result2[i].DATE);
+
+                    var fechaI = new Date(result2[i].DATE);
+
+                    var stringFecha = fechaI.getDate() + "-" + (fechaI.getMonth() + 1) + "-" + fechaI.getFullYear();
+
+                    console.log(stringFecha);
+
+                    idsL.push({
+                        fecha: stringFecha ,
+                        horario: result2[i].FOODHOUR,
+                        amount: result2[i].AMOUNT,
+                        idAlimento: result2[i].FOODID,
+                        CREATETIME: result2[i].CREATETIME
+                    });
+
+                }else{
+                    console.log("nO ENTRA: " + result2[i].DATE);
+
+                }
+
+
+
+            }
+
+
+            console.log(idsL);
+            res.json(idsL);
+
+
+        }, function(error) {
+            console.log("Error enviando los 3 dias de registros");
+            res.json({MSG:"ERROR",TIME: new Date().getTime(), ERROR: null});
+        });
+
+
+    });
+
     self.router.route('/week_number/delete').post(function(req, res) {
         var patient_id = req.body.id;
+
+        console.log("Vamos a eliminar los registros de los ultimos 3 dias.")
 
         var foodRegister = FoodRegister.build();
 
@@ -255,18 +329,21 @@ FoodRegisterService.prototype.initializeRouter = function() {
                         console.log("Error reseteando los objetivos")
                         res.json({MSG:"ERROR",TIME: new Date().getTime(), ERROR: null});
                     });
+                }else{
+                    console.log("No hay objetivos.")
+                    res.json({MSG:"1",TIME: new Date().getTime(), ERROR: null});
                 }
 
 
             }, function(error) {
-                console.log("Error obteniendo los objetivos.")
+                console.log("Error obteniendo los objetivos.");
                 res.json({MSG:"ERROR",TIME: new Date().getTime(), ERROR: null});
             });
 
 
 
         }, function(error) {
-            console.log("Error eliminando los 3 dias de registros")
+            console.log("Error eliminando los 3 dias de registros");
             res.json({MSG:"ERROR",TIME: new Date().getTime(), ERROR: null});
         });
     });

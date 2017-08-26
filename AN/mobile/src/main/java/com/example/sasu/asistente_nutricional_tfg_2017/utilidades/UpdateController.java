@@ -1,6 +1,5 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.utilidades;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -9,7 +8,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
-import android.widget.Toast;
 
 
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
@@ -30,11 +28,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -166,6 +162,9 @@ public class UpdateController {
 
         });
 
+
+        //DEBUG
+        //Tabla.deleteAll(Tabla.class);
         //Sincronizamos la base de datos local de alimentos si el número de filas de la base de datos es diferente.
         Call<Row> foodRegistryCall = api.numberRegisters(new FoodRegistryBody(id));
         foodRegistryCall.enqueue(new Callback<Row>()
@@ -253,7 +252,7 @@ public class UpdateController {
 
             @Override
             public void onFailure(Call<List<Alimento>> call, Throwable t) {
-
+                System.out.println("Error sincronizando alimentos");
             }
 
         });
@@ -367,7 +366,7 @@ public class UpdateController {
             for(int j = 0;j < aList2.size();j++)
             {
 
-                Alimento al = Alimento.findById(Alimento.class,aList2.get(j).getId());
+                Alimento al = Alimento.findById(Alimento.class,aList2.get(j).getIdAlimento());
 
                 String fecha = "";
 
@@ -391,7 +390,7 @@ public class UpdateController {
                     e.printStackTrace();
                 }
 
-            request = new Registros(id,al.getFOODID(),aList2.get(j).getHorario_comida(),dataFrom.getTime(),0,aList2.get(j).getCREATETIME());
+            request = new Registros(id,al.getFOODID(),aList2.get(j).getHorario(),dataFrom.getTime(),0,aList2.get(j).getCREATETIME());
 
              Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> uploadRegistry = api.syncUpload(request);
             uploadRegistry.enqueue(new Callback<com.example.sasu.asistente_nutricional_tfg_2017.models.Response>()
@@ -463,7 +462,11 @@ public class UpdateController {
      */
     private void syncFoodRegisterDBDownload() {
 
-        List<Tabla> aList = Tabla.find(Tabla.class, null, null, null, "createtime DESC", "1");
+        int id = Integer.parseInt(mPrefs.getString(PREF_PATIENT_ID, null));
+
+        /*List<Tabla> aList = Tabla.find(Tabla.class, null, null, null, "createtime DESC", "1");
+
+
 
         Tabla al;
 
@@ -472,6 +475,39 @@ public class UpdateController {
             al = aList.get(0);
 
         }
+
+        */
+
+
+        //Eliminamos los registros de la base de datos.
+        Tabla.deleteAll(Tabla.class);
+
+        Call<List<Tabla>> registers = api.registers(new NewsBody(id,""));
+        registers.enqueue(new Callback<List<Tabla>>() {
+            @Override
+            public void onResponse(Call<List<Tabla>> call, Response<List<Tabla>> response) {
+
+                List<Tabla> rs = response.body();
+
+                for (int i = 0; i < rs.size(); i++) {
+                    //rs.get(i).setPHOTO(loadImages(rs.get(i).getPHOTO()));
+
+                    Alimento al =  Alimento.find(Alimento.class,"FOODID = ?", rs.get(i).getIdAlimento().toString()).get(0);
+
+                    rs.get(i).setIdAlimento(al.getId());
+                    rs.get(i).save();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Tabla>> call, Throwable t) {
+                System.out.println("Error obteniendo los registros del server");
+            }
+
+        });
+
     }
 
     private void applyError(String error) {

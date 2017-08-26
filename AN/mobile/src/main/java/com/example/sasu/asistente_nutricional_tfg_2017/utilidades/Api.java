@@ -11,6 +11,7 @@ import com.example.sasu.asistente_nutricional_tfg_2017.models.Patient;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Registros;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Response;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Row;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Tabla;
 
 
 import java.util.List;
@@ -44,6 +45,9 @@ public interface Api {
 
     @POST("food_register/sync")
     Call<Response> syncUpload(@Body Registros registros);
+
+    @POST("food_register/patient")
+    Call<List<Tabla>> registers(@Body NewsBody newsBody);
 
     /*@POST("food/count")
     Call<Row> foodCount(@Body Row rows);*/
