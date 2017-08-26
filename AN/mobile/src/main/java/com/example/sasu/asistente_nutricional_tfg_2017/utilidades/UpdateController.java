@@ -1,11 +1,18 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.utilidades;
 
+
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Environment;
+import android.os.IBinder;
+import android.preference.PreferenceManager;
+import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
@@ -42,7 +49,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Manejador de preferencias de la sesión del paciente
  */
-public class UpdateController {
+public class UpdateController extends Service {
 
     public static final String PREFS_NAME = "AN_PREFS";
     public static final String PREF_PATIENT_ID = "PREF_USER_ID";
@@ -56,10 +63,14 @@ public class UpdateController {
     private Api api;
 
 
-    private final SharedPreferences mPrefs;
+    private SharedPreferences mPrefs;
 
 
     private static UpdateController INSTANCE;
+
+    public void setContext(Context c){
+        this.c = c;
+    }
 
     public static UpdateController get(Context context) {
         if (INSTANCE == null) {
@@ -69,16 +80,30 @@ public class UpdateController {
         return INSTANCE;
     }
 
-    private UpdateController(Context context) {
-        mPrefs = context.getApplicationContext()
-                .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    public UpdateController(){
+       // Context ctx = getApplicationContext();
+        /*mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         Retrofit mRestAdapter = new Retrofit.Builder()
                 .baseUrl(Api.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        api = mRestAdapter.create(Api.class);
+        api = mRestAdapter.create(Api.class);*/
+    }
+
+    public UpdateController(Context context) {
+
+        /*Context ctx = getApplicationContext();
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        //mPrefs = this.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        Retrofit mRestAdapter = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        api = mRestAdapter.create(Api.class);*/
 
         //mIsLoggedIn = !TextUtils.isEmpty(mPrefs.getString(PREF_PATIENT_TOKEN, null));
     }
@@ -90,9 +115,21 @@ public class UpdateController {
         editor.putString(PREF_PATIENT_TOKEN, null);
         editor.apply();*/
 
+        //mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mPrefs = c.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        Retrofit mRestAdapter = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        api = mRestAdapter.create(Api.class);
+
+
         completed = true;
         String token = mPrefs.getString(PREF_PATIENT_TOKEN, null);
-        int id = Integer.parseInt(mPrefs.getString(PREF_PATIENT_ID, null));
+        String idS  = mPrefs.getString(PREF_PATIENT_ID,"-1");
+        int id = Integer.parseInt(idS);
 
 
         //Sincronizamos los objetivos del paciente si se ha añadido alguno nuevo.
@@ -462,7 +499,7 @@ public class UpdateController {
      */
     private void syncFoodRegisterDBDownload() {
 
-        int id = Integer.parseInt(mPrefs.getString(PREF_PATIENT_ID, null));
+        int id = Integer.parseInt(mPrefs.getString(PREF_PATIENT_ID, "-1"));
 
         /*List<Tabla> aList = Tabla.find(Tabla.class, null, null, null, "createtime DESC", "1");
 
@@ -549,5 +586,28 @@ public class UpdateController {
         editor.putString(PREF_PATIENT_TOKEN, null);
 
         editor.apply();
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public void onCreate() {
+        this.c = getApplicationContext();
+        super.onCreate();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        updateDB();
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

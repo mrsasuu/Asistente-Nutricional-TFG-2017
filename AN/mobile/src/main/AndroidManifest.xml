@@ -64,6 +64,8 @@
             android:label="@string/title_activity_registrar_comida_tab"
             android:theme="@style/NoActionBar"></activity>
 
+        <service android:name=".utilidades.UpdateController" android:exported="false"></service>
+
     </application>
 
 </manifest>

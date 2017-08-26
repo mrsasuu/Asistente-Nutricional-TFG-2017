@@ -406,7 +406,12 @@ public class Main_menu2 extends AppCompatActivity
 
 
 
-        UpdateController.get(this).updateDB();
+        //UpdateController.get(this).updateDB();
+
+
+        Intent intent = new Intent(this,UpdateController.class);
+
+        startService(intent);
 
 
 

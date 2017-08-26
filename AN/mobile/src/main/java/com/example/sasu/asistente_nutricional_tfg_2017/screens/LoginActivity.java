@@ -184,7 +184,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     // Guardar afiliado en preferencias
                     SessionPrefs.get(LoginActivity.this).savePatient(response.body());
-                    UpdateController.get(LoginActivity.this).updateDB();
+                    //UpdateController.get(LoginActivity.this).updateDB();
 
 
 
