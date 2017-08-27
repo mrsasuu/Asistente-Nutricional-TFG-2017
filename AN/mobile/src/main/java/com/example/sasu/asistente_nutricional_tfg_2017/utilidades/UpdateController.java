@@ -56,6 +56,7 @@ public class UpdateController extends Service {
     public static final String PREF_PATIENT_NUTRITIONIST_ID = "PREF_PATIENT_NUTRITIONIST_ID";
     public static final String PREF_PATIENT_NEWS = "PREF_PATIENT_NEWS";
     public static final String PREF_PATIENT_TOKEN = "PREF_PATIENT_TOKEN";
+    public static final int SERVICE_ID = 1456778;
     private static Context c;
     private boolean completed;
 

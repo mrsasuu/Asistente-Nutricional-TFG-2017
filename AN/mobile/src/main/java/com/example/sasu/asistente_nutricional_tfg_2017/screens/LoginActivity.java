@@ -1,5 +1,7 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.screens;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +34,7 @@ import com.example.sasu.asistente_nutricional_tfg_2017.prefs.SessionPrefs;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.UpdateController;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -185,6 +188,27 @@ public class LoginActivity extends AppCompatActivity {
                     // Guardar afiliado en preferencias
                     SessionPrefs.get(LoginActivity.this).savePatient(response.body());
                     //UpdateController.get(LoginActivity.this).updateDB();
+                    Context ctx = getApplicationContext();
+/** this gives us the time for the first trigger.  */
+                    Calendar cal = Calendar.getInstance();
+                    AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
+                    //long interval = 1000 * 5; // 5 minutes in milliseconds
+
+                    long interval = 1000 * 60 * 60 * 3; // intervalo de 3 horas
+                    Intent serviceIntent = new Intent(ctx, UpdateController.class);
+// make sure you **don't** use *PendingIntent.getBroadcast*, it wouldn't work
+                    PendingIntent servicePendingIntent =
+                            PendingIntent.getService(ctx,
+                                    UpdateController.SERVICE_ID, // integer constant used to identify the service
+                                    serviceIntent,
+                                    PendingIntent.FLAG_CANCEL_CURRENT);  // FLAG to avoid creating a second service if there's already one running
+// there are other options like setInexactRepeating, check the docs
+                    am.setRepeating(
+                            AlarmManager.RTC_WAKEUP,//type of alarm. This one will wake up the device when it goes off, but there are others, check the docs
+                            cal.getTimeInMillis(),
+                            interval,
+                            servicePendingIntent
+                    );
 
 
 

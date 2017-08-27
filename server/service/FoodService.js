@@ -90,6 +90,7 @@ FoodService.prototype.initializeRouter = function() {
 
         food.retrieveAllOrdered().then(function(result) {
             if(result){
+                console.log("Fecha de la consulta: " + new Date());
                 console.log("Numero de alimentos get etgretgv4e : " + result.length)
 
                 var respuesta = result.length;

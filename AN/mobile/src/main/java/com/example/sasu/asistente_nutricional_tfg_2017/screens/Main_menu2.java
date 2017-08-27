@@ -1,5 +1,8 @@
 package com.example.sasu.asistente_nutricional_tfg_2017.screens;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +35,7 @@ import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.Horario
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.ControllerPreferences;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.UpdateController;
 
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -409,9 +413,14 @@ public class Main_menu2 extends AppCompatActivity
         //UpdateController.get(this).updateDB();
 
 
-        Intent intent = new Intent(this,UpdateController.class);
+        /*Intent intent = new Intent(this,UpdateController.class);
 
         startService(intent);
+*/
+
+
+
+
 
 
 
