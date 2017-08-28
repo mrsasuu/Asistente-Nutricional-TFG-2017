@@ -102,7 +102,13 @@ public class AdapterObjetivo extends RecyclerView.Adapter<AdapterObjetivo.Regist
 
 
         //holder.cardviewAlimento.setBackgroundResource(R.drawable.sunny);
-        holder.nombre.setText("Tomar "+ (listaObjetivos.get(position).getAMOUNT() - listaObjetivos.get(position).getPROGRESS()) + " porcion/es de " +listaObjetivos.get(position).getFOODNAME());
+        if(listaObjetivos.get(position).getFOODID() == -1)
+        {
+            holder.nombre.setText("No hay objetivos pendientes.\nVas por buen camino");
+        }
+        else {
+            holder.nombre.setText("Tomar "+ (listaObjetivos.get(position).getAMOUNT() - listaObjetivos.get(position).getPROGRESS()) + " porcion/es de " +listaObjetivos.get(position).getFOODNAME());
+        }
     }
 
 

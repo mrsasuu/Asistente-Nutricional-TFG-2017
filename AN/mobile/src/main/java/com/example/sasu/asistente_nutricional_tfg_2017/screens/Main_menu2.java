@@ -3,12 +3,14 @@ package com.example.sasu.asistente_nutricional_tfg_2017.screens;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -61,112 +63,7 @@ public class Main_menu2 extends AppCompatActivity
     Animation fabOpen, fabClose, fabClockw, fabAntiClockw;
     boolean isOpen = false;
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
-            case MotionEvent.EDGE_RIGHT:
-                if(position!=1){
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-
-                    transaction.addToBackStack(transaction.toString());
-                    transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
-                    //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
-                    transaction.replace(R.id.fragment_container, Registro.newInstance());
-
-
-                    transaction.commit();
-                }
-                break;
-            case MotionEvent.EDGE_LEFT:
-                if(position!=0){
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-
-                    transaction.addToBackStack(transaction.toString());
-                    transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
-                    //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
-                    transaction.replace(R.id.fragment_container, Inicio.newInstance());
-
-
-                    transaction.commit();
-                }
-                break;
-
-            case MotionEvent.ACTION_DOWN: {
-                // store the X value when the user's finger was pressed down
-                downXValue = event.getX();
-                downYValue = event.getY();
-                Log.v("", "= " + downYValue);
-                break;
-            }
-
-            case MotionEvent.ACTION_UP: {
-                // Get the X value when the user released his/her finger
-                float currentX = event.getX();
-                float currentY = event.getY();
-                // check if horizontal or vertical movement was bigger
-
-                if (Math.abs(downXValue - currentX) > Math.abs(downYValue
-                        - currentY)) {
-                    Log.v("", "x");
-                    // going backwards: pushing stuff to the right
-                    if (downXValue < currentX) {
-                        Log.v("", "right");
-                        if(position==1){
-                            position = 0;
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-
-                            transaction.addToBackStack(transaction.toString());
-                            transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
-                            //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
-                            transaction.replace(R.id.fragment_container, Inicio.newInstance());
-
-
-                            transaction.commit();
-                        }
-
-
-                    }
-
-                    // going forwards: pushing stuff to the left
-                    if (downXValue > currentX) {
-                        if(position==0){
-                            position = 1;
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-
-                            transaction.addToBackStack(transaction.toString());
-                            transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
-                            //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
-                            transaction.replace(R.id.fragment_container, Registro.newInstance());
-
-
-                            transaction.commit();
-                        }
-                        Log.v("", "left");
-
-                    }
-
-                } else {
-                    Log.v("", "y ");
-
-                    if (downYValue < currentY) {
-                        Log.v("", "down");
-
-                    }
-                    if (downYValue > currentY) {
-                        Log.v("", "up");
-
-                    }
-                }
-                break;
-            }
-
-        }
-        return super.onTouchEvent(event);
-    }
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -424,6 +321,10 @@ public class Main_menu2 extends AppCompatActivity
 */
 
 
+        UpdateController up = new UpdateController();
+
+        up.setContext(getApplicationContext());
+        up.updateDB();
 
 
 
@@ -439,34 +340,40 @@ public class Main_menu2 extends AppCompatActivity
 
     public void inicio(View v){
 
-        position = 0;
+        if(position == 1)
+        {
+            position = 0;
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-
-        transaction.addToBackStack(transaction.toString());
-        transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
-        //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
-        transaction.replace(R.id.fragment_container,Inicio.newInstance());
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 
-        transaction.commit();
+            transaction.addToBackStack(transaction.toString());
+            transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+            //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
+            transaction.replace(R.id.fragment_container,Inicio.newInstance());
+
+
+            transaction.commit();
+        }
     }
 
     public void registro(View v){
 
-        position = 1;
+        if(position == 0)
+        {
+            position = 1;
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-
-        transaction.addToBackStack(transaction.toString());
-        transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
-        //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
-        transaction.replace(R.id.fragment_container, Registro.newInstance());
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 
-        transaction.commit();
+            transaction.addToBackStack(transaction.toString());
+            transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_left );
+            //transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_left);
+            transaction.replace(R.id.fragment_container, Registro.newInstance());
+
+
+            transaction.commit();
+        }
     }
 
     public void registrarDesayuno(View v){
@@ -478,10 +385,22 @@ public class Main_menu2 extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        //Toast.makeText(this,Integer.toString(fragmentManager.getBackStackEntryCount()),Toast.LENGTH_LONG).show();
+        if(fragmentManager.getBackStackEntryCount()<1)
+        {
+            new AlertDialog.Builder(this).setMessage(R.string.exit_Message)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                            System.exit(0);
+
+                        }
+                    })
+                    .setNegativeButton(R.string.No, null)
+                    .show();
+        }else{
             super.onBackPressed();
         }
     }

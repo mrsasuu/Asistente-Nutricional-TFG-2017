@@ -4,7 +4,7 @@ var crypto = require("crypto");
 var Patient = require("../models/Patient");
 
 var patientToken;
-
+var novedades;
 
 
 function PatientService() {
@@ -141,11 +141,19 @@ PatientService.prototype.initializeRouter = function() {
 
                     patient = Patient.build();
 
+                    console.log("Las novedades del paciente son: " + result.NEWS);
+                    novedades = result.NEWS;
+
+
+
                     patient.news = 0;
 
                     patient.updateNews(result.ID).then(function(result2) {
-                        console.log("Se han actualizado las novedades del paciente");
-                        res.json({NEWS: result.NEWS,ERROR: null});
+                        console.log("Se han actualizado las novedades del paciente a " + novedades);
+                        if(novedades == 1)
+                            res.json({ERROR: null,NEWS: 1});
+                        else
+                            res.json({ERROR: null,NEWS: 0});
                     }, function(error) {
                         console.log(error);
                         self.renderJson.error = 'Se ha producido un error interno';

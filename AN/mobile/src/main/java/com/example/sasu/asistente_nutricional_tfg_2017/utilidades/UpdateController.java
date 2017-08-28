@@ -21,6 +21,7 @@ import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.FoodRegistryBody;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.News;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.NewsBody;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Objetivo;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Patient;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Registros;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Row;
@@ -109,12 +110,14 @@ public class UpdateController extends Service {
         //mIsLoggedIn = !TextUtils.isEmpty(mPrefs.getString(PREF_PATIENT_TOKEN, null));
     }
 
+
     public boolean updateDB() {
         /*Testing*/
         /*SharedPreferences.Editor editor = mPrefs.edit();
 
         editor.putString(PREF_PATIENT_TOKEN, null);
         editor.apply();*/
+
 
         //mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         mPrefs = c.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -133,25 +136,7 @@ public class UpdateController extends Service {
         int id = Integer.parseInt(idS);
 
 
-        //Sincronizamos los objetivos del paciente si se ha añadido alguno nuevo.
-        Call<News> newsCall = api.news(new NewsBody(id, token));
-        newsCall.enqueue(new Callback<News>() {
-            @Override
-            public void onResponse(Call<News> call, Response<News> response) {
-                if (response.body().getERROR() != null) {
-                    applyError(response.body().getERROR());
-                } else {
-                    if (response.body().getNEWS() == 1) {
-                        syncObjetiveDB();
-                    }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<News> call, Throwable t) {
-                System.out.println("Ha fallado 2: " + t);
-            }
-        });
 
         //syncFoodDB();
 
@@ -258,6 +243,26 @@ public class UpdateController extends Service {
 
         });
 
+        //Sincronizamos los objetivos del paciente si se ha añadido alguno nuevo.
+        Call<News> newsCall = api.news(new NewsBody(id, token));
+        newsCall.enqueue(new Callback<News>() {
+            @Override
+            public void onResponse(Call<News> call, Response<News> response) {
+                if (response.body().getERROR() != null) {
+                    applyError(response.body().getERROR());
+                } else {
+                    if (response.body().getNEWS() == 1) {
+                        syncObjetiveDB();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<News> call, Throwable t) {
+                System.out.println("Ha fallado 2: " + t);
+            }
+        });
+
 
         return completed;
     }
@@ -357,7 +362,41 @@ public class UpdateController extends Service {
     /**
      * Método para sincronizar los registros locales de los objetivos
      */
-    private void syncObjetiveDB() {
+    public void syncObjetiveDB() {
+
+        int id = Integer.parseInt(mPrefs.getString(PREF_PATIENT_ID, null));
+
+        Objetivo.deleteAll(Objetivo.class);
+
+        Call<List<Objetivo>> objetives = api.objetives(id);
+        objetives.enqueue(new Callback<List<Objetivo>>() {
+            @Override
+            public void onResponse(Call<List<Objetivo>> call, Response<List<Objetivo>> response) {
+
+                List<Objetivo> rs = response.body();
+
+                for (int i = 0; i < rs.size(); i++) {
+
+                    List<Alimento> alimentos = Alimento.find(Alimento.class, "FOODID = ?", Integer.toString(rs.get(i).getFOODID()));
+
+                    Alimento al = Alimento.find(Alimento.class,"FOODID = ?", Integer.toString(rs.get(i).getFOODID())).get(0);
+
+                    rs.get(i).setPHOTO(al.getPHOTO());
+                    rs.get(i).setFOODNAME(al.getNAME());
+
+                    rs.get(i).save();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Objetivo>> call, Throwable t) {
+                System.out.println("Error sincronizando objetivos");
+            }
+
+        });
+
 
     }
 

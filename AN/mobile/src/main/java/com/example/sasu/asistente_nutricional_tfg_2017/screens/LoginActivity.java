@@ -244,9 +244,9 @@ public class LoginActivity extends AppCompatActivity {
 
         Calendar cal2 = Calendar.getInstance();
         AlarmManager am2 = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-        //long interval2 = 1000 * 2; // 5 minutes in milliseconds
+        long interval2 = 1000 * 60 *45; // 45 minutes in milliseconds
 
-        long interval2 = 1000 * 60 * 60 * 3; // intervalo de 3 horas
+        //long interval2 = 1000 * 60 * 60 * 3; // intervalo de 3 horas
         Intent serviceIntent2 = new Intent(ctx, WaterService.class);
 // make sure you **don't** use *PendingIntent.getBroadcast*, it wouldn't work
         PendingIntent servicePendingIntent2 =
@@ -297,7 +297,7 @@ public class LoginActivity extends AppCompatActivity {
         calendar4.set(Calendar.HOUR_OF_DAY, 21);
         calendar4.set(Calendar.MINUTE, 30);
         calendar4.set(Calendar.SECOND, 00);
-        alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP, calendar3.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent4);  //set repeating every 24 hours
+        alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP, calendar4.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent4);  //set repeating every 24 hours
 
 
     }

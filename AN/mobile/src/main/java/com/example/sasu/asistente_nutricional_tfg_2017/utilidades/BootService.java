@@ -22,9 +22,9 @@ public class BootService extends BroadcastReceiver{
 /** this gives us the time for the first trigger.  */
             Calendar cal = Calendar.getInstance();
             AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-            //long interval = 1000 * 5; // 5 minutes in milliseconds
+            long interval = 1000 * 60 * 45; // 5 minutes in milliseconds
 
-            long interval = 1000 * 60 * 60 * 3; // intervalo de 3 horas
+            //long interval = 1000 * 60 * 60 * 3; // intervalo de 3 horas
             Intent serviceIntent = new Intent(ctx, UpdateController.class);
             PendingIntent servicePendingIntent =
                     PendingIntent.getService(ctx,
@@ -94,7 +94,7 @@ public class BootService extends BroadcastReceiver{
             calendar4.set(Calendar.HOUR_OF_DAY, 21);
             calendar4.set(Calendar.MINUTE, 30);
             calendar4.set(Calendar.SECOND, 00);
-            alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP, calendar3.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent4);  //set repeating every 24 hours
+            alarmManager4.setRepeating(AlarmManager.RTC_WAKEUP, calendar4.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent4);  //set repeating every 24 hours
 
 
         }

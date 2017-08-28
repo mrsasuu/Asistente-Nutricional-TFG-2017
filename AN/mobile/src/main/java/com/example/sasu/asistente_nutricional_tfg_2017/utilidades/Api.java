@@ -7,6 +7,7 @@ import com.example.sasu.asistente_nutricional_tfg_2017.models.FoodRegistryBody;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.LoginBody;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.News;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.NewsBody;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Objetivo;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Patient;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Registros;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Response;
@@ -60,5 +61,8 @@ public interface Api {
 
     @GET("food/{routes}")
     Call<List<Alimento>> food(@Path("routes") String routes);
+
+    @GET("objetive/week/{id}")
+    Call<List<Objetivo>> objetives(@Path("id") int id);
 
 }

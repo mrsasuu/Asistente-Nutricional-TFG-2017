@@ -22,7 +22,7 @@
         tools:replace="android:icon,android:theme">
         <meta-data
             android:name="DATABASE"
-            android:value="asistente37.db" />
+            android:value="asistente38.db" />
         <meta-data
             android:name="VERSION"
             android:value="2" />
