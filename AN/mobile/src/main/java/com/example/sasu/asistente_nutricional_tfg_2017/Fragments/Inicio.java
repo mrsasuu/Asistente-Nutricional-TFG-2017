@@ -4,11 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
+import com.example.sasu.asistente_nutricional_tfg_2017.adapters.AdapterObjetivo;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Objetivo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +32,8 @@ public class Inicio extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    LinearLayout layout;
 
     // TODO: Rename and change types of parameters
 
@@ -49,7 +60,33 @@ public class Inicio extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inicio, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_inicio, container, false);
+
+        /*layout = (LinearLayout) view.findViewById(R.id.objetiveHorizontalScroll);
+
+
+        for (int i = 0; i < yourData.size(); i++) {
+            TextView tv = new TextView(getApplicationContext());
+            tv.setText(yourData.get(i));
+            layout.addView(tv);
+        }*/
+
+        RecyclerView rv = (RecyclerView) view.findViewById(R.id.listaObjetivos);
+        RecyclerView.LayoutManager llm = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        rv.setLayoutManager(llm);
+        List<Objetivo> objetivos = new ArrayList<>();
+
+        objetivos.add(new Objetivo(0,"Pizza Margarita","","http://mrsasuu.hopto.org/static/img/foods/pizza_margarita.jpg",2,0,0,0));
+
+        objetivos.add(new Objetivo(0,"Otra cosa","","http://mrsasuu.hopto.org/static/img/foods/breakfast.jpg",2,0,0,0));
+
+        AdapterObjetivo adaptador= new AdapterObjetivo(objetivos,getContext());
+        rv.setAdapter(adaptador);
+
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -32,8 +32,13 @@ import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Registro;
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Row;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
+import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.BreakfastService;
+import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.CenadoService;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.ControllerPreferences;
+import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.LunchService;
+import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.SnackService;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.UpdateController;
+import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.WaterService;
 
 import java.util.Calendar;
 import java.util.List;
