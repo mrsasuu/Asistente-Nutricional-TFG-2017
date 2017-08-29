@@ -123,6 +123,24 @@ public class Registro extends Fragment implements AdapterView.OnItemSelectedList
 
 
 
+        Date hoy = controllerPreferences.fechaActual;
+
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(hoy);
+        controllerPreferences.fechaActual = cal.getTime();
+
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String fechaB = Integer.toString(day) + "-" + Integer.toString(month) + "-" + Integer.toString(year);
+        //Toast.makeText(getContext(), "Buscamos la fecha: " + fechaB, Toast.LENGTH_LONG).show();
+        controllerPreferences.setSegundaFecha(fechaB);
+        Comida c = controllerPreferences.getComida(fechaB);
+
+
+
+
         atras = (Button) rootView.findViewById(R.id.diaAtras);
         delante = (Button) rootView.findViewById(R.id.diaDelante);
 

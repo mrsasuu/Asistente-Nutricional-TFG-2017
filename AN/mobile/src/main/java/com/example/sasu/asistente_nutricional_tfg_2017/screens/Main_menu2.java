@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.Comida;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.Api;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Inicio;
 import com.example.sasu.asistente_nutricional_tfg_2017.Fragments.Registro;
@@ -43,6 +44,7 @@ import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.UpdateControll
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.WaterService;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -362,6 +364,22 @@ public class Main_menu2 extends AppCompatActivity
         if(position == 0)
         {
             position = 1;
+
+            //controller.getComidaHoy();
+
+            Date hoy = controller.HOY;
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(hoy);
+            controller.fechaActual = cal.getTime();
+
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH) + 1;
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            String fechaB = Integer.toString(day) + "-" + Integer.toString(month) + "-" + Integer.toString(year);
+            //Toast.makeText(getContext(), "Buscamos la fecha: " + fechaB, Toast.LENGTH_LONG).show();
+            controller.setSegundaFecha(fechaB);
+            Comida c = controller.getComida(fechaB);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

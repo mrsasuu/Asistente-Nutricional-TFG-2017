@@ -75,6 +75,8 @@ public class Comida{
 
     }
 
+
+
     public String getFecha() {
         return fecha;
     }
@@ -110,6 +112,37 @@ public class Comida{
         }
         Tabla nuevo = new Tabla(fecha,h.toString(),al.getId(),new Date().getTime());
         nuevo.save();
+    }
+    public Comida(String hoy,int nada) {
+
+
+        horarios.add(HorarioComida.DESAYUNO);
+        horarios.add(HorarioComida.ALMUERZO);
+        horarios.add(HorarioComida.MERIENDA_TARDE);
+        horarios.add(HorarioComida.CENA);
+        horarios.add(HorarioComida.OTRO);
+
+        for(int i = 0; i < horarios.size(); i++){
+            //List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horarioComida = ?", fecha,horarios.get(i).toString());
+            comidas.put(horarios.get(i),new ArrayList<Alimento>());
+            //comidas.put(horarios.get(i),new ArrayList<Alimento>());
+
+
+        }
+
+        for(int i = 0; i < horarios.size(); i++){
+            List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ?", hoy,horarios.get(i).toString());
+            List<Alimento> alimentos =  new ArrayList<>();
+            for(int j = 0; (listaPorHorario!=null)&&(j < listaPorHorario.size());j++){
+                Alimento al = Alimento.findById(Alimento.class, listaPorHorario.get(j).getIdAlimento());
+                alimentos.add(al);
+            }
+
+            comidas.remove(horarios.get(i));
+            comidas.put(horarios.get(i),alimentos);
+
+
+        }
     }
 
     public Comida(String fecha) {

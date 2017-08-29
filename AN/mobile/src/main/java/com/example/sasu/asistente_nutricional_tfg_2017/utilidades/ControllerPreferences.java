@@ -19,9 +19,11 @@ public class ControllerPreferences {
     private HorarioComida horarioConsultar;
     private Api api;
     private Retrofit mRestAdapter;
+    public Date HOY;
 
     public Date fechaActual;
     public String segundaFecha;
+    public String hoyS;
 
     public HorarioComida getHorarioRegistrar() {
         return horarioRegistrar;
@@ -45,6 +47,17 @@ public class ControllerPreferences {
     }
 
     public ControllerPreferences() {
+
+        this.HOY = new Date();
+
+        Date hoy = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(hoy);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        this.hoyS = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
+
         /*Date hoy = new Date();
         Log.println(Log.INFO,"HORA", String.valueOf(hoy.getTime()));
         Calendar cal = Calendar.getInstance();
@@ -133,6 +146,35 @@ public class ControllerPreferences {
         return comida;
     }
 
+    public Comida getComidaHoy(){
+        /*Date hoy = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(hoy);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        List<Comida> comidas = null;
+        String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
+
+        try{
+            comidas = Comida.find(Comida.class,"fecha = ?",fechaB);
+        }catch (Exception e){
+            comida = new Comida(fechaB);
+            comida.save();
+        }
+
+
+        if(comidas.size() !=0){
+            comida = comidas.get(0);
+        }else{
+            comida = new Comida(fechaB);
+            comida.save();
+        }*/
+        comida = new Comida(hoyS,0);
+        return comida;
+    }
+
+
     public Comida getComida(String fecha){
         comida = new Comida(fecha);
 
@@ -194,6 +236,19 @@ public class ControllerPreferences {
 
 
 
-        this.comida = new Comida();
+        Date hoy2 = HOY;
+
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(hoy2);
+        fechaActual = cal2.getTime();
+
+        int year2 = cal2.get(Calendar.YEAR);
+        int month2 = cal2.get(Calendar.MONTH) + 1;
+        int day2 = cal2.get(Calendar.DAY_OF_MONTH);
+        String fechaBa = Integer.toString(day2) + "-" + Integer.toString(month2) + "-" + Integer.toString(year2);
+        //Toast.makeText(getContext(), "Buscamos la fecha: " + fechaB, Toast.LENGTH_LONG).show();
+        setSegundaFecha(fechaBa);
+
+        this.comida = getComida(fechaBa);
     }
 }
