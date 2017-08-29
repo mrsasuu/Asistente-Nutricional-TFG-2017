@@ -22,7 +22,7 @@
         tools:replace="android:icon,android:theme">
         <meta-data
             android:name="DATABASE"
-            android:value="asistente38.db" />
+            android:value="asistente55.db" />
         <meta-data
             android:name="VERSION"
             android:value="2" />
@@ -51,22 +51,27 @@
         </activity>
         <activity
             android:name=".screens.Main_menu2"
+            android:screenOrientation="portrait"
             android:label="Asistente nutricional"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".screens.LoginActivity"
+            android:screenOrientation="portrait"
             android:label="Inicio de sesión" />
         <activity
             android:name=".AppointmentsActivity"
+            android:screenOrientation="portrait"
             android:label="Asistente nutricional" />
         <activity
             android:name=".screens.registrarComida"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_registrar_comida"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".screens.registrarComidaTab"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_registrar_comida_tab"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/NoActionBar"/>
 
         <service android:name=".utilidades.UpdateController" android:exported="false"></service>
         <service android:name=".utilidades.BreakfastService" android:exported="false"></service>

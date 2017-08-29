@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="25dp"
+        android:id="@+id/diaRegistro"
         android:text="Hoy"/>
 
     <Button

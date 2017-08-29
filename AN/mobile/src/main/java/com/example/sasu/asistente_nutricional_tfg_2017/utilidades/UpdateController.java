@@ -251,9 +251,9 @@ public class UpdateController extends Service {
                 if (response.body().getERROR() != null) {
                     applyError(response.body().getERROR());
                 } else {
-                    if (response.body().getNEWS() == 1) {
+                    //if (response.body().getNEWS() == 1) {
                         syncObjetiveDB();
-                    }
+                    //}
                 }
             }
 

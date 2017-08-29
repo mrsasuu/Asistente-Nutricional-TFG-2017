@@ -2,7 +2,9 @@ package com.example.sasu.asistente_nutricional_tfg_2017.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
@@ -38,6 +41,8 @@ public class Registro extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    int positionDay = 0;
+    TextView diaRegistro;
     Button atras,delante;
     ControllerPreferences controllerPreferences;
     View rootView;
@@ -62,11 +67,11 @@ public class Registro extends Fragment {
         int month = cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH) - 1;
         String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
-        Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
         Comida c = controllerPreferences.getComida();
 
         List<Alimento> alimentos = c.getLista(HorarioComida.DESAYUNO);
-        Toast.makeText(getContext(),"Tamaño: "+ alimentos.size(),Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(),"Tamaño: "+ alimentos.size(),Toast.LENGTH_LONG).show();
 
 
 
@@ -92,11 +97,14 @@ public class Registro extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          rootView = inflater.inflate(R.layout.fragment_registro, container, false);
+
+        diaRegistro = (TextView) rootView.findViewById(R.id.diaRegistro);
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.listaAlimentos);
         RecyclerView.LayoutManager llm = new LinearLayoutManager(getContext());
@@ -108,11 +116,11 @@ public class Registro extends Fragment {
         int month = cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
         String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
-        Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
         Comida c = controllerPreferences.getComida();
 
         List<Alimento> alimentos = c.getLista(HorarioComida.DESAYUNO);
-        Toast.makeText(getContext(),"Tamaño: "+ alimentos.size(),Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(),"Tamaño: "+ alimentos.size(),Toast.LENGTH_LONG).show();
 
 
 
@@ -124,71 +132,117 @@ public class Registro extends Fragment {
         atras = (Button) rootView.findViewById(R.id.diaAtras);
         delante = (Button) rootView.findViewById(R.id.diaDelante);
 
+        delante.setBackground(getActivity().getDrawable(R.drawable.disable_next));
+        delante.setEnabled(false);
+        delante.setClickable(false);
+
         atras.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
-                RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.listaAlimentos);
-                RecyclerView.LayoutManager llm = new LinearLayoutManager(getContext());
-                rv.setLayoutManager(llm);
-                Date hoy = controllerPreferences.fechaActual;
 
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(hoy);
-                cal.add(Calendar.DAY_OF_MONTH, -1);
-                controllerPreferences.fechaActual = cal.getTime();
+                if(positionDay > -2)
+                {
+                    positionDay--;
 
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH)+1;
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
-                controllerPreferences.setSegundaFecha(fechaB);
-                Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
+                    if(positionDay == -1){
+                        diaRegistro.setText("Ayer");
+                        delante.setBackground(getActivity().getDrawable(R.mipmap.next));
+                        delante.setEnabled(true);
+                        delante.setClickable(true);
+                    }else if(positionDay == -2){
+                        diaRegistro.setText("Anteayer");
+                        atras.setBackground(getActivity().getDrawable(R.drawable.disableprevious));
+                        atras.setEnabled(false);
+                        atras.setClickable(false);
+                    }else{
+                        diaRegistro.setText("Error");
+                    }
 
-                Comida c = controllerPreferences.getComida(fechaB);
+                    RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.listaAlimentos);
+                    RecyclerView.LayoutManager llm = new LinearLayoutManager(getContext());
+                    rv.setLayoutManager(llm);
+                    Date hoy = controllerPreferences.fechaActual;
 
-                List<Alimento> alimentos = c.getLista(HorarioComida.DESAYUNO);
-                Toast.makeText(getContext(),"Tamaño: "+ alimentos.size(),Toast.LENGTH_LONG).show();
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(hoy);
+                    cal.add(Calendar.DAY_OF_MONTH, -1);
+                    controllerPreferences.fechaActual = cal.getTime();
+
+                    int year = cal.get(Calendar.YEAR);
+                    int month = cal.get(Calendar.MONTH)+1;
+                    int day = cal.get(Calendar.DAY_OF_MONTH);
+                    String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
+                    controllerPreferences.setSegundaFecha(fechaB);
+                    //Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
+
+                    Comida c = controllerPreferences.getComida(fechaB);
+
+                    List<Alimento> alimentos = c.getLista(HorarioComida.DESAYUNO);
+                    //Toast.makeText(getContext(),"Tamaño: "+ alimentos.size(),Toast.LENGTH_LONG).show();
 
 
 
-                //List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
+                    //List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
 
-                AdapterRegistro adaptador= new AdapterRegistro(alimentos,getContext());
-                rv.setAdapter(adaptador);
+                    AdapterRegistro adaptador= new AdapterRegistro(alimentos,getContext());
+                    rv.setAdapter(adaptador);
+                }
             }
         });
 
         delante.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
-                RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.listaAlimentos);
-                RecyclerView.LayoutManager llm = new LinearLayoutManager(getContext());
-                rv.setLayoutManager(llm);
-                Date hoy = controllerPreferences.fechaActual;
+
+                if(positionDay < 0) {
+
+                    positionDay++;
+
+                    if(positionDay == -1){
+                        diaRegistro.setText("Ayer");
+                        atras.setEnabled(true);
+                        atras.setBackground(getActivity().getDrawable(R.mipmap.atras));
+                        atras.setClickable(true);
+                    }else if(positionDay == 0){
+                        diaRegistro.setText("Hoy");
+                        delante.setBackground(getActivity().getDrawable(R.drawable.disable_next));
+                        delante.setEnabled(false);
+                        delante.setClickable(false);
+
+                    }else{
+                        diaRegistro.setText("Error");
+                    }
+
+                    RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.listaAlimentos);
+                    RecyclerView.LayoutManager llm = new LinearLayoutManager(getContext());
+                    rv.setLayoutManager(llm);
+                    Date hoy = controllerPreferences.fechaActual;
 
 
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(hoy);
-                cal.add(Calendar.DAY_OF_MONTH, 1);
-                controllerPreferences.fechaActual = cal.getTime();
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(hoy);
+                    cal.add(Calendar.DAY_OF_MONTH, 1);
+                    controllerPreferences.fechaActual = cal.getTime();
 
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH)+1;
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
-                Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
-                controllerPreferences.setSegundaFecha(fechaB);
-                Comida c = controllerPreferences.getComida(fechaB);
+                    int year = cal.get(Calendar.YEAR);
+                    int month = cal.get(Calendar.MONTH) + 1;
+                    int day = cal.get(Calendar.DAY_OF_MONTH);
+                    String fechaB = Integer.toString(day) + "-" + Integer.toString(month) + "-" + Integer.toString(year);
+                    //Toast.makeText(getContext(), "Buscamos la fecha: " + fechaB, Toast.LENGTH_LONG).show();
+                    controllerPreferences.setSegundaFecha(fechaB);
+                    Comida c = controllerPreferences.getComida(fechaB);
 
-                List<Alimento> alimentos = c.getLista(HorarioComida.DESAYUNO);
-                Toast.makeText(getContext(),"Tamaño: "+ alimentos.size(),Toast.LENGTH_LONG).show();
+                    List<Alimento> alimentos = c.getLista(HorarioComida.DESAYUNO);
+                    //Toast.makeText(getContext(), "Tamaño: " + alimentos.size(), Toast.LENGTH_LONG).show();
 
 
+                    //List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
 
-                //List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
-
-                AdapterRegistro adaptador= new AdapterRegistro(alimentos,getContext());
-                rv.setAdapter(adaptador);
+                    AdapterRegistro adaptador = new AdapterRegistro(alimentos, getContext());
+                    rv.setAdapter(adaptador);
+                }
             }
         });
         return rootView;
