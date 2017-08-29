@@ -26,6 +26,7 @@ import com.example.sasu.asistente_nutricional_tfg_2017.models.Patient;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Registros;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Row;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Tabla;
+import com.example.sasu.asistente_nutricional_tfg_2017.models.enumerados.HorarioComida;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -467,7 +468,14 @@ public class UpdateController extends Service {
                     e.printStackTrace();
                 }
 
-            request = new Registros(id,al.getFOODID(),aList2.get(j).getHorario(),dataFrom.getTime(),0,aList2.get(j).getCREATETIME());
+                String horario = aList2.get(j).getHorario();
+
+                if(horario.equals(HorarioComida.MERIENDA_TARDE.toString()))
+                {
+                    horario = "MERIENDA";
+                }
+
+            request = new Registros(id,al.getFOODID(),horario,dataFrom.getTime(),0,aList2.get(j).getCREATETIME());
 
              Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> uploadRegistry = api.syncUpload(request);
             uploadRegistry.enqueue(new Callback<com.example.sasu.asistente_nutricional_tfg_2017.models.Response>()
@@ -570,6 +578,10 @@ public class UpdateController extends Service {
                     //rs.get(i).setPHOTO(loadImages(rs.get(i).getPHOTO()));
 
                     Alimento al =  Alimento.find(Alimento.class,"FOODID = ?", rs.get(i).getIdAlimento().toString()).get(0);
+
+                    if(rs.get(i).getHorario().equals("MERIENDA")){
+                        rs.get(i).setHorario(HorarioComida.MERIENDA_TARDE);
+                    }
 
                     rs.get(i).setIdAlimento(al.getId());
                     rs.get(i).save();

@@ -1,4 +1,13 @@
 <resources>
+
+    <string-array name="FOODHOURS">
+        <item>Desayuno</item>
+        <item>Almuerzo</item>
+        <item>Merienda</item>
+        <item>Cena</item>
+        <item>Otros</item>
+    </string-array>
+
     <string name="app_name">Asistente-Nutricional-TFG-2017</string>
 
     <!-- TODO: Remove or change this placeholder text -->

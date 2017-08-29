@@ -11,8 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +39,7 @@ import java.util.List;
  * Use the {@link Registro#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Registro extends Fragment {
+public class Registro extends Fragment implements AdapterView.OnItemSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -104,30 +107,21 @@ public class Registro extends Fragment {
         // Inflate the layout for this fragment
          rootView = inflater.inflate(R.layout.fragment_registro, container, false);
 
+        Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.FOODHOURS, R.layout.spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(R.layout.spinner_item_dropdown);
+        //adapter.setDropDownViewResource(R.layout.spinner_item_dropdown);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(this);
+
         diaRegistro = (TextView) rootView.findViewById(R.id.diaRegistro);
 
-        RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.listaAlimentos);
-        RecyclerView.LayoutManager llm = new LinearLayoutManager(getContext());
-        rv.setLayoutManager(llm);
-        Date hoy = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(hoy);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
-        //Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
-        Comida c = controllerPreferences.getComida();
 
-        List<Alimento> alimentos = c.getLista(HorarioComida.DESAYUNO);
-        //Toast.makeText(getContext(),"Tamaño: "+ alimentos.size(),Toast.LENGTH_LONG).show();
-
-
-
-        //List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
-
-        AdapterRegistro adaptador= new AdapterRegistro(alimentos,getContext());
-        rv.setAdapter(adaptador);
 
         atras = (Button) rootView.findViewById(R.id.diaAtras);
         delante = (Button) rootView.findViewById(R.id.diaDelante);
@@ -178,7 +172,7 @@ public class Registro extends Fragment {
 
                     Comida c = controllerPreferences.getComida(fechaB);
 
-                    List<Alimento> alimentos = c.getLista(HorarioComida.DESAYUNO);
+                    List<Alimento> alimentos = c.getLista(controllerPreferences.getHorarioConsultar());
                     //Toast.makeText(getContext(),"Tamaño: "+ alimentos.size(),Toast.LENGTH_LONG).show();
 
 
@@ -234,7 +228,9 @@ public class Registro extends Fragment {
                     controllerPreferences.setSegundaFecha(fechaB);
                     Comida c = controllerPreferences.getComida(fechaB);
 
-                    List<Alimento> alimentos = c.getLista(HorarioComida.DESAYUNO);
+
+
+                    List<Alimento> alimentos = c.getLista(controllerPreferences.getHorarioConsultar());
                     //Toast.makeText(getContext(), "Tamaño: " + alimentos.size(), Toast.LENGTH_LONG).show();
 
 
@@ -245,7 +241,65 @@ public class Registro extends Fragment {
                 }
             }
         });
+
+
+
+
         return rootView;
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        // An item was selected. You can retrieve the selected item usingç
+
+        RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.listaAlimentos);
+        RecyclerView.LayoutManager llm = new LinearLayoutManager(getContext());
+        rv.setLayoutManager(llm);
+        Date hoy = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(hoy);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
+        //Toast.makeText(getContext(),"Buscamos la fecha: "+ fechaB,Toast.LENGTH_LONG).show();
+        Comida c = controllerPreferences.getComida();
+
+        List<Alimento> alimentos = null;// = c.getLista(HorarioComida.DESAYUNO);
+        //Toast.makeText(getContext(),"Tamaño: "+ alimentos.size(),Toast.LENGTH_LONG).show();
+
+
+
+        //List<Alimento> alimentos = Arrays.asList(new Alimento("Leche"),new Alimento("Tostadas"),new Alimento("Pera"),new Alimento("Pizza"),new Alimento("mermelada"));
+
+
+
+        Object ca = parent.getItemAtPosition(pos);
+        if(parent.getItemAtPosition(pos).equals("Desayuno"))
+        {
+            controllerPreferences.setHorarioConsultar(HorarioComida.DESAYUNO);
+            alimentos = c.getLista(HorarioComida.DESAYUNO);
+        }
+        else if(parent.getItemAtPosition(pos).equals("Almuerzo")){
+            controllerPreferences.setHorarioConsultar(HorarioComida.ALMUERZO);
+            alimentos = c.getLista(HorarioComida.ALMUERZO);
+        }else if(parent.getItemAtPosition(pos).equals("Merienda")){
+            controllerPreferences.setHorarioConsultar(HorarioComida.MERIENDA_TARDE);
+            alimentos = c.getLista(HorarioComida.MERIENDA_TARDE);
+        }else if(parent.getItemAtPosition(pos).equals("Cena")){
+            controllerPreferences.setHorarioConsultar(HorarioComida.CENA);
+            alimentos = c.getLista(HorarioComida.CENA);
+        }else if(parent.getItemAtPosition(pos).equals("Otros")){
+            controllerPreferences.setHorarioConsultar(HorarioComida.OTRO);
+            alimentos = c.getLista(HorarioComida.OTRO);
+        }
+
+        AdapterRegistro adaptador= new AdapterRegistro(alimentos,getContext());
+        rv.setAdapter(adaptador);
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 
 

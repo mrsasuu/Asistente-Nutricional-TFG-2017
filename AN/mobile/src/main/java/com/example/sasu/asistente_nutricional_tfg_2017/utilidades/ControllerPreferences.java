@@ -16,6 +16,7 @@ public class ControllerPreferences {
     private static ControllerPreferences instance = null;
     private Comida comida;
     private HorarioComida horarioRegistrar;
+    private HorarioComida horarioConsultar;
     private Api api;
     private Retrofit mRestAdapter;
 
@@ -33,6 +34,14 @@ public class ControllerPreferences {
     public void registrarComidaHorario(Alimento al){
         comida.registrarComidaHorario(horarioRegistrar,al);
         //comida.save();
+    }
+
+    public HorarioComida getHorarioConsultar() {
+        return horarioConsultar;
+    }
+
+    public void setHorarioConsultar(HorarioComida horarioConsultar) {
+        this.horarioConsultar = horarioConsultar;
     }
 
     public ControllerPreferences() {
@@ -154,8 +163,11 @@ public class ControllerPreferences {
         int day = cal.get(Calendar.DAY_OF_MONTH) - 1;
         String fechaB = Integer.toString(day)+ "-" + Integer.toString(month)+"-" + Integer.toString(year);
 
+        String fecha23 = comida.getFecha();
 
-        List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ? and alim = ?", comida.getFecha(),horarioRegistrar.toString(),alimento.getId().toString());
+        String horariop = horarioRegistrar.toString();
+
+        List<Tabla> listaPorHorario =  Tabla.find(Tabla.class,"fecha = ? and horario = ? and alim = ?", comida.getFecha(),horarioConsultar.toString(),alimento.getId().toString());
 
         if(listaPorHorario.size() > 0)
         {

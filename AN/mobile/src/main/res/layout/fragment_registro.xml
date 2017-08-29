@@ -228,7 +228,7 @@
             card_view:cardBackgroundColor="@color/cardview_light_background"
             card_view:cardCornerRadius="0dp"
             >
-            <LinearLayout
+          <!--  <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -312,9 +312,17 @@
                         android:text="Otros"/>
                 </FrameLayout>
 
-            </LinearLayout>
+            </LinearLayout>-->
 
 
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:textSize="60dp"
+                android:layout_height="60dp" />
 
         </android.support.v7.widget.CardView>
 
