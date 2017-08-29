@@ -2,13 +2,16 @@ package com.example.sasu.asistente_nutricional_tfg_2017.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,6 +42,7 @@ public class Inicio extends Fragment {
 
     LinearLayout layout;
     TextView welcome;
+    FrameLayout welcomeImage;
 
     // TODO: Rename and change types of parameters
 
@@ -80,6 +84,7 @@ public class Inicio extends Fragment {
 
 
         welcome =  (TextView) view.findViewById(R.id.welcomeText);
+        welcomeImage = (FrameLayout) view.findViewById(R.id.welcomeImage);
 
         changeWelcomeMessage();
 
@@ -110,18 +115,53 @@ public class Inicio extends Fragment {
         List<Tabla> registros = Tabla.find(Tabla.class,"fecha = ?",fechaB);
 
         for(int i = 0; i < objetivosDB.size(); i++){
-            int apariciones = 0;
-
+            double apariciones = 0;
+            objetivosDB.get(i).setPROGRESS(0);
             for(int j = 0; j < registros.size(); j++){
                 Alimento al = Alimento.findById(Alimento.class,registros.get(j).getIdAlimento());
                 if(( al.getFOODID() == objetivosDB.get(i).getFOODID())){
-                    apariciones++;
+                    apariciones+= registros.get(j).getAmount();
                 }
             }
 
-            if(objetivosDB.get(i).getAMOUNT()<=apariciones){
+
+
+            if(objetivosDB.get(i).getAMOUNT() <= apariciones){
                 objetivosDB.get(i).setPROGRESS(apariciones);
             }else{
+                objetivosDB.get(i).setPROGRESS(apariciones);
+
+                //Alimento al = Alimento.findById(Alimento.class,objetivosDB.get(i).getFOODID());
+
+                Alimento al = Alimento.find(Alimento.class,"FOODID = ?", Integer.toString(objetivosDB.get(i).getFOODID())).get(0);
+
+                double amountNeeded = objetivosDB.get(i).getAMOUNT() - apariciones;
+
+                int porciones = 0;
+                double tamPorcion = 0;
+
+                String porcionTexto;
+
+                if(amountNeeded <= al.getMINAMOUNT()){
+                    tamPorcion = al.getMINAMOUNT();
+                    porcionTexto = " porcion/es pequeña/s de ";
+                }else if(al.getMINAMOUNT() < amountNeeded && amountNeeded < al.getMAXAMOUNT()){
+                    tamPorcion = al.getMEDAMOUNT();
+                    porcionTexto = " porcion/es mediana/s de ";
+                }else{
+                    tamPorcion = al.getMAXAMOUNT();
+                    porcionTexto = " porcion/es grande/s de ";
+                }
+
+                while(amountNeeded > 0){
+                    porciones++;
+
+                    amountNeeded-= tamPorcion;
+                }
+
+                objetivosDB.get(i).setFOODNAME(porciones + porcionTexto +  objetivosDB.get(i).getFOODNAME());
+
+
                 objetivos.add(objetivosDB.get(i));
             }
         }
@@ -131,7 +171,7 @@ public class Inicio extends Fragment {
         }
 
 
-        AdapterObjetivo adaptador= new AdapterObjetivo(objetivos,getContext());
+        AdapterObjetivo adaptador = new AdapterObjetivo(objetivos,getContext());
         rv.setAdapter(adaptador);
 
 
@@ -139,6 +179,7 @@ public class Inicio extends Fragment {
         return view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void changeWelcomeMessage() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 06);
@@ -163,10 +204,14 @@ public class Inicio extends Fragment {
 
         if( morning <= time && time < lunch){
             welcome.setText("¡Buenos días!");
+            welcomeImage.setBackground(getActivity().getDrawable(R.drawable.sunny));
+
         }else if( lunch <= time && time < night){
             welcome.setText("¡Buenas tardes!");
+            welcomeImage.setBackground(getActivity().getDrawable(R.drawable.evening));
         }else{
             welcome.setText("¡Buenas noches!");
+            welcomeImage.setBackground(getActivity().getDrawable(R.drawable.night));
         }
     }
 

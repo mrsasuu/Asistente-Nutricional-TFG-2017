@@ -87,13 +87,14 @@ public class ActivitySplashScreen extends Activity {
                 // Redirección al Login
                 if (!SessionPrefs.get(context).isLoggedIn()) {
                     //startActivity(new Intent(context, LoginActivity.class));
-                    startActivity(new Intent(context, LoginActivity.class));
+                    startActivity(new Intent(context, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                     finish();
                     return;
                 }else {
                     Intent mainIntent = new Intent().setClass(
                             //ActivitySplashScreen.this, LoginActivity.class);
                             ActivitySplashScreen.this, Main_menu2.class);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(mainIntent);
                 }
 

@@ -84,6 +84,8 @@ public class UpdateController extends Service {
     }
 
     public UpdateController(){
+
+
        // Context ctx = getApplicationContext();
         /*mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -93,6 +95,17 @@ public class UpdateController extends Service {
                 .build();
 
         api = mRestAdapter.create(Api.class);*/
+    }
+
+    public void initialize(){
+        mPrefs = c.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        Retrofit mRestAdapter = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        api = mRestAdapter.create(Api.class);
     }
 
     public UpdateController(Context context) {
@@ -273,7 +286,7 @@ public class UpdateController extends Service {
      * Método para sincronizar los registros locales de alimentos
      */
 
-    private void syncFoodDB() {
+    public void syncFoodDB() {
         System.out.println("Llega");
 
         Alimento.deleteAll(Alimento.class);

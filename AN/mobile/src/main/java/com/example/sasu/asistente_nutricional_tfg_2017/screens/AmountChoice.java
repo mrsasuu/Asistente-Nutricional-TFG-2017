@@ -61,6 +61,7 @@ public class AmountChoice extends AppCompatActivity {
 
     public void mainScreen(){
         Intent intent = new Intent(this, Main_menu2.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
     }
 }

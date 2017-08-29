@@ -51,10 +51,7 @@ public class registrarComidaTab extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_comida_tab);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -162,7 +159,8 @@ public class registrarComidaTab extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 2;
+            //return 2;
+            return 1;
         }
 
         @Override
@@ -170,8 +168,8 @@ public class registrarComidaTab extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return "Recomendado";
-                case 1:
-                    return "Reciente";
+                /*case 1:
+                    return "Reciente";*/
             }
             return null;
         }

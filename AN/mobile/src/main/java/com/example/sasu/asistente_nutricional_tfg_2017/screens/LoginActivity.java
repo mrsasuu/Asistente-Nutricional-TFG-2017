@@ -320,7 +320,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showAppointmentsScreen() {
-        startActivity(new Intent(this, Main_menu2.class));
+
+
+        UpdateController up = new UpdateController();
+
+
+
+        up.setContext(getApplicationContext());
+
+        up.initialize();
+
+        up.syncFoodDB();
+
+        startActivity(new Intent(this, Main_menu2.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
         finish();
     }
 
