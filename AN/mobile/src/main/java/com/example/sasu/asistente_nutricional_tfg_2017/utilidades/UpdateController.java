@@ -287,6 +287,9 @@ public class UpdateController extends Service {
 
                 for (int i = 0; i < rs.size(); i++) {
                     rs.get(i).setPHOTO(loadImages(rs.get(i).getPHOTO()));
+                    rs.get(i).setMINPHOTO(loadImages(rs.get(i).getMINPHOTO()));
+                    rs.get(i).setMEDPHOTO(loadImages(rs.get(i).getMEDPHOTO()));
+                    rs.get(i).setMAXPHOTO(loadImages(rs.get(i).getMAXPHOTO()));
 
                     rs.get(i).save();
 
@@ -475,7 +478,7 @@ public class UpdateController extends Service {
                     horario = "MERIENDA";
                 }
 
-            request = new Registros(id,al.getFOODID(),horario,dataFrom.getTime(),0,aList2.get(j).getCREATETIME());
+            request = new Registros(id,al.getFOODID(),horario,dataFrom.getTime(),aList2.get(j).getAmount(),aList2.get(j).getCREATETIME());
 
              Call<com.example.sasu.asistente_nutricional_tfg_2017.models.Response> uploadRegistry = api.syncUpload(request);
             uploadRegistry.enqueue(new Callback<com.example.sasu.asistente_nutricional_tfg_2017.models.Response>()

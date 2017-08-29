@@ -8,10 +8,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" />
 
-
-
     <application
-
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -22,7 +19,7 @@
         tools:replace="android:icon,android:theme">
         <meta-data
             android:name="DATABASE"
-            android:value="asistente55.db" />
+            android:value="asistente59.db" />
         <meta-data
             android:name="VERSION"
             android:value="2" />
@@ -51,40 +48,59 @@
         </activity>
         <activity
             android:name=".screens.Main_menu2"
-            android:screenOrientation="portrait"
             android:label="Asistente nutricional"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".screens.LoginActivity"
-            android:screenOrientation="portrait"
-            android:label="Inicio de sesión" />
+            android:label="Inicio de sesión"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".screens.AmountChoice"
+            android:label="Seleccion de cantidades"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AppointmentsActivity"
-            android:screenOrientation="portrait"
-            android:label="Asistente nutricional" />
+            android:label="Asistente nutricional"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".screens.registrarComida"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_registrar_comida"
+            android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".screens.registrarComidaTab"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_registrar_comida_tab"
-            android:theme="@style/NoActionBar"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
 
-        <service android:name=".utilidades.UpdateController" android:exported="false"></service>
-        <service android:name=".utilidades.BreakfastService" android:exported="false"></service>
-        <service android:name=".utilidades.LunchService" android:exported="false"></service>
-        <service android:name=".utilidades.SnackService" android:exported="false"></service>
-        <service android:name=".utilidades.CenadoService" android:exported="false"></service>
-        <service android:name=".utilidades.WaterService" android:exported="false"></service>
+        <service
+            android:name=".utilidades.UpdateController"
+            android:exported="false" />
+        <service
+            android:name=".utilidades.BreakfastService"
+            android:exported="false" />
+        <service
+            android:name=".utilidades.LunchService"
+            android:exported="false" />
+        <service
+            android:name=".utilidades.SnackService"
+            android:exported="false" />
+        <service
+            android:name=".utilidades.CenadoService"
+            android:exported="false" />
+        <service
+            android:name=".utilidades.WaterService"
+            android:exported="false" />
 
-        <receiver android:name=".utilidades.BootService" android:exported="true" android:enabled="true">
+        <receiver
+            android:name=".utilidades.BootService"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <category android:name="android.intent.category.DEFAULT" />
 
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 

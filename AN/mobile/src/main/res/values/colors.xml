@@ -8,6 +8,7 @@
     <color name="red">#d20101</color>
     <color name="green">#35a432</color>
     <color name="whiteTransparent">#9effffff</color>
-
+    <color name="backgrounds">#4267A8</color>
+    <color name="backgroundTitle">#24385C</color>
 
 </resources>

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.sasu.asistente_nutricional_tfg_2017.R;
 import com.example.sasu.asistente_nutricional_tfg_2017.models.Alimento;
+import com.example.sasu.asistente_nutricional_tfg_2017.screens.AmountChoice;
 import com.example.sasu.asistente_nutricional_tfg_2017.screens.Main_menu2;
 import com.example.sasu.asistente_nutricional_tfg_2017.utilidades.ControllerPreferences;
 import com.squareup.picasso.Picasso;
@@ -60,8 +61,13 @@ public class AdapterRegistrarAlimento extends RecyclerView.Adapter<AdapterRegist
 
             Log.println(Log.INFO,"Nombre",alimento.getNAME());
 
-            Intent intent = new Intent(context, Main_menu2.class);
+            Intent intent = new Intent(context, AmountChoice.class);
             context.startActivity(intent);
+
+
+            /*
+            Intent intent = new Intent(context, Main_menu2.class);
+            context.startActivity(intent);*/
 
         }
     }

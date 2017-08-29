@@ -17,9 +17,12 @@ public class ControllerPreferences {
     private Comida comida;
     private HorarioComida horarioRegistrar;
     private HorarioComida horarioConsultar;
+    private double amount;
     private Api api;
     private Retrofit mRestAdapter;
     public Date HOY;
+
+    Alimento al;
 
     public Date fechaActual;
     public String segundaFecha;
@@ -33,9 +36,23 @@ public class ControllerPreferences {
         this.horarioRegistrar = horarioRegistrar;
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
     public void registrarComidaHorario(Alimento al){
-        comida.registrarComidaHorario(horarioRegistrar,al);
+        this.al = al;
         //comida.save();
+    }
+
+    public void registrarComidaFinal(double amount){
+        this.amount = amount;
+        comida.registrarComidaHorario(horarioRegistrar,al,amount);
+
     }
 
     public HorarioComida getHorarioConsultar() {
@@ -46,7 +63,17 @@ public class ControllerPreferences {
         this.horarioConsultar = horarioConsultar;
     }
 
+    public Alimento getAl() {
+        return al;
+    }
+
+    public void setAl(Alimento al) {
+        this.al = al;
+    }
+
     public ControllerPreferences() {
+
+        amount = 0;
 
         this.HOY = new Date();
 

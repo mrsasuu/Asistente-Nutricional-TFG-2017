@@ -401,6 +401,40 @@ public class Main_menu2 extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void registrarAlmuerzo(View v){
+
+        controller.setHorarioRegistrar(HorarioComida.ALMUERZO);
+        Intent intent = new Intent(this, registrarComidaTab.class);
+        startActivity(intent);
+    }
+
+    public void registrarMerienda(View v){
+
+        controller.setHorarioRegistrar(HorarioComida.MERIENDA_TARDE);
+        Intent intent = new Intent(this, registrarComidaTab.class);
+        startActivity(intent);
+    }
+
+    public void registrarCena(View v){
+
+        controller.setHorarioRegistrar(HorarioComida.CENA);
+        Intent intent = new Intent(this, registrarComidaTab.class);
+        startActivity(intent);
+    }
+    public void registrarOtros(View v){
+
+        controller.setHorarioRegistrar(HorarioComida.OTRO);
+        Intent intent = new Intent(this, registrarComidaTab.class);
+        startActivity(intent);
+    }
+
+    public void registrarAgua(View v){
+
+        controller.setHorarioRegistrar(HorarioComida.OTRO);
+        Intent intent = new Intent(this, registrarComidaTab.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();

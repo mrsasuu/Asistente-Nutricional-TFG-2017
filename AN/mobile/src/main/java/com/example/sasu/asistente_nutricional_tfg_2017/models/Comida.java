@@ -19,6 +19,7 @@ public class Comida{
     ArrayList<HorarioComida> horarios = new ArrayList<>();
 
 
+
     Map<HorarioComida,List<Alimento>> comidas = new HashMap<>();
 
     public Comida() {
@@ -98,7 +99,7 @@ public class Comida{
         this.comidas = comidas;
     }
 
-    public void registrarComidaHorario(HorarioComida h, Alimento al){
+    public void registrarComidaHorario(HorarioComida h, Alimento al,double amount){
         if(comidas.containsKey(h)){
             List<Alimento> alimentos = comidas.get(h);
             alimentos.add(al);
@@ -110,7 +111,8 @@ public class Comida{
             alimentos.add(al);
             comidas.put(h,alimentos);
         }
-        Tabla nuevo = new Tabla(fecha,h.toString(),al.getId(),new Date().getTime());
+        //Tabla nuevo = new Tabla(fecha,h.toString(),al.getId(),new Date().getTime());
+        Tabla nuevo = new Tabla(fecha,h.toString(),amount,al.getId(),new Date().getTime());
         nuevo.save();
     }
     public Comida(String hoy,int nada) {
