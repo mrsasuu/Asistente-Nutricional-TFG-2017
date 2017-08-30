@@ -130,106 +130,13 @@ public class Main_menu2 extends AppCompatActivity
             public void onClick(View view) {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
-                if(isOpen){
 
-                    fb2L.startAnimation(fabClose);
-                    fb3L.startAnimation(fabClose);
-                    fb4L.startAnimation(fabClose);
-                    fb5L.startAnimation(fabClose);
-                    fb6L.startAnimation(fabClose);
-                    fb7L.startAnimation(fabClose);
+                abrirCerrarFab();
 
-                    fb2.startAnimation(fabClose);
-                    fb3.startAnimation(fabClose);
-                    fb4.startAnimation(fabClose);
-                    fb5.startAnimation(fabClose);
-                    fb6.startAnimation(fabClose);
-                    fb7.startAnimation(fabClose);
-
-                    //fondo.startAnimation(fabClose);
-
-                    fb1.startAnimation(fabAntiClockw);
-
-
-                    fondo.setVisibility(View.INVISIBLE);
-                    fb2L.setVisibility(View.INVISIBLE);
-                    fb3L.setVisibility(View.INVISIBLE);
-                    fb4L.setVisibility(View.INVISIBLE);
-                    fb5L.setVisibility(View.INVISIBLE);
-                    fb6L.setVisibility(View.INVISIBLE);
-                    fb7L.setVisibility(View.INVISIBLE);
-
-                    fb2L.setClickable(false);
-                    fb3L.setClickable(false);
-                    fb4L.setClickable(false);
-                    fb5L.setClickable(false);
-                    fb6L.setClickable(false);
-                    fb7L.setClickable(false);
-
-                    fb2.setClickable(false);
-                    fb3.setClickable(false);
-                    fb4.setClickable(false);
-                    fb5.setClickable(false);
-                    fb6.setClickable(false);
-                    fb7.setClickable(false);
-
-                    isOpen = false;
-
-                }else{
-
-                    fb2L.startAnimation(fabOpen);
-                    fb3L.startAnimation(fabOpen);
-                    fb4L.startAnimation(fabOpen);
-                    fb5L.startAnimation(fabOpen);
-                    fb6L.startAnimation(fabOpen);
-                    fb7L.startAnimation(fabOpen);
-
-                    //fondo.startAnimation(fabOpen);
-
-                    fb2.startAnimation(fabOpen);
-                    fb3.startAnimation(fabOpen);
-                    fb4.startAnimation(fabOpen);
-                    fb5.startAnimation(fabOpen);
-                    fb6.startAnimation(fabOpen);
-                    fb7.startAnimation(fabOpen);
-
-                    fb1.startAnimation(fabClockw);
-
-                    fondo.setVisibility(View.VISIBLE);
-                    fb2L.setVisibility(View.VISIBLE);
-                    fb3L.setVisibility(View.VISIBLE);
-                    fb4L.setVisibility(View.VISIBLE);
-                    fb5L.setVisibility(View.VISIBLE);
-                    fb6L.setVisibility(View.VISIBLE);
-                    fb7L.setVisibility(View.VISIBLE);
-
-                    fb2L.setClickable(true);
-                    fb3L.setClickable(true);
-                    fb4L.setClickable(true);
-                    fb5L.setClickable(true);
-                    fb6L.setClickable(true);
-                    fb7L.setClickable(true);
-
-                    fb2.setClickable(true);
-                    fb3.setClickable(true);
-                    fb4.setClickable(true);
-                    fb5.setClickable(true);
-                    fb6.setClickable(true);
-                    fb7.setClickable(true);
-
-                    isOpen = true;
-
-                }
             }
         });
 
-        fb2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-            }
-        });
+
 
         /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -334,6 +241,98 @@ public class Main_menu2 extends AppCompatActivity
 
     }
 
+    private void abrirCerrarFab(){
+        if(isOpen){
+
+            fb2L.startAnimation(fabClose);
+            fb3L.startAnimation(fabClose);
+            fb4L.startAnimation(fabClose);
+            fb5L.startAnimation(fabClose);
+            fb6L.startAnimation(fabClose);
+            fb7L.startAnimation(fabClose);
+
+            fb2.startAnimation(fabClose);
+            fb3.startAnimation(fabClose);
+            fb4.startAnimation(fabClose);
+            fb5.startAnimation(fabClose);
+            fb6.startAnimation(fabClose);
+            fb7.startAnimation(fabClose);
+
+            //fondo.startAnimation(fabClose);
+
+            fb1.startAnimation(fabAntiClockw);
+
+
+            fondo.setVisibility(View.INVISIBLE);
+            fb2L.setVisibility(View.INVISIBLE);
+            fb3L.setVisibility(View.INVISIBLE);
+            fb4L.setVisibility(View.INVISIBLE);
+            fb5L.setVisibility(View.INVISIBLE);
+            fb6L.setVisibility(View.INVISIBLE);
+            fb7L.setVisibility(View.INVISIBLE);
+
+            fb2L.setClickable(false);
+            fb3L.setClickable(false);
+            fb4L.setClickable(false);
+            fb5L.setClickable(false);
+            fb6L.setClickable(false);
+            fb7L.setClickable(false);
+
+            fb2.setClickable(false);
+            fb3.setClickable(false);
+            fb4.setClickable(false);
+            fb5.setClickable(false);
+            fb6.setClickable(false);
+            fb7.setClickable(false);
+
+            isOpen = false;
+
+        }else{
+
+            fb2L.startAnimation(fabOpen);
+            fb3L.startAnimation(fabOpen);
+            fb4L.startAnimation(fabOpen);
+            fb5L.startAnimation(fabOpen);
+            fb6L.startAnimation(fabOpen);
+            fb7L.startAnimation(fabOpen);
+
+            //fondo.startAnimation(fabOpen);
+
+            fb2.startAnimation(fabOpen);
+            fb3.startAnimation(fabOpen);
+            fb4.startAnimation(fabOpen);
+            fb5.startAnimation(fabOpen);
+            fb6.startAnimation(fabOpen);
+            fb7.startAnimation(fabOpen);
+
+            fb1.startAnimation(fabClockw);
+
+            fondo.setVisibility(View.VISIBLE);
+            fb2L.setVisibility(View.VISIBLE);
+            fb3L.setVisibility(View.VISIBLE);
+            fb4L.setVisibility(View.VISIBLE);
+            fb5L.setVisibility(View.VISIBLE);
+            fb6L.setVisibility(View.VISIBLE);
+            fb7L.setVisibility(View.VISIBLE);
+
+            fb2L.setClickable(true);
+            fb3L.setClickable(true);
+            fb4L.setClickable(true);
+            fb5L.setClickable(true);
+            fb6L.setClickable(true);
+            fb7L.setClickable(true);
+
+            fb2.setClickable(true);
+            fb3.setClickable(true);
+            fb4.setClickable(true);
+            fb5.setClickable(true);
+            fb6.setClickable(true);
+            fb7.setClickable(true);
+
+            isOpen = true;
+
+        }
+    }
 
 
     private void showError(String error) {
@@ -431,8 +430,13 @@ public class Main_menu2 extends AppCompatActivity
     public void registrarAgua(View v){
 
         controller.setHorarioRegistrar(HorarioComida.OTRO);
-        Intent intent = new Intent(this, registrarComidaTab.class);
-        startActivity(intent);
+
+        Alimento al = Alimento.find(Alimento.class,"NAME = ?","Agua").get(0);
+        controller.registrarComidaHorario(al);
+        controller.registrarComidaFinal(1);
+
+        abrirCerrarFab();
+
     }
 
     @Override

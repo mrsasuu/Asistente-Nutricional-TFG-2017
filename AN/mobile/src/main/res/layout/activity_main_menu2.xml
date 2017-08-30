@@ -168,6 +168,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         app:backgroundTint="#447CC5"
+        android:onClick="registrarAgua"
         android:src="@mipmap/agua"
         android:tag="Añadir vaso de agua"
         />
@@ -200,6 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             app:backgroundTint="#447CC5"
+            android:onClick="registrarAlmuerzo"
             android:src="@mipmap/comida"
             android:tag="Añadir vaso de agua"
             />
@@ -230,6 +232,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
+            android:onClick="registrarCena"
             app:backgroundTint="#447CC5"
             android:src="@mipmap/cena"
             android:tag="Añadir otro"
@@ -262,6 +265,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
+            android:onClick="registrarMerienda"
             app:backgroundTint="#447CC5"
             android:src="@mipmap/merienda"
             android:tag="Añadir otro"
@@ -295,6 +299,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             app:backgroundTint="#447CC5"
+            android:onClick="registrarOtros"
             android:src="@mipmap/snack"
             android:tag="Añadir otro"
             />
@@ -331,6 +336,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:backgroundTint="#447CC5"
+        android:onClick="registrarDesayuno"
         android:src="@mipmap/desayuno"
         android:tag="Añadir desayuno"
 

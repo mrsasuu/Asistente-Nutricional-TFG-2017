@@ -244,7 +244,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Calendar cal2 = Calendar.getInstance();
         AlarmManager am2 = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-        long interval2 = 1000 * 60 *45; // 45 minutes in milliseconds
+        long interval2 = 1000 *  60 * 30; // 45 minutes in milliseconds
 
         //long interval2 = 1000 * 60 * 60 * 3; // intervalo de 3 horas
         Intent serviceIntent2 = new Intent(ctx, WaterService.class);
