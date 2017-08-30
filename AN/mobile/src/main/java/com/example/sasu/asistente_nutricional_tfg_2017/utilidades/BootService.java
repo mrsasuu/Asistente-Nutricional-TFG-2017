@@ -22,7 +22,7 @@ public class BootService extends BroadcastReceiver{
 /** this gives us the time for the first trigger.  */
             Calendar cal = Calendar.getInstance();
             AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-            long interval = 1000 * 60 * 30; // 5 minutes in milliseconds
+            long interval = 1000 * 60 * 45; // 5 minutes in milliseconds
 
             //long interval = 1000 * 60 * 60 * 3; // intervalo de 3 horas
             Intent serviceIntent = new Intent(ctx, UpdateController.class);

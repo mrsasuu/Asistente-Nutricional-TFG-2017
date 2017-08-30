@@ -98,24 +98,27 @@ public class AdapterRegistro extends RecyclerView.Adapter<AdapterRegistro.Regist
     public void onBindViewHolder(final RegistroViewHolder holder, int position) {
         //holder.cardviewAlimento.setBackgroundResource(R.drawable.sunny);
         holder.alimento = listaAlimentos.get(position);
-        Picasso.with(context).load(listaAlimentos.get(position).getPHOTO()).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                holder.cardviewAlimento.setBackground(new BitmapDrawable(context.getResources(), bitmap));
-            }
+        /*if(listaAlimentos.get(position)!= null)
+        {*/
+            Picasso.with(context).load(listaAlimentos.get(position).getPHOTO()).into(new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    holder.cardviewAlimento.setBackground(new BitmapDrawable(context.getResources(), bitmap));
+                }
 
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {
 
-            }
+                }
 
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
 
-            }
-        });
-       //Picasso.with(context).load(listaAlimentos.get(position).getPHOTO()).into(holder.foto);
-        holder.nombre.setText(listaAlimentos.get(position).getNAME());
+                }
+            });
+            //Picasso.with(context).load(listaAlimentos.get(position).getPHOTO()).into(holder.foto);
+            holder.nombre.setText(listaAlimentos.get(position).getNAME());
+        //}
     }
 
 

@@ -118,9 +118,13 @@ public class Inicio extends Fragment {
             double apariciones = 0;
             objetivosDB.get(i).setPROGRESS(0);
             for(int j = 0; j < registros.size(); j++){
+
                 Alimento al = Alimento.findById(Alimento.class,registros.get(j).getIdAlimento());
-                if(( al.getFOODID() == objetivosDB.get(i).getFOODID())){
-                    apariciones+= registros.get(j).getAmount();
+                if(al != null)
+                {
+                    if(( al.getFOODID() == objetivosDB.get(i).getFOODID())){
+                        apariciones+= registros.get(j).getAmount();
+                    }
                 }
             }
 

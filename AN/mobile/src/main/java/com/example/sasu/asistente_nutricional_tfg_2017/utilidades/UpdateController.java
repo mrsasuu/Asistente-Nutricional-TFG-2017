@@ -145,7 +145,7 @@ public class UpdateController extends Service {
 
 
         completed = true;
-        String token = mPrefs.getString(PREF_PATIENT_TOKEN, null);
+
         String idS  = mPrefs.getString(PREF_PATIENT_ID,"-1");
         int id = Integer.parseInt(idS);
 
@@ -185,6 +185,8 @@ public class UpdateController extends Service {
                         syncFoodDB();
 
                         System.out.println("Hecho");
+                    }else {
+                        checkRegistersAndObjetives();
                     }
                 }
 
@@ -199,6 +201,19 @@ public class UpdateController extends Service {
 
         });
 
+
+
+
+
+        return completed;
+    }
+
+    private void checkRegistersAndObjetives(){
+
+        String idS  = mPrefs.getString(PREF_PATIENT_ID,"-1");
+        int id = Integer.parseInt(idS);
+
+        String token = mPrefs.getString(PREF_PATIENT_TOKEN, null);
 
         //DEBUG
         //Tabla.deleteAll(Tabla.class);
@@ -266,7 +281,7 @@ public class UpdateController extends Service {
                     applyError(response.body().getERROR());
                 } else {
                     //if (response.body().getNEWS() == 1) {
-                        syncObjetiveDB();
+                    syncObjetiveDB();
                     //}
                 }
             }
@@ -276,9 +291,37 @@ public class UpdateController extends Service {
                 System.out.println("Ha fallado 2: " + t);
             }
         });
+    }
+
+    private void checkRegistersAndObjetivesDownload(){
+
+        String idS  = mPrefs.getString(PREF_PATIENT_ID,"-1");
+        int id = Integer.parseInt(idS);
+
+        String token = mPrefs.getString(PREF_PATIENT_TOKEN, null);
+
+         syncFoodRegisterDBDownload();
 
 
-        return completed;
+        //Sincronizamos los objetivos del paciente si se ha añadido alguno nuevo.
+        Call<News> newsCall = api.news(new NewsBody(id, token));
+        newsCall.enqueue(new Callback<News>() {
+            @Override
+            public void onResponse(Call<News> call, Response<News> response) {
+                if (response.body().getERROR() != null) {
+                    applyError(response.body().getERROR());
+                } else {
+                    //if (response.body().getNEWS() == 1) {
+                    syncObjetiveDB();
+                    //}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<News> call, Throwable t) {
+                System.out.println("Ha fallado 2: " + t);
+            }
+        });
     }
 
 
@@ -307,6 +350,8 @@ public class UpdateController extends Service {
                     rs.get(i).save();
 
                 }
+
+                checkRegistersAndObjetivesDownload();
 
             }
 

@@ -222,7 +222,7 @@ public class LoginActivity extends AppCompatActivity {
         AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
         //long interval = 1000 * 5; // 5 minutes in milliseconds
 
-        long interval = 1000 * 60 * 60 * 3; // intervalo de 3 horas
+        long interval = 1000 * 60 * 45; // intervalo de 45 min
         Intent serviceIntent = new Intent(ctx, UpdateController.class);
 // make sure you **don't** use *PendingIntent.getBroadcast*, it wouldn't work
         PendingIntent servicePendingIntent =
