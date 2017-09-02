@@ -16,7 +16,7 @@
 		<h4>Editar Paciente</h4>
 		<span><i class="modal_close modal-action modal-close material-icons right">close</i></span>
 	</div>
-	<form class="col s12" method="post" action="/backend/patients/edit/" enctype="multipart/form-data">
+	<form class="col s12" method="post" action="/backend/patients/edit/" enctype="multipart/form-data" onsubmit="return (validateDNI2());">
 		<div class="modal-content">
 
 
@@ -67,7 +67,7 @@
 
 			<!-- Phone -->
 			<div class="input-field col s12">
-				<input id="edit_phone_patient" name="edit_phone_patient" type="number" class="validate" required>
+				<input id="edit_phone_patient" name="edit_phone_patient" type="tel" class="validate" required>
 				<label for="edit_phone_patient">Teléfono</label>
 			</div>
 
@@ -86,13 +86,13 @@
 			<!-- Height -->
 			<div class="input-field col s12 m6">
 				<input id="edit_height_patient" name="edit_height_patient" type="number" class="validate" required>
-				<label for="edit_height_patient">Altura</label>
+				<label for="edit_height_patient">Altura (cm)</label>
 			</div>
 
 			<!-- Weight -->
 			<div class="input-field col s12 m6">
 				<input id="edit_weight_patient" name="edit_weight_patient" type="number" class="validate" required>
-				<label for="edit_weight_patient">Peso</label>
+				<label for="edit_weight_patient">Peso (Kg)</label>
 			</div>
 
 
@@ -144,3 +144,45 @@
 		</div>
 	</form>
 </div>
+
+<script>
+
+
+    function validateDNI2() {
+        var dni = $("#edit_dni_patient").val();
+        var numero, let, letra;
+        var expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
+
+        dni = dni.toUpperCase();
+
+        if(expresion_regular_dni.test(dni) === true){
+            numero = dni.substr(0,dni.length-1);
+            numero = numero.replace('X', 0);
+            numero = numero.replace('Y', 1);
+            numero = numero.replace('Z', 2);
+            let = dni.substr(dni.length-1, 1);
+            numero = numero % 23;
+            letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
+            letra = letra.substring(numero, numero+1);
+            if (letra != let) {
+                alert('Dni erroneo, la letra del NIF no se corresponde');
+                return false;
+            }else{
+                //alert('Dni correcto');
+                return true;
+            }
+        }else{
+            alert('Dni erroneo, formato no válido');
+            return false;
+        }
+    }
+
+    function valTel() {
+        var valor = $("#edit_phone_patient").val();
+        if( !(/^\d{9}$/.test(valor)) ) {
+            return false;
+        }
+    }
+
+
+</script>

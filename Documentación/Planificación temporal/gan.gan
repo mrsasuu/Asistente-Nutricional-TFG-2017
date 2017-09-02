@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Asistente nutricional" company="Antonio Javier Benítez Guijarro" webLink="http://mrsasu.info/" view-date="2017-05-29" view-index="1" gantt-divider-location="345" resource-divider-location="545" version="2.8.5" locale="es">
+    <description><![CDATA[Proyecto de una aplicación web y móvil conectadas a través de servidor nube.]]></description>
+    <view zooming-state="default:6" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="180" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="68" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="78" order="2"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="332" order="0"/>
+        <field id="1" name="Función" width="209" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="151" name="Plataforma nube" meeting="false" start="2017-06-08" duration="74" complete="100" expand="true"/>
+        <task id="4" name="Iteración 1" meeting="false" start="2017-06-05" duration="19" complete="100" expand="true">
+            <task id="5" name="Plataforma web" meeting="false" start="2017-06-08" duration="16" complete="100" expand="true">
+                <depend id="149" type="2" difference="0" hardness="Strong"/>
+                <task id="99" name="Crear estructura del servidor" meeting="false" start="2017-06-08" duration="4" complete="100" expand="true"/>
+                <task id="100" name="Crear estructura de la base de datos" meeting="false" start="2017-06-12" duration="1" complete="100" expand="true">
+                    <depend id="102" type="2" difference="0" hardness="Strong"/>
+                    <depend id="103" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="101" name="Crear interfaz del panel principal" meeting="false" start="2017-06-13" duration="1" complete="100" expand="true">
+                    <task id="102" name="Iniciar sesión" meeting="false" start="2017-06-13" duration="1" complete="100" expand="true"/>
+                    <task id="103" name="Cerrar sesión" meeting="false" start="2017-06-13" duration="1" complete="100" expand="true"/>
+                </task>
+                <task id="104" name="Crear interfaz del panel de nutricionistas" meeting="false" start="2017-06-14" duration="4" complete="100" expand="true"/>
+                <task id="105" name="Insertar nutricionista" meeting="false" start="2017-06-14" duration="4" complete="100" expand="true"/>
+                <task id="106" name="Eliminar nutricionista" meeting="false" start="2017-06-14" duration="4" complete="100" expand="true"/>
+                <task id="107" name="Modificar nutricionista" meeting="false" start="2017-06-15" duration="3" complete="100" expand="true"/>
+                <task id="108" name="Crear interfaz del panel de alimentos" meeting="false" start="2017-06-20" duration="6" complete="100" expand="true"/>
+                <task id="109" name="Insertar alimento" meeting="false" start="2017-06-20" duration="6" complete="100" expand="true"/>
+                <task id="110" name="Modificar alimento" meeting="false" start="2017-06-20" duration="6" complete="100" expand="true"/>
+                <task id="111" name="Eliminar alimento" meeting="false" start="2017-06-20" duration="6" complete="100" expand="true"/>
+            </task>
+            <task id="127" name="Reunión de nutrición" meeting="false" start="2017-06-08" duration="1" complete="100" expand="true"/>
+            <task id="147" name="Reunión de planificación" meeting="false" start="2017-06-05" duration="1" complete="100" expand="true"/>
+        </task>
+        <task id="20" name="Iteración 2" meeting="false" start="2017-06-27" duration="11" complete="100" expand="true">
+            <task id="21" name="Plataforma web" meeting="false" start="2017-06-27" duration="11" complete="100" expand="true">
+                <task id="112" name="Crear interfaz del panel de pacientes" meeting="false" start="2017-06-27" duration="1" complete="100" expand="true"/>
+                <task id="113" name="Insertar paciente" meeting="false" start="2017-06-28" duration="3" complete="100" expand="true"/>
+                <task id="114" name="Modificar paciente" meeting="false" start="2017-06-28" duration="3" complete="100" expand="true"/>
+                <task id="115" name="Eliminar paciente" meeting="false" start="2017-06-28" duration="3" complete="100" expand="true"/>
+                <task id="116" name="Mostrar paciente" meeting="false" start="2017-06-30" duration="2" complete="100" expand="true">
+                    <depend id="117" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="117" name="Crear calendario interactivo del paciente" meeting="false" start="2017-07-03" duration="3" complete="100" expand="true">
+                    <depend id="118" type="2" difference="0" hardness="Strong"/>
+                    <depend id="119" type="2" difference="0" hardness="Strong"/>
+                    <depend id="120" type="2" difference="0" hardness="Strong"/>
+                    <depend id="121" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="118" name="Añadir evento" meeting="false" start="2017-07-06" duration="1" complete="100" expand="true">
+                    <depend id="119" type="2" difference="0" hardness="Strong"/>
+                    <depend id="120" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="119" name="Visualizar evento" meeting="false" start="2017-07-07" duration="1" complete="100" expand="true"/>
+                <task id="120" name="Añadir registro" meeting="false" start="2017-07-07" duration="1" complete="100" expand="true">
+                    <depend id="121" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="121" name="Eliminar registro" meeting="false" start="2017-07-08" duration="1" complete="100" expand="true"/>
+            </task>
+            <task id="149" name="Reunión de actualización y planificación" meeting="false" start="2017-06-27" duration="1" complete="100" expand="true"/>
+        </task>
+        <task id="31" name="Iteración 3" meeting="false" start="2017-07-17" duration="24" complete="99" expand="true">
+            <task id="129" name="Plataforma web" meeting="false" start="2017-07-17" duration="23" complete="99" expand="true">
+                <task id="133" name="Añadir objetivo" meeting="false" start="2017-07-17" duration="3" complete="100" expand="true">
+                    <depend id="134" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="134" name="Eliminar objetivo" meeting="false" start="2017-07-20" duration="1" complete="100" expand="true"/>
+                <task id="135" name="Crear interfaz de estadísticas" meeting="false" start="2017-07-20" duration="3" complete="100" expand="true">
+                    <depend id="136" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="136" name="Crear calculador de estadísticas mensuales" meeting="false" start="2017-07-24" duration="1" complete="100" expand="true">
+                    <depend id="137" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="137" name="Crear calculador de estadísticas semanales" meeting="false" start="2017-07-25" duration="1" complete="100" expand="true"/>
+                <task id="138" name="Crear interfaz de las tablas de cantidades diarias recomendadas" meeting="false" start="2017-07-26" duration="3" complete="100" expand="true"/>
+                <task id="139" name="Insertar tablas de cantidades diarias recomendadas" meeting="false" start="2017-08-05" duration="1" complete="100" expand="true">
+                    <depend id="140" type="2" difference="0" hardness="Strong"/>
+                    <depend id="141" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="140" name="Modificar  tablas de cantidades diarias recomendadas" meeting="false" start="2017-08-07" duration="1" complete="100" expand="true"/>
+                <task id="141" name="Eliminar tablas de cantidades diarias recomendadas" meeting="false" start="2017-08-07" duration="1" complete="91" expand="true"/>
+                <task id="142" name="Crear interfaz del historial" meeting="false" start="2017-08-09" duration="2" complete="100" expand="true">
+                    <depend id="143" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="143" name="Insertar histórico" meeting="false" start="2017-08-11" duration="1" complete="100" expand="true">
+                    <depend id="146" type="2" difference="0" hardness="Strong"/>
+                </task>
+            </task>
+            <task id="146" name="Reunión de actualización" meeting="false" start="2017-08-12" duration="1" complete="100" expand="true"/>
+        </task>
+        <task id="148" name="Iteración 4" meeting="false" start="2017-08-17" duration="14" complete="100" expand="true">
+            <task id="152" name="Plataforma móvil" meeting="false" start="2017-08-17" duration="14" complete="100" expand="true">
+                <task id="173" name="Crear interfaz del login" meeting="false" start="2017-08-17" duration="1" complete="100" expand="true"/>
+                <task id="174" name="Iniciar sesión" meeting="false" start="2017-08-17" duration="2" complete="100" expand="true"/>
+                <task id="175" name="Cerrar sesión" meeting="false" start="2017-08-18" duration="1" complete="100" expand="true"/>
+                <task id="176" name="Crear interfaz del inicio" meeting="false" start="2017-08-19" duration="2" complete="100" expand="true"/>
+                <task id="177" name="Crear interfaz del panel registro" meeting="false" start="2017-08-21" duration="2" complete="100" expand="true">
+                    <depend id="178" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="178" name="Crear interfaz de la selección de alimentos" meeting="false" start="2017-08-23" duration="1" complete="100" expand="true"/>
+                <task id="179" name="Crear interfaz de la selección de cantidades" meeting="false" start="2017-08-23" duration="1" complete="100" expand="true"/>
+                <task id="180" name="Registrar alimento" meeting="false" start="2017-08-24" duration="3" complete="100" expand="true">
+                    <depend id="181" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="181" name="Visualizar registro" meeting="false" start="2017-08-28" duration="1" complete="100" expand="true"/>
+                <task id="182" name="Eliminar registro" meeting="false" start="2017-08-28" duration="1" complete="100" expand="true">
+                    <depend id="183" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="183" name="Visualizar registros a partir de una fecha dada" meeting="false" start="2017-08-29" duration="1" complete="100" expand="true"/>
+                <task id="184" name="Visualizar registros a partir de un horario de comida específico dado" meeting="false" start="2017-08-29" duration="1" complete="100" expand="true"/>
+                <task id="185" name="Sincronizar contenidos locales de la base de datos con la nube" meeting="false" start="2017-08-28" duration="5" complete="100" expand="true"/>
+                <task id="186" name="Crear servicios en segundo plano" meeting="false" start="2017-09-01" duration="1" complete="100" expand="true"/>
+            </task>
+            <task id="187" name="Reunión final" meeting="false" start="2017-09-01" duration="1" complete="100" expand="true"/>
+        </task>
+        <task id="172" name="Documentación" meeting="false" start="2017-06-05" duration="82" complete="100" expand="true"/>
+    </tasks>
+    <resources>
+        <resource id="0" name="Antonio Javier Benítez Guijarro" function="Default:0" contacts="mrsasuu@gmail.com" phone="648899446"/>
+        <resource id="1" name="Android Studio" function="Default:0" contacts="" phone=""/>
+        <resource id="2" name="JetBrains WebStorm" function="Default:0" contacts="" phone=""/>
+        <resource id="3" name="NodeJs" function="Default:0" contacts="" phone=""/>
+        <resource id="4" name="Android" function="Default:0" contacts="" phone=""/>
+        <resource id="5" name="Servidor local" function="Default:0" contacts="" phone=""/>
+        <resource id="6" name="Javascript" function="Default:0" contacts="" phone=""/>
+        <resource id="7" name="HTML5" function="Default:0" contacts="" phone=""/>
+        <resource id="8" name="CSS3" function="Default:0" contacts="" phone=""/>
+        <resource id="9" name="Microsoft office Word 2016" function="Default:0" contacts="" phone=""/>
+        <resource id="10" name="GanttProject" function="Default:0" contacts="" phone=""/>
+        <resource id="11" name="Dispositivos móviles Android para el testeo" function="Default:0" contacts="" phone=""/>
+        <resource id="12" name="WhatsApp" function="Default:0" contacts="" phone=""/>
+        <resource id="13" name="Skype" function="Default:0" contacts="" phone=""/>
+        <resource id="14" name="Windows" function="Default:0" contacts="" phone=""/>
+        <resource id="15" name="MySQL/MariaDB" function="Default:0" contacts="" phone=""/>
+        <resource id="16" name="Photoshop" function="Default:0" contacts="" phone=""/>
+        <resource id="17" name="Linux" function="Default:0" contacts="" phone=""/>
+        <resource id="18" name="" function="Default:0" contacts="" phone=""/>
+        <resource id="19" name="" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>

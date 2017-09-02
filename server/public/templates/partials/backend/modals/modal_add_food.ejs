@@ -5,6 +5,8 @@
 	</div>
 	<form class="col s12 row" method="post" action="/backend/foods/add/" enctype="multipart/form-data" autocomplete="off">
 		<div class="modal-content">
+			<p>Todos los campos con indicados son obligatorios.</p>
+			<p>Las cantidades corresponden a cada 100g del alimento.</p>
 			<!-- Nombre -->
 			<div class="input-field col s12">
 				<input id="add_name_food" name="add_name_food" type="text" class="validate" required>
@@ -14,100 +16,102 @@
 			<!-- Proteinas -->
 			<div class="input-field col s12">
 				<input id="add_proteins_food" name="add_proteins_food" type="number" step="0.001" class="validate" required>
-				<label for="add_proteins_food">Proteinas</label>
+				<label for="add_proteins_food">Proteinas (g)</label>
 			</div>
 
 			<!-- Hidratos -->
 			<div class="input-field col s12 m6">
 				<input id="add_carbon_hydrates_food" name="add_carbon_hydrates_food" type="number" step="0.001" class="validate" required>
-				<label for="add_carbon_hydrates_food">H. carbono</label>
+				<label for="add_carbon_hydrates_food">H. carbono (g)</label>
 			</div>
 
 			<!-- Lipidos -->
 			<div class="input-field col s12 m6">
 				<input id="add_lipids_food" name="add_lipids_food" type="number" step="0.001" class="validate" required>
-				<label for="add_lipids_food">Lípidos</label>
+				<label for="add_lipids_food">Lípidos (g)</label>
 			</div>
 
+			<h5 class="center-align" style="margin: 20px!important;">Ácidos grasos:</h5>
+			<!-- Colesterol -->
+			<div class="input-field col s12 m6">
+				<input id="add_cholesterol_table" name="add_cholesterol_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_cholesterol_table">Colesterol (mg)</label>
+			</div>
 
-			<!-- KCAL -->
+			<!-- Saturadas -->
+			<div class="input-field col s12 m6">
+				<input id="add_saturated_table" name="add_saturated_table" type="number" step="0.001" value="0.000" class="validate" required>
+				<label for="add_saturated_table">G.Saturadas (g)</label>
+			</div>
+
+			<h5 class="center-align" style="margin: 20px!important;">Sales:</h5>
+			<!-- Sal -->
 			<div class="input-field col s12 m12">
 				<input id="add_kcal_table" name="add_kcal_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_kcal_table">Kcalorias</label>
+				<label for="add_kcal_table">Sal (g)</label>
 			</div>
 
 			<h5 class="center-align" style="margin: 20px!important;">Vitaminas:</h5>
 			<!-- V_A -->
 			<div class="input-field col s12 m6">
 				<input id="add_v_a_table" name="add_v_a_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_v_a_table">Vitamina A</label>
+				<label for="add_v_a_table">Vitamina A (µg)</label>
 			</div>
 
 			<!-- V_C -->
 			<div class="input-field col s12 m6">
 				<input id="add_v_c_table" name="add_v_c_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_v_c_table">Vitamina C</label>
+				<label for="add_v_c_table">Vitamina C (mg)</label>
 			</div>
 
 			<!-- v_D -->
 			<div class="input-field col s12 m6">
 				<input id="add_v_d_table" name="add_v_d_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_v_d_table">Vitamina D</label>
+				<label for="add_v_d_table">Vitamina D (µg)</label>
 			</div>
 
 			<!-- V_E -->
 			<div class="input-field col s12 m6">
 				<input id="add_v_e_table" name="add_v_e_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_v_e_table">Vitamina E</label>
+				<label for="add_v_e_table">Vitamina E (mg)</label>
 			</div>
 			<h5 class="center-align" style="margin: 20px!important;">Minerales:</h5>
 			<!-- Calcio -->
 			<div class="input-field col s12 m6">
 				<input id="add_calcium_table" name="add_calcium_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_calcium_table">Calcio</label>
+				<label for="add_calcium_table">Calcio (mg)</label>
 			</div>
 
 			<!-- Hierro -->
 			<div class="input-field col s12 m6">
 				<input id="add_iron_table" name="add_iron_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_iron_table">Hierro</label>
+				<label for="add_iron_table">Hierro (mg)</label>
 			</div>
 
 			<!-- Magnesio -->
 			<div class="input-field col s12 m6">
 				<input id="add_magnesium_table" name="add_magnesium_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_magnesium_table">Magnesio</label>
+				<label for="add_magnesium_table">Magnesio (mg)</label>
 			</div>
 
 			<!-- Potasio -->
 			<div class="input-field col s12 m6">
 				<input id="add_potassium_table" name="add_potassium_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_potassium_table">Potasio</label>
+				<label for="add_potassium_table">Potasio (mg)</label>
 			</div>
 
 			<!-- Fósforo -->
 			<div class="input-field col s12 m6">
 				<input id="add_phosphorus_table" name="add_phosphorus_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_phosphorus_table">Fósforo</label>
+				<label for="add_phosphorus_table">Fósforo (mg)</label>
 			</div>
 
 			<!-- Sodio -->
 			<div class="input-field col s12 m6">
 				<input id="add_sodium_table" name="add_sodium_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_sodium_table">Sodio</label>
-			</div>
-			<h5 class="center-align" style="margin: 20px!important;">Ácidos:</h5>
-			<!-- Colesterol -->
-			<div class="input-field col s12 m6">
-				<input id="add_cholesterol_table" name="add_cholesterol_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_cholesterol_table">Colesterol</label>
+				<label for="add_sodium_table">Sodio (mg)</label>
 			</div>
 
-			<!-- Saturadas -->
-			<div class="input-field col s12 m6">
-				<input id="add_saturated_table" name="add_saturated_table" type="number" step="0.001" value="0.000" class="validate" required>
-				<label for="add_saturated_table">G.Saturadas</label>
-			</div>
 
 
 

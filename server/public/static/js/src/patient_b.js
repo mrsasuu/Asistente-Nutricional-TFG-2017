@@ -1093,6 +1093,9 @@ $(document).ready(function() {
                     else
                         $("#editPatientImgViewer").attr('src', "/static/img/img_not_available.png");
 
+                    $("input").focus();
+
+                    $("input").select();
 
 
 					$('#patient_loader').css('opacity', '0');
@@ -1268,6 +1271,7 @@ $(document).ready(function() {
                 $("#show_weight_patient").val(jsondata.WEIGHT);
                 $("#showPatientImgViewer").attr('src', jsondata.PHOTO);
                 $("#show_previous_photo_user").val(jsondata.PHOTO);
+
 
 
 

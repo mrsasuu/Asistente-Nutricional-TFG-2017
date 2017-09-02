@@ -27,9 +27,9 @@
 							<th data-field="id">#</th>
 							<th data-field="picture">Foto</th>
 							<th data-field="name">Nombre</th>
-							<th data-field="carbon_hydrates">H. Carbono</th>
-							<th data-field="proteins">Proteinas</th>
-							<th data-field="lipids">Lípidos</th>
+							<th data-field="carbon_hydrates">H. Carbono (g)</th>
+							<th data-field="proteins">Proteinas (g)</th>
+							<th data-field="lipids">Lípidos (g)</th>
 							<th data-field="action">Acción</th>
 						</tr>
 					</thead>
@@ -46,8 +46,8 @@
 								<td><%= foods[i].PROTEINS%></td>
 								<td><%= foods[i].LIPIDS%></td>
 								<td class="actions">
-									<a class="modal-trigger" href="#edit_food"><i class="material-icons">mode_edit</i></a>
-									<a class="modal-trigger" href="#delete_food"><i class="material-icons">delete</i></a>
+									<a class="modal-trigger" href="#edit_food" title="Abrir el formulario para editar el alimento"><i class="material-icons">mode_edit</i></a>
+									<a class="modal-trigger" href="#delete_food" title="Abrir el formulario para eliminar el alimento"><i class="material-icons">delete</i></a>
 								</td>
 								</tr>
 						<% }

@@ -3,25 +3,26 @@
 		<h4>Añadir un nuevo paciente</h4>
 		<span><i class="modal_close modal-action modal-close material-icons right">close</i></span>
 	</div>
-	<form class="col s12 row" method="post" action="/backend/patients/add/" enctype="multipart/form-data" autocomplete="off">
+	<form id = "newPatient"class="col s12 row" method="post" action="/backend/patients/add/" enctype="multipart/form-data" autocomplete="off" onsubmit="return validateDNI1();" >
 		<div class="modal-content">
 
+			<p>Todos los campos con indicados con (*) son obligatorios.</p>
 
 			<!-- DNI -->
 			<div class="input-field col s12 m4">
 				<input id="add_dni_patient" name="add_dni_patient" type="text" class="validate" required>
-				<label for="add_dni_patient">DNI</label>
+				<label for="add_dni_patient">DNI (*)</label>
 			</div>
 
 			<!-- Age -->
 			<div class="input-field col s12 m2">
 				<input id="add_age_patient" name="add_age_patient" type="number" class="validate" required>
-				<label for="add_age_patient">Edad</label>
+				<label for="add_age_patient">Edad (*)</label>
 			</div>
 
 			<!-- Gender -->
 			<div class="input-field col s12 m6">
-				<p class="red-text text-darken-1">Sexo</p>
+				<p class="red-text text-darken-1">Sexo (*)</p>
 				<!-- Confirmacion -->
 				<p><input name="add_gender_patient" type="radio" id="add_patient_male" value="0" /><label for="add_patient_male">Hombre</label></p>
 				<p><input name="add_gender_patient" type="radio" id="add_patient_female" value="1" checked /><label for="add_patient_female">Mujer</label></p>
@@ -30,55 +31,55 @@
 			<!-- Name -->
 			<div class="input-field col s12 m6">
 				<input id="add_name_patient" name="add_name_patient" type="text" class="validate" required>
-				<label for="add_name_patient">Nombre</label>
+				<label for="add_name_patient">Nombre (*)</label>
 			</div>
 
 			<!-- Surname -->
 			<div class="input-field col s12 m6">
 				<input id="add_surname_patient" name="add_surname_patient" type="text" class="validate" required>
-				<label for="add_surname_patient">Apellidos</label>
+				<label for="add_surname_patient">Apellidos (*)</label>
 			</div>
 
 			<!-- Address -->
 			<div class="input-field col s12">
 				<input id="add_address_patient" name="add_address_patient" type="text" class="validate" required>
-				<label for="add_address_patient">Dirección</label>
+				<label for="add_address_patient">Dirección (*)</label>
 			</div>
 
 			<!-- Email -->
 			<div class="input-field col s12">
 				<input id="add_email_patient" name="add_email_patient" type="email" class="validate" required>
-				<label for="add_email_patient">Correo electrónico</label>
+				<label for="add_email_patient">Correo electrónico (*)</label>
 			</div>
 
 			<!-- Phone -->
 			<div class="input-field col s12">
-				<input id="add_phone_patient" name="add_phone_patient" type="number" class="validate" required>
-				<label for="add_phone_patient">Teléfono</label>
+				<input id="add_phone_patient" name="add_phone_patient" type="tel" class="validate" required>
+				<label for="add_phone_patient">Teléfono (*)</label>
 			</div>
 
 			<!-- Username -->
 			<div class="input-field col s12">
 				<input id="add_username_patient" name="add_username_patient" type="text" class="validate" required>
-				<label for="add_username_patient">Nombre de usuario</label>
+				<label for="add_username_patient">Nombre de usuario (*)</label>
 			</div>
 
 			<!-- Password -->
 			<div class="input-field col s12">
 				<input id="add_password_patient" name="add_password_patient" type="password" class="validate" required>
-				<label for="add_password_patient">Contraseña</label>
+				<label for="add_password_patient">Contraseña (*)</label>
 			</div>
 
 			<!-- Height -->
 			<div class="input-field col s12 m6">
 				<input id="add_height_patient" name="add_height_patient" type="number" class="validate" required>
-				<label for="add_height_patient">Altura</label>
+				<label for="add_height_patient">Altura (cm) (*)</label>
 			</div>
 
 			<!-- Weight -->
 			<div class="input-field col s12 m6">
 				<input id="add_weight_patient" name="add_weight_patient" type="number" class="validate" required>
-				<label for="add_weight_patient">Peso</label>
+				<label for="add_weight_patient">Peso (Kg) (*)</label>
 			</div>
 
 
@@ -86,7 +87,7 @@
 
 			<!-- activity level -->
 			<div class="input-field col s12" style="padding-bottom: 100px!important;">
-				<p class="red-text text-darken-1">Nivel de actividad</p>
+				<p class="red-text text-darken-1">Nivel de actividad (*)</p>
 				<!-- Confirmacion -->
 				<p><input name="add_activity_level_patient" type="radio" id="add_activity_level_patient_1" value="0" /><label for="add_activity_level_patient_1">Sedentario</label></p>
 				<p><input name="add_activity_level_patient" type="radio" id="add_activity_level_patient_2" value="1" checked /><label for="add_activity_level_patient_2">Moderada</label></p>
@@ -129,3 +130,78 @@
 		</div>
 	</form>
 </div>
+
+
+<script>
+
+
+	function validar() {
+		var result1 = validateDNI();
+		var result2 = valTel();
+
+		return result1 && result2;
+    }
+
+
+    /*function validateDNI() {
+        var dni = $("#edit_dni_patient").val();
+        var validChars = 'TRWAGMYFPDXBNJZSQVHLCKET';
+        var nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i;
+        var nieRexp = /^[XYZ]{1}[0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i;
+        var str = dni.toString().toUpperCase();
+
+        if (!nifRexp.test(str) && !nieRexp.test(str)) return false;
+
+        var nie = str
+            .replace(/^[X]/, '0')
+            .replace(/^[Y]/, '1')
+            .replace(/^[Z]/, '2');
+
+        var letter = str.substr(-1);
+        var charIndex = parseInt(nie.substr(0, 8)) % 23;
+
+        if (validChars.charAt(charIndex) === letter) return true;
+
+        alert("El DNI no es válido");
+        return false;
+    }*/
+
+    function validateDNI1() {
+        var dni = $("#add_dni_patient").val();
+        var numero, let, letra;
+        var expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
+
+        dni = dni.toUpperCase();
+
+        if(expresion_regular_dni.test(dni) === true){
+            numero = dni.substr(0,dni.length-1);
+            numero = numero.replace('X', 0);
+            numero = numero.replace('Y', 1);
+            numero = numero.replace('Z', 2);
+            let = dni.substr(dni.length-1, 1);
+            numero = numero % 23;
+            letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
+            letra = letra.substring(numero, numero+1);
+            if (letra != let) {
+                alert('Dni erroneo, la letra del NIF no se corresponde');
+                return false;
+            }else{
+                //alert('Dni correcto');
+                return true;
+            }
+        }else{
+            alert('Dni erroneo, formato no válido');
+            return false;
+        }
+    }
+
+
+    function valTel() {
+        var valor = $("#add_phone_patient").val();
+        alert(valor);
+        if( !(/^\d{9}$/.test(valor)) ) {
+            alert('Teléfono no válido.');
+            return false;
+        }
+    }
+</script>
