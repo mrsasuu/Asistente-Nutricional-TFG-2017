@@ -4,6 +4,9 @@ var upload = multer({dest: __dirname + '/../public/static/upload'});
 var fs = require('fs');
 var path = require('path');
 var moment = require('moment');
+var config = require('../config/config.json');
+
+var controllerLogPath = "Patient"
 
 var Utils = require('../utils/Util');
 var Patient = require('../models/Patient');
@@ -73,9 +76,20 @@ PatientController.prototype.initBackend = function() {
             patients.retrieveAll(self.renderJson.user.ID).then(function(result) {
                 self.renderJson.patients = result;
 
+                var jsonfile = require('jsonfile')
+
+                var path = config.logs.web_logs;
+                var file = path + controllerLogPath +'data.json'
+                var obj = {name: 'JP'}
+
+                jsonfile.writeFile(file, obj,{spaces:0 ,flag: 'a'}, function (err) {
+                    console.error(err)
+                });
+
                 res.render('pages/backend/patient', self.renderJson);
                 self.clearMessages();
             }, function(error) {
+                console.log(error);
                 self.renderJson.error = 'Se ha producido un error interno recuperando la lista de pacientes';
                 res.redirect('/backend');
             });

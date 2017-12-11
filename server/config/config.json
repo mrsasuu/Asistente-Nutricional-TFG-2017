@@ -8,10 +8,13 @@
 		"port": 3306,
 		"driver": "mariadb",
 		"username": "root",
-		"password": "pepito11",
+		"password": "root",
 		"database": "an"
 	},
 	"logs": {
+		"log_path": "./logs/",
+		"web_logs": "./logs/webApp/",
+		"mobile_logs": "./logs/mobileApp/",
 		"user_login_logout": false
 	}
 }
